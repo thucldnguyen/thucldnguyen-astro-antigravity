@@ -64,68 +64,68 @@ import LiquidBackground from "./LiquidBackground.astro";
 			</button>
 		</div>
 	</nav>
-
-	<!-- Mobile Menu Overlay -->
-	<div
-		id="mobile-menu"
-		class="fixed inset-0 z-[100] bg-white/60 dark:bg-slate-900/60 backdrop-blur-3xl transition-all duration-500 opacity-0 pointer-events-none transform translate-y-4 md:hidden flex flex-col items-center justify-center pt-20 overflow-hidden"
-	>
-		<!-- Liquid decorations for the menu -->
-		<div
-			class="absolute top-1/4 left-1/4 w-64 h-64 bg-violet-500/20 rounded-full blur-3xl -z-10 animate-blob"
-		>
-		</div>
-		<div
-			class="absolute bottom-1/4 right-1/4 w-64 h-64 bg-fuchsia-500/20 rounded-full blur-3xl -z-10 animate-blob animation-delay-2000"
-		>
-		</div>
-
-		<nav
-			class="flex flex-col items-center gap-8 text-2xl font-bold tracking-tight z-10"
-		>
-			<a
-				href="/"
-				class="mobile-link text-slate-800 dark:text-slate-100 hover:text-violet-600 dark:hover:text-violet-400 transition-colors"
-				>Home</a
-			>
-			<a
-				href="/blog"
-				class="mobile-link text-slate-800 dark:text-slate-100 hover:text-violet-600 dark:hover:text-violet-400 transition-colors"
-				>Blog</a
-			>
-			<a
-				href="/about"
-				class="mobile-link text-slate-800 dark:text-slate-100 hover:text-violet-600 dark:hover:text-violet-400 transition-colors"
-				>About</a
-			>
-			<a
-				href="/contact"
-				class="mobile-link text-slate-800 dark:text-slate-100 hover:text-violet-600 dark:hover:text-violet-400 transition-colors"
-				>Contact</a
-			>
-		</nav>
-
-		<button
-			id="close-menu-btn"
-			class="absolute bottom-12 p-4 rounded-full bg-white/10 border border-white/20 text-slate-500 dark:text-slate-300 hover:bg-white/20 transition-all backdrop-blur-md z-10"
-			aria-label="Close Menu"
-		>
-			<svg
-				xmlns="http://www.w3.org/2000/svg"
-				fill="none"
-				viewBox="0 0 24 24"
-				stroke-width="1.5"
-				stroke="currentColor"
-				class="w-8 h-8"
-			>
-				<path
-					stroke-linecap="round"
-					stroke-linejoin="round"
-					d="M6 18L18 6M6 6l12 12"></path>
-			</svg>
-		</button>
-	</div>
 </header>
+
+<!-- Mobile Menu Overlay - Moved outside header to escape containing block -->
+<div
+	id="mobile-menu"
+	class="fixed inset-0 z-[100] bg-white/60 dark:bg-slate-900/60 backdrop-blur-3xl transition-all duration-500 opacity-0 pointer-events-none transform translate-y-4 md:hidden flex flex-col items-center justify-center overflow-hidden"
+>
+	<!-- Liquid decorations for the menu -->
+	<div
+		class="absolute top-1/4 left-1/4 w-64 h-64 bg-violet-500/20 rounded-full blur-3xl -z-10 animate-blob"
+	>
+	</div>
+	<div
+		class="absolute bottom-1/4 right-1/4 w-64 h-64 bg-fuchsia-500/20 rounded-full blur-3xl -z-10 animate-blob animation-delay-2000"
+	>
+	</div>
+
+	<nav
+		class="flex flex-col items-center gap-8 text-2xl font-bold tracking-tight z-10"
+	>
+		<a
+			href="/"
+			class="mobile-link text-slate-800 dark:text-slate-100 hover:text-violet-600 dark:hover:text-violet-400 transition-colors"
+			>Home</a
+		>
+		<a
+			href="/blog"
+			class="mobile-link text-slate-800 dark:text-slate-100 hover:text-violet-600 dark:hover:text-violet-400 transition-colors"
+			>Blog</a
+		>
+		<a
+			href="/about"
+			class="mobile-link text-slate-800 dark:text-slate-100 hover:text-violet-600 dark:hover:text-violet-400 transition-colors"
+			>About</a
+		>
+		<a
+			href="/contact"
+			class="mobile-link text-slate-800 dark:text-slate-100 hover:text-violet-600 dark:hover:text-violet-400 transition-colors"
+			>Contact</a
+		>
+	</nav>
+
+	<button
+		id="close-menu-btn"
+		class="absolute bottom-12 p-4 rounded-full bg-white/10 border border-white/20 text-slate-500 dark:text-slate-300 hover:bg-white/20 transition-all backdrop-blur-md z-10"
+		aria-label="Close Menu"
+	>
+		<svg
+			xmlns="http://www.w3.org/2000/svg"
+			fill="none"
+			viewBox="0 0 24 24"
+			stroke-width="1.5"
+			stroke="currentColor"
+			class="w-8 h-8"
+		>
+			<path
+				stroke-linecap="round"
+				stroke-linejoin="round"
+				d="M6 18L18 6M6 6l12 12"></path>
+		</svg>
+	</button>
+</div>
 
 <script>
 	const mobileBtn = document.getElementById("mobile-menu-btn");
