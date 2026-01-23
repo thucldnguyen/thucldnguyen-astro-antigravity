@@ -56,7 +56,8 @@
   }
 
   .liquid-blob {
-    @apply absolute bg-gradient-to-r from-violet-400 to-indigo-500 rounded-full mix-blend-multiply filter blur-3xl opacity-30 animate-blob;
+    @apply absolute bg-gradient-to-r from-violet-400 to-indigo-500 rounded-full mix-blend-multiply filter blur-3xl opacity-30;
+    animation: blob 7s infinite;
     will-change: transform;
   }
 
