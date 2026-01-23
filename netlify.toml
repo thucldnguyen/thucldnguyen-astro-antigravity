@@ -2,14 +2,7 @@
   command = "npm run build"
   publish = "dist"
 
-[dev]
-  command = "npm run dev"
 
-[[headers]]
-  for = "/*"
-  [headers.values]
-    Clear-Site-Data = "\"cache\", \"storage\", \"executionContexts\""
-    Cache-Control = "no-cache, no-store, must-revalidate"
 
 [[headers]]
   for = "/sw.js"
