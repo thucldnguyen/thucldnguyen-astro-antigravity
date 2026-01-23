@@ -56,6 +56,19 @@ const { title, description, image = "/assets/banner.jpg" } = Astro.props;
 	} else {
 		document.documentElement.classList.remove("dark");
 	}
+	}
+</script>
+
+<script is:inline>
+	// Unregister Service Worker if it exists (from previous Gatsby site)
+	if ('serviceWorker' in navigator) {
+		navigator.serviceWorker.getRegistrations().then(function(registrations) {
+			for(let registration of registrations) {
+				registration.unregister();
+				console.log('Service Worker unregistered');
+			}
+		});
+	}
 </script>
 
 <!-- Open Graph / Facebook -->
