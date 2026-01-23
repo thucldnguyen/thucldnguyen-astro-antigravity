@@ -42,9 +42,106 @@ import LiquidBackground from "./LiquidBackground.astro";
 				</svg>
 			</a>
 			<ThemeIcon />
+			<!-- Mobile Menu Button -->
+			<button
+				id="mobile-menu-btn"
+				class="md:hidden p-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors text-slate-500 dark:text-slate-400"
+				aria-label="Toggle Menu"
+			>
+				<svg
+					xmlns="http://www.w3.org/2000/svg"
+					fill="none"
+					viewBox="0 0 24 24"
+					stroke-width="1.5"
+					stroke="currentColor"
+					class="w-6 h-6"
+				>
+					<path
+						stroke-linecap="round"
+						stroke-linejoin="round"
+						d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"></path>
+				</svg>
+			</button>
 		</div>
 	</nav>
+
+	<!-- Mobile Menu Overlay -->
+	<div
+		id="mobile-menu"
+		class="fixed inset-0 z-40 bg-white/90 dark:bg-slate-950/90 backdrop-blur-xl transition-all duration-300 opacity-0 pointer-events-none transform -translate-y-4 md:hidden"
+	>
+		<div
+			class="flex flex-col items-center justify-center h-full gap-8 text-lg font-medium"
+		>
+			<a href="/" class="mobile-link">Home</a>
+			<a href="/blog" class="mobile-link">Blog</a>
+			<a href="/about" class="mobile-link">About</a>
+			<a href="/contact" class="mobile-link">Contact</a>
+		</div>
+		<button
+			id="close-menu-btn"
+			class="absolute top-6 right-6 p-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-500 dark:text-slate-400"
+		>
+			<svg
+				xmlns="http://www.w3.org/2000/svg"
+				fill="none"
+				viewBox="0 0 24 24"
+				stroke-width="1.5"
+				stroke="currentColor"
+				class="w-6 h-6"
+			>
+				<path
+					stroke-linecap="round"
+					stroke-linejoin="round"
+					d="M6 18L18 6M6 6l12 12"></path>
+			</svg>
+		</button>
+	</div>
 </header>
+
+<script>
+	const mobileBtn = document.getElementById("mobile-menu-btn");
+	const closeBtn = document.getElementById("close-menu-btn");
+	const mobileMenu = document.getElementById("mobile-menu");
+	const mobileLinks = document.querySelectorAll(".mobile-link");
+
+	function toggleMenu() {
+		const isClosed = mobileMenu?.classList.contains("opacity-0");
+		if (isClosed) {
+			mobileMenu?.classList.remove(
+				"opacity-0",
+				"pointer-events-none",
+				"-translate-y-4",
+			);
+			document.body.style.overflow = "hidden"; // Prevent scrolling
+		} else {
+			mobileMenu?.classList.add(
+				"opacity-0",
+				"pointer-events-none",
+				"-translate-y-4",
+			);
+			document.body.style.overflow = "";
+		}
+	}
+
+	mobileBtn?.addEventListener("click", toggleMenu);
+	closeBtn?.addEventListener("click", toggleMenu);
+
+	// Close menu when clicking a link
+	mobileLinks.forEach((link) => {
+		link.addEventListener("click", () => {
+			// Allow detailed navigation to happen before closing?
+			// Actually better to just close immediately or let page load handle it.
+			// But since Astro is MPA, the page will reload anyway.
+			mobileMenu?.classList.add(
+				"opacity-0",
+				"pointer-events-none",
+				"-translate-y-4",
+			);
+			document.body.style.overflow = "";
+		});
+	});
+</script>
 <LiquidBackground />
 <style>
 	/* Custom styles can still go here if needed, but Tailwind handles most */
