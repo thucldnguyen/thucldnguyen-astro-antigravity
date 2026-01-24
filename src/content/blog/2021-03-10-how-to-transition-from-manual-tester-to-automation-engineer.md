@@ -9,13 +9,13 @@ description: Some say Manual Testing is an old "mindset" that is impossible to
   career move under the sun. But the good news is there's still a lot of overlap
   (transferable knowledge) and it's totally feasible to make this transition, if
   you want to.
-featuredImage: /assets/how-to-transition-from-manual-tester-to-automation-engineer.png
+featuredImage: ../../assets/how-to-transition-from-manual-tester-to-automation-engineer.png
 ---
 Some say **Manual Testing** is an old "mindset" that is impossible to *upgrade* to the **Automation Testing** mindset. I say no. Admittedly they are two different *skill sets* and we got to go the extra miles -- like every other career move under the sun. But the difference is no where near the abstract level of "mindsets" or "domains". It's just about practical know-hows.
 
 The good news is there's still a lot of overlap (*transferable knowledge*) between Manual Testing and Automation Testing. And of course, if we want to, we can totally to make a successful transition. Most of the time, you'll receive a better pay (a welcoming jump from ~$55K/year to **$79K/year** - source: [Glassdoor](https://www.glassdoor.com)), more room for career advancement, and more job satisfaction.
 
-![Automation engineer is well compensated](/assets/automation-engineer-salary.png "Automation engineer is well compensated")
+![Automation engineer is well compensated](../../assets/automation-engineer-salary.png "Automation engineer is well compensated")
 
 # Step #1- Retrospective
 

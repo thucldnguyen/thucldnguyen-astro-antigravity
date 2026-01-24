@@ -7,7 +7,7 @@ description: Free open-source automation frameworks are not actually zero cost.
   Their costs are just hidden out of sight. And we still have to pay somehow.
   This article discusses the merits of BUILD versus BUY when it comes to picking
   your Automation Framework.
-featuredImage: /assets/buy-or-build-3.png
+featuredImage: ../../assets/buy-or-build-3.png
 ---
 Have you ever wondered about whether you should **BUY** or **BUILD**? Over the years, I’ve seen many test teams at non-tech enterprises struggled with the same dilemma.  
 
@@ -28,7 +28,7 @@ Finding developers is hard. But what’s even harder? Paying them a hefty sum ev
 
 **Extensive coding demands expensive resources.**
 
-![Javascript developer salary](/assets/javascript-dev-salary.png "Javascript developer salary")
+![Javascript developer salary](../../assets/javascript-dev-salary.png "Javascript developer salary")
 
 When it comes down to dollars (cost of ownership – TCO),  commercial tools or even outright outsourcing to a tech services firm hyper-specialized in Test Automation become a much more attractive alternative. 
 
@@ -40,7 +40,7 @@ Besides the dollar values (TCO – Total Cost of Ownership), you have to pay ano
 
 I’m a Product Manager but let’s say I’m also relatively good at carpentry (fictional) and I can decently make a DIY chair for fun. But should I craft each and every wood item in my house, including that huge kitchen cabinets, the king-size beds, wood nightstands and those wood bookshelves… on my own? It’s probably less fun now.
 
-![Fun vs. Less Fun (not my house anyway)](/assets/fun-less-fun.png "Fun vs. Less Fun (disclaimer: not my house)")
+![Fun vs. Less Fun (not my house anyway)](../../assets/fun-less-fun.png "Fun vs. Less Fun (disclaimer: not my house)")
 
 One hour you spend on maintaining the automation frameworks or fixing flaky scripts is another hour you could’ve used to do something else. Should you rather spend that hour on building stuff that are directly valuable to your Core business? 
 
@@ -54,7 +54,7 @@ To be fair, these community developers churn out code for free. They’re alread
 
 Otherwise, you have to fork the project and fix them on your own. That leads back to [Problem #1](#problem-1-the-tangible-cost-of-ownership).
 
-<img src="/assets/developer-fix-bug.gif" alt="Fastest way to fix bugs (source: The IT Crowd)"/>
+<img src="../../assets/developer-fix-bug.gif" alt="Fastest way to fix bugs (source: The IT Crowd)"/>
 
 With a commercial tool, you have a Customer Support team to yell at and some engineers behind the scene to fix bugs for you. Customers are king so even when your test requirements are quite far away from the traditional paths, you can still ask the vendors to customize their solution for you. Better right?
 

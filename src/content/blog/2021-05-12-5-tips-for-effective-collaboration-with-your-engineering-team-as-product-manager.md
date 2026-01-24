@@ -10,7 +10,7 @@ description: As a product manager, our engineering team is the one and only
   tremendously while saving us a ton of chronic headaches. This blog post
   contains useful tips that could hopefully help product managers work more
   effectively and harmoniously with their engineering team.
-featuredImage: /assets/5-tips-for-effective-collaboration-with-engineering-team.png
+featuredImage: ../../assets/5-tips-for-effective-collaboration-with-engineering-team.png
 ---
 As a product manager, our engineering team is the single group of people that we interact with the most. Thus, cultivating a harmonious relationship with our engineering team will help boost our productivity tremendously while saving us a ton of chronic headaches. This blog post contains useful tips that could hopefully help product managers work more effectively and efficiently with their engineering team.
 
@@ -28,7 +28,7 @@ But soon afterward, I finally realized the power of doing the *legwork* beforeha
 
 Why preparation pays off exponentially? Because preparations create an ***aura of "I've got this"*** around you as a product manager. In other words, better preparations help you establish a ***reputation*** of an expert. And everybody loves to work with experts whom they can trust and respect. Lenny Rachitsky included this quality in his *"14 Habits of Highly Effective Product Managers"* tweet below. I've definitely recommended reading it. 
 
-![14 habits of highly effective product managers](/assets/14-habbits-of-great-product-manager.png "14 habits of highly effective product managers Source: [Lenny Rachitsky](https://twitter.com/lennysan/status/1389611792741986305?s=20)")
+![14 habits of highly effective product managers](../../assets/14-habbits-of-great-product-manager.png "14 habits of highly effective product managers Source: [Lenny Rachitsky](https://twitter.com/lennysan/status/1389611792741986305?s=20)")
 
 ## \#2. Be the Voice of the Customer 
 
@@ -50,7 +50,7 @@ For me, I was able to gain customer insights by syncing with our internal user g
 
 Since service teams are first-hand end-users of the tool ([TestArchitect](https://www.testarchitect.com)), syncing with them on a weekly basis helped me understand how the product was used in real life. These interactions provided me with wisdom nuggets here and there. For instance, I was surprised to find out that one of our UI dialogs was so badly designed that users could not rearrange the order of test execution. They got to cancel the run and create a new run from scratch if they wanted to move a test case up or down. I immediately added the fixes to the very next release.
 
-![An example of a bad UX design](/assets/old-new-execute-test-dialogs.png "An example of a bad UX design")
+![An example of a bad UX design](../../assets/old-new-execute-test-dialogs.png "An example of a bad UX design")
 
 ### Support Tickets
 
@@ -65,7 +65,7 @@ It's a dangerous trap for PM to work backward from a preconceived solution. Cust
 
 Most importantly, we're not empowering the engineers. No engineering team wants to be treated as a ***"feature factory"*** -- mindlessly churning out preconceived solutions but not solving business problems. The best way to empower engineers is to give them a problem and provide a business context (guardrails) then let them figure out the best way to solve it on their own. You'll be amazed by the creativity of your engineers.
 
-![George  Patton Quotes - Source: https://twitter.com/AlexBangash/status/803414936806457344?s=20](/assets/george-patton-quotes.jpg "George  Patton Quotes - Source: https://twitter.com/AlexBangash/status/803414936806457344?s=20")
+![George  Patton Quotes - Source: https://twitter.com/AlexBangash/status/803414936806457344?s=20](../../assets/george-patton-quotes.jpg "George  Patton Quotes - Source: https://twitter.com/AlexBangash/status/803414936806457344?s=20")
 
 ## \#3. Develop Passion for Technology 
 
@@ -75,7 +75,7 @@ As product managers, if we want to get into the “inner circles” and be consi
 
 To give a little background, I’m a technically inclined product manager. In the early 2000s when I was 11 years old, a co-worker of my mom gifted me her old computer (an *Intel 80386* with *256 megabytes* of HDD). It was not much but it opened up a whole new wonderful world in front of my eyes. Twenty years ago in a third-world country like Vietnam, having a computer was truly a privilege. I was fascinated by the old computer. I loved how easy it was to give the computer a command and it obediently executed without any questions. 
 
-![An Intel 80386 Computer](/assets/intel-386.jpg "An Intel 80386 Computer that looks very similar to the one I had -- Credit: https://retrospector78.wordpress.com/2019/10/02/laser-386-pc/")
+![An Intel 80386 Computer](../../assets/intel-386.jpg "An Intel 80386 Computer that looks very similar to the one I had -- Credit: https://retrospector78.wordpress.com/2019/10/02/laser-386-pc/")
 
 That’s why I started programming in Pascal at an early age compared to my peers. Then I got into a program for “gifted” kids specializing in Pascal programming. When I entered university, programming courses were just a breeze thanks to the early head start. Thus, I graduated as a Valedictorian majoring in Software Engineering. I’m forever indebted to this angel lady.
 
@@ -87,7 +87,7 @@ A software engineering background helps me a lot in discussing technical problem
 
 Providing the business context including market dynamics, competitive analysis, the business outcomes that the organization is pushing for, etc. is a key value-add of product managers. When presenting to the team, we have to make sure we highlight system thinking behind every product decision. For instance, if we prioritize metrics like increasing Acquisition, we’ll inevitably hurt Retention. A trade-off has to be made. We can’t have it both ways.
 
-![Leslie Kilgore (Netflix) - Lead with context, not control](/assets/leslie-quotes.png "Leslie Kilgore (Netflix) - Lead with context, not control")
+![Leslie Kilgore (Netflix) - Lead with context, not control](../../assets/leslie-quotes.png "Leslie Kilgore (Netflix) - Lead with context, not control")
 
 Since I cared about my job and I wanted to be better every day, I made a commitment to learn more about business. I took online courses like Creating a Business Plan, Financial Modeling for Non-Financial Managers, Advanced Product Management, Digital Marketing, etc. on Udemy and LinkedIn Learning. I taught myself useful models like Porter’s 5 Forces, SWOT Analysis, Positioning in Marketing, etc.
 

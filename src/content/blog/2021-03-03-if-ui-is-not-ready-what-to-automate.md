@@ -7,19 +7,19 @@ description: If the UI of your web, desktop, or mobile app is not ready, what
   should you do? Sitting around waiting idly is of course not an option. The
   good news is as a software automation engineer, you can start working on many
   things.
-featuredImage: /assets/if-ui-is-not-ready-what-to-automate_.png
+featuredImage: ../../assets/if-ui-is-not-ready-what-to-automate_.png
 ---
 **If the UI of your web, desktop, or mobile app is not ready, what should you do?** 
 
 Regardless of the SDLC model that your organization is using, there will always be a gap between the start of development and the delivery of the very first "build". Developers are humans. They need time to work too, especially if you want to deliver something of value.
 
-![In-sprint automation is ideal but rarely achievable](/assets/automation-in-sprints.png "In-sprint automation is ideal but rarely achievable")
+![In-sprint automation is ideal but rarely achievable](../../assets/automation-in-sprints.png "In-sprint automation is ideal but rarely achievable")
 
 That gap time could range from a few days to several weeks, or "sprints" if you prefer the Scrum lingo. The picture above illustrates this gap. In the upper scenario (#1), test automation can at least start in the same sprint as feature development. But it still bleeds into the next sprint. Scenario #2 is worse. The developers take even more time to finish the feature. Thus, the testers waste the entire sprint doing nothing (maybe tech debts?).
 
 Sitting around waiting idly is of course not an option. The good news is as a **Software Automation Engineer**, you can start working on many things instead. The correct mindset is to think of the big picture. Don’t just automate the tests. Automate your entire CI/CD pipeline.
 
-![Testing is usually the bottleneck of software deliveries](/assets/testing-as-a-bottleneck.png "Testing is usually the bottleneck of software deliveries")
+![Testing is usually the bottleneck of software deliveries](../../assets/testing-as-a-bottleneck.png "Testing is usually the bottleneck of software deliveries")
 
 The picture above illustrates the fact that **Testing is usually the bottleneck of software deliveries.** Don't let that happen. With that in mind, I'd like to outline below some key automation jobs that you can start working on while waiting for the GUI to stabilize.
 
@@ -33,7 +33,7 @@ Whenever the API of your app is ready, automate them ASAP. You can use [POSTMAN 
 
 The picture below (credit: [pact.io](https://pact.io)) shows various microservices that depend on each other. You can untangle this mess by automating each and every one of them first, then automate the integration tests that consume all of them.
 
-![Microservices architecture - Source: pact.io](/assets/pact-io-microservices.png "Microservices architecture - Source: pact.io")
+![Microservices architecture - Source: pact.io](../../assets/pact-io-microservices.png "Microservices architecture - Source: pact.io")
 
 # \#2. Automate Business-Logics Flows
 
@@ -45,7 +45,7 @@ What do you mean by "business-logics"? For instance, a typical use case of a piz
 
 The picture below shows the pizza ordering test in another KDT tool called [TestArchitect](https://www.testarchitect.com). You can craft business-logics keywords called actions (*find restaurant nearby,  select pizza, verify cart,* etc.) then compose a test using those actions. Note that the actions are all highlighted in red because their contents (each test step describing which buttons to click or which elements to check) are not defined yet. 
 
-![Pizza ordering test written in TestArchitect IDE (a KDT tool)](/assets/pizza-ordering-test.png "Pizza ordering test written in TestArchitect IDE (a KDT tool)")
+![Pizza ordering test written in TestArchitect IDE (a KDT tool)](../../assets/pizza-ordering-test.png "Pizza ordering test written in TestArchitect IDE (a KDT tool)")
 
 # \#3. Automate Database
 
@@ -57,7 +57,7 @@ Besides data verifications at the database-level described above, you can also a
 
 The picture below shows some options that you can control on [generatedata.com](https://www.generatedata.com). For instance, you can define a column "Employee Name" and let the tool randomly pick realistic-sounding names like John Doe and Marry Anne.
 
-![Generate a realistic dataset for testing purposes](/assets/generate-data.png "Generate a realistic dataset for testing purposes")
+![Generate a realistic dataset for testing purposes](../../assets/generate-data.png "Generate a realistic dataset for testing purposes")
 
 # \#4. Automate Test Environment
 
@@ -69,7 +69,7 @@ Without test environments, we cannot run a single automated test let alone paral
 
 The picture below separates out different types of test environments: regression testing, integration testing, performance testing, and staging for acceptance testing. Credit: <https://www.capgemini.com/2017/02/automated-test-environments-for-devops/>
 
-![Different types of test environment](/assets/test-environments.jpg "Different types of test environment")
+![Different types of test environment](../../assets/test-environments.jpg "Different types of test environment")
 
 # Conclusion
 

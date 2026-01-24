@@ -5,7 +5,7 @@ slug: /blog/test-automation-tools/three-reasons-why-cypress-is-heading-in-the-ri
 date: 2019-12-04 00:01
 description: Cypress has its own unique approach to web automation and there are
   good reasons they chose to approach it that way
-featuredImage: /assets/cypress-2.jpg
+featuredImage: ../../assets/cypress-2.jpg
 ---
 # 1. Cypress Made Bold Trade-off
 
@@ -13,7 +13,7 @@ Bold trade-offs show the strength, and confidence of a product team. They elimin
 
 Take [Cypress ](https://www.cypress.io/)as an example. Right from the start, they’ve been supporting only Chrome and Chromium-based browsers (Canary and Electron). This decision has been booed by many critics. Cross-browser testing is the de-facto must-have in web testing. It’s hard to imagine that an automation tool not supporting cross-browser testing would survive. However, Cypress team put up with all the criticism and kept plowing ahead.
 
-![Cypress only supports Chrome, Canary and Electron](/assets/cypress-1.png "Cypress only supports Chrome, Canary and Electron")
+![Cypress only supports Chrome, Canary and Electron](../../assets/cypress-1.png "Cypress only supports Chrome, Canary and Electron")
 
 I must admit I was one of those who doubted Cypress when I first stumbled upon it. However, later on, it dawned on me that they got a solid point here. Chrome eats up over [60% of the browser market share ](https://gs.statcounter.com/browser-market-share). Thanks to their predominant presence on the market, other browsers must play by its rules. Developers also prioritize making web apps that run smoothly on Chrome. Cross-browser testing became less and less important.
 
@@ -43,7 +43,7 @@ How Cypress solves other problems are also brilliant. But let’s save those top
 
 [Time travel ](https://docs.cypress.io/guides/getting-started/writing-your-first-test.html#Time-travel)helps Cypress shine. No other tools have this capability. Basically, you can step back to a past state of the web app to debug your test and your app.
 
-![Cypress Time Travel](/assets/cypress-3.png "Cypress Time Travel")
+![Cypress Time Travel](../../assets/cypress-3.png "Cypress Time Travel")
 
 
 

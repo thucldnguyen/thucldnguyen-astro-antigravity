@@ -4,7 +4,7 @@ title: 3 Tips for Product Manager in Public Safety
 slug: /blog/3-tips-for-product-manager-in-public-safety
 date: 2022-11-12 14:07
 description: Building software is hard. Building software for police is even harder
-featuredImage: /assets/axon-perf.jpg
+featuredImage: ../../assets/axon-perf.jpg
 ---
 Building good software is never easy. 
 
@@ -36,7 +36,7 @@ What struck me was that no two agencies are the same. For instance, Lieutenants 
 
 Another way for me to get direct customer engagement: ride-alongs. I went on several ride-alongs with diffreent agencies, ranging from Seattle to San Jose, Tucson and Dallas. Sitting in the passenger seat, watching officers respond to calls, handle evidence and fill out reports, it opened my eyes to so many details what I would've missed from behind a desk. I saw firsthand how unpredictable and high-pressure an officer's shift can be, how much multitasking they juggle, and how a small "friction" - like a slow-loading screen or confusing UI - can have a big impact in the field. 
 
-![POV from a police cruiser in my very first ride-along with an agency north of Seattle - this suspect was a drug abuser and repeated offender](/assets/first-ride-along.jpeg)
+![POV from a police cruiser in my very first ride-along with an agency north of Seattle - this suspect was a drug abuser and repeated offender](../../assets/first-ride-along.jpeg)
 
 These weren't edge cases - they were everyday moments where our product needed to quietly support. If you're working on software for public safety, I'd say time spending alongside the people you're building for is essential. Ride-alongs weren't just nice to have. They are essential. They helped me understand not just what but the why behind police workflows. And they reminded me that even the best product ideas don't mean much if they don't fit into the real, messy, human world of the people we serve. 
 

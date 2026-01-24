@@ -1,14 +1,15 @@
 ---
-import { Image } from 'astro:assets';
-import type { CollectionEntry } from 'astro:content';
-import BaseHead from '../components/BaseHead.astro';
-import Footer from '../components/Footer.astro';
-import FormattedDate from '../components/FormattedDate.astro';
-import Header from '../components/Header.astro';
+import { Image } from "astro:assets";
+import type { CollectionEntry } from "astro:content";
+import BaseHead from "../components/BaseHead.astro";
+import Footer from "../components/Footer.astro";
+import FormattedDate from "../components/FormattedDate.astro";
+import Header from "../components/Header.astro";
 
-type Props = CollectionEntry<'blog'>['data'];
+type Props = CollectionEntry<"blog">["data"];
 
-const { title, description, date, updatedDate, heroImage, featuredImage } = Astro.props;
+const { title, description, date, updatedDate, heroImage, featuredImage } =
+	Astro.props;
 ---
 
 <html lang="en">
@@ -16,12 +17,38 @@ const { title, description, date, updatedDate, heroImage, featuredImage } = Astr
 		<BaseHead title={title} description={description} />
 	</head>
 
-	<body class="bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-slate-100 transition-colors duration-300">
+	<body
+		class="bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-slate-100 transition-colors duration-300"
+	>
 		<Header />
 		<main class="w-full max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-			<article class="bg-white dark:bg-slate-900 rounded-2xl shadow-sm border border-slate-200 dark:border-slate-800 overflow-hidden transition-colors duration-300">
-				<div class="w-full aspect-video relative bg-slate-100 dark:bg-slate-800">
-					{ (heroImage || featuredImage) && <img width={1020} height={510} src={heroImage || featuredImage} alt="" class="w-full h-full object-cover" /> }
+			<article
+				class="bg-white dark:bg-slate-900 rounded-2xl shadow-sm border border-slate-200 dark:border-slate-800 overflow-hidden transition-colors duration-300"
+			>
+				<div
+					class="w-full aspect-video relative bg-slate-100 dark:bg-slate-800"
+				>
+					{
+						(heroImage || featuredImage) &&
+							(typeof (heroImage || featuredImage) ===
+							"string" ? (
+								<img
+									width={1020}
+									height={510}
+									src={heroImage || featuredImage}
+									alt=""
+									class="w-full h-full object-cover"
+								/>
+							) : (
+								<Image
+									width={1020}
+									height={510}
+									src={heroImage || featuredImage}
+									alt=""
+									class="w-full h-full object-cover"
+								/>
+							))
+					}
 				</div>
 				<div class="p-8 md:p-12 lg:p-16">
 					<div class="text-center mb-12">
@@ -30,15 +57,22 @@ const { title, description, date, updatedDate, heroImage, featuredImage } = Astr
 							{
 								updatedDate && (
 									<div class="italic text-sm mt-1">
-										Last updated on <FormattedDate date={updatedDate} />
+										Last updated on{" "}
+										<FormattedDate date={updatedDate} />
 									</div>
 								)
 							}
 						</div>
-						<h1 class="text-4xl md:text-5xl font-bold tracking-tight text-slate-900 dark:text-white mb-4">{title}</h1>
+						<h1
+							class="text-4xl md:text-5xl font-bold tracking-tight text-slate-900 dark:text-white mb-4"
+						>
+							{title}
+						</h1>
 						<hr class="w-24 h-1 bg-accent mx-auto" />
 					</div>
-					<div class="prose prose-lg prose-slate dark:prose-invert mx-auto max-w-none">
+					<div
+						class="prose prose-lg prose-slate dark:prose-invert mx-auto max-w-none"
+					>
 						<slot />
 					</div>
 				</div>
@@ -47,4 +81,3 @@ const { title, description, date, updatedDate, heroImage, featuredImage } = Astr
 		<Footer />
 	</body>
 </html>
-

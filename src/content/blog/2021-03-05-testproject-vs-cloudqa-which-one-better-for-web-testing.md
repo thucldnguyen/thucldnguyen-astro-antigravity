@@ -8,7 +8,7 @@ description: TestProject and CloudQA are both new kids on the block competing
   to jump start your your web testing project, which one is better? This article
   discusses the pros and cons of each tool and deliver a somewhat biased
   verdict.
-featuredImage: /assets/testproject-vs-cloudqa.png
+featuredImage: ../../assets/testproject-vs-cloudqa.png
 ---
 A lot of ink and paper have been spent on popular tools like [Selenium](https://www.selenium.dev), [Cypress](https://www.cypress.io), [Robot Framework](https://www.robotframework.org), [WebDriverIO](http://webdriver.io), etc. but not so much about these two new and underrated kids on the block: [TestProject ](https://www.testproject.io)and [CloudQA](https://www.cloudqa.io). Today let's analyze the **Pros** and **Cons** of these tools to help you select the winner for your upcoming web testing project.
 
@@ -32,7 +32,7 @@ I'm absolutely impressed and pleasantly delighted by the UX of TestProject. New 
 * You have to manage the test execution infrastructure
 * Very frustrating when adding assertions
 
-![TestProject supports a lot more platforms than CloudQA](/assets/testproject-2.png "TestProject supports a lot more platforms than CloudQA")
+![TestProject supports a lot more platforms than CloudQA](../../assets/testproject-2.png "TestProject supports a lot more platforms than CloudQA")
 
 # CloudQA
 
@@ -56,7 +56,7 @@ However, I have to be honest that CloudQA is quite flaky. A simple record & play
 * Don’t auto highlight elements during recording
 * Cannot select the location that the test will be run from (always Virginia, USA)
 
-![CloudQA interrupts your test run constantly with this annoying salesy message](/assets/cloudqa-1.png "CloudQA interrupts your test run constantly with this annoying salesy message")
+![CloudQA interrupts your test run constantly with this annoying salesy message](../../assets/cloudqa-1.png "CloudQA interrupts your test run constantly with this annoying salesy message")
 
 # Verdict
 

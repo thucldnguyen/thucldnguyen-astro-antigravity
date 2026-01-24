@@ -6,7 +6,7 @@ date: 2021-03-01 17:29
 description: The more automation the better. Automate once and run forever. Lack
   of preparation for provisioning and managing test environments. These are the
   three most common misconceptions about software test automation.
-featuredImage: /assets/3-common-misconceptions-about-software-test-automation.png
+featuredImage: ../../assets/3-common-misconceptions-about-software-test-automation.png
 ---
 Some popular misconceptions about Software Test Automation.
 

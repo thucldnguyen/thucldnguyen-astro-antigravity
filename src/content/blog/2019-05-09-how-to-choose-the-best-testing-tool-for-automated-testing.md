@@ -7,7 +7,7 @@ description: Test Automation framework should meet such as supported automation
   platforms (desktop, web or mobile?), usability, maintainability, stability,
   ease of debugging test failures, ease of integrating test automation into a
   CI/CD pipeline, first-class Docker support, budget/pricing, etc.
-featuredImage: /assets/choose-test-tool.png
+featuredImage: ../../assets/choose-test-tool.png
 ---
 
 **Last Updated: 6-Mar-2021**

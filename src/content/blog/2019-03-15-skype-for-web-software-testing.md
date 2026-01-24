@@ -7,7 +7,7 @@ description: On March 7, 2019, Microsoft released a fresh version of Skype for
   Web (source). The new Skype features many gems such as HD video calling, call
   recording and finding messages within conversations. The caveat? It only works
   for Chrome and Edge.
-featuredImage: /assets/browser-not-supported.png
+featuredImage: ../../assets/browser-not-supported.png
 ---
 **On March 7, 2019,** Microsoft released a fresh version of Skype for Web ([source](https://blogs.skype.com/news/2019/03/07/the-new-skype-for-web-is-here/)). The new Skype features many gems such as HD video calling, call recording and finding messages within conversations. The caveat? It only works for Chrome and Edge.
 
@@ -31,7 +31,7 @@ Maybe. Maybe not. I’d suspect the move was not intentionally malicious. Like o
 
 While it’s good news for automation testing on web apps (you don’t have to do cross-browser testing in a Chrome-dominated world), it’s dire news for us as consumers. The world wide web which was once a beautiful and diverse network has been monopolized by Google. Chrome has become the exact enemy it swore to defeat (IE at one point occupied 95% of market share).
 
-![Chrome market share](/assets/chrome-market-share.png "Chrome market share")
+![Chrome market share](../../assets/chrome-market-share.png "Chrome market share")
 
 If cross-browser testing is still in your work agenda, don’t throw them tests away, just yet. However, don’t spend too much effort into maintaining those tests either. **If you have limited time and resources (like everybody else on Earth), focus on making sure that your web apps work perfectly on Chrome first. It’s the simple 80/20 rule.**
 

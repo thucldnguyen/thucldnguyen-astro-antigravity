@@ -8,11 +8,11 @@ description: Cypress is by no doubts on the rise. It got 318,244 weekly
   21-Dec-2018 (Christmas?), Cypress’ popularity has been increasing steadily.
   The chart from npm below clearly corroborates the claim. That said, there’s
   certainly no tool that fits every team.
-featuredImage: /assets/cypress-code2.png
+featuredImage: ../../assets/cypress-code2.png
 ---
 **Cypress** is by no doubts on the rise. It got **318,244** weekly downloads as of the week of 8-Mar-2019. Aside from a short deep dive in the 21-Dec-2018 (Christmas?), Cypress’ popularity has been increasing steadily. The chart from **npm** below clearly corroborates the claim.
 
-![Cypress weekly downloads on npm](/assets/cypress-npm.png "Cypress weekly downloads on npm")
+![Cypress weekly downloads on npm](../../assets/cypress-npm.png "Cypress weekly downloads on npm")
 
 That said, there’s certainly no tool that fits every team. Like any other test automation frameworks, Cypress has its own pitfalls. Consider the Cypress pitfalls below when you have to decide whether Cypress is the perfect match for you and your team.
 
@@ -24,7 +24,7 @@ What does it mean? It means you have to be a professional JavaScript developer t
 
 The picture below shows a typical error. Could you figure out why?
 
-![Cypress cryptic error](/assets/cypress-error.png "Cypress cryptic error")
+![Cypress cryptic error](../../assets/cypress-error.png "Cypress cryptic error")
 
 This cryptic error message actually results from missing a closing round bracket at line 9. But less-technical testers would probably be confused since Cypress said there was something wrong at line 10.
 

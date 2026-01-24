@@ -4,7 +4,7 @@ title: Pros and cons of Selenium vs RPA vs Cypress.io
 slug: /blog/test-automation-tools/pros-and-cons-of-selenium-vs-rpa-vs-cypress-io/
 date: 2019-05-09 12:00
 description: Pros and cons of Selenium vs RPA vs Cypress.io
-featuredImage: /assets/sel-cy-uip.png
+featuredImage: ../../assets/sel-cy-uip.png
 ---
 # [Selenium](http://seleniumhq.org/)
 

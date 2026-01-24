@@ -6,7 +6,7 @@ date: 2021-05-07 15:48
 description: Unlike normal web apps, PWA poses its own unique challenges that
   test engineers and automation engineers must pay attention to. This article
   discusses these unique testing requirements of PWA and how to approach them.
-featuredImage: /assets/how-to-test-progressive-web-app-center.png
+featuredImage: ../../assets/how-to-test-progressive-web-app-center.png
 ---
 Of course, you can test **Progressive Web App (PWA)** *manually* just like any other web app by going through the test scenarios step by step and validating the app’s functionalities along the way. In terms of *automated testing*, you can easily automate PWA using the usual automation frameworks such as [Selenium](http://selenium.dev/ "selenium.dev"), [Cypress](http://cypress.io/ "cypress.io"), [Puppeteer](https://developers.google.com/web/tools/puppeteer "developers.google.com"), [Playwright](https://playwright.dev/ "playwright.dev"), [Robot](https://robotframework.org/ "robotframework.org"), [Protractor](https://www.protractortest.org/ "www.protractortest.org"), [TestProject](http://testproject.io/ "testproject.io"), etc. However, there are some unique aspects of PWA that you have to pay attention to compared to normal web apps.
 
@@ -18,7 +18,7 @@ Unlike normal web apps, PWA is expected to function normally despite being offli
 
 Being installable is another big advantage of PWA compared to normal web apps. Users who install your PWA on their mobile devices tend to engage with it more often. So make sure that it’s installable whenever you release a new version of your PWA.
 
-![Screenshot from Lighthouse - Installability](/assets/installability.png "Screenshot from Lighthouse - Installability")
+![Screenshot from Lighthouse - Installability](../../assets/installability.png "Screenshot from Lighthouse - Installability")
 
 ## **\#2. Sensor Integration**
 
@@ -52,7 +52,7 @@ Take full advantage of Google Lighthouse to measure the performance of your PWA 
 
 Unlike normal web apps which don’t involve strict accessibility requirements, PWA must pass these accessibility tests. Again, Lighthouse is your best guide. Check out this [blog post](https://altitudemarketing.com/blog/easy-guide-website-accessibility/ "altitudemarketing.com"). The picture below shows some example accessibility problems.
 
-![Accessibility problem examples - Screenshot from Lighthouse](/assets/accessibility-problems.png "Accessibility problem examples - Screenshot from Lighthouse")
+![Accessibility problem examples - Screenshot from Lighthouse](../../assets/accessibility-problems.png "Accessibility problem examples - Screenshot from Lighthouse")
 
 ## **\#10. Coverage Matrix**
 

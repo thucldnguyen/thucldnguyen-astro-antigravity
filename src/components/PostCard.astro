@@ -1,4 +1,5 @@
 ---
+import { Image } from "astro:assets";
 import { type CollectionEntry } from "astro:content";
 import FormattedDate from "./FormattedDate.astro";
 
@@ -10,6 +11,12 @@ const { post } = Astro.props;
 const slug = (post.data.slug || post.id)
     .replace(/^\/?blog\//, "")
     .replace(/^\//, "");
+
+// Resolve featured image
+const heroImage =
+    post.data.heroImage ||
+    post.data.featuredImage ||
+    "/assets/placeholder-blog.jpg";
 ---
 
 <a
@@ -19,13 +26,23 @@ const slug = (post.data.slug || post.id)
     <div
         class="aspect-video w-full overflow-hidden bg-slate-100 dark:bg-slate-800"
     >
-        <img
-            src={post.data.heroImage ||
-                post.data.featuredImage ||
-                "/assets/placeholder-blog.jpg"}
-            alt=""
-            class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
-        />
+        {
+            typeof heroImage === "string" ? (
+                <img
+                    src={heroImage}
+                    alt=""
+                    class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                />
+            ) : (
+                <Image
+                    src={heroImage}
+                    alt=""
+                    width={800}
+                    height={450}
+                    class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                />
+            )
+        }
     </div>
     <div class="p-6">
         <div

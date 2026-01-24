@@ -3,6 +3,7 @@
 // all pages through the use of the <BaseHead /> component.
 import "../styles/global.css";
 import type { ImageMetadata } from "astro";
+import { ClientRouter } from "astro:transitions";
 import { SITE_TITLE } from "../consts";
 
 interface Props {
@@ -30,7 +31,11 @@ const { title, description, image = "/assets/banner.jpg" } = Astro.props;
 <meta name="generator" content={Astro.generator} />
 
 <!-- Font preloads -->
-<!-- Google Fonts -->
+<link
+	rel="preload"
+	href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@400;700&display=swap"
+	as="style"
+/>
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link
@@ -40,6 +45,8 @@ const { title, description, image = "/assets/banner.jpg" } = Astro.props;
 
 <!-- Canonical URL -->
 <link rel="canonical" href={canonicalURL} />
+
+<ClientRouter />
 
 <!-- Primary Meta Tags -->
 <title>{title}</title>
@@ -56,18 +63,19 @@ const { title, description, image = "/assets/banner.jpg" } = Astro.props;
 	} else {
 		document.documentElement.classList.remove("dark");
 	}
-	}
 </script>
 
 <script is:inline>
 	// Unregister Service Worker if it exists (from previous Gatsby site)
-	if ('serviceWorker' in navigator) {
-		navigator.serviceWorker.getRegistrations().then(function(registrations) {
-			for(let registration of registrations) {
-				registration.unregister();
-				console.log('Service Worker unregistered');
-			}
-		});
+	if ("serviceWorker" in navigator) {
+		navigator.serviceWorker
+			.getRegistrations()
+			.then(function (registrations) {
+				for (let registration of registrations) {
+					registration.unregister();
+					console.log("Service Worker unregistered");
+				}
+			});
 	}
 </script>
 
@@ -78,7 +86,11 @@ const { title, description, image = "/assets/banner.jpg" } = Astro.props;
 <meta property="og:description" content={description} />
 <meta
 	property="og:image"
-	content={new URL(image?.src || image || "/assets/banner.jpg", Astro.site)}
+	content={new URL(
+		(typeof image === "string" ? image : image?.src) ||
+			"/assets/banner.jpg",
+		Astro.site,
+	)}
 />
 
 <!-- Twitter -->
@@ -88,5 +100,9 @@ const { title, description, image = "/assets/banner.jpg" } = Astro.props;
 <meta property="twitter:description" content={description} />
 <meta
 	property="twitter:image"
-	content={new URL(image?.src || image || "/assets/banner.jpg", Astro.site)}
+	content={new URL(
+		(typeof image === "string" ? image : image?.src) ||
+			"/assets/banner.jpg",
+		Astro.site,
+	)}
 />

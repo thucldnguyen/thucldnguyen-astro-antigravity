@@ -4,7 +4,7 @@ title: From Utility to Empathy - How the Product Craft Evolves in the Age of AI
 slug: /blog/product-craft
 date: 2025-11-10 09:37
 description: The product craft as we know it has evolved dramatically
-featuredImage: /assets/product-craft.png
+featuredImage: ../../assets/product-craft.png
 ---
 
 [Julie Zhuo](https://www.juliezhuo.com/) wrote something recently that really stuck with me: [*The Thing You Are Expert at Will Be Your Career Downfall*](https://lg.substack.com/p/the-thing-you-are-expert-at-will).
@@ -111,7 +111,7 @@ If we fail to empathize with the reality of police work, we risk building featur
 
 On the other hand, when we start with empathy, we see opportunities that truly matter.  
 
-![AI highlights of key moments](/assets/key-moments.png)
+![AI highlights of key moments](../../assets/key-moments.png)
 
 Cops don’t need “likes.” What they *do* need is help finding the critical few seconds in hours of footage — the moment a firearm was unholstered, a TASER discharged, or someone said, “I can’t breathe.”  
 

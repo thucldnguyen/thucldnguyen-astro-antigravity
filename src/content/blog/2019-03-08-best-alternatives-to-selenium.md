@@ -7,7 +7,7 @@ description: Web automation testing for web apps is in huge demand. The global
   test automation market is expected to reach USD 54.98 billion by 2022
   according to Zion Market Research (source). And no other tools have outshone
   Selenium in terms of fame and adoption so far. But, that’s about to change.
-featuredImage: /assets/best-alternatives-to-selenium-webdriver.png
+featuredImage: ../../assets/best-alternatives-to-selenium-webdriver.png
 ---
 **Last Updated: 05-Mar-2021**
 
@@ -37,7 +37,7 @@ Cypress.io is an open-source NodeJS testing tool. Front-end developers love it s
 * No parallel execution
 * A little difficult for non-technical testers or newbies
 
-![Cypress provides a "cy" object with prebuilt API to interact with web UI](/assets/cypress-code2.png "Cypress provides a \"cy\" object with prebuilt API to interact with web UI")
+![Cypress provides a "cy" object with prebuilt API to interact with web UI](../../assets/cypress-code2.png "Cypress provides a \"cy\" object with prebuilt API to interact with web UI")
 
 ## 2. [TestArchitect](http://testarchitect.com/)
 
@@ -57,7 +57,7 @@ TestArchitect is a commercial Keyword-Driven Testing tool. Testers with modest p
 * Slower than Selenium a bit
 * A commercial product so you have to pay. However, they do offer TestArchitect Team — a free version with a limited number of test cases.
 
-![A pizza ordering test written in TestArchitect IDE](/assets/pizza-ordering-test.png "A pizza ordering test written in TestArchitect IDE")
+![A pizza ordering test written in TestArchitect IDE](../../assets/pizza-ordering-test.png "A pizza ordering test written in TestArchitect IDE")
 
 ## 3. Tricentis Tosca
 
@@ -76,7 +76,7 @@ Tricentis provides wide support for virtually all test activities. They offer cu
 * Model-based approach creates unnecessary maintenance problems
 * Too much clicking when writing tests
 
-![Tricentis Tosca GUI](/assets/tricentis.png "Tricentis Tosca GUI")
+![Tricentis Tosca GUI](../../assets/tricentis.png "Tricentis Tosca GUI")
 
 ## 4. [Mabl](http://mabl.com/)
 
@@ -96,7 +96,7 @@ Mabl made headlines last year thanks to the $20 million investment from Google V
 * Convenience comes with a cost (SaaS)
 * You cannot change the element locators that Mabl uses to find UI controls even if you’re 100% sure that your locator is the best.
 
-![Test results on Mabl](/assets/mabl-screenshot.png "Test results on Mabl")
+![Test results on Mabl](../../assets/mabl-screenshot.png "Test results on Mabl")
 
 # 5. [TestProject](https://www.testproject.io)
 
@@ -116,7 +116,7 @@ TestProject is a new kid on the block so it's not that popular. However, I belie
 * You have to manage the test execution infrastructure
 * Very frustrating when adding assertions
 
-![TestProject supports many browser types](/assets/testproject-2.png "TestProject supports many browser types")
+![TestProject supports many browser types](../../assets/testproject-2.png "TestProject supports many browser types")
 
 # Conclusion
 

@@ -7,7 +7,7 @@ description: New testers often ask me what are the best sites to sharpen their
   saw. So I composed this list of news sources that I frequently check to stay
   up to date with new trends in the industry. Let me know if you have other
   valuable sources that you often reference in the comment section.
-featuredImage: /assets/learn.jpg
+featuredImage: ../../assets/learn.jpg
 ---
 New testers often ask me what are the best sites to sharpen their saw. So I composed this list of news sources that I frequently check to stay up to date with new trends in the industry. Let me know if you have other valuable sources that you often reference in the comment section.
 

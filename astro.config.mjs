@@ -11,6 +11,7 @@ export default defineConfig({
   site: 'https://thucldnguyen.com',
   integrations: [mdx(), sitemap()],
 
+  prefetch: true,
   vite: {
     plugins: [tailwindcss()],
   },

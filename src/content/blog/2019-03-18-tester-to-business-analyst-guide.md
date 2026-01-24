@@ -4,11 +4,11 @@ title: Tester Switching to Business Analyst – A Fast-Track Guide
 slug: /blog/career-advice/tester-to-business-analyst-guide/
 date: 2019-03-18 09:00
 description: Tester Switching to Business Analyst – A Fast-Track Guide
-featuredImage: /assets/dream-job2.jpeg
+featuredImage: ../../assets/dream-job2.jpeg
 ---
 Let’s be honest. Money is important. It’s often the top factor that motivates a career switch. Who doesn’t love a bumped-up salary? The charts below show how much business analysts are making on average compared to software testers (QA) (source: [Glassdoor](https://www.glassdoor.com/Salaries)).
 
-![Difference in salaries between BA and QA](/assets/salaries.png "Difference in salaries between BA and QA")
+![Difference in salaries between BA and QA](../../assets/salaries.png "Difference in salaries between BA and QA")
 
 Since there’s a significant gap between testers and business analysts, some testers decide to make the jump. So you’re excited about switching from software testing to a business analyst (BA)? Cool! Let’s get started.
 
@@ -42,7 +42,7 @@ There are 3 primary skill sets that every BA must have:
 
 I’ve drawn a diagram to illustrate the relationships between these skills and the day-to-day tasks of BA below.
 
-![Business Analysis Skills](/assets/business-analysis-skills-diagram.jpg "Business Analysis Skills")
+![Business Analysis Skills](../../assets/business-analysis-skills-diagram.jpg "Business Analysis Skills")
 
 Note that the diagram doesn’t exhaustively describe the myriad of tasks that a BA must do. There are plenty more but you got the gist of it.
 
@@ -75,7 +75,7 @@ You know what’s best? Becoming a BA of a software testing product!
 
 After you make up your mind and understand your advantages, it’s now time to get started.
 
-![Tester to business analyst journey](/assets/tester-to-ba.png "Tester to business analyst journey")
+![Tester to business analyst journey](../../assets/tester-to-ba.png "Tester to business analyst journey")
 
 
 

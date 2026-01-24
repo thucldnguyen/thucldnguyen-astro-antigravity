@@ -1,12 +1,21 @@
 ---
 import Layout from "../layouts/BlogPost.astro";
+import { Image } from "astro:assets";
+import childhoodCollage from "../assets/childhood-collage.png";
+import intel386 from "../assets/intel-386.jpg";
+import prizeCollage from "../assets/prize-collage.png";
+import graduate from "../assets/graduate.JPG";
+import honeyMoonCollage from "../assets/honey-moon-collage.png";
+import axonPerfPng from "../assets/axon-perf.png";
+import ridealongCollage from "../assets/ridealong-collage.png";
+import banner from "../assets/banner.jpg";
 ---
 
 <Layout
 	title="About Me"
 	description="About Thuc Nguyen"
 	date={new Date("2024-01-01")}
-	heroImage="/assets/banner.jpg"
+	heroImage={banner}
 >
 	<p>You've found me! Welcome to my personal blog.</p>
 
@@ -27,8 +36,8 @@ import Layout from "../layouts/BlogPost.astro";
 		family afloat on her modest salary.
 	</p>
 
-	<img
-		src="/assets/childhood-collage.png"
+	<Image
+		src={childhoodCollage}
 		alt="Childhood pictures with mom and dad"
 		title="Childhood pictures with mom and dad"
 	/>
@@ -47,8 +56,8 @@ import Layout from "../layouts/BlogPost.astro";
 		technology and wonders.
 	</p>
 
-	<img
-		src="/assets/intel-386.jpg"
+	<Image
+		src={intel386}
 		alt="My very first computer looks a lot like this one"
 		title="My very first computer looks a lot like this one"
 	/>
@@ -95,8 +104,8 @@ import Layout from "../layouts/BlogPost.astro";
 		actually won a gold medal. It was the sweetest victory of my life.
 	</p>
 
-	<img
-		src="/assets/prize-collage.png"
+	<Image
+		src={prizeCollage}
 		alt="Winning gold medals"
 		title="Winning gold medals"
 	/>
@@ -117,7 +126,7 @@ import Layout from "../layouts/BlogPost.astro";
 		as valedictorian from <strong>Hoa Sen University</strong>.
 	</p>
 
-	<img src="/assets/graduate.JPG" alt="Graduate" title="Graduate" />
+	<Image src={graduate} alt="Graduate" title="Graduate" />
 
 	<h2>Learning Product the Hard Way</h2>
 
@@ -146,7 +155,7 @@ import Layout from "../layouts/BlogPost.astro";
 		stories that resonate. Those lessons shaped how I work to this day.
 	</p>
 
-	<img src="/assets/banner.jpg" alt="Lake Tahoe" title="Lake Tahoe" />
+	<Image src={banner} alt="Lake Tahoe" title="Lake Tahoe" />
 
 	<p>
 		LogiGear was also where I met my soulmate - Xuyen. We spent our
@@ -155,11 +164,7 @@ import Layout from "../layouts/BlogPost.astro";
 		shelter-in-place quarantine. It was a close call and a great story.
 	</p>
 
-	<img
-		src="/assets/honey-moon-collage.png"
-		alt="Honey moon"
-		title="Honey moon"
-	/>
+	<Image src={honeyMoonCollage} alt="Honey moon" title="Honey moon" />
 
 	<h2>Building for Public Safety</h2>
 
@@ -190,8 +195,8 @@ import Layout from "../layouts/BlogPost.astro";
 		lead to safer outcomes for both officers and communities.
 	</p>
 
-	<img
-		src="/assets/axon-perf.png"
+	<Image
+		src={axonPerfPng}
 		alt="Axon Performance - TASER dashboard"
 		title="Axon Performance - TASER dashboard"
 	/>
@@ -220,11 +225,7 @@ import Layout from "../layouts/BlogPost.astro";
 		smarter.
 	</p>
 
-	<img
-		src="/assets/ridealong-collage.png"
-		alt="Ride alongs"
-		title="Ride alongs"
-	/>
+	<Image src={ridealongCollage} alt="Ride alongs" title="Ride alongs" />
 
 	<h2>Beyond Work</h2>
 
