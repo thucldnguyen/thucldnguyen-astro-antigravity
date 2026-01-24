@@ -128,47 +128,54 @@ import LiquidBackground from "./LiquidBackground.astro";
 </div>
 
 <script>
-	const mobileBtn = document.getElementById("mobile-menu-btn");
-	const closeBtn = document.getElementById("close-menu-btn");
-	const mobileMenu = document.getElementById("mobile-menu");
-	const mobileLinks = document.querySelectorAll(".mobile-link");
+	function setupMobileMenu() {
+		const mobileBtn = document.getElementById("mobile-menu-btn");
+		const closeBtn = document.getElementById("close-menu-btn");
+		const mobileMenu = document.getElementById("mobile-menu");
+		const mobileLinks = document.querySelectorAll(".mobile-link");
 
-	function toggleMenu() {
-		const isClosed = mobileMenu?.classList.contains("opacity-0");
-		if (isClosed) {
-			mobileMenu?.classList.remove(
-				"opacity-0",
-				"pointer-events-none",
-				"-translate-y-4",
-			);
-			document.body.style.overflow = "hidden"; // Prevent scrolling
-		} else {
-			mobileMenu?.classList.add(
-				"opacity-0",
-				"pointer-events-none",
-				"-translate-y-4",
-			);
-			document.body.style.overflow = "";
+		if (!mobileBtn || !closeBtn || !mobileMenu) return;
+
+		function toggleMenu() {
+			const isClosed = mobileMenu?.classList.contains("opacity-0");
+			if (isClosed) {
+				mobileMenu?.classList.remove(
+					"opacity-0",
+					"pointer-events-none",
+					"-translate-y-4",
+				);
+				document.body.style.overflow = "hidden"; // Prevent scrolling
+			} else {
+				mobileMenu?.classList.add(
+					"opacity-0",
+					"pointer-events-none",
+					"-translate-y-4",
+				);
+				document.body.style.overflow = "";
+			}
 		}
+
+		mobileBtn.addEventListener("click", toggleMenu);
+		closeBtn.addEventListener("click", toggleMenu);
+
+		// Close menu when clicking a link
+		mobileLinks.forEach((link) => {
+			link.addEventListener("click", () => {
+				mobileMenu?.classList.add(
+					"opacity-0",
+					"pointer-events-none",
+					"-translate-y-4",
+				);
+				document.body.style.overflow = "";
+			});
+		});
 	}
 
-	mobileBtn?.addEventListener("click", toggleMenu);
-	closeBtn?.addEventListener("click", toggleMenu);
+	// Initialize on page load
+	setupMobileMenu();
 
-	// Close menu when clicking a link
-	mobileLinks.forEach((link) => {
-		link.addEventListener("click", () => {
-			// Allow detailed navigation to happen before closing?
-			// Actually better to just close immediately or let page load handle it.
-			// But since Astro is MPA, the page will reload anyway.
-			mobileMenu?.classList.add(
-				"opacity-0",
-				"pointer-events-none",
-				"-translate-y-4",
-			);
-			document.body.style.overflow = "";
-		});
-	});
+	// Support View Transitions
+	document.addEventListener("astro:after-swap", setupMobileMenu);
 </script>
 <LiquidBackground />
 <style>

@@ -259,69 +259,82 @@ import { SITE_TITLE, SITE_DESCRIPTION } from "../consts";
             </div>
         </div>
 
-        <script is:inline>
-            const form = document.getElementById("contact-form");
-            const submitBtn = document.getElementById("submit-btn");
-            const toast = document.getElementById("toast");
+        <script>
+            function setupContactForm() {
+                const form = document.getElementById(
+                    "contact-form",
+                ) as HTMLFormElement;
+                const submitBtn = document.getElementById(
+                    "submit-btn",
+                ) as HTMLButtonElement;
+                const toast = document.getElementById("toast");
 
-            function showToast() {
-                toast.classList.remove("translate-y-24", "opacity-0");
-                setTimeout(hideToast, 5000);
-            }
+                if (!form || !submitBtn || !toast) return;
 
-            function hideToast() {
-                toast.classList.add("translate-y-24", "opacity-0");
-            }
+                function showToast() {
+                    toast?.classList.remove("translate-y-24", "opacity-0");
+                    setTimeout(hideToast, 5000);
+                }
 
-            // Expose hideToast to global scope
-            window.hideToast = hideToast;
+                function hideToast() {
+                    toast?.classList.add("translate-y-24", "opacity-0");
+                }
 
-            form.addEventListener("submit", function (e) {
-                e.preventDefault();
-                const formData = new FormData(form);
-                const object = Object.fromEntries(formData);
-                const json = JSON.stringify(object);
+                // Expose hideToast to global scope if needed for the onclick
+                (window as any).hideToast = hideToast;
 
-                // Disable button and show loading state
-                submitBtn.disabled = true;
-                const originalText = submitBtn.innerHTML;
-                submitBtn.innerHTML = `
-                    <svg class="animate-spin -ml-1 mr-3 h-5 w-5 text-white inline shadow-none" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                        <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
-                        <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-                    </svg>
-                    Sending...
-                `;
+                form.addEventListener("submit", function (e) {
+                    e.preventDefault();
+                    const formData = new FormData(form);
+                    const object = Object.fromEntries(formData);
+                    const json = JSON.stringify(object);
 
-                fetch("https://api.web3forms.com/submit", {
-                    method: "POST",
-                    headers: {
-                        "Content-Type": "application/json",
-                        Accept: "application/json",
-                    },
-                    body: json,
-                })
-                    .then(async (response) => {
-                        let json = await response.json();
-                        if (response.status == 200) {
-                            showToast();
-                            form.reset();
-                            submitBtn.innerHTML = "Message Sent!";
-                            // Keep button disabled as requested
-                        } else {
-                            console.log(response);
-                            alert(json.message);
+                    // Disable button and show loading state
+                    submitBtn.disabled = true;
+                    const originalText = submitBtn.innerHTML;
+                    submitBtn.innerHTML = `
+                        <svg class="animate-spin -ml-1 mr-3 h-5 w-5 text-white inline shadow-none" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                            <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                            <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                        </svg>
+                        Sending...
+                    `;
+
+                    fetch("https://api.web3forms.com/submit", {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json",
+                            Accept: "application/json",
+                        },
+                        body: json,
+                    })
+                        .then(async (response) => {
+                            let json = await response.json();
+                            if (response.status == 200) {
+                                showToast();
+                                form.reset();
+                                submitBtn.innerHTML = "Message Sent!";
+                            } else {
+                                console.log(response);
+                                alert(json.message);
+                                submitBtn.disabled = false;
+                                submitBtn.innerHTML = originalText;
+                            }
+                        })
+                        .catch((error) => {
+                            console.log(error);
+                            alert("Something went wrong!");
                             submitBtn.disabled = false;
                             submitBtn.innerHTML = originalText;
-                        }
-                    })
-                    .catch((error) => {
-                        console.log(error);
-                        alert("Something went wrong!");
-                        submitBtn.disabled = false;
-                        submitBtn.innerHTML = originalText;
-                    });
-            });
+                        });
+                });
+            }
+
+            // Initialize
+            setupContactForm();
+
+            // Handle View Transitions
+            document.addEventListener("astro:after-swap", setupContactForm);
         </script>
     </body>
 </html>
