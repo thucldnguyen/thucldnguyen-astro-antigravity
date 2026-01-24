@@ -54,15 +54,19 @@ const { title, description, image = "/assets/banner.jpg" } = Astro.props;
 <meta name="description" content={description} />
 
 <script is:inline>
-	// On page load or when changing themes, best to add inline in `head` to avoid FOUC
-	if (
-		localStorage.getItem("color-theme") === "dark" ||
-		!("color-theme" in localStorage)
-	) {
-		document.documentElement.classList.add("dark");
-	} else {
-		document.documentElement.classList.remove("dark");
+	function applyTheme() {
+		if (
+			localStorage.getItem("color-theme") === "dark" ||
+			!("color-theme" in localStorage)
+		) {
+			document.documentElement.classList.add("dark");
+		} else {
+			document.documentElement.classList.remove("dark");
+		}
 	}
+
+	applyTheme();
+	document.addEventListener("astro:after-swap", applyTheme);
 </script>
 
 <script is:inline>

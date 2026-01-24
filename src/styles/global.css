@@ -62,7 +62,7 @@
   }
 
   .dark .liquid-blob {
-    @apply mix-blend-normal opacity-20 from-violet-800 to-indigo-900;
+    @apply mix-blend-normal opacity-40 from-violet-600 to-indigo-700;
   }
 }
 
