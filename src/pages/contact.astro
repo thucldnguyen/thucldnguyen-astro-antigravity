@@ -36,18 +36,13 @@ import { SITE_TITLE, SITE_DESCRIPTION } from "../consts";
             <div class="glass-form-card max-w-2xl mx-auto">
                 <!-- Web3Forms -->
                 <form
-                    action="https://api.web3forms.com/submit"
+                    name="contact"
                     method="POST"
+                    data-netlify="true"
+                    netlify-honeypot="botcheck"
                     id="contact-form"
                     class="space-y-6"
                 >
-                    <!-- Access Key -->
-                    <input
-                        type="hidden"
-                        name="access_key"
-                        value="f4b673e6-ceb5-47d3-8e7a-9324922941ee"
-                    />
-
                     <!-- Spam Protection (Honeypot) -->
                     <input
                         type="checkbox"
@@ -286,8 +281,14 @@ import { SITE_TITLE, SITE_DESCRIPTION } from "../consts";
                 form.addEventListener("submit", function (e) {
                     e.preventDefault();
                     const formData = new FormData(form);
-                    const object = Object.fromEntries(formData);
-                    const json = JSON.stringify(object);
+
+                    // Add form name for Netlify
+                    formData.append("form-name", "contact");
+
+                    // Convert to URL encoded string
+                    const body = new URLSearchParams(
+                        formData as any,
+                    ).toString();
 
                     // Disable button and show loading state
                     submitBtn.disabled = true;
@@ -300,23 +301,21 @@ import { SITE_TITLE, SITE_DESCRIPTION } from "../consts";
                         Sending...
                     `;
 
-                    fetch("https://api.web3forms.com/submit", {
+                    fetch("/", {
                         method: "POST",
                         headers: {
-                            "Content-Type": "application/json",
-                            Accept: "application/json",
+                            "Content-Type": "application/x-www-form-urlencoded",
                         },
-                        body: json,
+                        body: body,
                     })
-                        .then(async (response) => {
-                            let json = await response.json();
-                            if (response.status == 200) {
+                        .then((response) => {
+                            if (response.ok) {
                                 showToast();
                                 form.reset();
                                 submitBtn.innerHTML = "Message Sent!";
                             } else {
                                 console.log(response);
-                                alert(json.message);
+                                alert("Submission failed. Please try again.");
                                 submitBtn.disabled = false;
                                 submitBtn.innerHTML = originalText;
                             }
