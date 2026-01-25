@@ -70,16 +70,29 @@ const { title, description, image = "/assets/banner.jpg" } = Astro.props;
 </script>
 
 <script is:inline>
-	// Unregister Service Worker if it exists (from previous Gatsby site)
+	// Aggressively unregister all Service Workers and clear caches (legacy Gatsby cleanup)
 	if ("serviceWorker" in navigator) {
-		navigator.serviceWorker
-			.getRegistrations()
-			.then(function (registrations) {
-				for (let registration of registrations) {
-					registration.unregister();
-					console.log("Service Worker unregistered");
-				}
-			});
+		navigator.serviceWorker.getRegistrations().then((registrations) => {
+			for (const registration of registrations) {
+				registration.unregister().then((success) => {
+					if (success) {
+						console.log("Service Worker unregistered successfully");
+						// Only reload if we actually found and removed a service worker
+						// to avoid infinite loops, though unregister() is usually enough.
+						window.location.reload();
+					}
+				});
+			}
+		});
+	}
+
+	if ("caches" in window) {
+		caches.keys().then((names) => {
+			for (const name of names) {
+				caches.delete(name);
+				console.log("Cache cleared:", name);
+			}
+		});
 	}
 </script>
 
