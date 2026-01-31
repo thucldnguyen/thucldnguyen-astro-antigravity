@@ -109,6 +109,7 @@ const { title, description, image = "/assets/banner.jpg" } = Astro.props;
 		Astro.site,
 	)}
 />
+<meta property="og:site_name" content={SITE_TITLE} />
 
 <!-- Twitter -->
 <meta property="twitter:card" content="summary_large_image" />
@@ -123,3 +124,17 @@ const { title, description, image = "/assets/banner.jpg" } = Astro.props;
 		Astro.site,
 	)}
 />
+
+<!-- Google Analytics -->
+<script
+	is:inline
+	async
+	src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+<script is:inline>
+	window.dataLayer = window.dataLayer || [];
+	function gtag() {
+		dataLayer.push(arguments);
+	}
+	gtag("js", new Date());
+	gtag("config", "G-XXXXXXXXXX");
+</script>
