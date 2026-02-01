@@ -5,6 +5,8 @@ import "../styles/global.css";
 import type { ImageMetadata } from "astro";
 import { ClientRouter } from "astro:transitions";
 import { SITE_TITLE } from "../consts";
+import bannerImage from "../assets/banner.jpg";
+import favicon from "../assets/favicon.png";
 
 interface Props {
 	title: string;
@@ -14,13 +16,13 @@ interface Props {
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 
-const { title, description, image = "/assets/banner.jpg" } = Astro.props;
+const { title, description, image = bannerImage } = Astro.props;
 ---
 
 <!-- Global Metadata -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
-<link rel="icon" type="image/png" href="/assets/logo-transparent.png" />
+<link rel="icon" type="image/png" href={favicon.src} />
 <link rel="sitemap" href="/sitemap-index.xml" />
 <link
 	rel="alternate"
@@ -72,27 +74,50 @@ const { title, description, image = "/assets/banner.jpg" } = Astro.props;
 <script is:inline>
 	// Aggressively unregister all Service Workers and clear caches (legacy Gatsby cleanup)
 	if ("serviceWorker" in navigator) {
-		navigator.serviceWorker.getRegistrations().then((registrations) => {
-			for (const registration of registrations) {
-				registration.unregister().then((success) => {
-					if (success) {
-						console.log("Service Worker unregistered successfully");
-						// Only reload if we actually found and removed a service worker
-						// to avoid infinite loops, though unregister() is usually enough.
-						window.location.reload();
-					}
-				});
-			}
-		});
+		navigator.serviceWorker
+			.getRegistrations()
+			.then((registrations) => {
+				for (const registration of registrations) {
+					registration
+						.unregister()
+						.then((success) => {
+							if (success) {
+								console.log(
+									"Service Worker unregistered successfully",
+								);
+								window.location.reload();
+							}
+						})
+						.catch((err) =>
+							console.error(
+								"Service Worker unregistration failed:",
+								err,
+							),
+						);
+				}
+			})
+			.catch((err) =>
+				console.error(
+					"Error getting Service Worker registrations:",
+					err,
+				),
+			);
 	}
 
 	if ("caches" in window) {
-		caches.keys().then((names) => {
-			for (const name of names) {
-				caches.delete(name);
-				console.log("Cache cleared:", name);
-			}
-		});
+		caches
+			.keys()
+			.then((names) => {
+				for (const name of names) {
+					caches
+						.delete(name)
+						.catch((err) =>
+							console.error("Cache deletion failed:", err),
+						);
+					console.log("Cache cleared:", name);
+				}
+			})
+			.catch((err) => console.error("Error getting cache keys:", err));
 	}
 </script>
 
@@ -104,8 +129,7 @@ const { title, description, image = "/assets/banner.jpg" } = Astro.props;
 <meta
 	property="og:image"
 	content={new URL(
-		(typeof image === "string" ? image : image?.src) ||
-			"/assets/banner.jpg",
+		(typeof image === "string" ? image : image?.src) || bannerImage.src,
 		Astro.site,
 	)}
 />
@@ -119,8 +143,7 @@ const { title, description, image = "/assets/banner.jpg" } = Astro.props;
 <meta
 	property="twitter:image"
 	content={new URL(
-		(typeof image === "string" ? image : image?.src) ||
-			"/assets/banner.jpg",
+		(typeof image === "string" ? image : image?.src) || bannerImage.src,
 		Astro.site,
 	)}
 />
@@ -129,12 +152,12 @@ const { title, description, image = "/assets/banner.jpg" } = Astro.props;
 <script
 	is:inline
 	async
-	src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+	src="https://www.googletagmanager.com/gtag/js?id=G-WBEHL329W9"></script>
 <script is:inline>
 	window.dataLayer = window.dataLayer || [];
 	function gtag() {
 		dataLayer.push(arguments);
 	}
 	gtag("js", new Date());
-	gtag("config", "G-XXXXXXXXXX");
+	gtag("config", "G-WBEHL329W9");
 </script>

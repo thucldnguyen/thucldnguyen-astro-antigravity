@@ -3,6 +3,8 @@ import { Image } from "astro:assets";
 import { type CollectionEntry } from "astro:content";
 import FormattedDate from "./FormattedDate.astro";
 
+import placeholderImage from "../assets/placeholder-blog.jpg";
+
 interface Props {
     post: CollectionEntry<"blog">;
 }
@@ -14,9 +16,7 @@ const slug = (post.data.slug || post.id)
 
 // Resolve featured image
 const heroImage =
-    post.data.heroImage ||
-    post.data.featuredImage ||
-    "/assets/placeholder-blog.jpg";
+    post.data.heroImage || post.data.featuredImage || placeholderImage;
 ---
 
 <a
@@ -24,7 +24,7 @@ const heroImage =
     class="group relative block h-full overflow-hidden rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-primary/5"
 >
     <div
-        class="aspect-video w-full overflow-hidden bg-slate-100 dark:bg-slate-800"
+        class="aspect-[3/2] w-full overflow-hidden bg-slate-100 dark:bg-slate-800"
     >
         {
             typeof heroImage === "string" ? (
@@ -37,8 +37,8 @@ const heroImage =
                 <Image
                     src={heroImage}
                     alt=""
-                    width={800}
-                    height={450}
+                    width={720}
+                    height={480}
                     class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
                 />
             )
