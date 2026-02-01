@@ -8,6 +8,8 @@ import { getCollection } from "astro:content";
 import FormattedDate from "../components/FormattedDate.astro";
 import PostCard from "../components/PostCard.astro";
 import ava3 from "../assets/ava3.jpg";
+import newThumbnail from "../assets/new-thumbnail.png";
+import ContactForm from "../components/ContactForm.astro";
 
 const posts = (await getCollection("blog"))
     .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
@@ -174,6 +176,41 @@ const posts = (await getCollection("blog"))
                 </div>
             </section>
         </main>
+
+        <!-- Let's Connect Section -->
+        <section
+            class="relative bg-slate-50 dark:bg-slate-900/50 py-20 transition-colors duration-300"
+        >
+            <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-12">
+                    <h2
+                        class="text-3xl md:text-4xl font-bold tracking-tight text-slate-900 dark:text-white mb-4"
+                    >
+                        Let's Connect
+                    </h2>
+                    <p
+                        class="text-lg text-slate-600 dark:text-slate-400 max-w-2xl mx-auto"
+                    >
+                        Have a question, a project idea, or just want to say hi?
+                        I'd love to hear from you. Use the form below or reach
+                        out via social media.
+                    </p>
+                </div>
+
+                <ContactForm />
+
+                <div class="mt-20">
+                    <Image
+                        src={newThumbnail}
+                        alt="Thumbnail"
+                        class="w-full h-auto rounded-2xl shadow-2xl"
+                        width={newThumbnail.width}
+                        height={newThumbnail.height}
+                    />
+                </div>
+            </div>
+        </section>
+
         <Footer />
     </body>
 </html>

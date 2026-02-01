@@ -5,7 +5,7 @@ slug: /blog/test-automation-tools/three-reasons-why-cypress-is-heading-in-the-ri
 date: 2019-12-04 00:01
 description: Cypress has its own unique approach to web automation and there are
   good reasons they chose to approach it that way
-featuredImage: ../../assets/cypress-2.jpg
+featuredImage: ../../assets/cypress.png
 ---
 # 1. Cypress Made Bold Trade-off
 

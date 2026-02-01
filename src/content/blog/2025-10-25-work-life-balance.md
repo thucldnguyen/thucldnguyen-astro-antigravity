@@ -7,6 +7,89 @@ description: There's no such thing called work-life balance
 featuredImage: ../../assets/work-life.png
 ---
 
+For a long time, I believed that *work–life balance* was something you could engineer.
+
+If I planned carefully enough, optimized my calendar, and stayed disciplined, I could keep work and life in perfect equilibrium—50/50, stable, predictable. When things felt off, I assumed it meant I hadn’t tried hard enough.
+
+What I didn’t fully recognize at the time was the hidden cost of that mindset:
+
+**guilt.**
+
+## Living with constant guilt
+
+I felt guilty at work when I wasn’t fully available.  
+I felt guilty at home when my mind was still at work.
+
+No matter where I was, a part of me felt like I was failing somewhere else.
+
+This wasn’t the loud, dramatic kind of burnout. It was quieter and more persistent—a low-level sense that I was always behind, always disappointing someone, always making the wrong trade-off. The more I tried to “balance” things, the more guilt I accumulated.
+
+Reading **Replacing Guilt** by Nate Soares gave language to something I had been feeling for years. One idea in particular stayed with me: guilt often isn’t a signal that we’ve done something wrong—it’s a signal that we’re holding ourselves to impossible standards.
+
+That hit uncomfortably close to home.
+
+![Replacing Guilt](../../assets/replacing-guilt.png)
+
+## The problem with “balance”
+
+Balance sounds healthy, but it quietly assumes that work and life deserve equal attention at all times.
+
+Real life doesn’t work that way.
+
+Some weeks demand deep focus at work—big decisions, launches, uncomfortable trade-offs. Other weeks demand presence at home—sick kids, sleepless nights, moments you don’t get back. Trying to force symmetry between the two turned every choice into a moral failure.
+
+If I leaned into work, I felt like a bad parent.  
+If I leaned into family, I felt like a bad professional.
+
+The guilt wasn’t a personal flaw. It was a structural outcome of chasing the wrong goal.
+
+## From balance to alignment
+
+What helped wasn’t trying harder. It was changing the question.
+
+Instead of asking, *“Is this balanced?”*  
+I started asking, *“Is this aligned with what matters most right now?”*
+
+Alignment acknowledges that priorities shift. It allows seasons instead of symmetry. It doesn’t eliminate guilt entirely—but it transforms it. Guilt becomes a temporary emotional response, not a verdict on your character.
+
+This reframing changed how I relate to both work and family.
+
+## What I do differently now
+
+### 1. I optimize for impact, not hours
+
+Earlier in my career, I equated commitment with endurance. Long hours felt like proof that I cared.
+
+Now I focus on leverage. Clear decisions, sharp priorities, and work that enables others matter more than constant availability. I intentionally reduce low-value work—through delegation, automation, or simply saying no—so my effort goes where it actually creates impact.
+
+### 2. I protect energy, not just time
+
+You can have a perfectly “balanced” calendar and still be depleted.
+
+I’ve learned that sustainable performance depends on mental and emotional energy. Rest isn’t something I earn after everything is done—it’s a prerequisite for doing meaningful work well, both at work and at home.
+
+### 3. I lead with clarity, not endurance
+
+Leadership isn’t about absorbing infinite pressure. It’s about creating clarity so teams can move forward confidently without constant oversight.
+
+When priorities are clear and trust is high, presence matters more than availability. That has allowed me to contribute meaningfully while still being present for my family in ways that actually count.
+
+## Ambition, redefined
+
+Letting go of the balance myth didn’t make me less ambitious.
+
+It made my ambition more grounded.
+
+I care less about how much I can personally endure and more about the quality of decisions, the durability of systems, and the long-term health of the people involved—including myself. Replacing guilt with alignment hasn’t lowered my standards; it has made them sustainable.
+
+Work and life aren’t opposing forces to be kept apart. They’re parts of the same system, constantly influencing each other. When they’re aligned, guilt softens, priorities clarify, and both sides improve.
+
+I no longer try to balance them.
+
+I try to design them—intentionally, imperfectly, and sustainably.
+
+
+<!-- 
 For years, I treated "work-life ballance" like a system to optimize. I used to believe that if I just planned better, woke up earlier, or multitasked harder, surely I could keep both sides level. 
 
 But when our second child **Mino** was born in September 2025, that illusion shattered. There's no such thing called work-life balance. At certain stage of life, as a good product manager, you have to tip the scale to whatever is more important. 
@@ -71,3 +154,4 @@ If you're trying to "balance" work and life and feel like you're drowning, maybe
 It doesn't. It means **enough**. 
 
 And sometimes, enough looks like logging off before 5PM to comfort a crying toddler, and realizing that actually you chose right. 
+-->

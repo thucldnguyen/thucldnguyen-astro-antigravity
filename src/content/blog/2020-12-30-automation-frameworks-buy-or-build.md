@@ -7,7 +7,7 @@ description: Free open-source automation frameworks are not actually zero cost.
   Their costs are just hidden out of sight. And we still have to pay somehow.
   This article discusses the merits of BUILD versus BUY when it comes to picking
   your Automation Framework.
-featuredImage: ../../assets/buy-or-build-3.png
+featuredImage: ../../assets/build-vs-buy.png
 ---
 Have you ever wondered about whether you should **BUY** or **BUILD**? Over the years, I’ve seen many test teams at non-tech enterprises struggled with the same dilemma.  
 
@@ -54,7 +54,7 @@ To be fair, these community developers churn out code for free. They’re alread
 
 Otherwise, you have to fork the project and fix them on your own. That leads back to [Problem #1](#problem-1-the-tangible-cost-of-ownership).
 
-<img src="../../assets/developer-fix-bug.gif" alt="Fastest way to fix bugs (source: The IT Crowd)"/>
+![Fastest way to fix bugs (source: The IT Crowd)](../../assets/developer-fix-bug.gif)
 
 With a commercial tool, you have a Customer Support team to yell at and some engineers behind the scene to fix bugs for you. Customers are king so even when your test requirements are quite far away from the traditional paths, you can still ask the vendors to customize their solution for you. Better right?
 
