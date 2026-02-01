@@ -1,0 +1,159 @@
+---
+
+---
+
+<div
+    id="lightbox"
+    class="fixed inset-0 z-[100] hidden flex items-center justify-center bg-black/90 backdrop-blur-sm transition-opacity duration-300 opacity-0"
+    role="dialog"
+    aria-modal="true"
+    aria-label="Image Lightbox"
+>
+    <!-- Close button -->
+    <button
+        id="lightbox-close"
+        class="absolute top-5 right-5 z-[110] p-2 text-white/70 hover:text-white transition-colors rounded-full bg-black/20 hover:bg-black/40"
+        aria-label="Close lightbox"
+    >
+        <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="32"
+            height="32"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            class="lucide lucide-x"
+        >
+            <path d="M18 6 6 18"></path>
+            <path d="m6 6 12 12"></path>
+        </svg>
+    </button>
+
+    <!-- Image Container -->
+    <div
+        class="relative w-full h-full max-w-7xl max-h-screen p-4 flex items-center justify-center"
+    >
+        <img
+            id="lightbox-img"
+            src=""
+            alt=""
+            class="max-w-full max-h-full object-contain shadow-2xl rounded-sm transform scale-95 transition-transform duration-300"
+        />
+        <div
+            id="lightbox-caption"
+            class="absolute bottom-8 left-0 right-0 text-center text-white/90 text-sm md:text-base px-4 font-medium drop-shadow-md tracking-wide"
+        >
+        </div>
+    </div>
+</div>
+
+<script>
+    function setupLightbox() {
+        const lightbox = document.getElementById("lightbox");
+        const lightboxImg = document.getElementById(
+            "lightbox-img",
+        ) as HTMLImageElement;
+        const lightboxCaption = document.getElementById("lightbox-caption");
+        const closeBtn = document.getElementById("lightbox-close");
+
+        if (!lightbox || !lightboxImg) return;
+
+        function openLightbox(src: string, alt: string) {
+            // Disable scrolling
+            document.body.style.overflow = "hidden";
+
+            // Set image source and alt
+            lightboxImg.src = src;
+            lightboxImg.alt = alt;
+
+            if (lightboxCaption) {
+                // Try to get caption from alt text or find a figcaption sibling if inside figure
+                lightboxCaption.textContent = alt || "";
+            }
+
+            // Show lightbox
+            lightbox?.classList.remove("hidden");
+            // Use setTimeout to allow display:block to apply before transition
+            setTimeout(() => {
+                lightbox?.classList.remove("opacity-0");
+                lightboxImg?.classList.remove("scale-95");
+                lightboxImg?.classList.add("scale-100");
+            }, 10);
+        }
+
+        function closeLightbox() {
+            // Enable scrolling
+            document.body.style.overflow = "";
+
+            // Hide animation
+            lightbox?.classList.add("opacity-0");
+            lightboxImg?.classList.remove("scale-100");
+            lightboxImg?.classList.add("scale-95");
+
+            // Hide element after transition
+            setTimeout(() => {
+                lightbox?.classList.add("hidden");
+                lightboxImg.src = "";
+            }, 300);
+        }
+
+        // Close on button click
+        closeBtn?.addEventListener("click", (e) => {
+            e.stopPropagation();
+            closeLightbox();
+        });
+
+        // Close on click outside image
+        lightbox.addEventListener("click", (e) => {
+            if (
+                e.target === lightbox ||
+                (e.target as Element).closest("#lightbox-container")
+            ) {
+                closeLightbox();
+            }
+        });
+
+        // Close on Escape key
+        document.addEventListener("keydown", (e) => {
+            if (e.key === "Escape" && !lightbox.classList.contains("hidden")) {
+                closeLightbox();
+            }
+        });
+
+        // Find all images in main content that should be zoomable
+        // We target images inside <article> for blog posts, and strictly inside .prose (standard markdown content)
+        // AND specific sections we might want to opt-in.
+        // For general home page usage, we can target specific classes or ids if needed,
+        // but for now let's be broad but safe: images inside 'main'
+
+        const contentImages = document.querySelectorAll("main img");
+
+        contentImages.forEach((img) => {
+            const imageEl = img as HTMLImageElement;
+            // Skip small icons, emojis, or specific classes (like logos if any)
+            // also avoid redundant click handlers
+            if (
+                imageEl.closest("a") ||
+                imageEl.classList.contains("no-lightbox") ||
+                imageEl.closest(".no-lightbox")
+            ) {
+                return;
+            }
+
+            imageEl.style.cursor = "zoom-in";
+            imageEl.addEventListener("click", (e) => {
+                e.preventDefault(); // Prevent default behavior if somehow wrapped in something else
+                openLightbox(imageEl.src, imageEl.alt);
+            });
+        });
+    }
+
+    // Initialize
+    setupLightbox();
+
+    // Handle View Transitions
+    document.addEventListener("astro:after-swap", setupLightbox);
+</script>

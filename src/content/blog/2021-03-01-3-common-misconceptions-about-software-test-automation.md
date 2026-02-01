@@ -10,7 +10,7 @@ featuredImage: ../../assets/3-common-misconceptions-about-software-test-automati
 ---
 Some popular misconceptions about Software Test Automation.
 
-# **\#1. The more automation the better**
+## **\#1. The more automation the better**
 
 Whenever we kick off a new project, we usually have high enthusiasm, high hopes, and high expectations. Same for automation projects. It’s only logical because if we don’t believe that a project would return high ROI, we’d not decide to take on the hassles anyway.
 
@@ -22,7 +22,7 @@ Such naïveté sometimes leads us to the wrong path: automate everything in fron
 
 Graph of Diminishing Returns - Source: [Wikipedia](https://en.wikipedia.org/wiki/Diminishing_returns "en.wikipedia.org")
 
-# **\#2. Automate once and run forever**
+## **\#2. Automate once and run forever**
 
 The most serious offender of them all is usually the Project Manager or other equivalent roles in management. They think setting up the initial automation framework and automating a few test cases are all there is. Now we can forget about it and get on with our life. Nah! It’s not that easy. That’s why on average, 63% of test automation projects fail.
 
@@ -32,7 +32,7 @@ The most serious offender of them all is usually the Project Manager or other eq
 
 Cost of automation maintenance - Source: [https://arxiv.org/pdf/1602.01226.pdf](https://arxiv.org/pdf/1602.01226.pdf "arxiv.org")
 
-# \#3. What are test environments anyway?
+## \#3. What are test environments anyway?
 
 A significant proportion of companies don’t even give test environments a second thought. They overlook the time and energy spent on test environment provisioning like spinning up VMs on a cloud (AWS, Azure…), staging a Kubernetes cluster, connecting to a database, installing the necessary automation libraries, installing the app under test (for desktop or mobile apps), dispatching the automated tests to multiple machines/VMs, aggregating the test results, etc.
 

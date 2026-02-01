@@ -98,7 +98,7 @@ Mabl made headlines last year thanks to the $20 million investment from Google V
 
 ![Test results on Mabl](../../assets/mabl-screenshot.png "Test results on Mabl")
 
-# 5. [TestProject](https://www.testproject.io)
+## 5. [TestProject](https://www.testproject.io)
 
 TestProject is a new kid on the block so it's not that popular. However, I believe it's an underrated tool since its **AI Self-Healing** and **Adaptive Waits** technologies are truly state-of-the-art best-in-class, even compared to commercial incumbents. These technologies help eliminate almost all of your automation flakiness. Enjoy a smooth and stable automation.
 
@@ -118,7 +118,7 @@ TestProject is a new kid on the block so it's not that popular. However, I belie
 
 ![TestProject supports many browser types](../../assets/testproject-2.png "TestProject supports many browser types")
 
-# Conclusion
+## Conclusion
 
 This list was composed as of early 2019 and recently updated in Mar 2021. The tool market for automation testing is very competitive. So you can expect radical changes and innovative features being introduced every day. If you spot some outdated information, please let me know. I’ll fix ASAP.
 

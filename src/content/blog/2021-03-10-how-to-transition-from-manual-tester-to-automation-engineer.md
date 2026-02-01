@@ -17,7 +17,7 @@ The good news is there's still a lot of overlap (*transferable knowledge*) betwe
 
 ![Automation engineer is well compensated](../../assets/automation-engineer-salary.png "Automation engineer is well compensated")
 
-# Step #1- Retrospective
+## Step #1- Retrospective
 
 First, let's retrospect before we dive deep into what to learn and how to make a successful transition.
 
@@ -31,7 +31,7 @@ Additionally, you also execute all those tests on the app in question manually o
 
 I bet you also possess the ***domain knowledge*** of the industry you're operating in such as banking, refinancing, energy, e-commerce, Salesforce, SAP, Oracle EBS, textile, supply chain inspection, etc. This is where you outshine a programmer who only has the tech stuff covered or someone who has just recently joined the project. Leverage your valuable domain expertise as a competitive advantage in a job interview.
 
-# Step #2 - Learn Automation-specific Skills
+## Step #2 - Learn Automation-specific Skills
 
 Now that you understand your strengths, let's examine the areas of knowledge that you'll need to learn. I'm listing out some key areas of knowledge below. Of course, these points are by no means exhaustive. There are still a lot to learn if you want to advance to senior level. But they basically cover the foundation for an entry-level automation engineer.
 
@@ -71,7 +71,7 @@ Automation engineers don’t just automate tests, we also automate the Continuou
 
 Now that we laid out the foundation for an automation engineer. Let's prepare for an actual career pivot.
 
-# Step #3. Prepare for an Interview
+## Step #3. Prepare for an Interview
 
 Whether you're transferring to another department within your own company or getting a new job with a new employer, you'll need to prepare for a job interview. *Prepare a portfolio of automation projects that could impress your interviewer.* Ideally, a Github repo is the best way to share your works.
 
@@ -85,7 +85,7 @@ Besides the automation-specific questions, you should also prepare for the gener
 
 Interviewers will not be so rude to ask that last question. But your answers should always be framed around this burning question. Sprinkle in some optimism and appetite for learning and you'll be gold.
 
-# Conclusion
+## Conclusion
 
 No doubt that career pivots are difficult and scary. But fortunately, transitioning from Manual Testing to **Automation Engineer** should not be among the hardest ones. The two roles overlap a lot as we analyzed above. So this pivot should be relatively easy. If you got any other ideas, feel free to leave a comment below. 
 

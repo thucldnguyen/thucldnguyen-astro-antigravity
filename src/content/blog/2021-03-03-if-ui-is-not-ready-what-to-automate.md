@@ -23,7 +23,7 @@ Sitting around waiting idly is of course not an option. The good news is as a **
 
 The picture above illustrates the fact that **Testing is usually the bottleneck of software deliveries.** Don't let that happen. With that in mind, I'd like to outline below some key automation jobs that you can start working on while waiting for the GUI to stabilize.
 
-# \#1. Automate API Behind the UI
+## \#1. Automate API Behind the UI
 
 Every UI needs a backend API or multiple APIs to fetch data from. Even static HTML websites built by static site generators like *Gatsby, Hugo, Jekyll, etc.* require a ***GraphQL API*** or at least some REST endpoints. It applies to both web and mobile apps. However, there could be an exception for legacy desktop apps. Not every desktop app exposes its API to the end-users or accessible from an automation perspective.
 
@@ -35,7 +35,7 @@ The picture below (credit: [pact.io](https://pact.io)) shows various microservic
 
 ![Microservices architecture - Source: pact.io](../../assets/pact-io-microservices.png "Microservices architecture - Source: pact.io")
 
-# \#2. Automate Business-Logics Flows
+## \#2. Automate Business-Logics Flows
 
 If the ***business-logics*** scenarios are ready, automate them and group them together to form a comprehensive **End-to-End (E2E)** test suite. This approach usually blends well with the **Keyword-Driven Testing (KDT)** method. Instead of being specific to the GUI interactions level, you can just start with a "skeleton" of major business steps and verifications.
 
@@ -47,7 +47,7 @@ The picture below shows the pizza ordering test in another KDT tool called [Test
 
 ![Pizza ordering test written in TestArchitect IDE (a KDT tool)](../../assets/pizza-ordering-test.png "Pizza ordering test written in TestArchitect IDE (a KDT tool)")
 
-# \#3. Automate Database
+## \#3. Automate Database
 
 Automate the **database queries** that fetch the test data for your **data-driven tests**. This strategy is similar to the API automation above. An app usually connects to a database. So why not make sure that the most common database queries will return the correct data, even before the GUI is ready?
 
@@ -59,7 +59,7 @@ The picture below shows some options that you can control on [generatedata.com](
 
 ![Generate a realistic dataset for testing purposes](../../assets/generate-data.png "Generate a realistic dataset for testing purposes")
 
-# \#4. Automate Test Environment
+## \#4. Automate Test Environment
 
 A lot of us usually overlook one key aspect of test automation: **automating the creation and teardown of test environments**, e.g. provisioning the test VMs, spinning up Docker containers, install software dependencies in each box, deploying the code or app under test, dispatching the tests to a public cloud in a parallel manner, etc.
 
@@ -71,7 +71,7 @@ The picture below separates out different types of test environments: regression
 
 ![Different types of test environment](../../assets/test-environments.jpg "Different types of test environment")
 
-# Conclusion
+## Conclusion
 
 Hope that helps. If you disagree with any point or want to add more, please leave a note in the Comment section below. Happy automating!
 

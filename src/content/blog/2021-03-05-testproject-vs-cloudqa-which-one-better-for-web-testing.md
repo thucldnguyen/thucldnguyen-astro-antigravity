@@ -14,7 +14,7 @@ A lot of ink and paper have been spent on popular tools like [Selenium](https://
 
 > TestProject and CloudQA are both empowered by Selenium. If you look for other alternatives to Selenium, check out this article: [Best Alternatives to Selenium WebDriver to Web Testing](https://www.thucldnguyen.com/blog/web-automation-testing/best-alternatives-to-selenium/).
 
-# TestProject
+## TestProject
 
 I'm absolutely impressed and pleasantly delighted by the UX of TestProject. New users like me are onboarded smoothly. Except for a quite "fat" **TestProject Agent** (weighing *267 MB*), the installation process is a breeze. You can get up to speed quickly. 
 
@@ -34,7 +34,7 @@ I'm absolutely impressed and pleasantly delighted by the UX of TestProject. New 
 
 ![TestProject supports a lot more platforms than CloudQA](../../assets/testproject-2.png "TestProject supports a lot more platforms than CloudQA")
 
-# CloudQA
+## CloudQA
 
 The strongest selling point for CloudQA is of course its cloud nature. Test execution happens on CloudQA's infrastructure so you don't have to manage that infrastructure yourself. One less task to worry about. Besides, creating assertions is very easy, unlike TestProject. You simply click the **"Assertion"** button and hold the mouse over an element.
 
@@ -58,7 +58,7 @@ However, I have to be honest that CloudQA is quite flaky. A simple record & play
 
 ![CloudQA interrupts your test run constantly with this annoying salesy message](../../assets/cloudqa-1.png "CloudQA interrupts your test run constantly with this annoying salesy message")
 
-# Verdict
+## Verdict
 
 The clear winner between these two tools is of course: **TestProject**. Its stable automation is admirable and much appreciated. I'd argue that their **Adaptive Waits** and **AI Self-Healing** are the state-of-the-art best-in-class technology on the market right now, even compared with commercial incumbents like *Tricentis Tosca, Ranorex, TestComplete, etc.* If you're searching for a tool for your next web testing project, pick TestProject. If you disagree with any point or have more tool suggestions, feel free to put them in the **Comment** section below.
 

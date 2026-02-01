@@ -18,7 +18,7 @@ These **BUY or BUILD** questions usually came from developers, especially senior
 
 However, there are some downsides if we go down that open-source path. With open-source, you would have to headbutt many big problems. Thus for big enterprises, nine out of ten, the answer is a firm **BUY**. Let me explain why.
 
-# Problem #1. The Tangible Cost of Ownership
+## Problem #1. The Tangible Cost of Ownership
 
 As a QA Manager, you have to think about **Capability Development** for the teams you supervise. If they lack a certain useful skill set, we have to train them, sponsor their online courses or go out and hire more people to fill in those skill gaps.
 
@@ -34,7 +34,7 @@ When it comes down to dollars (cost of ownership – TCO),  commercial tools or 
 
 Why don’t we let them deal with all this craziness so that we can get on with our life in peace?
 
-# Problem #2.The Intangible Cost of Opportunity
+## Problem #2.The Intangible Cost of Opportunity
 
 Besides the dollar values (TCO – Total Cost of Ownership), you have to pay another intangible cost: Opportunity Cost. Developers love building stuff and that’s all well and good. But not everything should be built by you.
 
@@ -46,7 +46,7 @@ One hour you spend on maintaining the automation frameworks or fixing flaky scri
 
 If you’re a bank, you better write code that improves your Customer Experience and see your bottom line getting fatter and fatter. If you’re a Oil & Gas company, you better write software that multiplies the productivity of your exploration & drilling operations. If you are… You know where I’m heading now. 😉
 
-# Problem #3. Continuous Support
+## Problem #3. Continuous Support
 
 Who is going to fix framework bugs? Let’s say the most basic click() & sendKeys() functions don’t work on a peculiar environment (e.g. iPad simulator), you cannot scream at the Protractor or Selenium community and demand them to fix it immediately.
 
@@ -58,6 +58,6 @@ Otherwise, you have to fork the project and fix them on your own. That leads bac
 
 With a commercial tool, you have a Customer Support team to yell at and some engineers behind the scene to fix bugs for you. Customers are king so even when your test requirements are quite far away from the traditional paths, you can still ask the vendors to customize their solution for you. Better right?
 
-# Conclusion
+## Conclusion
 
 I’ll add more problems and solutions to this article continuously. There might be a lot more concerns to address but these three are the most noticeable headaches. Free open-source solutions are not actually zero cost. We still have to pay somehow. If you notice anything missing, let me know in the comment.

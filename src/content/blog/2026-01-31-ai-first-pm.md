@@ -17,7 +17,7 @@ The first was **Axon Tech Summit**, where I had the chance to MC a AMA panel wit
 
 Our audience was senior engineers, staff engineers, architects, director of engineering from local tech companies like Nvidia Vietnam, NAB, and Ninja Van. Several candidates applied on the spot.
 
-![Axon Tech Summit 2026](../../assets/tech-summit.png)
+![Axon Tech Summit 2026](../../assets/tech-summit2.jpg)
 
 The second was an internal **AI Hackathon**, where I was exposed — for the first time — to the idea of a *fleet of AI agents* and tools like **Claude Code** operating directly on real codebases.
 

@@ -6,7 +6,7 @@ date: 2019-05-09 12:00
 description: Pros and cons of Selenium vs RPA vs Cypress.io
 featuredImage: ../../assets/sel-cy-uip-new.png
 ---
-# [Selenium](http://seleniumhq.org/)
+## [Selenium](http://seleniumhq.org/)
 
 ### Pros
 
@@ -22,7 +22,7 @@ featuredImage: ../../assets/sel-cy-uip-new.png
 * **No out-of-browser support:** You cannot interact with popups, browser dialogs or desktop windows without additional tools.
 * **Hard to architect right:** If you don’t have enough experience designing a Selenium framework, you’ll ultimately have to rebuild it from scratch after a while because updating test assets has become too painful. Read more about building a good Selenium framework [here](https://www.logigear.com/blog/test-automation/building-a-selenium-framework-from-a-to-z/).
 
-# [Cypress.io](http://cypress.io/)
+## [Cypress.io](http://cypress.io/)
 
 ### Pros
 
@@ -35,7 +35,7 @@ featuredImage: ../../assets/sel-cy-uip-new.png
 * **No parallel execution:** you can only run one test at a time. The development team doesn’t intend to implement this feature any time soon. They suggest us to parallelize at “operating system level”, aka using Docker containers.
 * **Only one language support:** either you like Javascript or you’re out. This doesn’t bother front-end developers much since they’re JS experts anyways. But for the rest of us who have diverse technical background, this could be a problem. Read more about the hidden traps of Cypress here: [5 Pitfalls You Should Consider Before Adopting Cypress – Thuc Nguyen](https://thucldnguyen.com/web-automation-testing/cypress-pitfalls/)
 
-# UiPath
+## UiPath
 
 ### Pros
 

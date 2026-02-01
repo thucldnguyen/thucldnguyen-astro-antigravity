@@ -7,7 +7,7 @@ description: Cypress has its own unique approach to web automation and there are
   good reasons they chose to approach it that way
 featuredImage: ../../assets/cypress.png
 ---
-# 1. Cypress Made Bold Trade-off
+## 1. Cypress Made Bold Trade-off
 
 Bold trade-offs show the strength, and confidence of a product team. They eliminate ambiguity and help the team laser-focus on what’s most important. But making trade-offs is easier said than done. Most product teams avoid or worse, defer making trade-offs because like all other human beings, we’re afraid to be wrong and criticized.
 
@@ -19,7 +19,7 @@ I must admit I was one of those who doubted Cypress when I first stumbled upon i
 
 Cypress made a good choice here. That’s why I believe they’ll go places in the future.
 
-# 2. Cypress Focuses on The Right Problems
+## 2. Cypress Focuses on The Right Problems
 
 A lot have changed since the early-days of test automation. Back then, clicking a UI element on a particular platform was a serious technical challenge. Teams must spend time and effort in building the automation technologies that were fragile because platform owners (Microsoft, Apple, Android…) didn’t invest adequately in app testability. Whenever they made a disrupt API change, our automation frameworks were screwed.
 
@@ -39,7 +39,7 @@ Cypress has solved these problems very cleverly. For instance, since Cypress bas
 
 How Cypress solves other problems are also brilliant. But let’s save those topics for another blog post.
 
-# 3. Cypress Adds its Own Highlight
+## 3. Cypress Adds its Own Highlight
 
 [Time travel ](https://docs.cypress.io/guides/getting-started/writing-your-first-test.html#Time-travel)helps Cypress shine. No other tools have this capability. Basically, you can step back to a past state of the web app to debug your test and your app.
 

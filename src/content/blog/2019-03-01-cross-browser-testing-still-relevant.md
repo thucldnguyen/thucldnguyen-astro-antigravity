@@ -11,7 +11,7 @@ description: A wave of new test automation tools argue that Cross Browser
   safe if you stick with Chrome – the most popular browser on planet Earth.
 featuredImage: ../../assets/web-browser-icons.png
 ---
-# Understanding the Argument
+## Understanding the Argument
 
 A wave of new test automation tools argue that Cross Browser Testing is no longer relevant. Their reason? Due to the law of diminishing returns, adding more browser coverage only marginally increases your confidence.
 
@@ -21,7 +21,7 @@ The argument further explains that since only a small proportion of your failure
 
 The <www.statista.com> chart above shows that Chrome occupied **70.95%** as of December 2018. That blew my mind. The antifans of cross browser testing certainly got their math right.
 
-# Technical Differences
+## Technical Differences
 
 Different browsers interpret the code of your web apps differently. That’s for granted.
 
@@ -31,7 +31,7 @@ Another big difference among browsers is the JavaScript engine. Chrome uses V8 w
 
 Hopefully now we can all agree that each browser is a complex beast. There’s no warranty that your web apps will behave exactly the same between browsers.
 
-# Return on Investment (ROI)
+## Return on Investment (ROI)
 
 Yes, the law of diminishing returns applies here. However, it only applies to the probability that a bug would happen. No one said anything about the impact of that highly improbable bug. The picture illustrates what I mean.
 
@@ -39,6 +39,6 @@ Yes, the law of diminishing returns applies here. However, it only applies to th
 
 Enterprises sometimes cannot afford the luxury of ignoring these risks.
 
-# Conclusion
+## Conclusion
 
 Cross Browser Testing is still relevant, at least at the moment. Do you think differently? Let me know in the comment section.

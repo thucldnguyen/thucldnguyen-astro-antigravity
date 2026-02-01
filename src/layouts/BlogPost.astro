@@ -6,6 +6,7 @@ import Footer from "../components/Footer.astro";
 import FormattedDate from "../components/FormattedDate.astro";
 import Header from "../components/Header.astro";
 import CallToAction from "../components/CallToAction.astro";
+import Lightbox from "../components/Lightbox.astro";
 import bannerImage from "../assets/banner.jpg";
 
 type Props = CollectionEntry<"blog">["data"];
@@ -89,5 +90,6 @@ const resolvedImage = heroImage || featuredImage || bannerImage;
 			</article>
 		</main>
 		<Footer />
+		<Lightbox />
 	</body>
 </html>
