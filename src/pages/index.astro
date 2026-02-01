@@ -126,6 +126,8 @@ const posts = (await getCollection("blog"))
                                 alt="Thuc Nguyen"
                                 width={320}
                                 height={320}
+                                loading="eager"
+                                fetchpriority="high"
                                 class="relative w-full h-full object-cover rounded-3xl shadow-2xl rotate-3 hover:rotate-0 transition-transform duration-500"
                             />
                         </div>

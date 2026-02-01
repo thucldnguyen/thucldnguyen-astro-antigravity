@@ -40,6 +40,8 @@ const resolvedImage = heroImage || featuredImage || bannerImage;
 								height={574}
 								src={resolvedImage}
 								alt=""
+								loading="eager"
+								fetchpriority="high"
 								class="w-full h-auto object-cover"
 							/>
 						) : (
@@ -47,6 +49,8 @@ const resolvedImage = heroImage || featuredImage || bannerImage;
 								width={1020}
 								src={resolvedImage}
 								alt=""
+								loading="eager"
+								fetchpriority="high"
 								class="w-full h-auto object-cover"
 							/>
 						)
