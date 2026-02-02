@@ -7,31 +7,57 @@ import FormattedDate from "../components/FormattedDate.astro";
 import Header from "../components/Header.astro";
 import CallToAction from "../components/CallToAction.astro";
 import Lightbox from "../components/Lightbox.astro";
+import { getReadingTime } from "../utils/readingTime";
+import TagList from "../components/TagList.astro";
+import ShareButtons from "../components/ShareButtons.astro";
+import RelatedPosts from "../components/RelatedPosts.astro";
+import Comments from "../components/Comments.astro";
+import AnimateOnScroll from "../components/AnimateOnScroll.astro";
 import bannerImage from "../assets/banner.jpg";
 
-type Props = CollectionEntry<"blog">["data"];
+type Props = CollectionEntry<"blog">["data"] & { body?: string };
 
-const { title, description, date, updatedDate, heroImage, featuredImage } =
-	Astro.props;
-const resolvedImage = heroImage || featuredImage || bannerImage;
+const {
+	title,
+	description,
+	date,
+	updatedDate,
+	heroImage,
+	featuredImage,
+	image,
+} = Astro.props;
+
+// Logic to determine which image to use (support various frontmatter fields)
+const resolvedImage = heroImage || featuredImage || image || bannerImage;
 ---
 
+<!doctype html>
 <html lang="en">
 	<head>
-		<BaseHead
-			title={title}
-			description={description}
-			image={resolvedImage}
-		/>
+		<BaseHead title={title} description={description} />
+		{/* Preload LCP image for blog post */}
+		{
+			resolvedImage && (
+				<link
+					rel="preload"
+					as="image"
+					href={
+						typeof resolvedImage === "string"
+							? resolvedImage
+							: resolvedImage.src
+					}
+				/>
+			)
+		}
 	</head>
 
 	<body
 		class="bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-slate-100 transition-colors duration-300"
 	>
 		<Header />
-		<main class="w-full max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+		<main class="w-full max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
 			<article
-				class="bg-white dark:bg-slate-900 rounded-2xl shadow-sm border border-slate-200 dark:border-slate-800 overflow-hidden transition-colors duration-300"
+				class="max-w-4xl mx-auto bg-white dark:bg-slate-900 rounded-2xl shadow-sm border border-slate-200 dark:border-slate-800 overflow-hidden transition-colors duration-300 animate-on-scroll"
 			>
 				<div class="w-full relative bg-slate-100 dark:bg-slate-800">
 					{
@@ -59,37 +85,70 @@ const resolvedImage = heroImage || featuredImage || bannerImage;
 				</div>
 				<div class="p-8 md:p-12 lg:p-16">
 					<div class="text-center mb-12">
-						<div class="text-slate-500 dark:text-slate-400 mb-4">
+						<div
+							class="text-slate-500 dark:text-slate-400 mb-4 flex items-center justify-center gap-2"
+						>
 							<FormattedDate date={date} />
-							{
-								updatedDate && (
-									<div class="italic text-sm mt-1">
-										Last updated on{" "}
-										<FormattedDate date={updatedDate} />
-									</div>
-								)
-							}
+							<span>•</span>
+							<span>{getReadingTime(Astro.props.body)}</span>
 						</div>
+						{
+							updatedDate && (
+								<div class="italic text-sm text-slate-500 dark:text-slate-400 mb-4">
+									Last updated on{" "}
+									<FormattedDate date={updatedDate} />
+								</div>
+							)
+						}
 						<h1
 							class="text-4xl md:text-5xl font-bold tracking-tight text-slate-900 dark:text-white mb-4"
 						>
 							{title}
 						</h1>
-						<hr class="w-24 h-1 bg-accent mx-auto" />
+						<hr class="w-24 h-1 bg-accent mx-auto mb-6" />
+
+						<div class="flex justify-center mb-6">
+							<TagList tags={Astro.props.tags || []} />
+						</div>
 					</div>
 					<div
 						class="prose prose-lg prose-slate dark:prose-invert mx-auto max-w-none"
 					>
 						<slot />
+
 						<hr
-							class="my-12 h-px border-0 bg-slate-200 dark:bg-slate-800"
+							class="my-8 h-px border-0 bg-slate-200 dark:bg-slate-800"
 						/>
-						<CallToAction />
+
+						<ShareButtons
+							title={title}
+							description={description}
+							url={Astro.url.href}
+						/>
+
+						<div class="mt-12">
+							<CallToAction />
+						</div>
 					</div>
 				</div>
 			</article>
+
+			<hr class="my-12 border-transparent" />
+
+			<div class="animate-on-scroll">
+				<RelatedPosts
+					currentSlug={Astro.params.slug || ""}
+					tags={Astro.props.tags || []}
+				/>
+			</div>
+
+			<div class="max-w-4xl mx-auto animate-on-scroll">
+				<Comments />
+			</div>
 		</main>
 		<Footer />
 		<Lightbox />
+		<AnimateOnScroll />
 	</body>
 </html>
+```

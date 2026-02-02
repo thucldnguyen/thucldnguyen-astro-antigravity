@@ -10,6 +10,7 @@ description: Some say Manual Testing is an old "mindset" that is impossible to
   (transferable knowledge) and it's totally feasible to make this transition, if
   you want to.
 featuredImage: ../../assets/how-to-transition-from-manual-tester-to-automation-engineer.png
+tags: ["Career", "Testing", "Automation"]
 ---
 Some say **Manual Testing** is an old "mindset" that is impossible to *upgrade* to the **Automation Testing** mindset. I say no. Admittedly they are two different *skill sets* and we got to go the extra miles -- like every other career move under the sun. But the difference is no where near the abstract level of "mindsets" or "domains". It's just about practical know-hows.
 

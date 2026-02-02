@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://thucldnguyen.com/sitemap-index.xml

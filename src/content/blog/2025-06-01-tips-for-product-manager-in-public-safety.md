@@ -5,6 +5,7 @@ slug: /blog/3-tips-for-product-manager-in-public-safety
 date: 2022-11-12 14:07
 description: Building software is hard. Building software for police is even harder
 featuredImage: ../../assets/axon-perf.jpg
+tags: ["Product Management", "Career", "Public Safety"]
 ---
 Building good software is never easy. 
 

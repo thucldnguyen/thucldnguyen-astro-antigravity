@@ -310,9 +310,22 @@
         form.addEventListener("submit", handleSubmit);
     }
 
-    // Initialize
-    setupContactForm();
+    // Defer init to idle so we don't compete with LCP (3G / low-end)
+    function runSetup() {
+        setupContactForm();
+    }
+    if (typeof requestIdleCallback !== "undefined") {
+        requestIdleCallback(runSetup, { timeout: 2000 });
+    } else {
+        window.addEventListener("load", runSetup);
+    }
 
     // Handle View Transitions
-    document.addEventListener("astro:after-swap", setupContactForm);
+    document.addEventListener("astro:after-swap", () => {
+        if (typeof requestIdleCallback !== "undefined") {
+            requestIdleCallback(setupContactForm, { timeout: 500 });
+        } else {
+            setupContactForm();
+        }
+    });
 </script>

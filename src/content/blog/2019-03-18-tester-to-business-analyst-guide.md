@@ -5,6 +5,7 @@ slug: /blog/career-advice/tester-to-business-analyst-guide/
 date: 2019-03-18 09:00
 description: Tester Switching to Business Analyst – A Fast-Track Guide
 featuredImage: ../../assets/dream-job2.jpeg
+tags: ["Career", "Testing", "Business Analysis"]
 ---
 Let’s be honest. Money is important. It’s often the top factor that motivates a career switch. Who doesn’t love a bumped-up salary? The charts below show how much business analysts are making on average compared to software testers (QA) (source: [Glassdoor](https://www.glassdoor.com/Salaries)).
 

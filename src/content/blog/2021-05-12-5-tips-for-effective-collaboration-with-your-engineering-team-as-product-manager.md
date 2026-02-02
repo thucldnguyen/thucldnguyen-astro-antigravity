@@ -11,6 +11,7 @@ description: As a product manager, our engineering team is the one and only
   contains useful tips that could hopefully help product managers work more
   effectively and harmoniously with their engineering team.
 featuredImage: ../../assets/5-tips-for-effective-collaboration-with-engineering-team.png
+tags: ["Product Management", "Career", "Leadership", "Collaboration"]
 ---
 As a product manager, our engineering team is the single group of people that we interact with the most. Thus, cultivating a harmonious relationship with our engineering team will help boost our productivity tremendously while saving us a ton of chronic headaches. This blog post contains useful tips that could hopefully help product managers work more effectively and efficiently with their engineering team.
 

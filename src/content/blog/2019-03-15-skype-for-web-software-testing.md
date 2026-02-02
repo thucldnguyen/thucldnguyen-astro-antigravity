@@ -8,6 +8,7 @@ description: On March 7, 2019, Microsoft released a fresh version of Skype for
   recording and finding messages within conversations. The caveat? It only works
   for Chrome and Edge.
 featuredImage: ../../assets/browser-not-supported.png
+tags: ["Testing", "Web", "Cross Browser Testing"]
 ---
 **On March 7, 2019,** Microsoft released a fresh version of Skype for Web ([source](https://blogs.skype.com/news/2019/03/07/the-new-skype-for-web-is-here/)). The new Skype features many gems such as HD video calling, call recording and finding messages within conversations. The caveat? It only works for Chrome and Edge.
 

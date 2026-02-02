@@ -151,9 +151,22 @@
         });
     }
 
-    // Initialize
-    setupLightbox();
+    // Defer init to idle (or after load) so we don't compete with LCP
+    function runSetup() {
+        setupLightbox();
+    }
+    if (typeof requestIdleCallback !== "undefined") {
+        requestIdleCallback(runSetup, { timeout: 2000 });
+    } else {
+        window.addEventListener("load", runSetup);
+    }
 
     // Handle View Transitions
-    document.addEventListener("astro:after-swap", setupLightbox);
+    document.addEventListener("astro:after-swap", () => {
+        if (typeof requestIdleCallback !== "undefined") {
+            requestIdleCallback(setupLightbox, { timeout: 500 });
+        } else {
+            setupLightbox();
+        }
+    });
 </script>

@@ -5,6 +5,7 @@ slug: /blog/ai-first-pm
 date: 2026-01-31 17:00
 description: "Why I stopped thinking of AI as a chatbot and started building an AI-first PM workflow to protect my most valuable asset: human judgment."
 featuredImage: ../../assets/ai-first-pm.png
+tags: ["AI", "Product Management", "Workflow"]
 ---
 
 At Axon’s Company Kickoff week in January 2026, we ran multiple AI events back-to-back. Two of which fundamentally changed how I think about AI.

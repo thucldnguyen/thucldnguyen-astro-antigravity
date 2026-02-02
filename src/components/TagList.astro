@@ -1,0 +1,29 @@
+---
+interface Props {
+    tags: string[];
+    clickable?: boolean;
+}
+
+const { tags, clickable = true } = Astro.props;
+---
+
+{
+    tags && tags.length > 0 && (
+        <div class="flex flex-wrap gap-2">
+            {tags.map((tag) =>
+                clickable ? (
+                    <a
+                        href={`/tags/${tag}`}
+                        class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-slate-100 text-slate-800 hover:bg-slate-200 dark:bg-slate-800 dark:text-slate-200 dark:hover:bg-slate-700 transition-colors"
+                    >
+                        #{tag}
+                    </a>
+                ) : (
+                    <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-slate-100 text-slate-800 dark:bg-slate-800 dark:text-slate-200">
+                        #{tag}
+                    </span>
+                ),
+            )}
+        </div>
+    )
+}

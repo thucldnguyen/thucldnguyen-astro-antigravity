@@ -9,6 +9,7 @@ description: Cypress is by no doubts on the rise. It got 318,244 weekly
   The chart from npm below clearly corroborates the claim. That said, there’s
   certainly no tool that fits every team.
 featuredImage: ../../assets/cypress-code2.png
+tags: ["Testing", "Cypress", "Automation"]
 ---
 **Cypress** is by no doubts on the rise. It got **318,244** weekly downloads as of the week of 8-Mar-2019. Aside from a short deep dive in the 21-Dec-2018 (Christmas?), Cypress’ popularity has been increasing steadily. The chart from **npm** below clearly corroborates the claim.
 

@@ -8,6 +8,7 @@ description: If the UI of your web, desktop, or mobile app is not ready, what
   good news is as a software automation engineer, you can start working on many
   things.
 featuredImage: ../../assets/if-ui-is-not-ready-what-to-automate_.png
+tags: ["Testing", "Strategy", "Automation", "API"]
 ---
 **If the UI of your web, desktop, or mobile app is not ready, what should you do?** 
 

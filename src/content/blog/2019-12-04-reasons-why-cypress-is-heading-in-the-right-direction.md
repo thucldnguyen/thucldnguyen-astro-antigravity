@@ -6,6 +6,7 @@ date: 2019-12-04 00:01
 description: Cypress has its own unique approach to web automation and there are
   good reasons they chose to approach it that way
 featuredImage: ../../assets/cypress.png
+tags: ["Testing", "Cypress", "Strategy"]
 ---
 ## 1. Cypress Made Bold Trade-off
 

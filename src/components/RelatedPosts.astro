@@ -1,0 +1,62 @@
+---
+import { getCollection } from "astro:content";
+import PostCard from "./PostCard.astro";
+
+interface Props {
+    currentSlug: string;
+    tags: string[];
+}
+
+const { currentSlug, tags } = Astro.props;
+
+// 1. Get all blog posts
+const allPosts = await getCollection("blog");
+
+// 2. Filter out current post
+const otherPosts = allPosts.filter((post) => {
+    // Handle different slug formats (with or without /blog/ prefix)
+    const postSlug = (post.data.slug || post.id)
+        .replace(/^\/?blog\//, "")
+        .replace(/^\//, "");
+    return postSlug !== currentSlug;
+});
+
+// 3. Score posts based on matching tags
+const scoredPosts = otherPosts.map((post) => {
+    let score = 0;
+    if (post.data.tags && tags) {
+        const matchingTags = post.data.tags.filter((tag) => tags.includes(tag));
+        score = matchingTags.length;
+    }
+    return { post, score };
+});
+
+// 4. Filter posts with at least one matching tag and sort by score (desc) then date (desc)
+const relatedPosts = scoredPosts
+    .filter(({ score }) => score > 0)
+    .sort((a, b) => {
+        if (b.score !== a.score) {
+            return b.score - a.score;
+        }
+        return b.post.data.date.valueOf() - a.post.data.date.valueOf();
+    })
+    .map(({ post }) => post)
+    .slice(0, 3); // Take top 3
+---
+
+{
+    relatedPosts.length > 0 && (
+        <section class="mt-12">
+            <h2 class="text-2xl font-bold text-slate-900 dark:text-white mb-6">
+                You might also like
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                {relatedPosts.map((post) => (
+                    <div class="h-full">
+                        <PostCard post={post} />
+                    </div>
+                ))}
+            </div>
+        </section>
+    )
+}

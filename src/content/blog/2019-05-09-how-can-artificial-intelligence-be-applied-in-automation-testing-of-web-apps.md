@@ -10,6 +10,7 @@ description: "There are several interesting web app automation scenarios that we
   automation tools like Mabl. Increase automation productivity by using Natural
   Language Processing (NLP) to automatically "
 featuredImage: ../../assets/how-can-ai-can-be-applied-new.png
+tags: ["Testing", "AI", "Automation"]
 ---
 There are several interesting web app automation scenarios that we can improve using AI:
 

@@ -5,6 +5,7 @@ slug: /blog/why-i-stopped-trying-to-balance-work-and-life
 date: 2025-10-25 16:17
 description: There's no such thing called work-life balance
 featuredImage: ../../assets/work-life.png
+tags: ["Career", "Life", "Product Management", "Leadership"]
 ---
 
 For a long time, I believed that *work–life balance* was something you could engineer.

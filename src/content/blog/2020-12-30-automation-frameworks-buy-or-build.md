@@ -8,6 +8,7 @@ description: Free open-source automation frameworks are not actually zero cost.
   This article discusses the merits of BUILD versus BUY when it comes to picking
   your Automation Framework.
 featuredImage: ../../assets/build-vs-buy.png
+tags: ["Test Automation", "Strategy"]
 ---
 Have you ever wondered about whether you should **BUY** or **BUILD**? Over the years, I’ve seen many test teams at non-tech enterprises struggled with the same dilemma.  
 

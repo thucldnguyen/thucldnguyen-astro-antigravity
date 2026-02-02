@@ -10,6 +10,7 @@ description: A wave of new test automation tools argue that Cross Browser
   of your failures actually result from inconsistencies between browsers, you’re
   safe if you stick with Chrome – the most popular browser on planet Earth.
 featuredImage: ../../assets/web-browser-icons.png
+tags: ["Testing", "Cross Browser Testing"]
 ---
 ## Understanding the Argument
 

@@ -8,6 +8,7 @@ description: Web automation testing for web apps is in huge demand. The global
   according to Zion Market Research (source). And no other tools have outshone
   Selenium in terms of fame and adoption so far. But, that’s about to change.
 featuredImage: ../../assets/best-alternatives-to-selenium-webdriver.png
+tags: ["Testing", "Selenium", "Cypress", "Automation"]
 ---
 **Last Updated: 05-Mar-2021**
 

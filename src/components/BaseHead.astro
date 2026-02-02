@@ -33,21 +33,25 @@ const { title, description, image = newThumbnail } = Astro.props;
 />
 <meta name="generator" content={Astro.generator} />
 
-<!-- Font preloads -->
-<link
-	rel="preload"
-	href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@400;700&display=swap"
-	as="style"
-/>
-<link rel="preconnect" href="https://fonts.googleapis.com" />
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link
-	href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@400;700&display=swap"
-	rel="stylesheet"
-/>
+<!-- Fonts: self-hosted via @fontsource in global.css (no external requests) -->
 
 <!-- Canonical URL -->
 <link rel="canonical" href={canonicalURL} />
+
+<!-- Preload LCP image (hero/OG) so the browser fetches it earlier -->
+{
+	image && (
+		<link
+			rel="preload"
+			as="image"
+			href={
+				typeof image === "string"
+					? image
+					: (image as ImageMetadata).src
+			}
+		/>
+	)
+}
 
 <ClientRouter />
 
@@ -160,16 +164,23 @@ const { title, description, image = newThumbnail } = Astro.props;
 	)}
 />
 
-<!-- Google Analytics -->
-<script
-	is:inline
-	async
-	src="https://www.googletagmanager.com/gtag/js?id=G-WBEHL329W9"></script>
+<!-- Google Analytics: load after page load to avoid blocking LCP (3G / low-end) -->
 <script is:inline>
 	window.dataLayer = window.dataLayer || [];
 	function gtag() {
 		dataLayer.push(arguments);
 	}
-	gtag("js", new Date());
-	gtag("config", "G-WBEHL329W9");
+	function loadGA() {
+		var s = document.createElement("script");
+		s.async = true;
+		s.src = "https://www.googletagmanager.com/gtag/js?id=G-WBEHL329W9";
+		document.head.appendChild(s);
+		gtag("js", new Date());
+		gtag("config", "G-WBEHL329W9");
+	}
+	if (document.readyState === "complete") {
+		loadGA();
+	} else {
+		window.addEventListener("load", loadGA);
+	}
 </script>

@@ -7,6 +7,7 @@ description: "The question might sound mundane and the answer seems obvious but
   many automation engineers keep asking it again and again. So let's get to the
   bottom of it. Sure you can but it's not recommended. "
 featuredImage: ../../assets/can-we-do-automation-testing-without-framework-new.png
+tags: ["Testing", "Strategy", "Automation Framework"]
 ---
 ***Sure, we can. Who’s there to stop us?*** Joking aside, although we can do automation testing without a framework, it’s not recommended. Don’t bring a knife to a gunfight. Clicking a button is easy. It’s just a few lines of code with Selenium WebDriver. But we’ll soon regret investing more in a framework from Day #1.
 

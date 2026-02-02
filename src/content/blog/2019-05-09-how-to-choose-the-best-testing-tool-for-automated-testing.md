@@ -8,6 +8,7 @@ description: Test Automation framework should meet such as supported automation
   ease of debugging test failures, ease of integrating test automation into a
   CI/CD pipeline, first-class Docker support, budget/pricing, etc.
 featuredImage: ../../assets/choose-test-tool-new.png
+tags: ["Testing", "Tools", "Automation", "Strategy"]
 ---
 
 **Last Updated: 6-Mar-2021**

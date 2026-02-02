@@ -5,6 +5,7 @@ slug: /blog/the-great-unshackling
 date: 2025-11-10 09:37
 description: "The product craft as we know it has evolved dramatically from utility to empathy"
 featuredImage: ../../assets/unshackling.png
+tags: ["Product Management", "AI", "Future of Work", "Leadership"]
 ---
 
 [Julie Zhuo](https://www.juliezhuo.com/) wrote something recently that really stuck with me: [*The Thing You Are Expert at Will Be Your Career Downfall*](https://lg.substack.com/p/the-thing-you-are-expert-at-will).

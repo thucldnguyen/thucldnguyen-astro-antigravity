@@ -2,7 +2,23 @@
   command = "npm run build"
   publish = "dist"
 
+# Default: short cache for HTML pages (later rules override for specific paths)
+[[headers]]
+  for = "/*"
+  [headers.values]
+    Cache-Control = "public, max-age=0, must-revalidate"
 
+# Long-lived cache for hashed static assets (immutable)
+[[headers]]
+  for = "/_astro/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+# Fonts: 1 day cache
+[[headers]]
+  for = "/fonts/*"
+  [headers.values]
+    Cache-Control = "public, max-age=86400, immutable"
 
 [[headers]]
   for = "/sw.js"

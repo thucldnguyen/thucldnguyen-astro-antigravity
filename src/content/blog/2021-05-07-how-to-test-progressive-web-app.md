@@ -7,6 +7,7 @@ description: Unlike normal web apps, PWA poses its own unique challenges that
   test engineers and automation engineers must pay attention to. This article
   discusses these unique testing requirements of PWA and how to approach them.
 featuredImage: ../../assets/how-to-test-progressive-web-app-center.png
+tags: ["Testing", "PWA", "Automation", "Strategy"]
 ---
 Of course, you can test **Progressive Web App (PWA)** *manually* just like any other web app by going through the test scenarios step by step and validating the app’s functionalities along the way. In terms of *automated testing*, you can easily automate PWA using the usual automation frameworks such as [Selenium](http://selenium.dev/ "selenium.dev"), [Cypress](http://cypress.io/ "cypress.io"), [Puppeteer](https://developers.google.com/web/tools/puppeteer "developers.google.com"), [Playwright](https://playwright.dev/ "playwright.dev"), [Robot](https://robotframework.org/ "robotframework.org"), [Protractor](https://www.protractortest.org/ "www.protractortest.org"), [TestProject](http://testproject.io/ "testproject.io"), etc. However, there are some unique aspects of PWA that you have to pay attention to compared to normal web apps.
 

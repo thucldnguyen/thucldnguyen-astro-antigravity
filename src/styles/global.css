@@ -1,3 +1,11 @@
+/* Self-hosted fonts (Inter + Playfair Display) – no external requests, font-display: swap */
+@import "@fontsource/inter/latin-400.css";
+@import "@fontsource/inter/latin-500.css";
+@import "@fontsource/inter/latin-600.css";
+@import "@fontsource/inter/latin-700.css";
+@import "@fontsource/playfair-display/latin-400.css";
+@import "@fontsource/playfair-display/latin-700.css";
+
 @import "tailwindcss";
 @plugin "@tailwindcss/typography";
 @custom-variant dark (&:where(.dark, .dark *));
@@ -116,4 +124,8 @@
 
 .animate-fade-in-up {
   animation: fade-in-up 0.6s ease-out forwards;
+}
+
+.animate-on-scroll {
+  @apply opacity-0 translate-y-4 transition-all duration-700 ease-out;
 }

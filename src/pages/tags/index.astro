@@ -1,0 +1,46 @@
+---
+import BaseHead from "../../components/BaseHead.astro";
+import Header from "../../components/Header.astro";
+import Footer from "../../components/Footer.astro";
+import TagCloud from "../../components/TagCloud.astro";
+import { getCollection } from "astro:content";
+import { SITE_TITLE, SITE_DESCRIPTION } from "../../consts";
+
+const allPosts = await getCollection("blog");
+const allTags = allPosts
+    .map((post) => post.data.tags)
+    .flat()
+    .filter((tag): tag is string => !!tag);
+---
+
+<!doctype html>
+<html lang="en">
+    <head>
+        <BaseHead
+            title={`Tags - ${SITE_TITLE}`}
+            description={SITE_DESCRIPTION}
+        />
+    </head>
+    <body class="bg-white dark:bg-slate-900 transition-colors duration-200">
+        <Header />
+        <main class="max-w-4xl mx-auto px-4 py-12 sm:px-6 lg:px-8">
+            <header class="text-center mb-12">
+                <h1
+                    class="text-4xl font-bold text-slate-900 dark:text-white mb-4"
+                >
+                    Topics
+                </h1>
+                <p class="text-xl text-slate-600 dark:text-slate-400">
+                    Explore articles by category
+                </p>
+            </header>
+
+            <div
+                class="bg-white dark:bg-slate-800/50 rounded-2xl p-8 shadow-sm border border-slate-100 dark:border-slate-800"
+            >
+                <TagCloud tags={allTags} showCount={true} />
+            </div>
+        </main>
+        <Footer />
+    </body>
+</html>
