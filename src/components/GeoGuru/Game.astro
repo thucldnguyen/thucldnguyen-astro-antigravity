@@ -4,13 +4,13 @@
 
 <div
     id="geoguru-game"
-    class="relative w-full max-w-4xl mx-auto my-8 rounded-3xl shadow-2xl overflow-hidden border-4 border-violet-200 dark:border-slate-700 min-h-[600px] md:min-h-[800px] flex flex-col font-sans"
+    class="relative w-full max-w-4xl mx-auto my-4 md:my-8 rounded-3xl shadow-2xl overflow-hidden border-4 border-violet-200 dark:border-slate-700 min-h-[450px] md:min-h-[800px] flex flex-col font-sans"
     style="font-family: 'Fredoka', sans-serif;"
 >
     <!-- HEADER -->
     <!-- HEADER -->
     <div
-        class="bg-gradient-to-r from-violet-600 to-fuchsia-600 p-4 flex justify-between items-center text-white shadow-lg z-10"
+        class="bg-gradient-to-r from-violet-600 to-fuchsia-600 p-3 md:p-4 flex justify-between items-center text-white shadow-lg z-10"
     >
         <div class="flex items-center gap-4">
             <!-- Home Button (visible when playing/clear) -->
@@ -208,7 +208,7 @@
             class="hidden relative z-10 w-full max-w-2xl flex-col items-center"
         >
             <div
-                class="w-full h-2 bg-slate-200 dark:bg-slate-700 rounded-full mb-8 overflow-hidden"
+                class="w-full h-2 bg-slate-200 dark:bg-slate-700 rounded-full mb-4 md:mb-8 overflow-hidden"
             >
                 <div
                     id="timer-bar"
@@ -217,7 +217,7 @@
                 </div>
             </div>
 
-            <div class="mb-8 relative group">
+            <div class="mb-4 md:mb-8 relative group">
                 <div
                     class="absolute -inset-1 bg-gradient-to-r from-violet-600 to-fuchsia-600 rounded-lg blur opacity-25 group-hover:opacity-50 transition duration-1000"
                 >
@@ -236,14 +236,14 @@
                         id="flag-img"
                         src=""
                         alt="Guess the country"
-                        class="h-48 sm:h-64 object-contain rounded shadow-inner transition-opacity duration-300 opacity-0"
+                        class="h-32 sm:h-64 object-contain rounded shadow-inner transition-opacity duration-300 opacity-0"
                     />
                 </div>
             </div>
 
             <div
                 id="options-grid"
-                class="grid grid-cols-1 sm:grid-cols-2 gap-4 w-full"
+                class="grid grid-cols-2 gap-2 sm:gap-4 w-full"
             >
                 <!-- Options injected by JS -->
             </div>
@@ -585,20 +585,16 @@
         switchScreen("clear");
 
         // Configure Buttons
-        if (score >= 40 && currentLevel === 1) {
-            // Win Level 1 -> Show Next
+        if (currentLevel === 1) {
+            // Level 1: Always show Next (and Replay for choice)
             els.controls.nextLevel.classList.remove("hidden");
-            els.controls.replay.classList.add("hidden");
+            els.controls.replay.classList.remove("hidden");
+            els.controls.replayText.innerText = "Replay Level 1";
         } else {
-            // Lose Level 1, or Any Result Level 2 -> Show Replay
+            // Level 2: End of demo, Play Again from start
             els.controls.nextLevel.classList.add("hidden");
             els.controls.replay.classList.remove("hidden");
-
-            if (currentLevel === 2) {
-                els.controls.replayText.innerText = "Play Again from Start";
-            } else {
-                els.controls.replayText.innerText = "Play Again";
-            }
+            els.controls.replayText.innerText = "Play Again";
         }
 
         audioManager.stopBgm();
@@ -750,8 +746,8 @@
         els.game.options.innerHTML = "";
         options.forEach((opt) => {
             const btn = document.createElement("button");
-            btn.className = btn.className =
-                "cursor-pointer p-4 bg-white/70 dark:bg-slate-800/70 backdrop-blur-sm border-b-4 border-slate-200/50 dark:border-slate-700/50 rounded-xl hover:border-violet-500 hover:bg-violet-50/80 dark:hover:bg-slate-700/80 transition-all font-bold text-slate-800 dark:text-slate-100 shadow-lg hover:-translate-y-0.5 active:translate-y-0.5 active:border-b-0 active:shadow-none mb-1";
+            btn.className =
+                "cursor-pointer p-3 md:p-4 bg-white/70 dark:bg-slate-800/70 backdrop-blur-sm border-b-4 border-slate-200/50 dark:border-slate-700/50 rounded-xl hover:border-violet-500 hover:bg-violet-50/80 dark:hover:bg-slate-700/80 transition-all font-bold text-slate-800 dark:text-slate-100 shadow-lg hover:-translate-y-0.5 active:translate-y-0.5 active:border-b-0 active:shadow-none mb-0";
             btn.innerText = opt.name;
             btn.onclick = () => handleAnswer(opt, btn);
             els.game.options.appendChild(btn);
