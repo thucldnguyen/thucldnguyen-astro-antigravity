@@ -626,7 +626,16 @@
 
         // Level 2 Safety: Filter pool to only include countries with available borders
         if (currentLevel === 2) {
-            pool = pool.filter((c) => AVAILABLE_BORDERS.includes(c.code));
+            const borderPool = pool.filter((c) =>
+                AVAILABLE_BORDERS.includes(c.code),
+            );
+            if (borderPool.length > 0) {
+                pool = borderPool;
+            } else {
+                console.warn(
+                    "GeoGuru: No countries match AVAILABLE_BORDERS! Falling back to full pool.",
+                );
+            }
         }
 
         // Level 1 Safety: Filter pool to only include countries with available flags
@@ -693,6 +702,11 @@
     }
 
     function renderQuestion(target: Country, options: Country[]) {
+        if (!target) {
+            console.error("GeoGuru: renderQuestion called with null target!");
+            // Emergency recovery: pick random
+            target = COUNTRIES[Math.floor(Math.random() * COUNTRIES.length)];
+        }
         // Dynamic Styling based on Level
         if (currentLevel === 2) {
             // Darkbox for Borders (Best contrast for Yellow)
