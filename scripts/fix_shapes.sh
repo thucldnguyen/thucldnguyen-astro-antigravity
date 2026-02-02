@@ -38,7 +38,14 @@ for code in $CODES; do
     fi
     
     # 2. Filter using Node script (Reliable "Keep Largest")
-    node scripts/keep_largest.js "$TMP_DIR/$code.geojson"
+    # For Canada (ca), keep islands > 1% of mainland to preserve arctic archipelago
+    # For others (us, fr, etc.), keep strictly largest (1.0)
+    THRESHOLD=1.0
+    if [ "$code" == "ca" ]; then
+        THRESHOLD=0.01
+    fi
+    
+    node scripts/keep_largest.js "$TMP_DIR/$code.geojson" "$THRESHOLD"
 
     # 3. Mapshaper for Styling only
     mapshaper "$TMP_DIR/$code.geojson" \

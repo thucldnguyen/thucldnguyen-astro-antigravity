@@ -328,6 +328,8 @@
     import { AudioManager } from "./AudioManager";
     import { COUNTRIES } from "./countries";
     import type { Country } from "./countries";
+    import { AVAILABLE_BORDERS } from "./availableBorders";
+    import { AVAILABLE_FLAGS } from "./availableFlags";
 
     console.log("GeoGuru: Script loaded");
 
@@ -620,6 +622,16 @@
                 "GeoGuru: Empty pool for difficulty, falling back to all.",
             );
             pool = COUNTRIES;
+        }
+
+        // Level 2 Safety: Filter pool to only include countries with available borders
+        if (currentLevel === 2) {
+            pool = pool.filter((c) => AVAILABLE_BORDERS.includes(c.code));
+        }
+
+        // Level 1 Safety: Filter pool to only include countries with available flags
+        if (currentLevel === 1) {
+            pool = pool.filter((c) => AVAILABLE_FLAGS.includes(c.code));
         }
 
         // Filter out already used flags
