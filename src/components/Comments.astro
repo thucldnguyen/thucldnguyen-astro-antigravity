@@ -4,20 +4,72 @@
 ---
 
 <section class="mt-16 w-full">
-    <script
-        src="https://giscus.app/client.js"
-        data-repo="thucldnguyen/thucldnguyen-astro-antigravity"
-        data-repo-id="R_kgDONq8jOQ"
-        data-category="Announcements"
-        data-category-id="DIC_kwDONq8jOc4Cl5rY"
-        data-mapping="pathname"
-        data-strict="0"
-        data-reactions-enabled="1"
-        data-emit-metadata="0"
-        data-input-position="top"
-        data-theme="preferred_color_scheme"
-        data-lang="en"
-        data-loading="lazy"
-        crossorigin="anonymous"
-        async></script>
+    <div id="giscus-container"></div>
+
+    <script>
+        function getGiscusTheme() {
+            return document.documentElement.classList.contains("dark")
+                ? "transparent_dark"
+                : "light";
+        }
+
+        const giscusAttributes = {
+            src: "https://giscus.app/client.js",
+            "data-repo": "thucldnguyen/thucldnguyen-astro-antigravity",
+            "data-repo-id": "R_kgDONq8jOQ",
+            "data-category": "Announcements",
+            "data-category-id": "DIC_kwDONq8jOc4Cl5rY",
+            "data-mapping": "pathname",
+            "data-strict": "0",
+            "data-reactions-enabled": "1",
+            "data-emit-metadata": "0",
+            "data-input-position": "top",
+            "data-theme": getGiscusTheme(),
+            "data-lang": "en",
+            "data-loading": "lazy",
+            crossorigin: "anonymous",
+            async: "",
+        };
+
+        const giscusContainer = document.getElementById("giscus-container");
+        const script = document.createElement("script");
+
+        Object.entries(giscusAttributes).forEach(([key, value]) => {
+            script.setAttribute(key, value);
+        });
+
+        giscusContainer?.appendChild(script);
+
+        // Listen for theme changes
+        const observer = new MutationObserver((mutations) => {
+            mutations.forEach((mutation) => {
+                if (
+                    mutation.type === "attributes" &&
+                    mutation.attributeName === "class"
+                ) {
+                    const iframe = document.querySelector<HTMLIFrameElement>(
+                        "iframe.giscus-frame",
+                    );
+                    if (!iframe) return;
+
+                    const theme = getGiscusTheme();
+                    iframe.contentWindow?.postMessage(
+                        {
+                            giscus: {
+                                setConfig: {
+                                    theme: theme,
+                                },
+                            },
+                        },
+                        "https://giscus.app",
+                    );
+                }
+            });
+        });
+
+        observer.observe(document.documentElement, {
+            attributes: true,
+            attributeFilter: ["class"],
+        });
+    </script>
 </section>
