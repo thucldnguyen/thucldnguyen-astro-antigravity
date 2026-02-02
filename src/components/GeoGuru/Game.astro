@@ -4,7 +4,7 @@
 
 <div
     id="geoguru-game"
-    class="relative w-full max-w-4xl mx-auto my-8 rounded-3xl shadow-2xl overflow-hidden border-4 border-violet-200 dark:border-slate-700 min-h-[800px] flex flex-col font-sans"
+    class="relative w-full max-w-4xl mx-auto my-8 rounded-3xl shadow-2xl overflow-hidden border-4 border-violet-200 dark:border-slate-700 min-h-[600px] md:min-h-[800px] flex flex-col font-sans"
     style="font-family: 'Fredoka', sans-serif;"
 >
     <!-- HEADER -->
@@ -33,11 +33,13 @@
                     ></path>
                 </svg>
             </button>
-            <h1 class="text-3xl font-black tracking-wider drop-shadow-md">
+            <h1
+                class="text-xl md:text-3xl font-black tracking-wider drop-shadow-md"
+            >
                 GeoGuru
             </h1>
         </div>
-        <div class="flex items-center gap-6">
+        <div class="flex items-center gap-2 md:gap-6">
             <div class="flex flex-col items-end">
                 <span class="text-xs opacity-80 uppercase tracking-widest"
                     >Score</span
@@ -95,7 +97,7 @@
 
     <!-- SCREENS -->
     <div
-        class="relative flex-1 p-6 flex flex-col items-center justify-center z-10 bg-cover bg-top"
+        class="relative flex-1 p-6 flex flex-col items-center justify-center z-10 bg-cover bg-center"
         style="background-image: url('/assets/geoguru/GeoGuru.png');"
     >
         <!-- Overlay for readability (very light) -->
@@ -173,11 +175,17 @@
                 <div
                     class="relative bg-white/20 dark:bg-slate-900/40 backdrop-blur-sm p-2 rounded-lg shadow-xl border border-white/30 dark:border-slate-700/50"
                 >
+                    <!-- Skeleton Loader -->
+                    <div
+                        id="flag-skeleton"
+                        class="absolute inset-0 bg-slate-200 dark:bg-slate-700 animate-pulse rounded z-10 hidden"
+                    >
+                    </div>
                     <img
                         id="flag-img"
                         src=""
                         alt="Guess the flag"
-                        class="h-48 sm:h-64 object-cover rounded shadow-inner"
+                        class="h-48 sm:h-64 object-cover rounded shadow-inner transition-opacity duration-300 opacity-0"
                     />
                 </div>
             </div>
@@ -324,6 +332,7 @@
         },
         game: {
             flag: document.getElementById("flag-img") as HTMLImageElement,
+            skeleton: document.getElementById("flag-skeleton")!,
             options: document.getElementById("options-grid")!,
         },
         controls: {
@@ -477,18 +486,49 @@
         // Render
         renderQuestion(currentCountry, options);
         questionStartTime = Date.now();
+
+        // Background Preload: Try to fetch next probable flag (random from pool)
+        // to reduce perceived latency.
+        setTimeout(() => {
+            const nextRandom = pool[Math.floor(Math.random() * pool.length)];
+            preloadFlag(nextRandom.code);
+        }, 1000); // Small delay to prioritize main thread for current render
+    }
+
+    function preloadFlag(code: string) {
+        const link = document.createElement("link");
+        link.rel = "preload";
+        link.as = "image";
+        link.href = `/assets/geoguru/flags/${code}.png`;
+        document.head.appendChild(link);
     }
 
     function renderQuestion(target: Country, options: Country[]) {
-        // Set Flag
-        // Note: Assuming /assets/geoguru/flags/{code}.png exists.
-        // Fallback or loading state could be added here.
-        els.game.flag.src = `/assets/geoguru/flags/${target.code}.png`;
-        els.game.flag.onerror = () => {
-            // Fallback if image missing
-            els.game.flag.src =
-                "https://placehold.co/600x400?text=" + target.name;
+        // Set Flag - logic with Skeleton
+        // 1. Show Skeleton, Hide Image
+        els.game.skeleton.classList.remove("hidden");
+        els.game.flag.classList.add("opacity-0");
+
+        // 2. Set Src
+        const newSrc = `/assets/geoguru/flags/${target.code}.png`;
+
+        // 3. Setup Load Handler
+        els.game.flag.onload = () => {
+            els.game.skeleton.classList.add("hidden");
+            els.game.flag.classList.remove("opacity-0");
         };
+
+        // 4. Setup Error Handler (No Spoilers!)
+        els.game.flag.onerror = () => {
+            // Fallback: Show a generic "Question Mark" or "Error" state
+            // Keeping skeleton hidden? Or showing a generic placeholder text?
+            // Let's us a placeholder image without text to be safe.
+            els.game.flag.src = "https://placehold.co/600x400?text=?";
+        };
+
+        els.game.flag.src = newSrc;
+
+        // Set Options
 
         // Set Options
         els.game.options.innerHTML = "";

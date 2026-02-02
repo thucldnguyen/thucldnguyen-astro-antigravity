@@ -8,7 +8,7 @@ const __dirname = path.dirname(__filename);
 
 const FLAGS_DIR = path.resolve(__dirname, '../public/assets/geoguru/flags');
 const CODES_URL = 'https://flagcdn.com/en/codes.json';
-const BASE_IMAGE_URL = 'https://flagpedia.net/data/flags/w580'; // Bigger & nicer than flagcdn w320
+const BASE_IMAGE_URL = 'https://flagpedia.net/data/flags/w320'; // Optimized size for mobile/web
 
 async function downloadFlags() {
     console.log('Fetching country codes...');
