@@ -152,6 +152,56 @@
             </button>
         </div>
 
+        <!-- STAGE 2 INTRO SCREEN -->
+        <div
+            id="screen-stage2-intro"
+            class="hidden relative z-10 text-center max-w-lg animate-fade-in"
+        >
+            <div
+                class="mb-8 p-6 bg-white/40 dark:bg-slate-900/60 rounded-2xl shadow-xl transition-transform duration-500 border border-white/30 dark:border-slate-700/30"
+            >
+                <div class="text-6xl mb-4">🗺️</div>
+                <h2
+                    class="text-3xl font-bold text-slate-800 dark:text-white mb-2"
+                >
+                    Stage 2: Border Challenge
+                </h2>
+                <p class="text-slate-600 dark:text-slate-300">
+                    Identify the country by its shape. Harder challenge, bigger
+                    rewards!
+                </p>
+            </div>
+
+            <div
+                class="grid grid-cols-2 gap-4 text-left text-sm text-slate-800 dark:text-slate-200 mb-8 p-4 bg-white/30 dark:bg-slate-900/40 backdrop-blur-sm rounded-lg border border-white/20"
+            >
+                <div class="flex items-center gap-2">
+                    <span class="text-green-500 font-bold">✓</span> Fast (&lt; 2s):
+                    <span class="font-bold">20 pts</span>
+                </div>
+                <div class="flex items-center gap-2">
+                    <span class="text-green-500 font-bold">✓</span> Correct:
+                    <span class="font-bold">15 pts</span>
+                </div>
+                <div class="flex items-center gap-2">
+                    <span class="text-red-500 font-bold">✗</span> Wrong: <span
+                        class="font-bold text-red-500">-5 pts</span
+                    >
+                </div>
+                <div class="flex items-center gap-2">
+                    <span class="text-yellow-500 font-bold">★</span>
+                    <span class="text-xs">Score Floor: 0</span>
+                </div>
+            </div>
+
+            <button
+                id="start-stage2-btn"
+                class="cursor-pointer px-8 py-4 bg-gradient-to-r from-amber-500 to-orange-600 text-white text-xl font-black rounded-2xl shadow-[0_6px_0_0_rgb(180,83,9)] hover:-translate-y-1 hover:shadow-[0_8px_0_0_rgb(180,83,9)] active:translate-y-1 active:shadow-[0_2px_0_0_rgb(180,83,9)] transition-all duration-150 w-full sm:w-auto uppercase tracking-wide"
+            >
+                Start Next Game
+            </button>
+        </div>
+
         <!-- PLAYING SCREEN -->
         <div
             id="screen-playing"
@@ -173,7 +223,8 @@
                 >
                 </div>
                 <div
-                    class="relative bg-white/20 dark:bg-slate-900/40 backdrop-blur-sm p-2 rounded-lg shadow-xl border border-white/30 dark:border-slate-700/50"
+                    id="flag-container"
+                    class="relative bg-white/20 dark:bg-slate-900/40 backdrop-blur-sm p-2 rounded-lg shadow-xl border border-white/30 dark:border-slate-700/50 transition-all duration-500"
                 >
                     <!-- Skeleton Loader -->
                     <div
@@ -184,8 +235,8 @@
                     <img
                         id="flag-img"
                         src=""
-                        alt="Guess the flag"
-                        class="h-48 sm:h-64 object-cover rounded shadow-inner transition-opacity duration-300 opacity-0"
+                        alt="Guess the country"
+                        class="h-48 sm:h-64 object-contain rounded shadow-inner transition-opacity duration-300 opacity-0"
                     />
                 </div>
             </div>
@@ -229,6 +280,13 @@
                 You are a GeoGuru!
             </p>
 
+            <button
+                id="next-stage-btn"
+                class="hidden mb-6 cursor-pointer px-8 py-4 bg-gradient-to-r from-amber-500 to-orange-600 text-white text-xl font-black rounded-2xl shadow-[0_6px_0_0_rgb(180,83,9)] hover:-translate-y-1 hover:shadow-[0_8px_0_0_rgb(180,83,9)] active:translate-y-1 active:shadow-[0_2px_0_0_rgb(180,83,9)] transition-all duration-150 w-full sm:w-auto uppercase tracking-wide animate-pulse"
+            >
+                Next Challenge ➔
+            </button>
+
             <div
                 class="bg-white/80 dark:bg-slate-900/80 backdrop-blur-md p-8 rounded-2xl shadow-2xl border border-white/50 dark:border-slate-700/50 mb-8 transform hover:scale-105 transition-transform duration-300"
             >
@@ -260,7 +318,7 @@
                         d="M4.755 10.059a7.5 7.5 0 0112.548-3.364l1.903 1.903h-3.183a.75.75 0 100 1.5h4.992a.75.75 0 00.75-.75V4.356a.75.75 0 00-1.5 0v3.18l-1.9-1.9A9 9 0 003.306 9.67a.75.75 0 101.45.388zm15.408 3.352a.75.75 0 00-.919.53 7.5 7.5 0 01-12.548 3.364l-1.902-1.903h3.183a.75.75 0 000-1.5H2.984a.75.75 0 00-.75.75v4.992a.75.75 0 001.5 0v-3.18l1.9 1.9a9 9 0 0015.059-4.035.75.75 0 00-.53-.919z"
                         clip-rule="evenodd"></path>
                 </svg>
-                Play Again
+                <span id="replay-btn-text">Play Again</span>
             </button>
         </div>
     </div>
@@ -320,6 +378,7 @@
 
     // State
     const audioManager = new AudioManager();
+    let currentStage = 1; // 1 = Flags, 2 = Borders
     let score = 0;
     let correctCount = 0;
     let timeRemaining = STAGE_TIME;
@@ -344,6 +403,9 @@
             els = {
                 screens: {
                     intro: document.getElementById("screen-intro")!,
+                    stage2Intro: document.getElementById(
+                        "screen-stage2-intro",
+                    )!,
                     playing: document.getElementById("screen-playing")!,
                     clear: document.getElementById("screen-clear")!,
                 },
@@ -357,6 +419,7 @@
                     clearMessage: document.getElementById("clear-message")!,
                 },
                 game: {
+                    flagContainer: document.getElementById("flag-container")!,
                     flag: document.getElementById(
                         "flag-img",
                     ) as HTMLImageElement,
@@ -365,7 +428,10 @@
                 },
                 controls: {
                     start: document.getElementById("start-btn")!,
+                    startStage2: document.getElementById("start-stage2-btn")!,
+                    nextStage: document.getElementById("next-stage-btn")!,
                     replay: document.getElementById("replay-btn")!,
+                    replayText: document.getElementById("replay-btn-text")!,
                     mute: document.getElementById("mute-btn")!,
                     home: document.getElementById("home-btn")!,
                 },
@@ -384,7 +450,14 @@
             // Event Listeners
             els.controls.start.addEventListener("click", () => {
                 console.log("GeoGuru: Start clicked");
-                startGame();
+                startGame(1);
+            });
+            els.controls.startStage2.addEventListener("click", () => {
+                startGame(2);
+            });
+            els.controls.nextStage.addEventListener("click", () => {
+                switchScreen("stage2Intro");
+                // Preload border images if needed
             });
             els.controls.replay.addEventListener("click", goToHome);
             els.controls.mute.addEventListener("click", toggleMute);
@@ -414,8 +487,10 @@
         }
     }
 
-    function startGame() {
-        console.log("GeoGuru: startGame called");
+    function startGame(stage = 1) {
+        console.log("GeoGuru: startGame called", stage);
+
+        currentStage = stage;
 
         // 1. Reset Game State & Visuals FIRST
         resetGame();
@@ -441,12 +516,15 @@
     }
 
     function resetGame() {
-        score = 0;
+        if (currentStage === 1) {
+            score = 0;
+        }
+        // Always clear used codes for a new stage to allow reusing countries (e.g. US Border after US Flag)
+        usedCountryCodes.clear();
+
         correctCount = 0;
         timeRemaining = STAGE_TIME;
         isGameActive = true;
-        // Reset duplicate tracker
-        usedCountryCodes.clear();
 
         updateScoreDisplay();
         updateTimerDisplay();
@@ -475,12 +553,21 @@
 
         els.display.finalScore.innerText = score.toString();
 
+        // Win Threshold Calculation
+        // Stage 1: 40 pts to clear.
+        // Stage 2: Cumulative. S1(40) + S2(roughly 80-100 possible).
+        // Let's set Final Threshold to 120 for "Trophy".
+        const winThreshold = currentStage === 1 ? 40 : 120;
+
         // Conditional Messaging
-        if (score >= 40) {
+        if (score >= winThreshold) {
             // High Score
             els.display.clearIcon.innerText = "🏆";
             els.display.clearTitle.innerText = "Stage Clear!";
-            els.display.clearMessage.innerText = "You are a GeoGuru!";
+            els.display.clearMessage.innerText =
+                currentStage === 1
+                    ? "Ready for the next challenge?"
+                    : "You are a True GeoGuru!";
             audioManager.playSfx("cheer");
         } else {
             // Low Score
@@ -494,6 +581,24 @@
         }
 
         switchScreen("clear");
+
+        // Configure Buttons
+        if (score >= 40 && currentStage === 1) {
+            // Win Stage 1 -> Show Next
+            els.controls.nextStage.classList.remove("hidden");
+            els.controls.replay.classList.add("hidden");
+        } else {
+            // Lose Stage 1, or Any Result Stage 2 -> Show Replay
+            els.controls.nextStage.classList.add("hidden");
+            els.controls.replay.classList.remove("hidden");
+
+            if (currentStage === 2) {
+                els.controls.replayText.innerText = "Play Again from Start";
+            } else {
+                els.controls.replayText.innerText = "Play Again";
+            }
+        }
+
         audioManager.stopBgm();
     }
 
@@ -502,6 +607,8 @@
 
         // Determine Pool based on difficulty
         // Easy mode (first 3 questions): Only pick from EASY_CODES
+        // For Stage 2, maybe always hard? Or keep easy curve?
+        // Let's keep easy curve for Stage 2 as well to prevent instant rage quit.
         let pool = COUNTRIES;
         if (correctCount < 3) {
             pool = COUNTRIES.filter((c) => EASY_CODES.includes(c.code));
@@ -560,26 +667,41 @@
         // to reduce perceived latency.
         setTimeout(() => {
             const nextRandom = pool[Math.floor(Math.random() * pool.length)];
-            preloadFlag(nextRandom.code);
+            preloadImage(nextRandom.code);
         }, 1000); // Small delay to prioritize main thread for current render
     }
 
-    function preloadFlag(code: string) {
+    function preloadImage(code: string) {
+        const type = currentStage === 2 ? "borders" : "flags";
         const link = document.createElement("link");
         link.rel = "preload";
         link.as = "image";
-        link.href = `/assets/geoguru/flags/${code}.webp`;
+        link.href = `/assets/geoguru/${type}/${code}.webp`;
         document.head.appendChild(link);
     }
 
     function renderQuestion(target: Country, options: Country[]) {
+        // Dynamic Styling based on Stage
+        if (currentStage === 2) {
+            // Whitebox for Borders (High Contrast)
+            els.game.flagContainer.className =
+                "relative bg-white/90 backdrop-blur-xl p-8 rounded-2xl shadow-2xl border-4 border-white transition-all duration-500";
+            els.game.flag.classList.remove("shadow-inner", "rounded");
+        } else {
+            // Glassmorphism for Flags
+            els.game.flagContainer.className =
+                "relative bg-white/20 dark:bg-slate-900/40 backdrop-blur-sm p-2 rounded-lg shadow-xl border border-white/30 dark:border-slate-700/50 transition-all duration-500";
+            els.game.flag.classList.add("shadow-inner", "rounded");
+        }
+
         // Set Flag - logic with Skeleton
         // 1. Show Skeleton, Hide Image
         els.game.skeleton.classList.remove("hidden");
         els.game.flag.classList.add("opacity-0");
 
         // 2. Set Src
-        const newSrc = `/assets/geoguru/flags/${target.code}.webp`;
+        const type = currentStage === 2 ? "borders" : "flags";
+        const newSrc = `/assets/geoguru/${type}/${target.code}.webp`;
 
         // 3. Setup Load Handler
         els.game.flag.onload = () => {
@@ -598,8 +720,7 @@
         els.game.flag.src = newSrc;
 
         // Set Options
-
-        // Set Options
+        // Update Grid class for longer options if needed? Default is fine.
         els.game.options.innerHTML = "";
         options.forEach((opt) => {
             const btn = document.createElement("button");
@@ -627,10 +748,18 @@
             audioManager.playSfx("correct");
 
             // Calculate Score
-            // Base 10. Fast bonus (+5) if < 1.5s.
+            // Stage 1: Base 10. Fast (+5) < 1.5s
+            // Stage 2: Base 15. Fast (+5) < 2.0s (harder to see)
             let points = 10;
-            if (thinkingTime < 1.5) {
-                points += 5;
+            let timeLimit = 1.5;
+
+            if (currentStage === 2) {
+                points = 15;
+                timeLimit = 2.0;
+            }
+
+            if (thinkingTime < timeLimit) {
+                points += currentStage === 2 ? 5 : 5; // +5 for speed in both
             }
             score += points;
             correctCount++;
@@ -642,7 +771,9 @@
             );
             audioManager.playSfx("wrong");
             // Penalty: -2. Floor at 0.
-            score = Math.max(0, score - 2);
+            // Stage 2 Penalty: -5
+            const penalty = currentStage === 2 ? 5 : 2;
+            score = Math.max(0, score - penalty);
 
             // Highlight correct one
             // (Optional: Show correct answer briefly)
@@ -684,14 +815,28 @@
         }
     }
 
-    function switchScreen(screenName: "intro" | "playing" | "clear") {
-        Object.values(els.screens).forEach((el) => el.classList.add("hidden"));
-        Object.values(els.screens).forEach((el) => el.classList.remove("flex")); // clean up flex
+    function switchScreen(
+        screenName: "intro" | "playing" | "clear" | "stage2Intro",
+    ) {
+        Object.values(els.screens).forEach((el) =>
+            (el as HTMLElement).classList.add("hidden"),
+        );
+        Object.values(els.screens).forEach((el) =>
+            (el as HTMLElement).classList.remove("flex"),
+        ); // clean up flex
 
         const target = els.screens[screenName];
         target.classList.remove("hidden");
         if (screenName === "playing" || screenName === "clear") {
+            // Basic flex
             target.classList.add("flex");
+        } else {
+            // Intros might be block or whatever, but let's check class list.
+            // Actually Intro is block in CSS?
+            // "screen-intro" is "text-center max-w-lg ...". It relies on parent.
+            // Wait, parent is "flex col items-center justify-center".
+            // So children just need to be visible.
+            // Let's check original. Intro has no 'flex' class added by JS.
         }
 
         if (screenName === "intro") {
@@ -724,7 +869,7 @@
         console.log("GeoGuru: Preloading Easy Set...");
         // Preload first 20 easy flags to ensure silky smooth start
         const subset = EASY_CODES.slice(0, 20);
-        subset.forEach((code) => preloadFlag(code));
+        subset.forEach((code) => preloadImage(code));
     }
 
     function toggleMute() {
