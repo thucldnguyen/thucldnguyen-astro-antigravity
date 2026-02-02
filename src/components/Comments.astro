@@ -3,7 +3,7 @@
 // Configuration should be updated with actual repo details
 ---
 
-<section class="mt-16 w-full">
+<section class="mt-16 w-full glass-comment-card">
     <div id="giscus-container"></div>
 
     <script>
@@ -73,3 +73,75 @@
         });
     </script>
 </section>
+
+<style>
+	.glass-comment-card {
+		background: rgba(
+			255,
+			255,
+			255,
+			0.85
+		); /* Solid fallback for mobile/no-support */
+		border: 1px solid rgba(255, 255, 255, 0.3);
+		border-radius: 16px;
+		box-shadow:
+			0 10px 15px -3px rgba(0, 0, 0, 0.05),
+			0 4px 6px -2px rgba(0, 0, 0, 0.02);
+		padding: 2rem;
+		position: relative;
+		overflow: hidden;
+		transition:
+			background-color 0.3s ease,
+			border-color 0.3s ease;
+	}
+
+	:global(.dark) .glass-comment-card {
+		background: rgba(
+			30,
+			41,
+			59,
+			0.85
+		); /* Slightly lighter slate for better depth */
+		border: 1px solid rgba(255, 255, 255, 0.15);
+		box-shadow:
+			0 20px 25px -5px rgba(0, 0, 0, 0.2),
+			0 10px 10px -5px rgba(0, 0, 0, 0.1);
+	}
+
+	@media (min-width: 640px) {
+		.glass-comment-card {
+			padding: 3rem;
+		}
+
+		@supports (backdrop-filter: blur(12px)) or
+			(-webkit-backdrop-filter: blur(12px)) {
+			.glass-comment-card {
+				background: rgba(255, 255, 255, 0.25);
+				backdrop-filter: blur(12px) saturate(110%);
+				-webkit-backdrop-filter: blur(12px) saturate(110%);
+			}
+
+			:global(.dark) .glass-comment-card {
+				background: rgba(
+					15,
+					23,
+					42,
+					0.3
+				); /* Higher transparency for better glass effect */
+				border: 1px solid rgba(255, 255, 255, 0.2);
+				box-shadow:
+					0 25px 50px -12px rgba(0, 0, 0, 0.5),
+					inset 0 1px 1px rgba(255, 255, 255, 0.1);
+			}
+		}
+	}
+
+	/* Reduced motion preference */
+	@media (prefers-reduced-motion: reduce) {
+		.glass-comment-card {
+			backdrop-filter: none !important;
+			-webkit-backdrop-filter: none !important;
+			transition: none !important;
+		}
+	}
+</style>

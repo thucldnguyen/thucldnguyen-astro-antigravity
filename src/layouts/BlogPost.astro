@@ -126,6 +126,8 @@ const resolvedImage = heroImage || featuredImage || image || bannerImage;
 							url={Astro.url.href}
 						/>
 
+						<Comments />
+
 						<div class="mt-12">
 							<CallToAction />
 						</div>
@@ -141,14 +143,9 @@ const resolvedImage = heroImage || featuredImage || image || bannerImage;
 					tags={Astro.props.tags || []}
 				/>
 			</div>
-
-			<div class="max-w-4xl mx-auto">
-				<Comments />
-			</div>
 		</main>
 		<Footer />
 		<Lightbox />
 		<AnimateOnScroll />
 	</body>
 </html>
-```
