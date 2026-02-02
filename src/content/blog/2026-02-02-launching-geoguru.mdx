@@ -83,6 +83,8 @@ Because my site uses Astro's **View Transitions** (simulating a Single Page App)
 
 It was my first time working with audio in web development. I downloaded a bunch of sound effects with random names and formats from the internet and asked Antigravity to add them to the game. It succeeded in one sweep, automatically recognizing that *'Night at the Beach.mp3'* is actually intended as the background music and *'confirmation.ogg'* is the sound effect for a correct answer. It even automatically assigned the correct volume levels for each.
 
+Another snag: background music was not muted when the user navigated to other pages which is annoying when you try to read the blog posts. We fixed it by adding a logic to the game-exit state to mute the background music when the user navigates to other pages.
+
 ---
 ## 6. Level clear screen
 
