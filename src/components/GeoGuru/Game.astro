@@ -1,0 +1,690 @@
+---
+
+---
+
+<div
+    id="geoguru-game"
+    class="relative w-full max-w-4xl mx-auto my-8 rounded-3xl shadow-2xl overflow-hidden border-4 border-violet-200 dark:border-slate-700 min-h-[800px] flex flex-col font-sans"
+    style="font-family: 'Fredoka', sans-serif;"
+>
+    <!-- HEADER -->
+    <!-- HEADER -->
+    <div
+        class="bg-gradient-to-r from-violet-600 to-fuchsia-600 p-4 flex justify-between items-center text-white shadow-lg z-10"
+    >
+        <div class="flex items-center gap-4">
+            <!-- Home Button (visible when playing/clear) -->
+            <button
+                id="home-btn"
+                class="hidden p-2 hover:bg-white/20 rounded-full transition-colors cursor-pointer active:scale-95"
+                aria-label="Go to Home"
+            >
+                <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 24 24"
+                    fill="currentColor"
+                    class="w-6 h-6"
+                >
+                    <path
+                        d="M11.47 3.84a.75.75 0 011.06 0l8.69 8.69a.75.75 0 101.06-1.06l-8.689-8.69a2.25 2.25 0 00-3.182 0l-8.69 8.69a.75.75 0 001.061 1.06l8.69-8.69z"
+                    ></path>
+                    <path
+                        d="M12 5.432l8.159 8.159c.03.03.06.058.091.086v6.198c0 1.035-.84 1.875-1.875 1.875H15a.75.75 0 01-.75-.75v-4.5a.75.75 0 00-.75-.75h-3a.75.75 0 00-.75.75V21a.75.75 0 01-.75.75H5.625a1.875 1.875 0 01-1.875-1.875v-6.198a2.29 2.29 0 00.091-.086L12 5.43z"
+                    ></path>
+                </svg>
+            </button>
+            <h1 class="text-3xl font-black tracking-wider drop-shadow-md">
+                GeoGuru
+            </h1>
+        </div>
+        <div class="flex items-center gap-6">
+            <div class="flex flex-col items-end">
+                <span class="text-xs opacity-80 uppercase tracking-widest"
+                    >Score</span
+                >
+                <span
+                    id="score-display"
+                    class="text-2xl font-mono font-bold leading-none">0</span
+                >
+            </div>
+            <div class="flex flex-col items-end w-16">
+                <span class="text-xs opacity-80 uppercase tracking-widest"
+                    >Time</span
+                >
+                <span
+                    id="timer-display"
+                    class="text-2xl font-mono font-bold leading-none text-yellow-300"
+                    >30</span
+                >
+            </div>
+            <button
+                id="mute-btn"
+                class="p-2 hover:bg-white/20 rounded-full transition-colors cursor-pointer active:scale-95"
+                aria-label="Toggle Mute"
+            >
+                <!-- Mute Icon (Speaker Wave) -->
+                <svg
+                    id="icon-sound-on"
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 24 24"
+                    fill="currentColor"
+                    class="w-6 h-6"
+                >
+                    <path
+                        d="M13.5 4.06c0-1.336-1.616-2.005-2.56-1.06l-4.5 4.5H4.508c-1.141 0-2.318 1.08-2.318 2.223v4.2c0 1.12.98 2.226 2.15 2.226h1.941l4.5 4.5c.945.945 2.56.276 2.56-1.06V4.06zM18.584 5.106a.75.75 0 011.06 0c3.808 3.807 3.808 9.98 0 13.788a.75.75 0 11-1.06-1.06 8.25 8.25 0 000-11.668.75.75 0 010-1.06z"
+                    ></path>
+                    <path
+                        d="M15.932 7.757a.75.75 0 011.061 0 6 6 0 010 8.486.75.75 0 01-1.06-1.061 4.5 4.5 0 000-6.364.75.75 0 010-1.06z"
+                    ></path>
+                </svg>
+                <!-- Mute Icon (Speaker X) -->
+                <svg
+                    id="icon-sound-off"
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 24 24"
+                    fill="currentColor"
+                    class="w-6 h-6 hidden"
+                >
+                    <path
+                        d="M13.5 4.06c0-1.336-1.616-2.005-2.56-1.06l-4.5 4.5H4.508c-1.141 0-2.318 1.08-2.318 2.223v4.2c0 1.12.98 2.226 2.15 2.226h1.941l4.5 4.5c.945.945 2.56.276 2.56-1.06V4.06zM17.78 9.22a.75.75 0 10-1.06 1.06L18.44 12l-1.72 1.72a.75.75 0 101.06 1.06l1.72-1.72 1.72 1.72a.75.75 0 101.06-1.06L20.56 12l1.72-1.72a.75.75 0 10-1.06-1.06l-1.72 1.72-1.72-1.72z"
+                    ></path>
+                </svg>
+            </button>
+        </div>
+    </div>
+
+    <!-- SCREENS -->
+    <div
+        class="relative flex-1 p-6 flex flex-col items-center justify-center z-10 bg-cover bg-top"
+        style="background-image: url('/assets/geoguru/GeoGuru.png');"
+    >
+        <!-- Overlay for readability (very light) -->
+        <div class="absolute inset-0 bg-white/10 dark:bg-slate-900/40 z-0">
+        </div>
+        <!-- INTRO SCREEN -->
+        <div
+            id="screen-intro"
+            class="relative z-10 text-center max-w-lg animate-fade-in"
+        >
+            <div
+                class="mb-8 p-6 bg-white/40 dark:bg-slate-900/60 backdrop-blur-sm rounded-2xl shadow-xl transform rotate-1 hover:rotate-0 transition-transform duration-500 border border-white/30 dark:border-slate-700/30"
+            >
+                <div class="text-6xl mb-4">🌍</div>
+                <h2
+                    class="text-3xl font-bold text-slate-800 dark:text-white mb-2"
+                >
+                    Stage 1: Flag Mastery
+                </h2>
+                <p class="text-slate-600 dark:text-slate-300">
+                    Identify the country flags as fast as you can. Speed is key!
+                </p>
+            </div>
+
+            <div
+                class="grid grid-cols-2 gap-4 text-left text-sm text-slate-800 dark:text-slate-200 mb-8 p-4 bg-white/30 dark:bg-slate-900/40 backdrop-blur-sm rounded-lg border border-white/20"
+            >
+                <div class="flex items-center gap-2">
+                    <span class="text-green-500 font-bold">✓</span> Fast (&lt; 1.5s):
+                    <span class="font-bold">15 pts</span>
+                </div>
+                <div class="flex items-center gap-2">
+                    <span class="text-green-500 font-bold">✓</span> Correct:
+                    <span class="font-bold">10 pts</span>
+                </div>
+                <div class="flex items-center gap-2">
+                    <span class="text-red-500 font-bold">✗</span> Wrong: <span
+                        class="font-bold text-red-500">-2 pts</span
+                    >
+                </div>
+                <div class="flex items-center gap-2">
+                    <span class="text-yellow-500 font-bold">★</span>
+                    <span class="text-xs">Score Floor: 0</span>
+                </div>
+            </div>
+
+            <button
+                id="start-btn"
+                class="cursor-pointer px-8 py-4 bg-gradient-to-r from-violet-600 to-fuchsia-600 text-white text-xl font-black rounded-2xl shadow-[0_6px_0_0_rgb(109,40,217)] hover:-translate-y-1 hover:shadow-[0_8px_0_0_rgb(109,40,217)] active:translate-y-1 active:shadow-[0_2px_0_0_rgb(109,40,217)] transition-all duration-150 w-full sm:w-auto uppercase tracking-wide"
+            >
+                Start Game
+            </button>
+        </div>
+
+        <!-- PLAYING SCREEN -->
+        <div
+            id="screen-playing"
+            class="hidden relative z-10 w-full max-w-2xl flex-col items-center"
+        >
+            <div
+                class="w-full h-2 bg-slate-200 dark:bg-slate-700 rounded-full mb-8 overflow-hidden"
+            >
+                <div
+                    id="timer-bar"
+                    class="h-full bg-yellow-400 w-full transition-all duration-1000 ease-linear"
+                >
+                </div>
+            </div>
+
+            <div class="mb-8 relative group">
+                <div
+                    class="absolute -inset-1 bg-gradient-to-r from-violet-600 to-fuchsia-600 rounded-lg blur opacity-25 group-hover:opacity-50 transition duration-1000"
+                >
+                </div>
+                <div
+                    class="relative bg-white/20 dark:bg-slate-900/40 backdrop-blur-sm p-2 rounded-lg shadow-xl border border-white/30 dark:border-slate-700/50"
+                >
+                    <img
+                        id="flag-img"
+                        src=""
+                        alt="Guess the flag"
+                        class="h-48 sm:h-64 object-cover rounded shadow-inner"
+                    />
+                </div>
+            </div>
+
+            <div
+                id="options-grid"
+                class="grid grid-cols-1 sm:grid-cols-2 gap-4 w-full"
+            >
+                <!-- Options injected by JS -->
+            </div>
+        </div>
+
+        <!-- CLEAR SCREEN -->
+        <div
+            id="screen-clear"
+            class="hidden relative z-10 flex-col items-center justify-center w-full text-center animate-bounce-in"
+        >
+            <div class="relative mb-6">
+                <div
+                    class="absolute inset-0 bg-yellow-400 blur-3xl opacity-20 animate-pulse"
+                >
+                </div>
+                <div class="text-8xl relative z-10 animate-bounce">🏆</div>
+            </div>
+
+            <h2 class="text-4xl font-black text-white drop-shadow-lg mb-2">
+                Stage Clear!
+            </h2>
+            <p class="text-xl text-white drop-shadow-md mb-8 font-semibold">
+                You are a GeoGuru!
+            </p>
+
+            <div
+                class="bg-white/80 dark:bg-slate-900/80 backdrop-blur-md p-8 rounded-2xl shadow-2xl border border-white/50 dark:border-slate-700/50 mb-8 transform hover:scale-105 transition-transform duration-300"
+            >
+                <div
+                    class="text-sm text-slate-600 dark:text-slate-400 uppercase tracking-widest mb-1 font-bold"
+                >
+                    Final Score
+                </div>
+                <div
+                    id="final-score"
+                    class="text-6xl font-mono font-black text-slate-900 dark:text-white drop-shadow-sm"
+                >
+                    0
+                </div>
+            </div>
+
+            <button
+                id="replay-btn"
+                class="cursor-pointer px-8 py-3 bg-violet-600 hover:bg-violet-700 text-white font-bold rounded-xl shadow-lg hover:-translate-y-1 transition-all duration-150 flex items-center gap-2 mx-auto border-2 border-white/20"
+            >
+                <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 24 24"
+                    fill="currentColor"
+                    class="w-5 h-5"
+                >
+                    <path
+                        fill-rule="evenodd"
+                        d="M4.755 10.059a7.5 7.5 0 0112.548-3.364l1.903 1.903h-3.183a.75.75 0 100 1.5h4.992a.75.75 0 00.75-.75V4.356a.75.75 0 00-1.5 0v3.18l-1.9-1.9A9 9 0 003.306 9.67a.75.75 0 101.45.388zm15.408 3.352a.75.75 0 00-.919.53 7.5 7.5 0 01-12.548 3.364l-1.902-1.903h3.183a.75.75 0 000-1.5H2.984a.75.75 0 00-.75.75v4.992a.75.75 0 001.5 0v-3.18l1.9 1.9a9 9 0 0015.059-4.035.75.75 0 00-.53-.919z"
+                        clip-rule="evenodd"></path>
+                </svg>
+                Play Again
+            </button>
+        </div>
+    </div>
+</div>
+
+<script>
+    import { AudioManager } from "./AudioManager";
+    import { COUNTRIES } from "./countries";
+    import type { Country } from "./countries";
+
+    console.log("GeoGuru: Script loaded");
+
+    // Constants
+    const STAGE_TIME = 30; // seconds
+    const EASY_CODES = [
+        "us",
+        "gb",
+        "fr",
+        "de",
+        "it",
+        "jp",
+        "cn",
+        "ru",
+        "br",
+        "ca",
+        "au",
+        "in",
+        "kr",
+        "es",
+        "mx",
+        "id",
+        "tr",
+        "sa",
+        "za",
+        "ar",
+        "th",
+        "vn",
+        "my",
+        "ph",
+        "sg",
+        "nl",
+        "se",
+        "no",
+        "fi",
+        "dk",
+        "ua",
+        "pl",
+        "gr",
+        "eg",
+        "ie",
+        "pt",
+        "be",
+        "ch",
+        "at",
+        "nz",
+    ];
+
+    // State
+    const audioManager = new AudioManager();
+    let score = 0;
+    let correctCount = 0;
+    let timeRemaining = STAGE_TIME;
+    let timerInterval: any = null;
+    let currentCountry: Country | null = null;
+    let questionStartTime = 0;
+    let isGameActive = false;
+
+    // Elements
+    const els = {
+        screens: {
+            intro: document.getElementById("screen-intro")!,
+            playing: document.getElementById("screen-playing")!,
+            clear: document.getElementById("screen-clear")!,
+        },
+        display: {
+            score: document.getElementById("score-display")!,
+            timer: document.getElementById("timer-display")!,
+            timerBar: document.getElementById("timer-bar")!,
+            finalScore: document.getElementById("final-score")!,
+        },
+        game: {
+            flag: document.getElementById("flag-img") as HTMLImageElement,
+            options: document.getElementById("options-grid")!,
+        },
+        controls: {
+            start: document.getElementById("start-btn")!,
+            replay: document.getElementById("replay-btn")!,
+            mute: document.getElementById("mute-btn")!,
+            home: document.getElementById("home-btn")!,
+        },
+        icons: {
+            on: document.getElementById("icon-sound-on")!,
+            off: document.getElementById("icon-sound-off")!,
+        },
+    };
+
+    // --- Core Logic ---
+
+    function init() {
+        try {
+            console.log("GeoGuru: Init started");
+
+            // Check elements
+            if (!els.controls.start)
+                console.error("GeoGuru: Start button missing");
+            if (!els.screens.intro)
+                console.error("GeoGuru: Intro screen missing");
+
+            // Event Listeners
+            els.controls.start.addEventListener("click", () => {
+                console.log("GeoGuru: Start clicked");
+                startGame();
+            });
+            els.controls.replay.addEventListener("click", goToHome);
+            els.controls.mute.addEventListener("click", toggleMute);
+            els.controls.home.addEventListener("click", goToHome);
+
+            // Initial State
+            updateMuteIcon();
+
+            // Cleanup on navigation (View Transitions support)
+            document.addEventListener("astro:before-swap", cleanupAudio);
+            // Cleanup on standard page unload
+            window.addEventListener("pagehide", cleanupAudio);
+
+            console.log("GeoGuru: Init complete");
+        } catch (e) {
+            console.error("GeoGuru: Init Error", e);
+        }
+    }
+
+    function startGame() {
+        console.log("GeoGuru: startGame called");
+
+        // 1. Reset Game State & Visuals FIRST
+        resetGame();
+
+        // 2. Play Audio (Best Effort)
+        try {
+            audioManager.playBgm();
+        } catch (e) {
+            console.warn("GeoGuru: Audio play failed", e);
+        }
+    }
+
+    function goToHome() {
+        isGameActive = false;
+        clearInterval(timerInterval);
+
+        // Stop BGM when going home (if desired, or keep it playing? usually menu music is separate or same)
+        // User said "indefinitely loop", but usually game music stops on simple menus.
+        // Let's stop it to reset the 'vibe'.
+        audioManager.stopBgm();
+
+        switchScreen("intro");
+    }
+
+    function resetGame() {
+        score = 0;
+        correctCount = 0;
+        timeRemaining = STAGE_TIME;
+        isGameActive = true;
+
+        updateScoreDisplay();
+        updateTimerDisplay();
+
+        switchScreen("playing");
+        startTimer();
+        nextQuestion();
+    }
+
+    function startTimer() {
+        if (timerInterval) clearInterval(timerInterval);
+
+        timerInterval = setInterval(() => {
+            timeRemaining--;
+            updateTimerDisplay();
+
+            if (timeRemaining <= 0) {
+                endGame();
+            }
+        }, 1000); // Decrement every second
+    }
+
+    function endGame() {
+        isGameActive = false;
+        clearInterval(timerInterval);
+
+        els.display.finalScore.innerText = score.toString();
+        switchScreen("clear");
+
+        audioManager.stopBgm();
+        audioManager.playSfx("cheer");
+    }
+
+    function nextQuestion() {
+        if (!isGameActive) return;
+
+        // Determine Pool based on difficulty
+        // Easy mode (first 3 questions): Only pick from EASY_CODES
+        let pool = COUNTRIES;
+        if (correctCount < 3) {
+            pool = COUNTRIES.filter((c) => EASY_CODES.includes(c.code));
+        }
+
+        // Safety: Ensure pool isn't empty (fallback to all countries)
+        if (pool.length === 0) {
+            console.warn(
+                "GeoGuru: Empty pool for difficulty, falling back to all.",
+            );
+            pool = COUNTRIES;
+        }
+
+        // Pick Random Country from Pool
+        const targetIndex = Math.floor(Math.random() * pool.length);
+        currentCountry = pool[targetIndex];
+
+        // Pick 3 Distractors (from FULL pool to keep options interesting?
+        // Or also from easy pool? Usually distractors can be hard, but let's
+        // keep distractors easy too for the first 3 to make it truly easy)
+        // Let's use the same pool for distractors to ensure fairness.
+        let options = [currentCountry];
+        while (options.length < 4) {
+            const randomC = pool[Math.floor(Math.random() * pool.length)];
+            if (!options.find((c) => c.code === randomC.code)) {
+                options.push(randomC);
+            }
+        }
+
+        // Shuffle Options
+        options = options.sort(() => Math.random() - 0.5);
+
+        // Render
+        renderQuestion(currentCountry, options);
+        questionStartTime = Date.now();
+    }
+
+    function renderQuestion(target: Country, options: Country[]) {
+        // Set Flag
+        // Note: Assuming /assets/geoguru/flags/{code}.png exists.
+        // Fallback or loading state could be added here.
+        els.game.flag.src = `/assets/geoguru/flags/${target.code}.png`;
+        els.game.flag.onerror = () => {
+            // Fallback if image missing
+            els.game.flag.src =
+                "https://placehold.co/600x400?text=" + target.name;
+        };
+
+        // Set Options
+        els.game.options.innerHTML = "";
+        options.forEach((opt) => {
+            const btn = document.createElement("button");
+            btn.className = btn.className =
+                "cursor-pointer p-4 bg-white/70 dark:bg-slate-800/70 backdrop-blur-sm border-b-4 border-slate-200/50 dark:border-slate-700/50 rounded-xl hover:border-violet-500 hover:bg-violet-50/80 dark:hover:bg-slate-700/80 transition-all font-bold text-slate-800 dark:text-slate-100 shadow-lg hover:-translate-y-0.5 active:translate-y-0.5 active:border-b-0 active:shadow-none mb-1";
+            btn.innerText = opt.name;
+            btn.onclick = () => handleAnswer(opt, btn);
+            els.game.options.appendChild(btn);
+        });
+    }
+
+    function handleAnswer(selected: Country, btnElement: HTMLButtonElement) {
+        if (!isGameActive || !currentCountry) return;
+
+        const isCorrect = selected.code === currentCountry.code;
+        const thinkingTime = (Date.now() - questionStartTime) / 1000;
+
+        // Visual Feedback
+        if (isCorrect) {
+            btnElement.classList.add(
+                "!bg-green-100",
+                "!border-green-500",
+                "!text-green-800",
+            );
+            audioManager.playSfx("correct");
+
+            // Calculate Score
+            // Base 10. Fast bonus (+5) if < 1.5s.
+            let points = 10;
+            if (thinkingTime < 1.5) {
+                points += 5;
+            }
+            score += points;
+            correctCount++;
+        } else {
+            btnElement.classList.add(
+                "!bg-red-100",
+                "!border-red-500",
+                "!text-red-800",
+            );
+            audioManager.playSfx("wrong");
+            // Penalty: -2. Floor at 0.
+            score = Math.max(0, score - 2);
+
+            // Highlight correct one
+            // (Optional: Show correct answer briefly)
+        }
+
+        updateScoreDisplay();
+
+        // Delay next question slightly
+        setTimeout(() => {
+            nextQuestion();
+        }, 500); // 0.5s delay
+    }
+
+    function updateScoreDisplay() {
+        els.display.score.innerText = score.toString();
+
+        // Juice: Pop effect
+        els.display.score.classList.remove("animate-pop");
+        void els.display.score.offsetWidth;
+        els.display.score.classList.add("animate-pop");
+    }
+
+    function updateTimerDisplay() {
+        els.display.timer.innerText = timeRemaining.toString();
+
+        // Update Bar Width
+        const percentage = (timeRemaining / STAGE_TIME) * 100;
+        els.display.timerBar.style.width = `${percentage}%`;
+
+        // Color Change
+        if (percentage < 30) {
+            els.display.timerBar.className =
+                "h-full bg-red-500 transition-all duration-1000 ease-linear";
+            els.display.timer.classList.add("text-red-500");
+        } else {
+            els.display.timerBar.className =
+                "h-full bg-yellow-400 transition-all duration-1000 ease-linear";
+            els.display.timer.classList.remove("text-red-500");
+        }
+    }
+
+    function switchScreen(screenName: "intro" | "playing" | "clear") {
+        Object.values(els.screens).forEach((el) => el.classList.add("hidden"));
+        Object.values(els.screens).forEach((el) => el.classList.remove("flex")); // clean up flex
+
+        const target = els.screens[screenName];
+        target.classList.remove("hidden");
+        if (screenName === "playing" || screenName === "clear") {
+            target.classList.add("flex");
+        }
+
+        if (screenName === "intro") {
+            els.controls.home.classList.add("hidden");
+        } else {
+            els.controls.home.classList.remove("hidden");
+        }
+    }
+
+    function enableAudioOnInteraction() {
+        const unlockAudio = () => {
+            console.log("GeoGuru: Unlocking audio on interaction");
+            try {
+                audioManager.playBgm();
+            } catch (e) {
+                console.warn("Audio unlock failed", e);
+            }
+            // Remove listeners once triggered
+            document.removeEventListener("click", unlockAudio);
+            document.removeEventListener("keydown", unlockAudio);
+            document.removeEventListener("touchstart", unlockAudio);
+        };
+
+        document.addEventListener("click", unlockAudio);
+        document.addEventListener("keydown", unlockAudio);
+        document.addEventListener("touchstart", unlockAudio);
+    }
+
+    function toggleMute() {
+        const isMuted = audioManager.toggleMute();
+        updateMuteIcon();
+    }
+
+    function updateMuteIcon() {
+        const isMuted = audioManager.getMutedState();
+        if (isMuted) {
+            els.icons.on.classList.add("hidden");
+            els.icons.off.classList.remove("hidden");
+        } else {
+            els.icons.on.classList.remove("hidden");
+            els.icons.off.classList.add("hidden");
+        }
+    }
+
+    function cleanupAudio() {
+        console.log("GeoGuru: Cleaning up audio");
+        audioManager.stopBgm();
+        isGameActive = false;
+        if (timerInterval) clearInterval(timerInterval);
+
+        // Remove listeners to prevent leaks if this script re-runs
+        document.removeEventListener("astro:before-swap", cleanupAudio);
+        window.removeEventListener("pagehide", cleanupAudio);
+    }
+
+    // Initialize on Page Load (View Transitions compatible)
+    document.addEventListener("astro:page-load", () => {
+        // Only init if the game container exists (we are on the game page)
+        if (document.getElementById("geoguru-game")) {
+            init();
+        }
+    });
+</script>
+
+<style>
+    @import url("https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&display=swap");
+
+    .animate-bounce-in {
+        animation: bounceIn 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    }
+
+    @keyframes bounceIn {
+        0% {
+            transform: scale(0.3);
+            opacity: 0;
+        }
+        50% {
+            transform: scale(1.05);
+            opacity: 1;
+        }
+        70% {
+            transform: scale(0.9);
+        }
+        100% {
+            transform: scale(1);
+        }
+    }
+
+    .animate-pop {
+        animation: pop 0.3s ease-out;
+    }
+
+    @keyframes pop {
+        0% {
+            transform: scale(1);
+        }
+        50% {
+            transform: scale(1.5);
+            color: #8b5cf6;
+        }
+        100% {
+            transform: scale(1);
+        }
+    }
+</style>

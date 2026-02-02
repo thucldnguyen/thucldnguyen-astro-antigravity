@@ -13,11 +13,17 @@ interface Props {
 	title: string;
 	description: string;
 	image?: ImageMetadata | string;
+	preloadImage?: boolean;
 }
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 
-const { title, description, image = newThumbnail } = Astro.props;
+const {
+	title,
+	description,
+	image = newThumbnail,
+	preloadImage = true,
+} = Astro.props;
 ---
 
 <!-- Global Metadata -->
@@ -40,14 +46,12 @@ const { title, description, image = newThumbnail } = Astro.props;
 
 <!-- Preload LCP image (hero/OG) so the browser fetches it earlier -->
 {
-	image && (
+	preloadImage && image && (
 		<link
 			rel="preload"
 			as="image"
 			href={
-				typeof image === "string"
-					? image
-					: (image as ImageMetadata).src
+				typeof image === "string" ? image : (image as ImageMetadata).src
 			}
 		/>
 	)
