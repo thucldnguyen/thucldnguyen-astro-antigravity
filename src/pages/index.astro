@@ -11,6 +11,7 @@ import ava3 from "../assets/ava3.jpg";
 import newThumbnail from "../assets/new-thumbnail.png";
 import ContactForm from "../components/ContactForm.astro";
 import Lightbox from "../components/Lightbox.astro";
+import GameCTA from "../components/GameCTA.astro";
 
 import AnimateOnScroll from "../components/AnimateOnScroll.astro";
 
@@ -205,6 +206,10 @@ const posts = (await getCollection("blog"))
                 </div>
 
                 <ContactForm />
+
+                <div class="mt-12">
+                    <GameCTA />
+                </div>
 
                 <div class="mt-20">
                     <Image

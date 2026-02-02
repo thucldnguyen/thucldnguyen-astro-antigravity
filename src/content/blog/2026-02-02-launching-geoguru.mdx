@@ -3,9 +3,11 @@ template: blog-post
 title: "Launching GeoGuru: Experiments in AI-First Game Dev"
 slug: /blog/launching-geoguru
 date: 2026-02-02 16:30
-description: "How I built, polished, and optimized a geography mini-game in a weekend using an AI-first workflow. Spoilers: It wasn't just 'generate and done'."
+description: "How I built, polished, and optimized a geography mini-game in one morning using an AI-first workflow. Spoilers: It wasn't just 'generate and done'."
 heroImage: ../../assets/GeoGuru.png
+tags: ["AI", "Game Dev", "Astro", "Experiment"]
 ---
+import GameCTA from '../../components/GameCTA.astro';
 
 My childhood friend **Thuan Ho** and I used to have a lot of fun playing flag guessing games back in elementary school. So in college during a school project, Thuan and I built GeoGuru using the 'top-notch' tech stack at that point: WPF and .NET. It was fun and we got 10/10 for the project. 
 
@@ -13,11 +15,9 @@ We never thought of it ever since. But this weekend, during a casual walk-down-m
 
 The result is mindblowing. AI helped me get it up and running in one morning. **[GeoGuru](/game)** is a rapid-fire flag guessing game that lives right here on my site.
 
-<div class="my-8 text-center">
-  <a href="/game" class="inline-block px-8 py-4 bg-gradient-to-r from-violet-600 to-fuchsia-600 text-white text-xl font-black rounded-2xl shadow-lg hover:-translate-y-1 transition-transform no-underline">
-    🎮 Play GeoGuru Now
-  </a>
-</div>
+
+<GameCTA />
+
 
 But the text-to-code dream isn't magic, it's a dialogue. Here's a look at the real journey, the snags I hit, and how I solved them.
 
