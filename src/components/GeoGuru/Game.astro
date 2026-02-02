@@ -316,6 +316,8 @@
     let currentCountry: Country | null = null;
     let questionStartTime = 0;
     let isGameActive = false;
+    // Track used flags to prevent duplicates
+    let usedCountryCodes: Set<string> = new Set();
 
     // Elements
     // Elements
@@ -429,6 +431,8 @@
         correctCount = 0;
         timeRemaining = STAGE_TIME;
         isGameActive = true;
+        // Reset duplicate tracker
+        usedCountryCodes.clear();
 
         updateScoreDisplay();
         updateTimerDisplay();
@@ -480,9 +484,28 @@
             pool = COUNTRIES;
         }
 
+            pool = COUNTRIES;
+        }
+        
+        // Filter out already used flags
+        // We want to avoid duplicates.
+        let availablePool = pool.filter(c => !usedCountryCodes.has(c.code));
+        
+        // If pool is exhausted (rare in 30s but possible), reset "used" for this difficulty tier
+        if (availablePool.length === 0) {
+             console.log("GeoGuru: Pool exhausted, clearing used history for this pool.");
+             // We only clear history for the *current* pool context?
+             // Or just allow repeats now? Let's just pick from full pool if needed but try to respect history.
+             // Simplest: If empty, just use the 'pool' and accept duplicates.
+             availablePool = pool;
+        }
+
         // Pick Random Country from Pool
-        const targetIndex = Math.floor(Math.random() * pool.length);
-        currentCountry = pool[targetIndex];
+        const targetIndex = Math.floor(Math.random() * availablePool.length);
+        currentCountry = availablePool[targetIndex];
+        
+        // Mark as used
+        usedCountryCodes.add(currentCountry.code);
 
         // Pick 3 Distractors (from FULL pool to keep options interesting?
         // Or also from easy pool? Usually distractors can be hard, but let's
