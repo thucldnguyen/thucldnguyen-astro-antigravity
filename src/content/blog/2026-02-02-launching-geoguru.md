@@ -77,7 +77,7 @@ My prompt was simple:
 
 > now add a condition for the stage clear screen. If the user's score is reasonably high considering the time constraint and number of questions they got correct, show the current message "You're a Geo Guru". If their score is disappointing, show a different message (implying that their score is bad but encouraging them to retry) and icon (replacing the trophy icon by something else more appropriate).
 
-The result was amazing! I didn't have to handhold it on what defines 'high score' versus 'low score'. It automatically picks a threshold of 40. Better yet, the text and the new icon it generated fit my purpose perfectly. The backpack icon and "Travel more to improve your skills" were killers. It adds humour as well as encouraging for users to retry. 
+The result was amazing! I didn't have to handhold it on what defines 'high score' versus 'low score'. It automatically picks a threshold of 40. Better yet, the text and the new icon it generated fit my purpose perfectly. The backpack icon and "Keep travelling to improve your skills" were excellent touches. It adds humour as well as encouraging users to retry. 
 
 ![GeoGuru when you achieve a bad score](../../assets/geoguru-stage-clear-low.png)
 
