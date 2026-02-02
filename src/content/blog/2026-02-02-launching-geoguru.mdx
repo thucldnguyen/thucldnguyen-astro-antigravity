@@ -22,9 +22,9 @@ The result is mindblowing. AI helped me get it up and running in one morning. **
 But the text-to-code dream isn't magic, it's a dialogue. Here's a look at the real journey, the snags I hit, and how I solved them.
 
 ---
-## 1. The "Easy" Logic Trap
+## 1. Difficulty Progression
 
-I started out with ChatGPT to check whether static HTML sites based on Astro can host this game. Good news! It is. ChatGPT also gave me a perfect Monopoly-styled game image, and recommendations on where to download open-source soundtracks, flag images as well as country shapes to breathe life to the game.
+I started out with ChatGPT to check whether static HTML sites based on Astro can host this game. Good news! They can. ChatGPT also gave me a perfect Monopoly-styled game image, and recommendations on where to download open-source soundtracks, flag images as well as country shapes to breathe life into the game.
 
 My initial prompt for Antigravity+Gemini3Pro was rather simple: *"Build a flag guessing game but keep the code cleanly separated from existing blogs posts and image assets"* The AI obliged, writing a script to fetch 250+ country flags in .PNG format, randomize the question, calculate the score and end with a level-clear screen celebrating users' achievement. 
 
@@ -37,12 +37,11 @@ My initial prompt for Antigravity+Gemini3Pro was rather simple: *"Build a flag g
 This small logic tweak changed it from a frustrating quiz to an addictive loop.
 
 ---
-## 2. Mobile Fails & "Liquid" UIs
+## 2. Liquid-Glass UI and Mobile Fails
 
 I wanted the game to look "premium"—glassmorphism, vibrant gradients, 3D buttons. The AI generated beautiful Tailwind code for desktop.
 
-**The Snag**: On mobile, it was a disaster.  
-The "Start Game" button was unclickable. The "Mute" toggle was pushed off-screen. The background image cropped awkwardly, hiding the cute 3D globe assets.
+**The Snag**: On mobile, it was a disaster. The "Start Game" button was unclickable. The "Mute" toggle was pushed off-screen. The background image cropped awkwardly, hiding the cute "Welcome to GeoGuru" background.
 
 **The Fix**: We (as in I and my faithful AI assistant) had to get into the weeds of responsive design.
 - **Dynamic Sizing**: We shrunk the header text (`text-3xl` → `text-xl`) and tightened gaps purely for mobile constraints.
@@ -94,7 +93,7 @@ My prompt was simple:
 
 > now add a condition for the level clear screen. If the user's score is reasonably high considering the time constraint and number of questions they got correct, show the current message "You're a Geo Guru". If their score is disappointing, show a different message (implying that their score is bad but encouraging them to retry) and icon (replacing the trophy icon by something else more appropriate).
 
-The result was amazing! I didn't have to handhold it on what defines 'high score' versus 'low score'. It automatically picks a threshold of 120 for both levels. Better yet, the text and the new icon it generated fit my purpose perfectly. The backpack icon and "Keep travelling to improve your skills" were excellent touches. It adds humour as well as encouraging users to retry. 
+The result was amazing! I didn't have to handhold it on what defines 'high score' versus 'low score'. It automatically picks a threshold of 40 for level 1 and 120 for level 2. Better yet, the text and the new icon it generated fit my purpose perfectly. The backpack icon and "Keep travelling to improve your skills" were excellent touches. It adds humour as well as encouraging users to retry. 
 
 ![GeoGuru when you achieve a bad score](../../assets/geoguru-level-clear-low.png)
 
@@ -104,29 +103,33 @@ The result was amazing! I didn't have to handhold it on what defines 'high score
 Once the core loop was fun, I wanted to double the content by adding **Level 2: Country Borders**. The idea was simple: show a silhouette, guess the country.
 
 **The Reality**: It was a data nightmare.
-- **Vector image processing**:Unlike flags which are readily available from flagpedia, country borders are not. I had to download a shapefile from Natural Earth, extract the geojson file, process it to get the country borders in SVG then convert them all into webp format.
+- **Vector image processing**: Unlike flags which are readily available from flagpedia, country borders are not. I had to download a shapefile from Natural Earth, extract the geojson file, process it to get the country borders in SVG then convert them all into webp format.
 - **Missing Countries**: My initial script couldn't find France or Norway. It turned out their ISO codes in the shapefile were stored in a non-standard column (`ISO_A2_EH`) because of disputed territories or dataset quirks.
 - **The "Blob" Problem**: When I generated the USA, I got a tiny, unrecognizable cluster of dots. Why? Because the bounding box included Alaska, Hawaii, and Guam. The "Mainland" was just a small piece of the puzzle. The same happened for France (hello, French Guiana!) and Russia.
 - **The "Squashed" Problem**: The initial SVGs looked distorted. Countries in the north (like Canada and Russia) looked extremely wide and squashed. This is a classic symptom of using a raw Equirectangular projection for screen display. I had to use a Web Mercator projection fix to make them look normal.
+- **The "Tiny Island" problem**: Some countries especially islands are just too small so their coast/border lines are too coarse/jagged. I had to refine the borders by setting the simplifcation percentage to 100% (no simplifcation at all) for those countries.
+
+![Squashed Canada](../../assets/squashed-ca.jpg)
 
 **The AI Solution**: instead of manually cropping 200+ images in Photoshop, I asked the AI to write a smart processing pipeline.
 1.  **Smart Queries**: We updated our `ogr2ogr` scripts to check multiple data columns, ensuring every country was found.
 2.  **Geometry Filtering**: We wrote a custom Node.js script using the **Shoelace formula** to calculate the area of every polygon. The script automatically identifies the "Mainland" (the largest landmass) and discards colonies or distant islands.
-3.  **Automated Styling**: We piped the output through `mapshaper` to apply a unform "Yellow Fill + Black Border" style that pops against the dark UI.
+3.  **Automated Styling**: We piped the output through `mapshaper` to apply a uniform "Yellow Fill + Black Border" style that pops against the dark UI.
 
 In 10 minutes, we went from "broken blobs" to a perfectly centered, consistent asset library for the entire world. This is the power of AI: solving scale problems that would be tedious for a human.
 
 ![GeoGuru Level 2](../../assets/geoguru-level-2.jpeg)
 
-Fun note: AI can make silly mistakes too
+Fun note: AI can make silly mistakes too. In the example below, it mistakenly set the simplification percentage to 0.5%, resulting in a blank image for "Saint Pierre and Miquelon"
 
 ![AI mistake](../../assets/AI-bug.png)
 
 ---
 ## Final Thoughts
+
 Building GeoGuru wasn't about typing one prompt and walking away. It was a series of rapid iterations. The AI acted as my **force multiplier**—it wrote the boilerplate, handled the math for the timer, and generated the CSS grid for the options.
 
-This freed me up to focus on the **User Experience**: the pacing, the animations, the graphics and the "juice" (like the cheering sound effects and pop animations).
+This freed me up to focus on the **User Experience**: the difficulty progression, the graphics, the sound effects, the animations, and the overall "juice" of the game.
 
 Go ahead, [give it a try](/game) and let me know if you can beat my high score below! 🌍🏆
 
