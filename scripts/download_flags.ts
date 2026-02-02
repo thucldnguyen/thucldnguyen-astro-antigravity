@@ -38,8 +38,8 @@ async function downloadFlags() {
 
         await Promise.all(chunk.map(async (code) => {
             try {
-                const imageUrl = `${BASE_IMAGE_URL}/${code}.png`;
-                const destPath = path.join(FLAGS_DIR, `${code}.png`);
+                const imageUrl = `${BASE_IMAGE_URL}/${code}.webp`;
+                const destPath = path.join(FLAGS_DIR, `${code}.webp`);
 
                 // Skip if already exists? NO, we want to overwrite with bigger flags.
                 // if (fs.existsSync(destPath)) {

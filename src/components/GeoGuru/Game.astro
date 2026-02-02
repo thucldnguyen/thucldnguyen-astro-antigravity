@@ -318,40 +318,46 @@
     let isGameActive = false;
 
     // Elements
-    const els = {
-        screens: {
-            intro: document.getElementById("screen-intro")!,
-            playing: document.getElementById("screen-playing")!,
-            clear: document.getElementById("screen-clear")!,
-        },
-        display: {
-            score: document.getElementById("score-display")!,
-            timer: document.getElementById("timer-display")!,
-            timerBar: document.getElementById("timer-bar")!,
-            finalScore: document.getElementById("final-score")!,
-        },
-        game: {
-            flag: document.getElementById("flag-img") as HTMLImageElement,
-            skeleton: document.getElementById("flag-skeleton")!,
-            options: document.getElementById("options-grid")!,
-        },
-        controls: {
-            start: document.getElementById("start-btn")!,
-            replay: document.getElementById("replay-btn")!,
-            mute: document.getElementById("mute-btn")!,
-            home: document.getElementById("home-btn")!,
-        },
-        icons: {
-            on: document.getElementById("icon-sound-on")!,
-            off: document.getElementById("icon-sound-off")!,
-        },
-    };
+    // Elements
+    let els: any = {};
 
     // --- Core Logic ---
 
     function init() {
         try {
             console.log("GeoGuru: Init started");
+
+            // Query Elements (MUST be inside init for View Transitions)
+            els = {
+                screens: {
+                    intro: document.getElementById("screen-intro")!,
+                    playing: document.getElementById("screen-playing")!,
+                    clear: document.getElementById("screen-clear")!,
+                },
+                display: {
+                    score: document.getElementById("score-display")!,
+                    timer: document.getElementById("timer-display")!,
+                    timerBar: document.getElementById("timer-bar")!,
+                    finalScore: document.getElementById("final-score")!,
+                },
+                game: {
+                    flag: document.getElementById(
+                        "flag-img",
+                    ) as HTMLImageElement,
+                    skeleton: document.getElementById("flag-skeleton")!,
+                    options: document.getElementById("options-grid")!,
+                },
+                controls: {
+                    start: document.getElementById("start-btn")!,
+                    replay: document.getElementById("replay-btn")!,
+                    mute: document.getElementById("mute-btn")!,
+                    home: document.getElementById("home-btn")!,
+                },
+                icons: {
+                    on: document.getElementById("icon-sound-on")!,
+                    off: document.getElementById("icon-sound-off")!,
+                },
+            };
 
             // Check elements
             if (!els.controls.start)
@@ -375,6 +381,16 @@
             document.addEventListener("astro:before-swap", cleanupAudio);
             // Cleanup on standard page unload
             window.addEventListener("pagehide", cleanupAudio);
+
+            // Interaction Listener for BGM (Unlock Audio Pattern)
+            enableAudioOnInteraction();
+
+            // PERFORMANCE: Preload Easy Flags on Idle
+            if ("requestIdleCallback" in window) {
+                requestIdleCallback(() => preloadEasySet());
+            } else {
+                setTimeout(() => preloadEasySet(), 2000);
+            }
 
             console.log("GeoGuru: Init complete");
         } catch (e) {
@@ -499,7 +515,7 @@
         const link = document.createElement("link");
         link.rel = "preload";
         link.as = "image";
-        link.href = `/assets/geoguru/flags/${code}.png`;
+        link.href = `/assets/geoguru/flags/${code}.webp`;
         document.head.appendChild(link);
     }
 
@@ -510,7 +526,7 @@
         els.game.flag.classList.add("opacity-0");
 
         // 2. Set Src
-        const newSrc = `/assets/geoguru/flags/${target.code}.png`;
+        const newSrc = `/assets/geoguru/flags/${target.code}.webp`;
 
         // 3. Setup Load Handler
         els.game.flag.onload = () => {
@@ -649,6 +665,13 @@
         document.addEventListener("click", unlockAudio);
         document.addEventListener("keydown", unlockAudio);
         document.addEventListener("touchstart", unlockAudio);
+    }
+
+    function preloadEasySet() {
+        console.log("GeoGuru: Preloading Easy Set...");
+        // Preload first 20 easy flags to ensure silky smooth start
+        const subset = EASY_CODES.slice(0, 20);
+        subset.forEach((code) => preloadFlag(code));
     }
 
     function toggleMute() {
