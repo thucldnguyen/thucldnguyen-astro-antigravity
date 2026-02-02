@@ -34,7 +34,11 @@ const resolvedImage = heroImage || featuredImage || image || bannerImage;
 <!doctype html>
 <html lang="en">
 	<head>
-		<BaseHead title={title} description={description} />
+		<BaseHead
+			title={title}
+			description={description}
+			image={resolvedImage}
+		/>
 		{/* Preload LCP image for blog post */}
 		{
 			resolvedImage && (
