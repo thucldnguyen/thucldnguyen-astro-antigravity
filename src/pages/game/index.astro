@@ -15,9 +15,11 @@ import GameComponent from "../../components/GeoGuru/Game.astro";
             image="/assets/geoguru/GeoGuru.png"
         />
     </head>
-    <body>
+    <body
+        class="bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-slate-100 transition-colors duration-300 min-h-screen flex flex-col"
+    >
         <Header />
-        <main>
+        <main class="flex-1 flex flex-col items-center justify-center">
             <GameComponent />
         </main>
         <Footer />
