@@ -208,13 +208,24 @@
                     class="absolute inset-0 bg-yellow-400 blur-3xl opacity-20 animate-pulse"
                 >
                 </div>
-                <div class="text-8xl relative z-10 animate-bounce">🏆</div>
+                <div
+                    id="clear-icon"
+                    class="text-8xl relative z-10 animate-bounce"
+                >
+                    🏆
+                </div>
             </div>
 
-            <h2 class="text-4xl font-black text-white drop-shadow-lg mb-2">
+            <h2
+                id="clear-title"
+                class="text-4xl font-black text-white drop-shadow-lg mb-2"
+            >
                 Stage Clear!
             </h2>
-            <p class="text-xl text-white drop-shadow-md mb-8 font-semibold">
+            <p
+                id="clear-message"
+                class="text-xl text-white drop-shadow-md mb-8 font-semibold"
+            >
                 You are a GeoGuru!
             </p>
 
@@ -341,6 +352,9 @@
                     timer: document.getElementById("timer-display")!,
                     timerBar: document.getElementById("timer-bar")!,
                     finalScore: document.getElementById("final-score")!,
+                    clearIcon: document.getElementById("clear-icon")!,
+                    clearTitle: document.getElementById("clear-title")!,
+                    clearMessage: document.getElementById("clear-message")!,
                 },
                 game: {
                     flag: document.getElementById(
@@ -460,10 +474,27 @@
         clearInterval(timerInterval);
 
         els.display.finalScore.innerText = score.toString();
-        switchScreen("clear");
 
+        // Conditional Messaging
+        if (score >= 40) {
+            // High Score
+            els.display.clearIcon.innerText = "🏆";
+            els.display.clearTitle.innerText = "Stage Clear!";
+            els.display.clearMessage.innerText = "You are a GeoGuru!";
+            audioManager.playSfx("cheer");
+        } else {
+            // Low Score
+            els.display.clearIcon.innerText = "🎒"; // Backpack
+            els.display.clearTitle.innerText = "Good Effort!";
+            els.display.clearMessage.innerText =
+                "Keep traveling to improve your skills!";
+            // Maybe a different sound? Or just silence/cheer anyway?
+            // Let's play cheer for positivity, or generic. Keeping cheer is fine.
+            audioManager.playSfx("cheer");
+        }
+
+        switchScreen("clear");
         audioManager.stopBgm();
-        audioManager.playSfx("cheer");
     }
 
     function nextQuestion() {
@@ -484,26 +515,25 @@
             pool = COUNTRIES;
         }
 
-            pool = COUNTRIES;
-        }
-        
         // Filter out already used flags
         // We want to avoid duplicates.
-        let availablePool = pool.filter(c => !usedCountryCodes.has(c.code));
-        
+        let availablePool = pool.filter((c) => !usedCountryCodes.has(c.code));
+
         // If pool is exhausted (rare in 30s but possible), reset "used" for this difficulty tier
         if (availablePool.length === 0) {
-             console.log("GeoGuru: Pool exhausted, clearing used history for this pool.");
-             // We only clear history for the *current* pool context?
-             // Or just allow repeats now? Let's just pick from full pool if needed but try to respect history.
-             // Simplest: If empty, just use the 'pool' and accept duplicates.
-             availablePool = pool;
+            console.log(
+                "GeoGuru: Pool exhausted, clearing used history for this pool.",
+            );
+            // We only clear history for the *current* pool context?
+            // Or just allow repeats now? Let's just pick from full pool if needed but try to respect history.
+            // Simplest: If empty, just use the 'pool' and accept duplicates.
+            availablePool = pool;
         }
 
         // Pick Random Country from Pool
         const targetIndex = Math.floor(Math.random() * availablePool.length);
         currentCountry = availablePool[targetIndex];
-        
+
         // Mark as used
         usedCountryCodes.add(currentCountry.code);
 
