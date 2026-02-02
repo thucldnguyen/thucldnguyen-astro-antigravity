@@ -86,6 +86,7 @@ main() {
         # We add -style to fill yellow and add border
         # We set width=1024 for higher res SVG coordinate space, so stroke-width=5 is ~0.5% of width
         mapshaper "$TMP_DIR/$code_lower.geojson" \
+            -proj webmercator \
             -simplify "$SIMPLIFY_PERCENT" \
             -style fill='#FFD700' stroke='#000000' stroke-width=6 \
             -o format=svg width=1024 "$TMP_DIR/$code_lower.svg"

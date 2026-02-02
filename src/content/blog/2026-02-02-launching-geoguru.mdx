@@ -105,6 +105,7 @@ Once the core loop was fun, I wanted to double the content by adding **Level 2: 
 - **Vector image processing**:Unlike flags which are readily available from flagpedia, country borders are not. I had to download a shapefile from Natural Earth, extract the geojson file, process it to get the country borders in SVG then convert them all into webp format.
 - **Missing Countries**: My initial script couldn't find France or Norway. It turned out their ISO codes in the shapefile were stored in a non-standard column (`ISO_A2_EH`) because of disputed territories or dataset quirks.
 - **The "Blob" Problem**: When I generated the USA, I got a tiny, unrecognizable cluster of dots. Why? Because the bounding box included Alaska, Hawaii, and Guam. The "Mainland" was just a small piece of the puzzle. The same happened for France (hello, French Guiana!) and Russia.
+- **The "Squashed" Problem**: The initial SVGs looked distorted. Countries in the north (like Canada and Russia) looked extremely wide and squashed. This is a classic symptom of using a raw Equirectangular projection for screen display. I had to use a Web Mercator projection fix to make them look normal.
 
 **The AI Solution**: instead of manually cropping 200+ images in Photoshop, I asked the AI to write a smart processing pipeline.
 1.  **Smart Queries**: We updated our `ogr2ogr` scripts to check multiple data columns, ensuring every country was found.

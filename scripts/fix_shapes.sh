@@ -17,7 +17,9 @@ TMP_DIR="$PROJECT_ROOT/tmp_shapes_fix"
 # PT: Azores
 # NO: Svalbard
 # RU: Islands
-CODES="us fr ru ca es pt no"
+# SE, IS, FI, GL: High latitude projection fix
+# CL: Fix off-center (Easter Island)
+CODES="us fr ru ca es pt no se is fi gl cl"
 
 echo "--- GeoGuru Shape Fixer (Largest Polygon) ---"
 echo "Targets: $CODES"
@@ -38,17 +40,22 @@ for code in $CODES; do
     fi
     
     # 2. Filter using Node script (Reliable "Keep Largest")
-    # For Canada (ca), keep islands > 1% of mainland to preserve arctic archipelago
+    # For Canada (ca), keep islands > 0.1% of mainland (Arctic Archipelago)
+    # For Chile (cl), keep islands > 1% (Tierra del Fuego) but drop Easter Island (<0.02%)
     # For others (us, fr, etc.), keep strictly largest (1.0)
     THRESHOLD=1.0
     if [ "$code" == "ca" ]; then
+        THRESHOLD=0.001
+    elif [ "$code" == "cl" ]; then
         THRESHOLD=0.01
     fi
     
     node scripts/keep_largest.js "$TMP_DIR/$code.geojson" "$THRESHOLD"
 
-    # 3. Mapshaper for Styling only
+    # 3. Mapshaper for Styling only + PROJECTION FIX
+    # Use Web Mercator to fix the "squashed" look of high-latitude countries (CA, RU, SE, etc.)
     mapshaper "$TMP_DIR/$code.geojson" \
+        -proj webmercator \
         -simplify 10% \
         -style fill='#FFD700' stroke='#000000' stroke-width=6 \
         -o format=svg width=1024 "$TMP_DIR/$code.svg"
