@@ -26,7 +26,8 @@ TMP_DIR="$PROJECT_ROOT/tmp_shapes_fix"
 # CN: Projection fix (Squashed)
 # IE, GB: Projection fix (Squashed)
 # DE: Projection fix (Squashed)
-CODES="us fr ru ca es pt no se is fi gl cl ua pm cn ie gb km de ws"
+# DK: Projection fix (Squashed) + Keep Islands
+CODES="us fr ru ca es pt no se is fi gl cl ua pm cn ie gb km de ws dk"
 
 echo "--- GeoGuru Shape Fixer (Largest Polygon) ---"
 echo "Targets: $CODES"
@@ -55,8 +56,8 @@ for code in $CODES; do
         THRESHOLD=0.001
     elif [ "$code" == "cl" ]; then
         THRESHOLD=0.01
-    elif [ "$code" == "pm" ] || [ "$code" == "ws" ]; then
-        # Saint Pierre and Miquelon (and Samoa) are tiny/split, need detail
+    elif [ "$code" == "pm" ] || [ "$code" == "ws" ] || [ "$code" == "dk" ]; then
+        # Saint Pierre and Miquelon (and Samoa, Denmark) need detail/islands
         THRESHOLD=0.1
     fi
     
