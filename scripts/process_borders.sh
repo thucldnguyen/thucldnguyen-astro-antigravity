@@ -68,7 +68,8 @@ main() {
         
         # 1. Extract GeoJSON
         # We catch errors here in case a code doesn't exist in the shapefile (e.g. some custom codes)
-        if ! ogr2ogr -f GeoJSON "$TMP_DIR/$code_lower.geojson" "$SHAPEFILE_PATH" -where "ISO_A2='${code_upper}'" -skipfailures; then
+        # using ISO_A2 OR ISO_A2_EH to catch cases like France (-99 in A2, FR in EH)
+        if ! ogr2ogr -f GeoJSON "$TMP_DIR/$code_lower.geojson" "$SHAPEFILE_PATH" -where "ISO_A2='${code_upper}' OR ISO_A2_EH='${code_upper}'" -skipfailures; then
             echo "  [WARN] Failed to extract $code_upper. Skipping."
             continue
         fi
@@ -82,9 +83,12 @@ main() {
 
         # 2. Simplify and Convert to SVG with mapshaper
         # -proj wgs84 ensures proper projection if not already
+        # We add -style to fill yellow and add border
+        # We set width=1024 for higher res SVG coordinate space, so stroke-width=5 is ~0.5% of width
         mapshaper "$TMP_DIR/$code_lower.geojson" \
             -simplify "$SIMPLIFY_PERCENT" \
-            -o format=svg "$TMP_DIR/$code_lower.svg"
+            -style fill='#FFD700' stroke='#000000' stroke-width=6 \
+            -o format=svg width=1024 "$TMP_DIR/$code_lower.svg"
 
         # 3. Convert SVG to WebP with ImageMagick
         # -trim removes extra whitespace? Maybe. 

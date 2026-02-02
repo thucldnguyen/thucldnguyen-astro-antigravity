@@ -9,8 +9,8 @@ TMP_DIR="$PROJECT_ROOT/tmp_shapes_priority"
 
 mkdir -p "$OUT_DIR" "$TMP_DIR"
 
-# Priority Codes: Easy + Some Medium
-CODES="us gb fr de it jp cn ru br ca au in kr es mx"
+# Priority Codes: Easy + Some Medium + Norway/France fix
+CODES="us gb fr de it jp cn ru br ca au in kr es mx no"
 
 echo "Using Shapefile: $SHAPEFILE"
 
@@ -19,10 +19,10 @@ for code in $CODES; do
   echo "Priority Processing: $UPPER"
   
   if [ -f "$SHAPEFILE" ]; then
-      ogr2ogr -f GeoJSON "$TMP_DIR/$code.geojson" "$SHAPEFILE" -where "ISO_A2='$UPPER'"
+      ogr2ogr -f GeoJSON "$TMP_DIR/$code.geojson" "$SHAPEFILE" -where "ISO_A2='$UPPER' OR ISO_A2_EH='$UPPER'"
       
       if [ -f "$TMP_DIR/$code.geojson" ]; then
-          mapshaper "$TMP_DIR/$code.geojson" -simplify 10% -o format=svg "$TMP_DIR/$code.svg"
+          mapshaper "$TMP_DIR/$code.geojson" -simplify 10% -style fill='#FFD700' stroke='#000000' stroke-width=6 -o format=svg width=1024 "$TMP_DIR/$code.svg"
           
           if [ -f "$TMP_DIR/$code.svg" ]; then
             magick convert -background none -density 300 "$TMP_DIR/$code.svg" -resize 512x512 -gravity center -extent 512x512 -quality 85 "$OUT_DIR/$code.webp"

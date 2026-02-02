@@ -24,7 +24,7 @@ But the text-to-code dream isn't magic, it's a dialogue. Here's a look at the re
 ## 1. The "Easy" Logic Trap
 I started out with ChatGPT to check whether static HTML sites based on Astro can host this game. Good news! It is. ChatGPT also gave me a perfect Monopoly-styled game image, and recommendations on where to download open-source soundtracks as well as flag images to breathe life to the game.
 
-My initial prompt for Antigravity+Gemini3Pro was rather simple: *"Build a flag guessing game but keep the code cleanly separated from existing blogs posts and image assets"* The AI obliged, writing a script to fetch 250+ country flags, randomize the question, calculate the score and end with a stage-clear screen celebrating users' achievement. 
+My initial prompt for Antigravity+Gemini3Pro was rather simple: *"Build a flag guessing game but keep the code cleanly separated from existing blogs posts and image assets"* The AI obliged, writing a script to fetch 250+ country flags, randomize the question, calculate the score and end with a level-clear screen celebrating users' achievement. 
 
 **The Problem**: Randomness is brutal. My first test run gave me *south Georgia and the South Sandwich Islands*, followed by *Kiribati*. I scored 0. It wasn't fun; it was a geography exam.
 
@@ -71,15 +71,29 @@ Because my site uses Astro's **View Transitions** (simulating a Single Page App)
 ![Ghost button](../../assets/geoguru-start-game.png)
 
 ## 5. Final touches
-After all the grunt work is done, I finally played with it a lot and was able to focus on polishing it. I discovered that no matter how high or low your score is, the stage-clear screen always displays "Hurray you're a GeoGuru". I fixed it by asking Antigravity to add a logic to display the correct message based on the score.
+After all the grunt work is done, I finally played with it a lot and was able to focus on polishing it. I discovered that no matter how high or low your score is, the level-clear screen always displays "Hurray you're a GeoGuru". I fixed it by asking Antigravity to add a logic to display the correct message based on the score.
 
 My prompt was simple: 
 
-> now add a condition for the stage clear screen. If the user's score is reasonably high considering the time constraint and number of questions they got correct, show the current message "You're a Geo Guru". If their score is disappointing, show a different message (implying that their score is bad but encouraging them to retry) and icon (replacing the trophy icon by something else more appropriate).
+> now add a condition for the level clear screen. If the user's score is reasonably high considering the time constraint and number of questions they got correct, show the current message "You're a Geo Guru". If their score is disappointing, show a different message (implying that their score is bad but encouraging them to retry) and icon (replacing the trophy icon by something else more appropriate).
 
 The result was amazing! I didn't have to handhold it on what defines 'high score' versus 'low score'. It automatically picks a threshold of 40. Better yet, the text and the new icon it generated fit my purpose perfectly. The backpack icon and "Keep travelling to improve your skills" were excellent touches. It adds humour as well as encouraging users to retry. 
 
-![GeoGuru when you achieve a bad score](../../assets/geoguru-stage-clear-low.png)
+![GeoGuru when you achieve a bad score](../../assets/geoguru-level-clear-low.png)
+
+## 6. The Asset Pipeline Challenge: Mapping the World
+Once the core loop was fun, I wanted to double the content by adding **Level 2: Country Borders**. The idea was simple: show a silhouette, guess the country.
+
+**The Reality**: It was a data nightmare.
+- **Missing Countries**: My initial script couldn't find France or Norway. It turned out their ISO codes in the shapefile were stored in a non-standard column (`ISO_A2_EH`) because of disputed territories or dataset quirks.
+- **The "Blob" Problem**: When I generated the USA, I got a tiny, unrecognizable cluster of dots. Why? Because the bounding box included Alaska, Hawaii, and Guam. The "Mainland" was just a small piece of the puzzle. The same happened for France (hello, French Guiana!) and Russia.
+
+**The AI Solution**: instead of manually cropping 200+ images in Photoshop, I asked the AI to write a smart processing pipeline.
+1.  **Smart Queries**: We updated our `ogr2ogr` scripts to check multiple data columns, ensuring every country was found.
+2.  **Geometry Filtering**: We wrote a custom Node.js script using the **Shoelace formula** to calculate the area of every polygon. The script automatically identifies the "Mainland" (the largest landmass) and discards colonies or distant islands.
+3.  **Automated Styling**: We piped the output through `mapshaper` to apply a unform "Yellow Fill + Black Border" style that pops against the dark UI.
+
+In 10 minutes, we went from "broken blobs" to a perfectly centered, consistent asset library for the entire world. This is the power of AI: solving scale problems that would be tedious for a human.
 
 ## Final Thoughts
 Building GeoGuru wasn't about typing one prompt and walking away. It was a series of rapid iterations. The AI acted as my **force multiplier**—it wrote the boilerplate, handled the math for the timer, and generated the CSS grid for the options.
@@ -88,4 +102,4 @@ This freed me up to focus on the **User Experience**: the pacing, the animations
 
 Go ahead, [give it a try](/game) and let me know if you can beat my high score below! 🌍🏆
 
-![GeoGuru when you achieve a high score](../../assets/geoguru-stage-clear-high.jpg)
+![GeoGuru when you achieve a high score](../../assets/geoguru-level-clear-high.jpg)

@@ -37,16 +37,8 @@ export const COUNTRIES: Country[] = [
     "name": "Angola"
   },
   {
-    "code": "aq",
-    "name": "Antarctica"
-  },
-  {
     "code": "ar",
     "name": "Argentina"
-  },
-  {
-    "code": "as",
-    "name": "American Samoa"
   },
   {
     "code": "at",
@@ -55,10 +47,6 @@ export const COUNTRIES: Country[] = [
   {
     "code": "au",
     "name": "Australia"
-  },
-  {
-    "code": "aw",
-    "name": "Aruba"
   },
   {
     "code": "ax",
@@ -71,10 +59,6 @@ export const COUNTRIES: Country[] = [
   {
     "code": "ba",
     "name": "Bosnia and Herzegovina"
-  },
-  {
-    "code": "bb",
-    "name": "Barbados"
   },
   {
     "code": "bd",
@@ -105,24 +89,8 @@ export const COUNTRIES: Country[] = [
     "name": "Benin"
   },
   {
-    "code": "bl",
-    "name": "Saint Barthélemy"
-  },
-  {
-    "code": "bm",
-    "name": "Bermuda"
-  },
-  {
-    "code": "bn",
-    "name": "Brunei"
-  },
-  {
     "code": "bo",
     "name": "Bolivia"
-  },
-  {
-    "code": "bq",
-    "name": "Caribbean Netherlands"
   },
   {
     "code": "br",
@@ -135,10 +103,6 @@ export const COUNTRIES: Country[] = [
   {
     "code": "bt",
     "name": "Bhutan"
-  },
-  {
-    "code": "bv",
-    "name": "Bouvet Island"
   },
   {
     "code": "bw",
@@ -155,10 +119,6 @@ export const COUNTRIES: Country[] = [
   {
     "code": "ca",
     "name": "Canada"
-  },
-  {
-    "code": "cc",
-    "name": "Cocos (Keeling) Islands"
   },
   {
     "code": "cd",
@@ -179,10 +139,6 @@ export const COUNTRIES: Country[] = [
   {
     "code": "ci",
     "name": "Côte d'Ivoire (Ivory Coast)"
-  },
-  {
-    "code": "ck",
-    "name": "Cook Islands"
   },
   {
     "code": "cl",
@@ -209,18 +165,6 @@ export const COUNTRIES: Country[] = [
     "name": "Cuba"
   },
   {
-    "code": "cv",
-    "name": "Cape Verde"
-  },
-  {
-    "code": "cw",
-    "name": "Curaçao"
-  },
-  {
-    "code": "cx",
-    "name": "Christmas Island"
-  },
-  {
     "code": "cy",
     "name": "Cyprus"
   },
@@ -239,10 +183,6 @@ export const COUNTRIES: Country[] = [
   {
     "code": "dk",
     "name": "Denmark"
-  },
-  {
-    "code": "dm",
-    "name": "Dominica"
   },
   {
     "code": "do",
@@ -280,25 +220,14 @@ export const COUNTRIES: Country[] = [
     "code": "et",
     "name": "Ethiopia"
   },
-  {
-    "code": "eu",
-    "name": "European Union"
-  },
+
   {
     "code": "fi",
     "name": "Finland"
   },
   {
-    "code": "fj",
-    "name": "Fiji"
-  },
-  {
     "code": "fk",
     "name": "Falkland Islands"
-  },
-  {
-    "code": "fm",
-    "name": "Micronesia"
   },
   {
     "code": "fo",
@@ -325,20 +254,8 @@ export const COUNTRIES: Country[] = [
     "name": "Georgia"
   },
   {
-    "code": "gf",
-    "name": "French Guiana"
-  },
-  {
-    "code": "gg",
-    "name": "Guernsey"
-  },
-  {
     "code": "gh",
     "name": "Ghana"
-  },
-  {
-    "code": "gi",
-    "name": "Gibraltar"
   },
   {
     "code": "gl",
@@ -351,10 +268,6 @@ export const COUNTRIES: Country[] = [
   {
     "code": "gn",
     "name": "Guinea"
-  },
-  {
-    "code": "gp",
-    "name": "Guadeloupe"
   },
   {
     "code": "gq",
@@ -373,10 +286,6 @@ export const COUNTRIES: Country[] = [
     "name": "Guatemala"
   },
   {
-    "code": "gu",
-    "name": "Guam"
-  },
-  {
     "code": "gw",
     "name": "Guinea-Bissau"
   },
@@ -387,10 +296,6 @@ export const COUNTRIES: Country[] = [
   {
     "code": "hk",
     "name": "Hong Kong"
-  },
-  {
-    "code": "hm",
-    "name": "Heard Island and McDonald Islands"
   },
   {
     "code": "hn",
@@ -421,16 +326,8 @@ export const COUNTRIES: Country[] = [
     "name": "Israel"
   },
   {
-    "code": "im",
-    "name": "Isle of Man"
-  },
-  {
     "code": "in",
     "name": "India"
-  },
-  {
-    "code": "io",
-    "name": "British Indian Ocean Territory"
   },
   {
     "code": "iq",
@@ -447,10 +344,6 @@ export const COUNTRIES: Country[] = [
   {
     "code": "it",
     "name": "Italy"
-  },
-  {
-    "code": "je",
-    "name": "Jersey"
   },
   {
     "code": "jm",
@@ -477,16 +370,8 @@ export const COUNTRIES: Country[] = [
     "name": "Cambodia"
   },
   {
-    "code": "ki",
-    "name": "Kiribati"
-  },
-  {
     "code": "km",
     "name": "Comoros"
-  },
-  {
-    "code": "kn",
-    "name": "Saint Kitts and Nevis"
   },
   {
     "code": "kp",
@@ -501,10 +386,6 @@ export const COUNTRIES: Country[] = [
     "name": "Kuwait"
   },
   {
-    "code": "ky",
-    "name": "Cayman Islands"
-  },
-  {
     "code": "kz",
     "name": "Kazakhstan"
   },
@@ -515,14 +396,6 @@ export const COUNTRIES: Country[] = [
   {
     "code": "lb",
     "name": "Lebanon"
-  },
-  {
-    "code": "lc",
-    "name": "Saint Lucia"
-  },
-  {
-    "code": "li",
-    "name": "Liechtenstein"
   },
   {
     "code": "lk",
@@ -557,10 +430,6 @@ export const COUNTRIES: Country[] = [
     "name": "Morocco"
   },
   {
-    "code": "mc",
-    "name": "Monaco"
-  },
-  {
     "code": "md",
     "name": "Moldova"
   },
@@ -569,16 +438,8 @@ export const COUNTRIES: Country[] = [
     "name": "Montenegro"
   },
   {
-    "code": "mf",
-    "name": "Saint Martin"
-  },
-  {
     "code": "mg",
     "name": "Madagascar"
-  },
-  {
-    "code": "mh",
-    "name": "Marshall Islands"
   },
   {
     "code": "mk",
@@ -597,36 +458,12 @@ export const COUNTRIES: Country[] = [
     "name": "Mongolia"
   },
   {
-    "code": "mo",
-    "name": "Macau"
-  },
-  {
-    "code": "mp",
-    "name": "Northern Mariana Islands"
-  },
-  {
-    "code": "mq",
-    "name": "Martinique"
-  },
-  {
     "code": "mr",
     "name": "Mauritania"
   },
   {
-    "code": "ms",
-    "name": "Montserrat"
-  },
-  {
     "code": "mt",
     "name": "Malta"
-  },
-  {
-    "code": "mu",
-    "name": "Mauritius"
-  },
-  {
-    "code": "mv",
-    "name": "Maldives"
   },
   {
     "code": "mw",
@@ -669,10 +506,6 @@ export const COUNTRIES: Country[] = [
     "name": "Nicaragua"
   },
   {
-    "code": "nl",
-    "name": "Netherlands"
-  },
-  {
     "code": "no",
     "name": "Norway"
   },
@@ -681,16 +514,8 @@ export const COUNTRIES: Country[] = [
     "name": "Nepal"
   },
   {
-    "code": "nr",
-    "name": "Nauru"
-  },
-  {
     "code": "nu",
     "name": "Niue"
-  },
-  {
-    "code": "nz",
-    "name": "New Zealand"
   },
   {
     "code": "om",
@@ -729,10 +554,6 @@ export const COUNTRIES: Country[] = [
     "name": "Saint Pierre and Miquelon"
   },
   {
-    "code": "pn",
-    "name": "Pitcairn Islands"
-  },
-  {
     "code": "pr",
     "name": "Puerto Rico"
   },
@@ -745,20 +566,12 @@ export const COUNTRIES: Country[] = [
     "name": "Portugal"
   },
   {
-    "code": "pw",
-    "name": "Palau"
-  },
-  {
     "code": "py",
     "name": "Paraguay"
   },
   {
     "code": "qa",
     "name": "Qatar"
-  },
-  {
-    "code": "re",
-    "name": "Réunion"
   },
   {
     "code": "ro",
@@ -785,10 +598,6 @@ export const COUNTRIES: Country[] = [
     "name": "Solomon Islands"
   },
   {
-    "code": "sc",
-    "name": "Seychelles"
-  },
-  {
     "code": "sd",
     "name": "Sudan"
   },
@@ -801,16 +610,8 @@ export const COUNTRIES: Country[] = [
     "name": "Singapore"
   },
   {
-    "code": "sh",
-    "name": "Saint Helena, Ascension and Tristan da Cunha"
-  },
-  {
     "code": "si",
     "name": "Slovenia"
-  },
-  {
-    "code": "sj",
-    "name": "Svalbard and Jan Mayen"
   },
   {
     "code": "sk",
@@ -849,10 +650,6 @@ export const COUNTRIES: Country[] = [
     "name": "El Salvador"
   },
   {
-    "code": "sx",
-    "name": "Sint Maarten"
-  },
-  {
     "code": "sy",
     "name": "Syria"
   },
@@ -869,10 +666,6 @@ export const COUNTRIES: Country[] = [
     "name": "Chad"
   },
   {
-    "code": "tf",
-    "name": "French Southern and Antarctic Lands"
-  },
-  {
     "code": "tg",
     "name": "Togo"
   },
@@ -883,10 +676,6 @@ export const COUNTRIES: Country[] = [
   {
     "code": "tj",
     "name": "Tajikistan"
-  },
-  {
-    "code": "tk",
-    "name": "Tokelau"
   },
   {
     "code": "tl",
@@ -913,14 +702,6 @@ export const COUNTRIES: Country[] = [
     "name": "Trinidad and Tobago"
   },
   {
-    "code": "tv",
-    "name": "Tuvalu"
-  },
-  {
-    "code": "tw",
-    "name": "Taiwan"
-  },
-  {
     "code": "tz",
     "name": "Tanzania"
   },
@@ -933,14 +714,6 @@ export const COUNTRIES: Country[] = [
     "name": "Uganda"
   },
   {
-    "code": "um",
-    "name": "United States Minor Outlying Islands"
-  },
-  {
-    "code": "un",
-    "name": "United Nations"
-  },
-  {
     "code": "us",
     "name": "United States"
   },
@@ -951,10 +724,6 @@ export const COUNTRIES: Country[] = [
   {
     "code": "uz",
     "name": "Uzbekistan"
-  },
-  {
-    "code": "va",
-    "name": "Vatican City (Holy See)"
   },
   {
     "code": "vc",
@@ -989,16 +758,8 @@ export const COUNTRIES: Country[] = [
     "name": "Samoa"
   },
   {
-    "code": "xk",
-    "name": "Kosovo"
-  },
-  {
     "code": "ye",
     "name": "Yemen"
-  },
-  {
-    "code": "yt",
-    "name": "Mayotte"
   },
   {
     "code": "za",
