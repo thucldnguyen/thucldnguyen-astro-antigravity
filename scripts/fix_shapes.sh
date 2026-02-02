@@ -19,7 +19,14 @@ TMP_DIR="$PROJECT_ROOT/tmp_shapes_fix"
 # RU: Islands
 # SE, IS, FI, GL: High latitude projection fix
 # CL: Fix off-center (Easter Island)
-CODES="us fr ru ca es pt no se is fi gl cl"
+# UA: Projection fix (Squashed)
+# PM: Detail fix (Coarse)
+# KM: Detail fix (Coarse)
+# WS: Detail fix (Coarse)
+# CN: Projection fix (Squashed)
+# IE, GB: Projection fix (Squashed)
+# DE: Projection fix (Squashed)
+CODES="us fr ru ca es pt no se is fi gl cl ua pm cn ie gb km de ws"
 
 echo "--- GeoGuru Shape Fixer (Largest Polygon) ---"
 echo "Targets: $CODES"
@@ -48,15 +55,24 @@ for code in $CODES; do
         THRESHOLD=0.001
     elif [ "$code" == "cl" ]; then
         THRESHOLD=0.01
+    elif [ "$code" == "pm" ] || [ "$code" == "ws" ]; then
+        # Saint Pierre and Miquelon (and Samoa) are tiny/split, need detail
+        THRESHOLD=0.1
     fi
     
     node scripts/keep_largest.js "$TMP_DIR/$code.geojson" "$THRESHOLD"
 
     # 3. Mapshaper for Styling only + PROJECTION FIX
     # Use Web Mercator to fix the "squashed" look of high-latitude countries (CA, RU, SE, etc.)
+    # Adjust simplification based on size
+    SIMPLIFY="10%"
+    if [ "$code" == "pm" ] || [ "$code" == "km" ] || [ "$code" == "ws" ]; then
+        SIMPLIFY="100%"
+    fi
+
     mapshaper "$TMP_DIR/$code.geojson" \
         -proj webmercator \
-        -simplify 10% \
+        -simplify "$SIMPLIFY" \
         -style fill='#FFD700' stroke='#000000' stroke-width=6 \
         -o format=svg width=1024 "$TMP_DIR/$code.svg"
         
