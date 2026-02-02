@@ -1,0 +1,57 @@
+---
+import { Image } from "astro:assets";
+
+type Props = {
+    src: string | ImageMetadata;
+    alt: string;
+    class?: string;
+};
+
+const { src, alt, class: className } = Astro.props;
+
+let isVertical = false;
+
+// If src is an import (ImageMetadata), we can check dimensions
+if (typeof src === "object" && "width" in src && "height" in src) {
+    if (src.height > src.width) {
+        isVertical = true;
+    }
+}
+---
+
+{
+    /* 
+    Logic:
+    - If vertical (height > width): Constrain width (max-w-xs or sm) and center. 
+      This prevents phone screenshots from blowing up to full screen width.
+    - If horizontal or unknown: Use full width (standard behavior).
+    */
+}
+
+{
+    isVertical ? (
+        <div class="flex justify-center my-8">
+            <Image
+                src={src}
+                alt={alt}
+                class:list={[
+                    "max-w-[320px] w-full h-auto rounded-xl shadow-lg border border-slate-200 dark:border-slate-700",
+                    className,
+                    "no-lightbox", // Optional: prevent lightbox if we want, but lightbox is usually good. Let's keep lightbox but just style it small in flow.
+                ]}
+            />
+        </div>
+    ) : typeof src === "string" ? (
+        <img
+            src={src}
+            alt={alt}
+            class:list={["w-full h-auto rounded-lg shadow-md my-8", className]}
+        />
+    ) : (
+        <Image
+            src={src}
+            alt={alt}
+            class:list={["w-full h-auto rounded-lg shadow-md my-8", className]}
+        />
+    )
+}

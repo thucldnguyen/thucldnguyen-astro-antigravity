@@ -17,8 +17,10 @@ type Props = CollectionEntry<"blog">;
 
 const post = Astro.props;
 const { Content } = await render(post);
+
+import BlogImage from "../../components/BlogImage.astro";
 ---
 
 <BlogPost {...post.data} body={post.body}>
-	<Content />
+	<Content components={{ img: BlogImage }} />
 </BlogPost>
