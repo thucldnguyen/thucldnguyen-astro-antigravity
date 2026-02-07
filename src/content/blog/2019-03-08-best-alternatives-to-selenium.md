@@ -68,7 +68,7 @@ Tricentis provides wide support for virtually all test activities. They offer cu
 
 * Tosca is easier to adopt by non-technical testers since it’s keyword-driven
 * Comprehensive support for Continuous Testing
-* Supports [Cross Browser Testing](https://thucldnguyen.com/web-automation-testing/cross-browser-testing-still-relevant/)
+* Supports [Cross Browser Testing](/blog/web-automation-testing/cross-browser-testing-still-relevant/)
 * Model-based approach improves productivity
 * Gartner ranked the tool as one of the leaders in their recent automation testing reports
 

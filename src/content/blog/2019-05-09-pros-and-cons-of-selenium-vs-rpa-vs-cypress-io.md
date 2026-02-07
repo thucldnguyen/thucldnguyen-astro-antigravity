@@ -34,7 +34,7 @@ tags: ["Testing", "Selenium", "Cypress", "RPA", "Comparison"]
 
 * **No cross-browser testing:** this is the biggest complaint since it limits your test coverage. You cannot automate other browsers besides Chrome.
 * **No parallel execution:** you can only run one test at a time. The development team doesn’t intend to implement this feature any time soon. They suggest us to parallelize at “operating system level”, aka using Docker containers.
-* **Only one language support:** either you like Javascript or you’re out. This doesn’t bother front-end developers much since they’re JS experts anyways. But for the rest of us who have diverse technical background, this could be a problem. Read more about the hidden traps of Cypress here: [5 Pitfalls You Should Consider Before Adopting Cypress – Thuc Nguyen](https://thucldnguyen.com/web-automation-testing/cypress-pitfalls/)
+* **Only one language support:** either you like Javascript or you’re out. This doesn’t bother front-end developers much since they’re JS experts anyways. But for the rest of us who have diverse technical background, this could be a problem. Read more about the hidden traps of Cypress here: [5 Pitfalls You Should Consider Before Adopting Cypress – Thuc Nguyen](/blog/web-automation-testing/cypress-pitfalls/)
 
 ## UiPath
 
