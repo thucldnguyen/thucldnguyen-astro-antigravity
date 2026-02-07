@@ -23,7 +23,10 @@ const posts = (await getCollection("blog"))
 <!doctype html>
 <html lang="en" class="no-js">
     <head>
-        <BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
+        <BaseHead
+            title="Thuc Nguyen — AI-First Product Manager | AI PM, Agent Workflows, Public Safety Tech, Product Leadership"
+            description={SITE_DESCRIPTION}
+        />
         <!-- Preload LCP image (hero avatar) on homepage -->
         <link rel="preload" as="image" href={ava3.src} />
         <JsonLd
@@ -47,7 +50,7 @@ const posts = (await getCollection("blog"))
                 name: "Thuc Nguyen",
                 url: "https://thucldnguyen.com",
                 image: new URL(ava3.src, "https://thucldnguyen.com").href,
-                jobTitle: "Senior Product Manager",
+                jobTitle: "AI-First Product Manager",
                 worksFor: {
                     "@type": "Organization",
                     name: "Axon",
