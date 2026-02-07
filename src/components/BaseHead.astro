@@ -68,6 +68,7 @@ const {
 <meta name="description" content={description} />
 
 <script is:inline>
+	document.documentElement.classList.remove("no-js");
 	function applyTheme() {
 		if (
 			localStorage.getItem("color-theme") === "dark" ||

@@ -8,7 +8,7 @@ heroImage: ../../assets/seo-optimization.png
 tags: ["AI", "Agent UX", "SEO"]
 ---
 
-Last week I was inspired by an [A16Z podcast](https://podcasts.apple.com/vn/podcast/anyone-can-code-now-netlify-ceo-talks-ai-agents/id842818711?i=1000747336451) where Matt Biilmann, the CEO of Netlify, shared about the concept of "Agent UX" and how Netlify is optimizing for both coding agents as well as user agents.
+I stumbled upon an [A16Z podcast](https://podcasts.apple.com/vn/podcast/anyone-can-code-now-netlify-ceo-talks-ai-agents/id842818711?i=1000747336451) where Matt Biilmann, the CEO of Netlify, shared about the concept of "Agent UX" and how Netlify is optimizing for both coding agents as well as user agents.
 
 It dawned on me that I can do the same Agent UX optimization for my personal site. 
 

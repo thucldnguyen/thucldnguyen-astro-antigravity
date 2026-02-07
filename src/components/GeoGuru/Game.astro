@@ -1,5 +1,6 @@
 ---
-
+import { Image } from "astro:assets";
+import geoGuruImg from "../../assets/GeoGuru.png";
 ---
 
 <div
@@ -97,11 +98,21 @@
 
     <!-- SCREENS -->
     <div
-        class="relative flex-1 p-6 flex flex-col items-center justify-center z-10 bg-cover bg-center"
-        style="background-image: url('/assets/geoguru/GeoGuru.png');"
+        class="relative flex-1 p-6 flex flex-col items-center justify-center z-10"
     >
-        <!-- Overlay for readability (very light) -->
-        <div class="absolute inset-0 bg-white/10 dark:bg-slate-900/40 z-0">
+        <!-- Optimized Background Image -->
+        <div class="absolute inset-0 z-0">
+            <Image
+                src={geoGuruImg}
+                alt="GeoGuru Game Background"
+                class="w-full h-full object-cover"
+                width={1200}
+                quality={80}
+                loading="eager"
+            />
+            <!-- Overlay for readability (very light) -->
+            <div class="absolute inset-0 bg-white/10 dark:bg-slate-900/40 z-10">
+            </div>
         </div>
         <!-- INTRO SCREEN -->
         <div
