@@ -33,7 +33,12 @@ const {
 <meta name="viewport" content="width=device-width,initial-scale=1" />
 <link rel="icon" type="image/png" href={favicon.src} />
 <link rel="sitemap" href="/sitemap-index.xml" />
-<link rel="alternate" type="text/plain" title="LLM-friendly content" href="/llms.txt" />
+<link
+	rel="alternate"
+	type="text/plain"
+	title="LLM-friendly content"
+	href="/llms.txt"
+/>
 <link
 	rel="alternate"
 	type="application/rss+xml"
@@ -66,6 +71,10 @@ const {
 <title>{title}</title>
 <meta name="title" content={title} />
 <meta name="description" content={description} />
+<meta
+	name="google-site-verification"
+	content="Ktnkc0KXKUQoo8PpEAU0Zyrub6dCY01Us79CMkiswzA"
+/>
 
 <script is:inline>
 	document.documentElement.classList.remove("no-js");
@@ -85,21 +94,25 @@ const {
 </script>
 
 <script is:inline>
-	if (!localStorage.getItem('sw-cleaned')) {
-		var cleanup = function() {
-			if ('serviceWorker' in navigator) {
-				navigator.serviceWorker.getRegistrations().then(function(regs) {
-					for (var i = 0; i < regs.length; i++) regs[i].unregister();
+	if (!localStorage.getItem("sw-cleaned")) {
+		var cleanup = function () {
+			if ("serviceWorker" in navigator) {
+				navigator.serviceWorker
+					.getRegistrations()
+					.then(function (regs) {
+						for (var i = 0; i < regs.length; i++)
+							regs[i].unregister();
+					});
+			}
+			if ("caches" in window) {
+				caches.keys().then(function (names) {
+					for (var i = 0; i < names.length; i++)
+						caches.delete(names[i]);
 				});
 			}
-			if ('caches' in window) {
-				caches.keys().then(function(names) {
-					for (var i = 0; i < names.length; i++) caches.delete(names[i]);
-				});
-			}
-			localStorage.setItem('sw-cleaned', '1');
+			localStorage.setItem("sw-cleaned", "1");
 		};
-		if ('requestIdleCallback' in window) {
+		if ("requestIdleCallback" in window) {
 			requestIdleCallback(cleanup);
 		} else {
 			setTimeout(cleanup, 2000);
