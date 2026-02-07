@@ -16,6 +16,7 @@ Google still matters. But increasingly, people are getting answers from ChatGPT,
 
 So I spent an afternoon fixing that. Here's what I did and why.
 
+---
 ## The problem: invisible to AI search
 
 Traditional SEO optimizes for Google's crawler — keywords, backlinks, meta descriptions, page speed. That still matters.
@@ -28,6 +29,7 @@ But AI search engines like ChatGPT work differently. They don't rank pages. They
 
 Most personal sites fail on all three counts. Mine did too.
 
+---
 ## What I changed (in one afternoon)
 
 ### 1. Welcomed AI crawlers explicitly
@@ -68,6 +70,7 @@ A legacy service worker cleanup script was running on every single page load —
 
 I wrapped it in a `localStorage` guard so it runs once and never again. Small fix, but page reload loops are the kind of thing that makes both users and crawlers give up on your site.
 
+---
 ## Why PMs should care about this
 
 If you're a product manager building a personal brand, your site is your product. And like any product, you need to understand your distribution channels.
@@ -76,6 +79,7 @@ The distribution channel for professional visibility is shifting from "Google ra
 
 The bar to get started is surprisingly low. You don't need to be a frontend engineer. I built my site with Astro (a static site generator), host it for free on Netlify, and made all the SEO changes described above in a single morning using Claude Code. The total cost was zero dollars and about two hours of focused work.
 
+---
 ## The AI-first PM pattern
 
 This is the same pattern from my [AI-first PM workflow](/blog/ai-first-pm): identify work that a human shouldn't be doing manually, then design a system where AI handles it.
