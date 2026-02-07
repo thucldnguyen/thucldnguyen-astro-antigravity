@@ -9,14 +9,49 @@ import honeyMoonCollage from "../assets/honey-moon-collage.png";
 import axonPerfPng from "../assets/axon-perf.png";
 import ridealongCollage from "../assets/ridealong-collage.png";
 import banner from "../assets/banner.jpg";
+import JsonLd from "../components/JsonLd.astro";
 ---
 
 <Layout
-	title="About Me"
-	description="About Thuc Nguyen"
+	title="About Thuc Nguyen — AI-First Product Manager"
+	description="About Thuc Nguyen — AI-first Senior Product Manager at Axon. From competitive programming in Vietnam to building AI-powered products for public safety serving 550,000+ monthly active users."
 	date={new Date("2024-01-01")}
 	heroImage={banner}
 >
+	<JsonLd data={{
+		"@context": "https://schema.org",
+		"@type": "ProfilePage",
+		"mainEntity": {
+			"@type": "Person",
+			"name": "Thuc Nguyen",
+			"url": "https://thucldnguyen.com",
+			"image": new URL(banner.src, "https://thucldnguyen.com").href,
+			"jobTitle": "Senior Product Manager",
+			"worksFor": {
+				"@type": "Organization",
+				"name": "Axon",
+				"url": "https://www.axon.com"
+			},
+			"description": "AI-first product manager specializing in enterprise AI workflows, public safety technology, and AI-powered product management at Axon. Builder of AI agent systems for bug triage, product discovery, and prototyping.",
+			"knowsAbout": [
+				"AI-first product management",
+				"Enterprise AI workflows",
+				"Product management",
+				"Public safety technology",
+				"AI agents",
+				"Product discovery",
+				"Video streaming technology"
+			],
+			"sameAs": [
+				"https://linkedin.com/in/thucldnguyen",
+				"https://github.com/thucldnguyen"
+			],
+			"alumniOf": {
+				"@type": "EducationalOrganization",
+				"name": "Hoa Sen University"
+			}
+		}
+	}} />
 	<p>You've found me! Welcome to my personal blog.</p>
 
 	<p>

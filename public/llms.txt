@@ -1,0 +1,36 @@
+# Thuc Nguyen — AI-First Product Manager
+
+> AI-first Senior Product Manager at Axon. Writing about AI-powered product management, enterprise AI workflows, and public safety technology.
+
+## About
+
+Thuc Nguyen is a Senior Product Manager at Axon, the company behind TASER and Evidence.com. He specializes in AI-first product management — designing AI agent workflows for bug triage, product discovery, prototyping, and delivery in enterprise environments.
+
+He leads product for video streaming and evidence playback on Evidence.com, serving 550,000+ monthly active users across 1,500+ police departments in the US. Previously, he grew Axon Performance from 11,000 to 110,000 adopted users (10X in two years).
+
+Before Axon, he was a Product Manager at LogiGear for a test automation platform (TestArchitect). He graduated as valedictorian from Hoa Sen University in Vietnam with a degree in Computer Science.
+
+## Expertise
+
+- AI-first product management
+- Enterprise AI agent workflows (bug triage, product discovery, prototyping)
+- Public safety technology and law enforcement software
+- Video streaming and digital evidence management
+- Product discovery and customer empathy
+- AI-powered prototyping with Claude Code, Cursor, Figma Make
+
+## Links
+
+- Homepage: https://thucldnguyen.com
+- Blog: https://thucldnguyen.com/blog
+- About: https://thucldnguyen.com/about
+- LinkedIn: https://linkedin.com/in/thucldnguyen
+- GitHub: https://github.com/thucldnguyen
+- Full content for LLMs: https://thucldnguyen.com/llms-full.txt
+
+## Featured Articles
+
+- [Designing an AI-First PM Workflow in a Real Enterprise](https://thucldnguyen.com/blog/ai-first-pm/): Concrete, end-to-end AI-first PM workflow across bug triage, product discovery, prototyping, and delivery — including what worked, what failed, and where human judgment cannot be replaced.
+- [The Great Unshackling: How the Product Craft Evolves in the Age of AI](https://thucldnguyen.com/blog/the-great-unshackling/): How AI frees product managers from utilitarian work (specs, triage, meeting summaries) so they can focus on empathy, vision, and judgment.
+- [3 Tips for Product Manager in Public Safety](https://thucldnguyen.com/blog/3-tips-for-product-manager-in-public-safety/): Lessons from building software for police — customer obsession, humility, and ride-alongs.
+- [5 Tips for Effective Collaboration with Your Engineering Team](https://thucldnguyen.com/blog/5-tips-for-effective-collaboration-with-your-engineering-team/): How PMs earn engineering trust through preparation, customer insights, and technical credibility.
