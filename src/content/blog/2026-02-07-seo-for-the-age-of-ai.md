@@ -77,7 +77,7 @@ If you're a product manager building a personal brand, your site is your product
 
 The distribution channel for professional visibility is shifting from "Google ranks your page" to "ChatGPT cites you as a source." This isn't hypothetical — it's happening now. When a hiring manager asks ChatGPT *"Who writes about AI product management?"*, you either show up or you don't.
 
-The bar to get started is surprisingly low. You don't need to be a frontend engineer. I built my site with Astro (a static site generator), host it for free on Netlify, and made all the SEO changes described above in a single morning using Claude Code. The total cost was zero dollars and about two hours of focused work.
+The bar to get started is surprisingly low. You don't need to be a frontend engineer. I made all the SEO changes described above and verified with Google Search Console as well as ChatGPT in a single afternoon using Claude Code and Cursor. The total cost was zero dollars and about two hours of focused work.
 
 ---
 ## The AI-first PM pattern
@@ -86,7 +86,7 @@ This is the same pattern from my [AI-first PM workflow](/blog/ai-first-pm): iden
 
 Writing JSON-LD by hand? Tedious. Figuring out which AI crawlers exist and their exact `User-agent` strings? Annoying. Generating a plain-text version of your entire blog for LLM consumption? Nobody wants to maintain that.
 
-But describing *what you want* to an AI coding tool and letting it execute? That's a morning project.
+But describing *what you want* to an AI coding tool and letting it execute? That's an afternoon project.
 
 The meta lesson: **the same AI-first mindset that makes you a better PM also makes you more visible to the AI systems that are increasingly deciding who gets discovered.**
 
