@@ -26,45 +26,51 @@ const posts = (await getCollection("blog"))
         <BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
         <!-- Preload LCP image (hero avatar) on homepage -->
         <link rel="preload" as="image" href={ava3.src} />
-        <JsonLd data={{
-            "@context": "https://schema.org",
-            "@type": "WebSite",
-            "name": "Thuc Nguyen",
-            "url": "https://thucldnguyen.com",
-            "description": "AI-first Senior Product Manager at Axon. Writing about AI-powered product management, enterprise workflows, and public safety technology.",
-            "author": {
+        <JsonLd
+            data={{
+                "@context": "https://schema.org",
+                "@type": "WebSite",
+                name: "Thuc Nguyen",
+                url: "https://thucldnguyen.com",
+                description:
+                    "AI-first Senior Product Manager at Axon. Writing about AI-powered product management, enterprise workflows, and public safety technology.",
+                author: {
+                    "@type": "Person",
+                    name: "Thuc Nguyen",
+                },
+            }}
+        />
+        <JsonLd
+            data={{
+                "@context": "https://schema.org",
                 "@type": "Person",
-                "name": "Thuc Nguyen"
-            }
-        }} />
-        <JsonLd data={{
-            "@context": "https://schema.org",
-            "@type": "Person",
-            "name": "Thuc Nguyen",
-            "url": "https://thucldnguyen.com",
-            "image": new URL(ava3.src, "https://thucldnguyen.com").href,
-            "jobTitle": "Senior Product Manager",
-            "worksFor": {
-                "@type": "Organization",
-                "name": "Axon",
-                "url": "https://www.axon.com"
-            },
-            "description": "AI-first product manager specializing in enterprise AI workflows, public safety technology, and AI-powered product management. Senior PM at Axon building products for 550,000+ monthly active users.",
-            "knowsAbout": [
-                "AI-first product management",
-                "Enterprise AI workflows",
-                "Product management",
-                "Public safety technology",
-                "AI agents",
-                "Product discovery",
-                "Video streaming technology",
-                "Evidence management"
-            ],
-            "sameAs": [
-                "https://linkedin.com/in/thucldnguyen",
-                "https://github.com/thucldnguyen"
-            ]
-        }} />
+                name: "Thuc Nguyen",
+                url: "https://thucldnguyen.com",
+                image: new URL(ava3.src, "https://thucldnguyen.com").href,
+                jobTitle: "Senior Product Manager",
+                worksFor: {
+                    "@type": "Organization",
+                    name: "Axon",
+                    url: "https://www.axon.com",
+                },
+                description:
+                    "AI-first product manager specializing in enterprise AI workflows, public safety technology, and AI-powered product management. Senior PM at Axon building products for 550,000+ monthly active users.",
+                knowsAbout: [
+                    "AI-first product management",
+                    "Enterprise AI workflows",
+                    "Product management",
+                    "Public safety technology",
+                    "AI agents",
+                    "Product discovery",
+                    "Video streaming technology",
+                    "Evidence management",
+                ],
+                sameAs: [
+                    "https://linkedin.com/in/thucldnguyen",
+                    "https://github.com/thucldnguyen",
+                ],
+            }}
+        />
     </head>
     <body
         class="bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-slate-100 transition-colors duration-300"
@@ -94,18 +100,19 @@ const posts = (await getCollection("blog"))
                             AI-First Product Manager &middot; Senior PM at Axon
                         </p>
                         <p
-                            class="text-sm text-slate-500 dark:text-slate-500 italic mb-6"
-                        >
-                            a.k.a. The Minimum Viable Dad
-                        </p>
-                        <p
                             class="text-lg text-slate-700 dark:text-slate-300 leading-relaxed max-w-2xl mb-8"
                         >
-                            Hey hey, welcome to my personal blog! I'm <strong>Thuc Nguyen</strong>,
-                            a Senior Product Manager at <a href="https://www.axon.com" class="text-violet-600 dark:text-violet-400 hover:underline">Axon</a>
-                            and an <strong>AI-first product manager</strong> who builds AI agent
-                            workflows for enterprise product management. I write about AI-powered
-                            PM workflows, public safety tech, and being a proud dad of two.
+                            Hey hey, welcome to my personal blog! I'm <strong
+                                >Thuc Nguyen</strong
+                            >, a Senior Product Manager at <a
+                                href="https://www.axon.com"
+                                class="text-violet-600 dark:text-violet-400 hover:underline"
+                                >Axon</a
+                            >
+                            and an <strong>AI-first product manager</strong> who builds
+                            AI agent workflows for enterprise product management.
+                            I write about AI-powered PM workflows, public safety tech,
+                            and being a proud dad of two.
                         </p>
                         <div class="flex gap-4">
                             <a
