@@ -15,7 +15,7 @@ import keystatic from '@keystatic/astro';
 // https://astro.build/config
 export default defineConfig({
   site: 'https://thucldnguyen.com',
-  output: 'static', // Static by default, Keystatic routes handled separately
+  output: 'static', // Static by default, Keystatic routes handled by adapter
   integrations: [mdx({
     rehypePlugins: [rehypeLazyImg],
   }), sitemap(), react(), markdoc(), keystatic()],

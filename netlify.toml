@@ -2,6 +2,11 @@
   command = "npm run build"
   publish = "dist"
 
+# Disable Netlify's automatic image optimization
+# Let Astro handle all image processing
+[images]
+  remote_images = []
+
 # Default: short cache for HTML pages (later rules override for specific paths)
 [[headers]]
   for = "/*"
