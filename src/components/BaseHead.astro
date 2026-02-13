@@ -105,13 +105,20 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 </script>
 
 <script is:inline>
+	// Kill any old service worker (e.g. Gatsby) and clear all caches.
 	if ("serviceWorker" in navigator) {
+		// 1. Unregister all service workers directly
 		navigator.serviceWorker.getRegistrations().then(function (regs) {
-			if (regs.length > 0) {
-				navigator.serviceWorker.register("/sw.js").then(function (reg) {
-					reg.update();
-				});
-			}
+			regs.forEach(function (reg) { reg.unregister(); });
+		});
+		// 2. Also register our kill-switch SW to replace any SW the browser
+		//    re-activates from its own cache before our unregister takes effect
+		navigator.serviceWorker.register("/sw.js");
+	}
+	// 3. Nuke CacheStorage (Gatsby's workbox caches)
+	if ("caches" in window) {
+		caches.keys().then(function (names) {
+			names.forEach(function (name) { caches.delete(name); });
 		});
 	}
 </script>
