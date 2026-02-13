@@ -199,11 +199,13 @@ export default function CommentSection({ thoughtId }: Props) {
     return (
         <>
             {/* Comment List - Part of the main thought card */}
-            <CommentList thoughtId={thoughtId} comments={comments} isLoading={isLoading} />
+            <div className="mt-12">
+                <CommentList thoughtId={thoughtId} comments={comments} isLoading={isLoading} />
+            </div>
 
-            {/* Comment Form - Separate card below */}
-            <div className="glass-comment-card mt-6">
-                <h3 className="text-xl font-bold text-slate-900 dark:text-white mb-4">
+            {/* Comment Form - Separate card below with clear visual separation */}
+            <div className="glass-comment-card mt-8">
+                <h3 className="text-xl font-bold text-slate-900 dark:text-white mb-6">
                     ✍️ Leave a Comment
                 </h3>
                 <form onSubmit={handleSubmit}>

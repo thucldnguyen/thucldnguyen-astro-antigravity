@@ -89,9 +89,7 @@ const pageDescription = content.substring(0, 160);
                     <ReactionButtons client:load thoughtId={thought.id} />
                 </div>
 
-                <div class="mt-12">
-                    <CommentSection client:load thoughtId={thought.id} />
-                </div>
+                <CommentSection client:load thoughtId={thought.id} />
             </article>
         </main>
 
