@@ -30,9 +30,10 @@ The problem? They'd diverged:
 
 Each variant's `App.tsx` alone was ~1,500 lines. Manually syncing them would take 4-6 hours.
 
-**A bit about my workflow**: I have a CS background but started my career as a PM—I've never pushed code to production. I used to have a designer who handled prototypes, but the process was painfully slow—every iteration had to pass a "design committee." Asking engineers to build throwaway prototypes was a non-starter. Now? I ship 4 production-quality variants in the time it used to take to schedule the first design review.
+**A bit about my workflow**: I have a CS background but started my career as a PM. I used to have a designer who handled prototypes, but the process was painfully slow—every iteration had to pass a "design committee." Asking engineers to build throwaway prototypes was a non-starter. Now? I ship 4 production-quality variants in the time it used to take to schedule the first design review.
 
 ![Multicam variant A](../../assets/variant-a.png)
+*Variant A uses a classic 3-panel layout: Library (left) | Grid+Timeline (center) | Metadata (right). This layout optimizes for investigators who need constant access to metadata while building their multicam view—perfect for detailed case review where context switching is expensive.*
 
 The traditional approach? Pick one variant, manually diff the others, copy-paste code, test each one. Estimated time: 4-6 hours of tedious, error-prone work.
 
@@ -70,6 +71,7 @@ All four agents launched simultaneously. No sequential startup delay.
 **The QA Tester finished first** (30 seconds)—Haiku's speed advantage on read-only tasks. It immediately flagged a critical bug: Variant C was passing `demoEvents` (all events, unfiltered) instead of `activeEvents` (filtered by currently loaded videos). This one-line bug would've shown users events from videos they hadn't even loaded—a production-breaking oversight.
 
 ![Multicam variant C](../../assets/variant-c.png)
+*Variant C takes a horizontal split approach: Library and Grid sit side-by-side at the top, with a full-width Timeline below, similar to professional video editing software like iMovie and CapCut. This layout is designed for users who prioritize reconstructing the sequence of events chronologically. The main trade-off is that the metadata panel is hidden by default, requiring an extra click to access—ideal for users who want to focus on the timeline first and only dive into metadata when needed.*
 
 Dev3 also spotted this discrepancy, but framed it as a code difference rather than a behavioral bug. The QA Tester's behavior-first lens made it immediately actionable.
 
@@ -108,6 +110,7 @@ Developers worked in parallel. Every decision was logged:
 No—**accidental peer review**. Dev2 arrived second and verified Dev1's implementation: build passed, all 3 tabs worked, layout preserved. A race condition turned into a quality gate.
 
 ![Multicam variant B](../../assets/variant-b.png)
+*Variant B mirrors Variant A's structure but with unique behaviors (drag-dropping videos to the video grid instead of toggling each video on/off via Eye icons) and component implementations and a 6-tab support pane. This variant tests whether power users prefer more granular control panels (separate tabs for different metadata types) versus Variant A's consolidated metadata view.*
 
 ### Phase 4: QA Verification (60 seconds)
 
@@ -123,16 +126,15 @@ The mission was complete. Here's how it stacked up:
 
 ## The Numbers That Matter
 
-| Metric                  | Value              |
-| ----------------------- | ------------------ |
-| **Wall clock time**     | 22 minutes         |
-| **Estimated solo time** | 4-6 hours          |
-| **Speedup**             | ~12x               |
-| **Total tokens**        | ~1.9M              |
-| **Estimated cost**      | $15-25             |
-| **Files modified**      | 8 (across B, C, D) |
-| **Build failures**      | 0                  |
-| **Merge conflicts**     | 0                  |
+| Metric                  | Value      |
+| ----------------------- | ---------- |
+| **Wall clock time**     | 22 minutes |
+| **Estimated solo time** | 4-6 hours  |
+| **Speedup**             | ~12x       |
+| **Total tokens**        | ~1.9M      |
+| **Estimated cost**      | $15-25     |
+| **Build failures**      | 0          |
+| **Merge conflicts**     | 0          |
 
 #### Cost Breakdown Surprises
 
