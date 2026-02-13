@@ -76,7 +76,7 @@ export default function CommentForm({ thoughtId, onCommentAdded }: Props) {
     };
 
     return (
-        <div className="glass-comment-card">
+        <div className="glass-comment-card mt-8">
             <h3 className="text-xl font-bold text-slate-900 dark:text-white mb-6">
                 ✍️ Leave a Comment
             </h3>

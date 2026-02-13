@@ -93,14 +93,12 @@ const pageDescription = content.substring(0, 160);
                 <CommentSection client:load thoughtId={thought.id} />
             </article>
 
-            <!-- Comment Form - Separate card outside article -->
-            <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 pb-12">
-                <CommentForm
-                    client:load
-                    thoughtId={thought.id}
-                    onCommentAdded={() => window.location.reload()}
-                />
-            </div>
+            <!-- Comment Form - Separate card below article -->
+            <CommentForm
+                client:load
+                thoughtId={thought.id}
+                onCommentAdded={() => window.location.reload()}
+            />
         </main>
 
         <Footer />
