@@ -69,6 +69,8 @@ All four agents launched simultaneously. No sequential startup delay.
 
 **The QA Tester finished first** (30 seconds)—Haiku's speed advantage on read-only tasks. It immediately flagged a critical bug: Variant C was passing `demoEvents` (all events, unfiltered) instead of `activeEvents` (filtered by currently loaded videos). This one-line bug would've shown users events from videos they hadn't even loaded—a production-breaking oversight.
 
+![Multicam variant C](../../assets/variant-c.png)
+
 Dev3 also spotted this discrepancy, but framed it as a code difference rather than a behavioral bug. The QA Tester's behavior-first lens made it immediately actionable.
 
 **Dev3 produced a comparison table** instead of two separate reports. This single decision saved 10+ minutes of manual diffing. The Dev Lead's gap matrix was essentially a merge of Dev3's table with the other reports.
@@ -104,6 +106,8 @@ Developers worked in parallel. Every decision was logged:
 **An unexpected collision happened**: Dev1 autonomously picked up Task #15 (add metadata tabs to Variant D) while Dev2 was being reassigned to it. Duplicate work?
 
 No—**accidental peer review**. Dev2 arrived second and verified Dev1's implementation: build passed, all 3 tabs worked, layout preserved. A race condition turned into a quality gate.
+
+![Multicam variant B](../../assets/variant-b.png)
 
 ### Phase 4: QA Verification (60 seconds)
 
@@ -254,7 +258,8 @@ If you're a PM who thinks AI is just ChatGPT for writing PRDs, you're already be
 3. Instrument workflows with verification gates
 4. Treat AI as a team, not a tool
 
-> NOTE: Be mindful about the token consumption as agent teams can burn millions of tokens in a single session. Always monitor the token usage and optimize the workflow to reduce unnecessary token consumption. I spent 100M tokens (approx $500) in one previous session (12-Feb-2026) due to a "UX Expert" agent that ate up millions of tokens just to answer design system questions via a Figma MCP. Better optimize visuals in a separate session outside of the team session.
+> NOTE: Be mindful about token consumption as agent teams can burn millions of tokens in a single session. Always monitor the token usage and optimize the workflow to reduce unnecessary token consumption. I spent 100M tokens (approx $500) in one previous session (12-Feb-2026) due to a "UX Expert" agent that ate up too many tokens just to answer design system questions via a Figma MCP. Better optimize visuals in a separate session outside of the team session.
+
 ![Token usage: 100M tokens](../../assets/token-usage.png)
 
 ---
