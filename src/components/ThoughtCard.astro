@@ -68,8 +68,15 @@ const contentWithLinks = content.replace(
         padding: 1rem;
         transition: all 0.3s ease;
         height: 100%;
+        min-height: 400px;
         display: flex;
         flex-direction: column;
+    }
+
+    .thought-card > a {
+        display: flex;
+        flex-direction: column;
+        flex: 1;
     }
 
     .thought-card:hover {
