@@ -7,6 +7,7 @@ import Footer from "../../components/Footer.astro";
 import FormattedDate from "../../components/FormattedDate.astro";
 import ReactionButtons from "../../components/ReactionButtons";
 import CommentSection from "../../components/CommentSection";
+import CommentForm from "../../components/CommentForm";
 import { SITE_TITLE } from "../../consts";
 
 export async function getStaticPaths() {
@@ -91,6 +92,15 @@ const pageDescription = content.substring(0, 160);
 
                 <CommentSection client:load thoughtId={thought.id} />
             </article>
+
+            <!-- Comment Form - Separate card outside article -->
+            <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 pb-12">
+                <CommentForm
+                    client:load
+                    thoughtId={thought.id}
+                    onCommentAdded={() => window.location.reload()}
+                />
+            </div>
         </main>
 
         <Footer />
