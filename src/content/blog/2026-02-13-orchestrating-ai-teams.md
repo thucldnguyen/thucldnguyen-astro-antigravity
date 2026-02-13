@@ -20,7 +20,7 @@ That's what happened when I stopped treating AI as a chatbot and started treatin
 
 ## The Problem: Feature Parity Across 4 Design Variants
 
-I was building a multicam evidence review tool—think body camera footage synced with CCTV and dashcam feeds. To validate different UX approaches with customers, I created four design variants (A, B, C, D), each with ~9,000 lines of React code.
+I was building a multicam evidence review tool - think body camera footage synced with CCTV and dashcam feeds. To validate different UX approaches with customers, I created four design variants (A, B, C, D), each with ~9,000 lines of React code.
 
 The problem? They'd diverged:
 - **Variant A**: All 10 features working
