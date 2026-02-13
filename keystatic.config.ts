@@ -3,12 +3,10 @@ import { config, fields, collection } from '@keystatic/core';
 export default config({
   storage: import.meta.env.DEV
     ? { kind: 'local' }
-    : {
-      kind: 'github',
-      repo: 'thucldnguyen/thucldnguyen-astro-antigravity',
-    },
-  // GitHub App credentials (set in Netlify environment variables)
-  // KEYSTATIC_GITHUB_CLIENT_ID and KEYSTATIC_GITHUB_CLIENT_SECRET
+    : { kind: 'cloud' },
+  cloud: {
+    project: 'thucldnguyen/thucldnguyen-astro',
+  },
   collections: {
     blog: collection({
       label: 'Blog Posts',
