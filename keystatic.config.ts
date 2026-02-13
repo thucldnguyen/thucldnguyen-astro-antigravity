@@ -38,7 +38,6 @@ export default config({
       label: 'Thoughts',
       slugField: 'title',
       path: 'src/content/thoughts/*',
-      format: { contentField: 'content' },
       schema: {
         title: fields.slug({
           name: {
