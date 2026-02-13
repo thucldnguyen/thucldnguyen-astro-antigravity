@@ -1,22 +1,26 @@
 ---
 template: blog-post
-title: "I Orchestrated 5 AI Agents to Refactor My Codebase in 22 Minutes"
+title: "Orchestrating Claude Agent Team to Refactor My Codebase in 22 Minutes"
 slug: /blog/orchestrating-ai-teams
 date: 2026-02-13 12:00
 description: "How I used Claude Teams to achieve 4x speedup on a complex multi-variant feature parity task—and what it taught me about the future of product development."
-heroImage: ../../assets/orchestrate-ai-teams.png
+heroImage: ../../assets/orchestrate-ai.png
 tags: ["Claude Agent Teams", "AI", "Product Management"]
 ---
 
 **22 minutes. 4 codebases. 1.9 million tokens. Zero questions asked.**
 
-That's what happened when I stopped treating AI as a chatbot and started treating it as a team.
+That's what happened when I stopped treating AI as a chatbot and started treating it as an Agentic team.
+
+![Orchestrate 5 AI agents](../../assets/orchestrate-ai-teams.png)
 
 ---
 
 ## The Problem: Feature Parity Across 4 Design Variants
 
 I was building a multicam evidence review tool—think body camera footage synced with CCTV and dashcam feeds. I had four design variants (A, B, C, D) with different layouts for customer validation. Each variant had ~1,500 lines of React code, and they'd diverged: Variant A had all 10 features, but B was missing search, C had broken event filtering, and D lacked metadata tabs.
+
+![Multicam variant A](../../assets/variant-a.png)
 
 The traditional approach? Pick one variant, manually diff the others, copy-paste code, test each one. Estimated time: 4-6 hours of tedious, error-prone work.
 
@@ -172,7 +176,4 @@ The magic isn't in the tool. It's in the **orchestration**.
 
 ---
 
-**Want the full mission brief and agent transcripts?** I've open-sourced the entire setup. [Link to repo coming soon.]
-
 **Questions? Challenges? Want to collaborate?** I'm always up for talking about agentic AI, product development, and the weird future we're building. Let's connect.
-
