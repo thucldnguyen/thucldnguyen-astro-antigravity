@@ -1,0 +1,122 @@
+---
+import type { CollectionEntry } from "astro:content";
+import FormattedDate from "./FormattedDate.astro";
+
+interface Props {
+    thought: CollectionEntry<"thoughts">;
+    showFullContent?: boolean;
+}
+
+const { thought, showFullContent = true } = Astro.props;
+const { title, content, image, publishedAt } = thought.data;
+const thoughtUrl = `/thoughts/${thought.id}`;
+
+// Auto-detect links in content
+const contentWithLinks = content.replace(
+    /(https?:\/\/[^\s]+)/g,
+    '<a href="$1" target="_blank" rel="noopener noreferrer" class="text-violet-600 dark:text-violet-400 hover:underline">$1</a>',
+);
+---
+
+<article class="thought-card glass-card">
+    <a href={thoughtUrl} class="block">
+        <div class="thought-content">
+            <p
+                class="text-slate-800 dark:text-slate-200 text-base leading-relaxed whitespace-pre-wrap line-clamp-4"
+                set:html={contentWithLinks}
+            />
+        </div>
+
+        {
+            image && (
+                <div class="thought-image mt-3">
+                    <img
+                        src={image}
+                        alt=""
+                        class="rounded-lg w-full object-cover max-h-48"
+                        loading="lazy"
+                    />
+                </div>
+            )
+        }
+    </a>
+
+    <div
+        class="thought-meta mt-3 flex items-center justify-between text-xs text-slate-500 dark:text-slate-400"
+    >
+        <FormattedDate date={publishedAt} />
+        <a
+            href={thoughtUrl}
+            class="hover:text-violet-600 dark:hover:text-violet-400 transition-colors"
+        >
+            💬 View
+        </a>
+    </div>
+</article>
+
+<style>
+    .thought-card {
+        background: rgba(255, 255, 255, 0.85);
+        border: 1px solid rgba(255, 255, 255, 0.3);
+        border-radius: 16px;
+        box-shadow:
+            0 10px 15px -3px rgba(0, 0, 0, 0.05),
+            0 4px 6px -2px rgba(0, 0, 0, 0.02);
+        padding: 1rem;
+        transition: all 0.3s ease;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .thought-card:hover {
+        transform: translateY(-2px);
+        box-shadow:
+            0 20px 25px -5px rgba(0, 0, 0, 0.1),
+            0 10px 10px -5px rgba(0, 0, 0, 0.04);
+    }
+
+    :global(.dark) .thought-card {
+        background: rgba(30, 41, 59, 0.85);
+        border: 1px solid rgba(255, 255, 255, 0.15);
+        box-shadow:
+            0 20px 25px -5px rgba(0, 0, 0, 0.2),
+            0 10px 10px -5px rgba(0, 0, 0, 0.1);
+    }
+
+    @media (min-width: 640px) {
+        .thought-card {
+            padding: 1.25rem;
+        }
+
+        @supports (backdrop-filter: blur(12px)) or
+            (-webkit-backdrop-filter: blur(12px)) {
+            .thought-card {
+                background: rgba(255, 255, 255, 0.25);
+                backdrop-filter: blur(12px) saturate(110%);
+                -webkit-backdrop-filter: blur(12px) saturate(110%);
+            }
+
+            :global(.dark) .thought-card {
+                background: rgba(15, 23, 42, 0.3);
+                border: 1px solid rgba(255, 255, 255, 0.2);
+                box-shadow:
+                    0 25px 50px -12px rgba(0, 0, 0, 0.5),
+                    inset 0 1px 1px rgba(255, 255, 255, 0.1);
+            }
+        }
+    }
+
+    .thought-content {
+        word-wrap: break-word;
+        overflow-wrap: break-word;
+    }
+
+    .thought-image img {
+        transition: transform 0.3s ease;
+    }
+
+    .thought-card:hover .thought-image img {
+        transform: scale(1.02);
+    }
+</style>

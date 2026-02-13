@@ -32,5 +32,33 @@ export default config({
         }),
       },
     }),
+    thoughts: collection({
+      label: 'Thoughts',
+      slugField: 'title',
+      path: 'src/content/thoughts/*',
+      format: { contentField: 'content' },
+      schema: {
+        title: fields.slug({
+          name: {
+            label: 'Title',
+            description: 'Auto-generated from content, or customize'
+          }
+        }),
+        content: fields.text({
+          label: 'What\'s on your mind?',
+          multiline: true,
+          validation: { length: { max: 500 } }
+        }),
+        image: fields.image({
+          label: 'Image (optional)',
+          directory: 'public/images/thoughts',
+          publicPath: '/images/thoughts/'
+        }),
+        publishedAt: fields.datetime({
+          label: 'Published At',
+          defaultValue: { kind: 'now' }
+        }),
+      },
+    }),
   },
 });
