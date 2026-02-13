@@ -22,18 +22,21 @@ const contentWithLinks = content.replace(
     <a href={thoughtUrl} class="block">
         <div class="thought-content">
             <p
-                class="text-slate-800 dark:text-slate-200 text-base leading-relaxed whitespace-pre-wrap line-clamp-4"
+                class:list={[
+                    "text-slate-800 dark:text-slate-200 text-base leading-relaxed whitespace-pre-wrap",
+                    image ? "line-clamp-3" : "line-clamp-6",
+                ]}
                 set:html={contentWithLinks}
             />
         </div>
 
         {
             image && (
-                <div class="thought-image mt-3">
+                <div class="thought-image mt-3 h-48">
                     <img
                         src={image}
                         alt=""
-                        class="rounded-lg w-full object-cover max-h-48"
+                        class="rounded-lg w-full h-full object-cover"
                         loading="lazy"
                     />
                 </div>
