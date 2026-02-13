@@ -3,8 +3,8 @@ template: blog-post
 title: "Orchestrating Claude Agent Team to Refactor My Codebase in 22 Minutes"
 slug: /blog/orchestrating-ai-teams
 date: 2026-02-13 12:00
-description: "How I used Claude Teams to achieve 4x speedup on a complex multi-variant feature parity task—and what it taught me about the future of product development."
-heroImage: ../../assets/orchestrate-ai.png
+description: "How I used Claude Agent Teams to achieve 12x speedup on a complex multi-variant refactoring task—and the critical lessons learned about inter-agent communication, QA automation, and the future of PM-led development."
+heroImage: ../../assets/orchestrate-ai-2.png
 tags: ["Claude Agent Teams", "AI", "Product Management"]
 ---
 
@@ -19,6 +19,8 @@ That's what happened when I stopped treating AI as a chatbot and started treatin
 ## The Problem: Feature Parity Across 4 Design Variants
 
 I was building a multicam evidence review tool—think body camera footage synced with CCTV and dashcam feeds. I had four design variants (A, B, C, D) with different layouts for customer validation. Each variant had ~9,000 lines of React code (with the central `App.tsx` alone being ~1,500 lines), and they'd diverged: Variant A had all 10 features, but B and C had non-functional mock search that returned random results, C showed unfiltered events regardless of which videos were loaded, and D lacked metadata tabs.
+
+**Context**: I'm a PM with a CS/software engineering background. I used to have a designer who handled prototypes, but the process was painfully slow—every iteration had to pass a "design committee." Asking engineers to build throwaway prototypes was a non-starter. Now? I ship 4 production-quality variants in the time it used to take to schedule the first design review.
 
 ![Multicam variant A](../../assets/variant-a.png)
 
@@ -83,6 +85,8 @@ Developers worked in parallel. Every decision was logged:
                        (adapted for B's local VideoStream interface)
 ```
 
+**What's `searchStreams()` and why does it matter?** The VideoLibraryPanel is where users browse available camera feeds and build their multicam grid. The search function lets them filter by officer name, location, or category (e.g., "arrest", "traffic stop"). Variant B had a mock implementation that just returned 5 random videos regardless of the search query—useless for real workflows. Dev2 ported the real implementation from Variant A, which parses `field=value` syntax and actually filters the 26+ available streams.
+
 **An unexpected collision happened**: Dev1 autonomously picked up Task #15 (add metadata tabs to Variant D) while Dev2 was being reassigned to it. Duplicate work?
 
 No—**accidental peer review**. Dev2 arrived second and verified Dev1's implementation: build passed, all 3 tabs worked, layout preserved. A race condition turned into a quality gate.
@@ -136,6 +140,32 @@ When Dev1 and Dev2 both completed Task #15, I thought I'd wasted tokens. But Dev
 
 **Takeaway**: Build verification into the task graph explicitly. Create paired tasks: "Implement X" (Dev A) + "Verify X" (Dev B).
 
+### 4. Inter-Agent Communication > Silent Subagents
+
+This is where Claude Agent Teams truly shines compared to traditional silent subagents. In the old model, I'd spawn multiple subagents, each working in isolation, then manually synthesize their outputs. Here's what changed:
+
+**The old way (silent subagents)**:
+- Dev1 implements search in Variant B
+- Dev2 implements search in Variant C independently
+- Both reinvent the wheel, slightly differently
+- I manually spot the inconsistency and ask for a fix
+
+**The Agent Teams way**:
+```
+02:20:28  DEV2 → LEAD        DONE: Task #12 — searchStreams() ported to B
+02:20:28  LEAD → DEV3        FYI: Dev2 just implemented search for B.
+                             Key pattern: field=value syntax, 300ms debounce.
+                             See handleSearch() for reference.
+02:31:01  DEV3 → LEAD        DONE: Task #13 — used Dev2's pattern for C.
+                             Adapted for C's hideHeader prop.
+```
+
+The Dev Lead actively **shared knowledge** between agents. Dev3 didn't have to reverse-engineer Dev2's approach—they got a direct handoff. This prevented duplicate work and ensured consistency.
+
+**Another example**: When Dev3 discovered that Variant C's layout required the timeline inside a `ResizablePanelGroup`, they logged the decision rationale. The Dev Lead immediately flagged this for Dev2 (who was working on Variant B with a similar layout). Result: Dev2 avoided the same layout trap.
+
+**Takeaway**: Agent Teams with explicit communication protocols catch cross-cutting concerns that silent subagents miss. The coordination overhead is worth it.
+
 ---
 
 ## What This Means for Product Managers
@@ -149,6 +179,40 @@ The skills that mattered:
 - **Quality gates**: Designing verification into the workflow, not bolting it on after
 
 These are **PM skills**. The AI did the implementation.
+
+---
+
+## Lessons Learned (What I'd Do Differently Next Time)
+
+### 1. Integrate Playwright for Real QA
+
+The biggest gap in this mission was QA testing. The QA agent only ran `npm run build` and grepped for strings in files. It never launched a browser, clicked buttons, or verified that the search box actually filters results in the UI.
+
+**Next time**: I'll integrate Playwright (or a browser automation MCP server) so the QA agent can:
+- Launch the dev server and open the app in a real browser
+- Test interactive workflows (drag video to grid, scrub timeline, toggle audio)
+- Capture screenshots to verify layout preservation
+- Monitor console logs for runtime errors
+
+This would bring QA confidence from ~60% (structural correctness) to ~95% (behavioral correctness).
+
+### 2. Add Git Commit Checkpoints
+
+All changes from this session sit uncommitted in the working directories. If something broke, I'd have no restore points.
+
+**Next time**: The mission plan should include commit checkpoints after each task completion. This creates a rollback path and makes it easier to review what changed.
+
+### 3. Prevent Duplicate Work with Explicit Ownership
+
+Dev1 and Dev3 both completed Task #11 (port data to C & D) independently. This wasted ~500K tokens. The system's eventual consistency for message delivery means agents can start work before receiving assignment updates.
+
+**Next time**: Add a "check TaskList before starting" instruction in the initial prompt, and make the Dev Lead send explicit ownership updates before agents begin implementation.
+
+### 4. Proactive Reassignment for Idle Agents
+
+Dev1 was underutilized after Phase 1. After delivering the Variant A report, Dev1 had no assigned work until they autonomously picked up tasks. The Dev Lead should have proactively reassigned Dev1 to help with implementation earlier.
+
+**Next time**: Build agent utilization monitoring into the Dev Lead's responsibilities. If an agent finishes early, immediately assign them to verify another agent's work or pick up the next task in the queue.
 
 ---
 
