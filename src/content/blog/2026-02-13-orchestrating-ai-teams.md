@@ -10,7 +10,7 @@ tags: ["Claude Agent Teams", "AI", "Product Management"]
 
 **22 minutes. 4 codebases. 1.9 million tokens. Zero questions asked.**
 
-That's what happened when I stopped treating AI as a chatbot and started treating it as an Agentic team.
+That's what happened when I stopped treating AI as a chatbot and started treating it as an agentic team. Check out Claude Agent Teams here: https://www.anthropic.com/product/agent-teams.
 
 ![Orchestrate 5 AI agents](../../assets/orchestrate-ai-teams.png)
 
@@ -18,7 +18,7 @@ That's what happened when I stopped treating AI as a chatbot and started treatin
 
 ## The Problem: Feature Parity Across 4 Design Variants
 
-I was building a multicam evidence review tool—think body camera footage synced with CCTV and dashcam feeds. I had four design variants (A, B, C, D) with different layouts for customer validation. Each variant had ~1,500 lines of React code, and they'd diverged: Variant A had all 10 features, but B was missing search, C had broken event filtering, and D lacked metadata tabs.
+I was building a multicam evidence review tool—think body camera footage synced with CCTV and dashcam feeds. I had four design variants (A, B, C, D) with different layouts for customer validation. Each variant had ~9,000 lines of React code (with the central `App.tsx` alone being ~1,500 lines), and they'd diverged: Variant A had all 10 features, but B and C had non-functional mock search that returned random results, C showed unfiltered events regardless of which videos were loaded, and D lacked metadata tabs.
 
 ![Multicam variant A](../../assets/variant-a.png)
 
@@ -55,7 +55,7 @@ All four agents launched simultaneously. No sequential startup delay.
 02:12:05  LEAD → QA-TESTER  SPAWN: "Review CLAUDE.md files"
 ```
 
-**The QA Tester finished first** (35 seconds)—Haiku's speed advantage on read-only tasks. It caught a critical bug the developers missed: Variant C was passing `demoEvents` (unfiltered) instead of `activeEvents` (filtered by grid). A one-line bug that would've broken production.
+**The QA Tester finished first** (30 seconds)—Haiku's speed advantage on read-only tasks. Both the QA Tester and Dev3 identified the discrepancy where Variant C was passing `demoEvents` (unfiltered) instead of `activeEvents` (filtered by grid), but the QA Tester's behavior-first framing made it immediately actionable as a bug to fix. A one-line bug that would've broken production.
 
 **Dev3 produced a comparison table** instead of two separate reports. This single decision saved 10+ minutes of manual diffing. The Dev Lead's gap matrix was essentially a merge of Dev3's table with the other reports.
 
@@ -91,6 +91,8 @@ No—**accidental peer review**. Dev2 arrived second and verified Dev1's impleme
 
 The QA Tester ran `npm run build` in all four directories. 4/4 builds passed. 7/8 spot-checks passed. One false alarm (pre-existing uncommitted changes in Variant A).
 
+**One limitation**: QA validated structural correctness (builds pass, right code in right files) but not runtime behavior. No browser was launched, no UI was visually inspected, and no interactive testing was performed. Browser-based testing would require additional tooling like Playwright.
+
 Total wall clock: **22 minutes** from team creation to shutdown.
 
 ---
@@ -101,7 +103,7 @@ Total wall clock: **22 minutes** from team creation to shutdown.
 | ----------------------- | ------------------ |
 | **Wall clock time**     | 22 minutes         |
 | **Estimated solo time** | 4-6 hours          |
-| **Speedup**             | ~4x                |
+| **Speedup**             | ~12x               |
 | **Total tokens**        | ~1.9M              |
 | **Estimated cost**      | $15-25             |
 | **Files modified**      | 8 (across B, C, D) |
@@ -122,9 +124,9 @@ When Dev3 explored Variants C and D, they produced a **side-by-side comparison t
 
 **Takeaway**: When agents explore related codebases, instruct them to produce diffs, not documents.
 
-### 2. The Cheapest Model Caught the Most Critical Bug
+### 2. The Cheapest Model Surfaced the Most Critical Bug
 
-The QA Tester (Haiku) was the first to finish and the only one to catch the `demoEvents` vs `activeEvents` bug. The developers focused on "does this component exist?" The QA Tester focused on "does this component behave correctly?"
+The QA Tester (Haiku) was the first to finish and framed the `demoEvents` vs `activeEvents` discrepancy as a behavioral bug (while Dev3 noted it as a code difference). The developers focused on "does this component exist?" The QA Tester focused on "does this component behave correctly?"
 
 **Takeaway**: Read-only QA/analyst roles catch different classes of bugs than implementers. Assign QA agents to behavior-first analysis, not code inventory.
 
