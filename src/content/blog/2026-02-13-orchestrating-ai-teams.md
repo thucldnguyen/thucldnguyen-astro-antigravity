@@ -61,10 +61,10 @@ Here's what happened, minute by minute:
 All four agents launched simultaneously. No sequential startup delay.
 
 ```
-02:12:05  LEAD → DEV1       SPAWN: "Explore Variant A"
-02:12:05  LEAD → DEV2       SPAWN: "Explore Variant B"
-02:12:05  LEAD → DEV3       SPAWN: "Explore Variants C & D"
-02:12:05  LEAD → QA-TESTER  SPAWN: "Review CLAUDE.md files"
+09:12:05  LEAD → DEV1       SPAWN: "Explore Variant A"
+09:12:05  LEAD → DEV2       SPAWN: "Explore Variant B"
+09:12:05  LEAD → DEV3       SPAWN: "Explore Variants C & D"
+09:12:05  LEAD → QA-TESTER  SPAWN: "Review CLAUDE.md files"
 ```
 
 **The QA Tester finished first** (30 seconds)—Haiku's speed advantage on read-only tasks. It immediately flagged a critical bug: Variant C was passing `demoEvents` (all events, unfiltered) instead of `activeEvents` (filtered by currently loaded videos). This one-line bug would've shown users events from videos they hadn't even loaded—a production-breaking oversight.
@@ -93,9 +93,9 @@ With the roadmap clear, the developers got to work.
 Developers worked in parallel. Every decision was logged:
 
 ```
-02:20:15  DEV2 → LEAD  DONE: Task #10 — data ported to B
+09:20:15  DEV2 → LEAD  DONE: Task #10 — data ported to B
                        (titles, categories, locations, timezones updated)
-02:20:28  DEV2 → LEAD  DONE: Task #12 — searchStreams() ported to B
+09:20:28  DEV2 → LEAD  DONE: Task #12 — searchStreams() ported to B
                        (search function that filters camera feeds by officer, location, or category)
 ```
 
@@ -170,11 +170,11 @@ This is where Claude Agent Teams truly shines compared to traditional silent sub
 
 **The Agent Teams way**:
 ```
-02:20:28  DEV2 → LEAD        DONE: Task #12 — searchStreams() ported to B
-02:20:28  LEAD → DEV3        FYI: Dev2 just implemented search for B.
+09:20:28  DEV2 → LEAD        DONE: Task #12 — searchStreams() ported to B
+09:20:28  LEAD → DEV3        FYI: Dev2 just implemented search for B.
                              Key pattern: field=value syntax, 300ms debounce.
                              See handleSearch() for reference.
-02:31:01  DEV3 → LEAD        DONE: Task #13 — used Dev2's pattern for C.
+09:31:01  DEV3 → LEAD        DONE: Task #13 — used Dev2's pattern for C.
                              Adapted for C's hideHeader prop.
 ```
 
@@ -253,6 +253,9 @@ If you're a PM who thinks AI is just ChatGPT for writing PRDs, you're already be
 2. Design task graphs, not to-do lists
 3. Instrument workflows with verification gates
 4. Treat AI as a team, not a tool
+
+> NOTE: Be mindful about the token consumption as agent teams can burn millions of tokens in a single session. Always monitor the token usage and optimize the workflow to reduce unnecessary token consumption. I spent 100M tokens (approx $500) in one previous session (12-Feb-2026) due to a "UX Expert" agent that ate up millions of tokens just to answer design system questions via a Figma MCP. Better optimize visuals in a separate session outside of the team session.
+![Token usage: 100M tokens](../../assets/token-usage.png)
 
 ---
 

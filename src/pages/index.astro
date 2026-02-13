@@ -8,7 +8,7 @@ import { getCollection } from "astro:content";
 import FormattedDate from "../components/FormattedDate.astro";
 import PostCard from "../components/PostCard.astro";
 import ava3 from "../assets/ava3.jpg";
-import newThumbnail from "../assets/new-thumbnail.png";
+import newThumbnail from "../assets/new-thumbnail.jpg";
 import ContactForm from "../components/ContactForm.astro";
 import Lightbox from "../components/Lightbox.astro";
 import GameCTA from "../components/GameCTA.astro";
@@ -24,7 +24,7 @@ const posts = (await getCollection("blog"))
 <html lang="en" class="no-js">
     <head>
         <BaseHead
-            title="Thuc Nguyen — AI-First Product Manager | AI PM, Agent Workflows, Public Safety Tech, Product Leadership"
+            title="Thuc Nguyen — AI-First Product Manager"
             description={SITE_DESCRIPTION}
         />
         <!-- Preload LCP image (hero avatar) on homepage -->
