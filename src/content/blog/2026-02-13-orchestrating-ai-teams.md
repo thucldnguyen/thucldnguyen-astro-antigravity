@@ -20,22 +20,7 @@ That's what happened when I stopped treating AI as a chatbot and started treatin
 
 ## The Problem: Feature Parity Across 4 Design Variants
 
-I was building a multicam evidence review tool - think body camera footage synced with CCTV and dashcam feeds. To validate different UX approaches with customers, I created four design variants (A, B, C, D), each with ~9,000 lines of React code.
-
-The problem? They'd diverged:
-- **Variant A**: All 10 features working
-- **Variants B & C**: Mock search returning random results
-- **Variant C**: Showed unfiltered events regardless of active videos
-- **Variant D**: Missing metadata tabs entirely
-
-Each variant's `App.tsx` alone was ~1,500 lines. Manually syncing them would take 4-6 hours.
-
-**A bit about my workflow**: I have a CS background but started my career as a PM. I used to have a designer who handled prototypes, but the process was painfully slow—every iteration had to pass a "design committee." Asking engineers to build throwaway prototypes was a non-starter. Now? I ship 4 production-quality variants in the time it used to take to schedule the first design review.
-
-![Multicam variant A](../../assets/variant-a.png)
-*Variant A uses a classic 3-panel layout: Library (left) | Grid+Timeline (center) | Metadata (right). This layout optimizes for investigators who need constant access to metadata while building their multicam view—perfect for detailed case review where context switching is expensive.*
-
-The traditional approach? Pick one variant, manually diff the others, copy-paste code, test each one. Estimated time: 4-6 hours of tedious, error-prone work.
+I had four design variants of a multi-camera evidence review tool that helps police detectives speed up invetigations - each ~9,000 lines of React. They'd diverged: features worked in some variants but not others. Manually syncing them would take 4-6 hours of tedious diffing.
 
 Instead, I wrote a mission brief and deployed an AI agent team.
 
@@ -70,9 +55,6 @@ All four agents launched simultaneously. No sequential startup delay.
 
 **The QA Tester finished first** (30 seconds)—Haiku's speed advantage on read-only tasks. It immediately flagged a critical bug: Variant C was passing `demoEvents` (all events, unfiltered) instead of `activeEvents` (filtered by currently loaded videos). This one-line bug would've shown users events from videos they hadn't even loaded—a production-breaking oversight.
 
-![Multicam variant C](../../assets/variant-c.png)
-*Variant C takes a horizontal split approach: Library and Grid sit side-by-side at the top, with a full-width Timeline below, similar to professional video editing software like iMovie and CapCut. This layout is designed for users who prioritize reconstructing the sequence of events chronologically. The main trade-off is that the metadata panel is hidden by default, requiring an extra click to access—ideal for users who want to focus on the timeline first and only dive into metadata when needed.*
-
 Dev3 also spotted this discrepancy, but framed it as a code difference rather than a behavioral bug. The QA Tester's behavior-first lens made it immediately actionable.
 
 **Dev3 produced a comparison table** instead of two separate reports. This single decision saved 10+ minutes of manual diffing. The Dev Lead's gap matrix was essentially a merge of Dev3's table with the other reports.
@@ -100,17 +82,12 @@ Developers worked in parallel. Every decision was logged:
 09:20:15  DEV2 → LEAD  DONE: Task #10 — data ported to B
                        (titles, categories, locations, timezones updated)
 09:20:28  DEV2 → LEAD  DONE: Task #12 — searchStreams() ported to B
-                       (search function that filters camera feeds by officer, location, or category)
+                       (the search function that filters camera feeds by query)
 ```
-
-**What's `searchStreams()` and why does it matter?** The VideoLibraryPanel is where users browse available camera feeds and build their multicam grid. The search function lets them filter by officer name, location, or category (e.g., "arrest", "traffic stop"). Variant B had a mock implementation that just returned 5 random videos regardless of the search query—useless for real workflows. Dev2 ported the real implementation from Variant A, which parses `field=value` syntax and actually filters the 26+ available streams.
 
 **An unexpected collision happened**: Dev1 autonomously picked up Task #15 (add metadata tabs to Variant D) while Dev2 was being reassigned to it. Duplicate work?
 
 No—**accidental peer review**. Dev2 arrived second and verified Dev1's implementation: build passed, all 3 tabs worked, layout preserved. A race condition turned into a quality gate.
-
-![Multicam variant B](../../assets/variant-b.png)
-*Variant B mirrors Variant A's structure but with unique behaviors (drag-dropping videos to the video grid instead of toggling each video on/off via Eye icons) and component implementations and a 6-tab support pane. This variant tests whether power users prefer more granular control panels (separate tabs for different metadata types) versus Variant A's consolidated metadata view.*
 
 ### Phase 4: QA Verification (60 seconds)
 
@@ -166,15 +143,8 @@ When Dev1 and Dev2 both completed Task #15, I thought I'd wasted tokens. But Dev
 
 ### 4. Inter-Agent Communication > Silent Subagents
 
-This is where Claude Agent Teams truly shines compared to traditional silent subagents. In the old model, I'd spawn multiple subagents, each working in isolation, then manually synthesize their outputs. Here's what changed:
+This is where Claude Agent Teams truly shines compared to traditional silent subagents. With silent subagents, each developer would have reinvented the wheel independently. Here's what changed:
 
-**The old way (silent subagents)**:
-- Dev1 implements search in Variant B
-- Dev2 implements search in Variant C independently
-- Both reinvent the wheel, slightly differently
-- I manually spot the inconsistency and ask for a fix
-
-**The Agent Teams way**:
 ```
 09:20:28  DEV2 → LEAD        DONE: Task #12 — searchStreams() ported to B
 09:20:28  LEAD → DEV3        FYI: Dev2 just implemented search for B.
@@ -185,8 +155,6 @@ This is where Claude Agent Teams truly shines compared to traditional silent sub
 ```
 
 The Dev Lead actively **shared knowledge** between agents. Dev3 didn't have to reverse-engineer Dev2's approach—they got a direct handoff. This prevented duplicate work and ensured consistency.
-
-**Another example**: When Dev3 discovered that Variant C's layout required the timeline inside a `ResizablePanelGroup`, they logged the decision rationale. The Dev Lead immediately flagged this for Dev2 (who was working on Variant B with a similar layout). Result: Dev2 avoided the same layout trap.
 
 **Takeaway**: Agent Teams with explicit communication protocols catch cross-cutting concerns that silent subagents miss. The coordination overhead is worth it.
 
@@ -208,43 +176,13 @@ These are **PM skills**. The AI did the implementation.
 
 ## Lessons Learned (What I'd Do Differently Next Time)
 
-Four things I'd change next time:
-1. Integrate Playwright for real browser testing
-2. Add git commit checkpoints for rollback safety
-3. Prevent duplicate work with explicit task ownership
-4. Proactively reassign idle agents
+1. **Integrate Playwright for real browser testing** — The QA agent only ran builds and grepped files. Next time, I'll add browser automation to test interactive workflows, verify layouts, and catch runtime errors.
 
-Let me explain each:
+2. **Add git commit checkpoints for rollback safety** — All changes sit uncommitted. Next time, the mission plan should include commit checkpoints after each task completion to create restore points.
 
-### 1. Integrate Playwright for Real QA
+3. **Prevent duplicate work with explicit task ownership** — Dev1 and Dev3 both completed Task #11 independently, wasting ~500K tokens. Next time, add a "check TaskList before starting" instruction and make the Dev Lead send explicit ownership updates.
 
-The biggest gap in this mission was QA testing. The QA agent only ran `npm run build` and grepped for strings in files. It never launched a browser, clicked buttons, or verified that the search box actually filters results in the UI.
-
-**Next time**: I'll integrate Playwright (or a browser automation MCP server) so the QA agent can:
-- Launch the dev server and open the app in a real browser
-- Test interactive workflows (drag video to grid, scrub timeline, toggle audio)
-- Capture screenshots to verify layout preservation
-- Monitor console logs for runtime errors
-
-This would bring QA confidence from ~60% (structural correctness) to ~95% (behavioral correctness).
-
-### 2. Add Git Commit Checkpoints
-
-All changes from this session sit uncommitted in the working directories. If something broke, I'd have no restore points.
-
-**Next time**: The mission plan should include commit checkpoints after each task completion. This creates a rollback path and makes it easier to review what changed.
-
-### 3. Prevent Duplicate Work with Explicit Ownership
-
-Dev1 and Dev3 both completed Task #11 (port data to C & D) independently. This wasted ~500K tokens. The system's eventual consistency for message delivery means agents can start work before receiving assignment updates.
-
-**Next time**: Add a "check TaskList before starting" instruction in the initial prompt, and make the Dev Lead send explicit ownership updates before agents begin implementation.
-
-### 4. Proactive Reassignment for Idle Agents
-
-Dev1 was underutilized after Phase 1. After delivering the Variant A report, Dev1 had no assigned work until they autonomously picked up tasks. The Dev Lead should have proactively reassigned Dev1 to help with implementation earlier.
-
-**Next time**: Build agent utilization monitoring into the Dev Lead's responsibilities. If an agent finishes early, immediately assign them to verify another agent's work or pick up the next task in the queue.
+4. **Proactively reassign idle agents** — Dev1 was underutilized after Phase 1. Next time, build agent utilization monitoring into the Dev Lead's responsibilities to immediately assign finished agents to verification or next tasks.
 
 ---
 
@@ -266,15 +204,18 @@ If you're a PM who thinks AI is just ChatGPT for writing PRDs, you're already be
 
 ---
 
-## Try It Yourself
+## Appendix: The Four Variants
 
-You don't need Claude Teams to start. You can simulate this with:
-- **Multiple Claude conversations** (one per "agent")
-- **Explicit role definitions** in your prompts
-- **Structured outputs** (comparison tables, gap matrices)
-- **Dependency-aware sequencing** (don't start Task B until Task A is done)
+For those interested in the UX design decisions behind each variant:
 
-The magic isn't in the tool. It's in the **orchestration**.
+![Multicam variant A](../../assets/variant-a.png)
+*Variant A uses a classic 3-panel layout: Library (left) | Grid+Timeline (center) | Metadata (right). This layout optimizes for investigators who need constant access to metadata while building their multicam view—perfect for detailed case review where context switching is expensive.*
+
+![Multicam variant B](../../assets/variant-b.png)
+*Variant B mirrors Variant A's structure but with unique behaviors (drag-dropping videos to the video grid instead of toggling each video on/off via Eye icons) and component implementations and a 6-tab support pane. This variant tests whether power users prefer more granular control panels (separate tabs for different metadata types) versus Variant A's consolidated metadata view.*
+
+![Multicam variant C](../../assets/variant-c.png)
+*Variant C takes a horizontal split approach: Library and Grid sit side-by-side at the top, with a full-width Timeline below, similar to professional video editing software like iMovie and CapCut. This layout is designed for users who prioritize reconstructing the sequence of events chronologically. The main trade-off is that the metadata panel is hidden by default, requiring an extra click to access—ideal for users who want to focus on the timeline first and only dive into metadata when needed.*
 
 ---
 

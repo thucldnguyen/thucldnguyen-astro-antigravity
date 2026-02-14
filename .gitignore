@@ -30,3 +30,4 @@ lighthouse-report*.json
 # Local Netlify folder
 .netlify
 scripts/rename-blog-files.js
+rewrite-plan.txt
