@@ -137,7 +137,7 @@ The QA Tester (Haiku) was the first to finish and framed the `demoEvents` vs `ac
 
 ### 3. Accidental Peer Review Is a Feature, Not a Bug
 
-When Dev1 and Dev2 both completed Task #15, I thought I'd wasted tokens. But Dev2's verification confirmed the implementation was correct without requiring a full QA cycle. The cost of reading and verifying is much lower than implementing.
+When Dev1 completed Task #15, Dev2 was simultaneously reassigned to it. Instead of duplicate implementation, Dev2 arrived second and performed verification: build passed, all 3 tabs worked, layout preserved. The cost of reading and verifying is much lower than implementing.
 
 **Takeaway**: Build verification into the task graph explicitly. Create paired tasks: "Implement X" (Dev A) + "Verify X" (Dev B).
 
@@ -180,7 +180,7 @@ These are **PM skills**. The AI did the implementation.
 
 2. **Add git commit checkpoints for rollback safety** — All changes sit uncommitted. Next time, the mission plan should include commit checkpoints after each task completion to create restore points.
 
-3. **Prevent duplicate work with explicit task ownership** — Dev1 and Dev3 both completed Task #11 independently, wasting ~500K tokens. Next time, add a "check TaskList before starting" instruction and make the Dev Lead send explicit ownership updates.
+3. **Prevent duplicate work with explicit task ownership** — While accidental peer review (Task #15) turned out valuable, Dev1 and Dev3 also both completed Task #11 independently. Duplicate implementation is expensive; intentional verification is cheap. Next time, add a "check TaskList before starting" instruction and make the Dev Lead send explicit ownership updates.
 
 4. **Proactively reassign idle agents** — Dev1 was underutilized after Phase 1. Next time, build agent utilization monitoring into the Dev Lead's responsibilities to immediately assign finished agents to verification or next tasks.
 
@@ -212,13 +212,13 @@ For those interested in the UX design decisions behind each variant:
 *Variant A uses a classic 3-panel layout: Library (left) | Grid+Timeline (center) | Metadata (right). This layout optimizes for investigators who need constant access to metadata while building their multicam view—perfect for detailed case review where context switching is expensive.*
 
 ![Multicam variant B](../../assets/variant-b.png)
-*Variant B mirrors Variant A's structure but with unique behaviors (drag-dropping videos to the video grid instead of toggling each video on/off via Eye icons) and component implementations and a 6-tab support pane. This variant tests whether power users prefer more granular control panels (separate tabs for different metadata types) versus Variant A's consolidated metadata view.*
+*Variant B mirrors Variant A's structure but with unique behaviors (drag-dropping videos to the video grid instead of toggling each video on/off via Eye icons) and a 6-tab support pane. This variant tests whether power users prefer more granular control panels (separate tabs for different metadata types) versus Variant A's consolidated metadata view.*
 
 ![Multicam variant C](../../assets/variant-c.png)
 *Variant C takes a horizontal split approach: Library and Grid sit side-by-side at the top, with a full-width Timeline below, similar to professional video editing software like iMovie and CapCut. This layout is designed for users who prioritize reconstructing the sequence of events chronologically. The main trade-off is that the metadata panel is hidden by default, requiring an extra click to access—ideal for users who want to focus on the timeline first and only dive into metadata when needed.*
 
 ![Multicam variant D](../../assets/variant-d.png)
-*Variant D is similar to variant C - users drag drop videos onto the timeline instead of the video grid. Key difference is that the video library on the left is more prominent, spanning the entire height of the page.*
+*Variant D is similar to variant C - users drag drop videos onto the timeline instead of the video grid. Key difference is that the video-library on the left is more prominent, spanning the entire height of the page. A taller video-library makes it easier for users to browse, do bulk actions (edit metadata, download, add evidence to a case, etc.) and drag-drop videos onto the timeline.*
 
 ---
 
