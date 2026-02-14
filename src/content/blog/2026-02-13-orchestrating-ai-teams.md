@@ -217,6 +217,9 @@ For those interested in the UX design decisions behind each variant:
 ![Multicam variant C](../../assets/variant-c.png)
 *Variant C takes a horizontal split approach: Library and Grid sit side-by-side at the top, with a full-width Timeline below, similar to professional video editing software like iMovie and CapCut. This layout is designed for users who prioritize reconstructing the sequence of events chronologically. The main trade-off is that the metadata panel is hidden by default, requiring an extra click to access—ideal for users who want to focus on the timeline first and only dive into metadata when needed.*
 
+![Multicam variant D](../../assets/variant-d.png)
+*Variant D is similar to variant C - users drag drop videos onto the timeline instead of the video grid. Key difference is that the video library on the left is more prominent, spanning the entire height of the page.*
+
 ---
 
 **Questions? Challenges? Want to collaborate?** I'm always up for talking about agentic AI, product development, and the weird future we're building. Let's connect.
