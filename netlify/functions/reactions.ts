@@ -1,5 +1,6 @@
 import type { Context } from '@netlify/functions';
 import { getStore } from '@netlify/blobs';
+import { jsonResponse, optionsResponse } from './http';
 
 interface ReactionData {
     likes: number;
@@ -21,14 +22,7 @@ export default async (req: Request, context: Context) => {
 
     // Handle CORS
     if (req.method === 'OPTIONS') {
-        return new Response(null, {
-            status: 204,
-            headers: {
-                'Access-Control-Allow-Origin': '*',
-                'Access-Control-Allow-Methods': 'GET, POST',
-                'Access-Control-Allow-Headers': 'Content-Type',
-            },
-        });
+        return optionsResponse('GET, POST');
     }
 
     try {
@@ -38,10 +32,7 @@ export default async (req: Request, context: Context) => {
             const thoughtId = url.searchParams.get('thoughtId');
 
             if (!thoughtId) {
-                return new Response(JSON.stringify({ error: 'thoughtId required' }), {
-                    status: 400,
-                    headers: { 'Content-Type': 'application/json' },
-                });
+                return jsonResponse({ error: 'thoughtId required' }, 400);
             }
 
             const data = await store.get(thoughtId, { type: 'json' }) as ReactionData | null;
@@ -50,18 +41,12 @@ export default async (req: Request, context: Context) => {
             // Check if current IP has liked
             const hasLiked = reactions.likedIPs.includes(clientIP);
 
-            return new Response(
-                JSON.stringify({
+            return jsonResponse(
+                {
                     likes: reactions.likes,
                     hasLiked,
-                }),
-                {
-                    status: 200,
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'Access-Control-Allow-Origin': '*',
-                    },
-                }
+                },
+                200
             );
         }
 
@@ -71,10 +56,7 @@ export default async (req: Request, context: Context) => {
             const { thoughtId, action } = body;
 
             if (!thoughtId || action !== 'like') {
-                return new Response(JSON.stringify({ error: 'Invalid request' }), {
-                    status: 400,
-                    headers: { 'Content-Type': 'application/json' },
-                });
+                return jsonResponse({ error: 'Invalid request' }, 400);
             }
 
             // Rate limiting check
@@ -85,16 +67,7 @@ export default async (req: Request, context: Context) => {
             if (rateLimitData) {
                 if (now < rateLimitData.resetTime) {
                     if (rateLimitData.count >= MAX_REACTIONS_PER_HOUR) {
-                        return new Response(
-                            JSON.stringify({ error: 'Rate limit exceeded. Try again later.' }),
-                            {
-                                status: 429,
-                                headers: {
-                                    'Content-Type': 'application/json',
-                                    'Access-Control-Allow-Origin': '*',
-                                },
-                            }
-                        );
+                        return jsonResponse({ error: 'Rate limit exceeded. Try again later.' }, 429);
                     }
                 }
             }
@@ -105,19 +78,13 @@ export default async (req: Request, context: Context) => {
 
             // Check if already liked
             if (reactions.likedIPs.includes(clientIP)) {
-                return new Response(
-                    JSON.stringify({
+                return jsonResponse(
+                    {
                         likes: reactions.likes,
                         hasLiked: true,
                         message: 'Already liked',
-                    }),
-                    {
-                        status: 200,
-                        headers: {
-                            'Content-Type': 'application/json',
-                            'Access-Control-Allow-Origin': '*',
-                        },
-                    }
+                    },
+                    200
                 );
             }
 
@@ -135,35 +102,20 @@ export default async (req: Request, context: Context) => {
             };
             await store.setJSON(rateLimitKey, newRateLimitData);
 
-            return new Response(
-                JSON.stringify({
+            return jsonResponse(
+                {
                     likes: reactions.likes,
                     hasLiked: true,
                     message: 'Like added',
-                }),
-                {
-                    status: 200,
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'Access-Control-Allow-Origin': '*',
-                    },
-                }
+                },
+                200
             );
         }
 
-        return new Response(JSON.stringify({ error: 'Method not allowed' }), {
-            status: 405,
-            headers: { 'Content-Type': 'application/json' },
-        });
+        return jsonResponse({ error: 'Method not allowed' }, 405);
     } catch (error) {
         console.error('Reactions error:', error);
-        return new Response(JSON.stringify({ error: 'Internal server error' }), {
-            status: 500,
-            headers: {
-                'Content-Type': 'application/json',
-                'Access-Control-Allow-Origin': '*',
-            },
-        });
+        return jsonResponse({ error: 'Internal server error' }, 500);
     }
 };
 
