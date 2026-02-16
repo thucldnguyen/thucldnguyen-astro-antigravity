@@ -8,14 +8,24 @@
 // 3. Subsequent visits skip the header entirely (no performance impact).
 export default async function handler(request: Request) {
   const cookie = request.headers.get("cookie") || "";
+  const url = new URL(request.url);
+  const isLocal =
+    url.hostname === "localhost" || url.hostname === "127.0.0.1";
 
   // Already cleaned — pass through without modification
-  if (cookie.includes("sw-cleaned=1")) {
+  if (cookie.includes("sw-cleaned=1") || isLocal) {
     return;
   }
 
-  // Get the original response
-  const response = await fetch(request);
+  let response: Response;
+  try {
+    // In production, continue to origin and decorate the response once.
+    response = await fetch(request);
+  } catch (error) {
+    // Fail open in dev/sandbox environments where edge fetch can fail.
+    console.warn("[clear-sw] pass-through due to fetch error:", error);
+    return;
+  }
   const newResponse = new Response(response.body, response);
 
   // Nuke old service workers and caches

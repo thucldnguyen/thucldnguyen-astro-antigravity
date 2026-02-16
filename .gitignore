@@ -31,3 +31,5 @@ lighthouse-report*.json
 .netlify
 scripts/rename-blog-files.js
 rewrite-plan.txt
+playwright-report/
+test-results/

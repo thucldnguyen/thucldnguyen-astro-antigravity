@@ -82,6 +82,56 @@ Access Keystatic CMS at `http://localhost:4321/keystatic` (local mode, no auth r
 | `npm run build`   | Build production site to `./dist/`                          |
 | `npm run preview` | Preview production build locally                            |
 | `netlify dev`     | Run with Netlify functions (for testing reactions/comments) |
+| `npm run test:e2e` | Run Playwright E2E tests (headed by default)              |
+| `npm run test:e2e -- --mode headless` | Run Playwright E2E tests in headless mode |
+
+## 🧪 E2E Tests (Playwright)
+
+The project includes Playwright end-to-end tests for:
+- Blog reading flow
+- GeoGuru gameplay start flow
+- Contact form submission flow
+- Thoughts reactions/comments flow
+- Key edge cases (404 route, comment validation)
+
+### Test Runner Options
+
+```bash
+# Local target, headed mode, screenshot on failure (default)
+npm run test:e2e
+
+# Headless mode
+npm run test:e2e -- --mode headless
+
+# Distributed run: 3 runner instances (shards) in parallel
+npm run test:e2e -- --instances 3
+
+# Distributed + headless
+npm run test:e2e -- --instances 3 --mode headless
+
+# Capture screenshots at all checkpoints (headed mode)
+npm run test:e2e -- --screenshots all
+
+# Run against production
+npm run test:e2e -- --target prod
+
+# Run against a custom URL
+npm run test:e2e -- --target https://thucldnguyen.com
+```
+
+Options:
+- `--mode headed|headless` (default: `headed`)
+- `--screenshots all|failure` (default: `failure`)
+- `--instances <n>` (default: `1`)
+- `--target local|prod|<url>` (default: `local`)
+
+For distributed runs, each shard is stored under:
+- `test-results/artifacts/<run-id>/shard-<n>-of-<total>/`
+- `playwright-report/<run-id>/shard-<n>-of-<total>/`
+
+Example orchestration for 6 tests:
+- `--instances 3` creates 3 shard runners.
+- Playwright shard routing distributes tests across them (typically ~2 tests per shard).
 
 ## 🔧 Environment Variables
 

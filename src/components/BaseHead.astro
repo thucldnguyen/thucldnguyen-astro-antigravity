@@ -29,15 +29,23 @@ const {
 ---
 
 <!-- Google Tag Manager -->
-<script is:inline>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-})(window,document,'script','dataLayer','GTM-TCPCLWKL');</script>
-<!-- End Google Tag Manager -->
-
-<!-- Ahrefs Web Analytics -->
-<script src="https://analytics.ahrefs.com/analytics.js" data-key="HmvZGorC9yvQSMOnmhYSWA" async></script>
+<script is:inline>
+	(function (w, d, s, l, i) {
+		w[l] = w[l] || [];
+		w[l].push({ "gtm.start": new Date().getTime(), event: "gtm.js" });
+		var f = d.getElementsByTagName(s)[0],
+			j = d.createElement(s),
+			dl = l != "dataLayer" ? "&l=" + l : "";
+		j.async = true;
+		j.src = "https://www.googletagmanager.com/gtm.js?id=" + i + dl;
+		f.parentNode.insertBefore(j, f);
+	})(window, document, "script", "dataLayer", "GTM-TCPCLWKL");
+</script>
+<!-- End Google Tag Manager --><!-- Ahrefs Web Analytics -->
+<script
+	src="https://analytics.ahrefs.com/analytics.js"
+	data-key="HmvZGorC9yvQSMOnmhYSWA"
+	async></script>
 
 <!-- Global Metadata -->
 <meta charset="utf-8" />
@@ -105,11 +113,44 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 </script>
 
 <script is:inline>
+	// Optimize view transitions with immediate feedback
+	document.addEventListener("astro:before-preparation", (event) => {
+		document.documentElement.dataset.isNavigating = "true";
+	});
+
+	document.addEventListener("astro:after-swap", () => {
+		document.documentElement.dataset.isNavigating = "false";
+		// Re-apply theme if needed (already handled by other listener)
+	});
+
+	document.addEventListener("astro:page-load", () => {
+		document.documentElement.dataset.isNavigating = "false";
+
+		// Trigger any lazy-loaded content after navigation
+		if (typeof window !== "undefined" && "requestIdleCallback" in window) {
+			requestIdleCallback(() => {
+				// Progressive enhancement: load non-critical resources
+				const lazyImages = document.querySelectorAll(
+					'img[loading="lazy"]',
+				);
+				lazyImages.forEach((img) => {
+					if (img instanceof HTMLImageElement && img.dataset.src) {
+						img.src = img.dataset.src;
+					}
+				});
+			});
+		}
+	});
+</script>
+
+<script is:inline>
 	// Kill any old service worker (e.g. Gatsby) and clear all caches.
 	if ("serviceWorker" in navigator) {
 		// 1. Unregister all service workers directly
 		navigator.serviceWorker.getRegistrations().then(function (regs) {
-			regs.forEach(function (reg) { reg.unregister(); });
+			regs.forEach(function (reg) {
+				reg.unregister();
+			});
 		});
 		// 2. Also register our kill-switch SW to replace any SW the browser
 		//    re-activates from its own cache before our unregister takes effect
@@ -118,7 +159,9 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 	// 3. Nuke CacheStorage (Gatsby's workbox caches)
 	if ("caches" in window) {
 		caches.keys().then(function (names) {
-			names.forEach(function (name) { caches.delete(name); });
+			names.forEach(function (name) {
+				caches.delete(name);
+			});
 		});
 	}
 </script>

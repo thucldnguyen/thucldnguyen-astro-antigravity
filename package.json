@@ -7,7 +7,10 @@
     "build": "astro build",
     "preview": "astro preview",
     "astro": "astro",
-    "lighthouse": "npx lighthouse http://localhost:4321/ --output=html --output-path=./lighthouse-report.html --only-categories=performance --quiet"
+    "lighthouse": "npx lighthouse http://localhost:4321/ --output=html --output-path=./lighthouse-report.html --only-categories=performance --quiet",
+    "test:e2e": "node scripts/run-e2e.mjs",
+    "test:e2e:headless": "node scripts/run-e2e.mjs --mode headless",
+    "test:e2e:distributed": "node scripts/run-e2e.mjs --instances 3"
   },
   "dependencies": {
     "@astrojs/check": "^0.9.6",
@@ -34,6 +37,7 @@
     "typescript": "^5.9.3"
   },
   "devDependencies": {
+    "@playwright/test": "^1.58.2",
     "@tailwindcss/typography": "^0.5.19"
   }
 }

@@ -164,3 +164,63 @@
 .no-js .animate-on-scroll {
   @apply opacity-100 translate-y-0;
 }
+
+/* Immediate navigation feedback */
+html[data-is-navigating="true"] body {
+  opacity: 0.6;
+  cursor: wait;
+  pointer-events: none;
+  transition: opacity 0.2s ease-out;
+}
+
+/* Minimal progress bar styles if needed later */
+#nprogress .bar {
+  background: var(--color-primary);
+}
+
+/* View Transitions Optimization */
+/* Speed up page transitions and prevent blocking on resource loads */
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation-duration: 0.3s;
+  animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Fade transition for smoother page changes */
+::view-transition-old(root) {
+  animation-name: fade-out;
+}
+
+::view-transition-new(root) {
+  animation-name: fade-in;
+}
+
+@keyframes fade-out {
+  to {
+    opacity: 0;
+    transform: scale(0.99);
+    /* subtle zoom out */
+  }
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+    transform: scale(1.01);
+    /* subtle zoom in */
+  }
+}
+
+/* Prevent layout shift during transitions */
+::view-transition-group(root) {
+  animation-duration: 0.3s;
+}
+
+/* Ensure dark mode persists during transitions */
+html.dark::view-transition-new(root) {
+  @apply bg-slate-950;
+}
+
+html:not(.dark)::view-transition-new(root) {
+  @apply bg-white;
+}
