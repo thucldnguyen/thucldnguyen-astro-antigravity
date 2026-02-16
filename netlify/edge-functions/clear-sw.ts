@@ -12,9 +12,13 @@ export default async function handler(request: Request) {
   const isLocal =
     url.hostname === "localhost" || url.hostname === "127.0.0.1";
 
+  // Bots never have service workers — let them through immediately
+  const ua = (request.headers.get("user-agent") || "").toLowerCase();
+  const isBot = /googlebot|bingbot|yandexbot|duckduckbot|baiduspider|slurp|facebookexternalhit|twitterbot|linkedinbot|oai-searchbot|gptbot|claudebot|perplexitybot|applebot|amazonbot|bytespider/i.test(ua);
+
   // Already cleaned — pass through without modification
   // bump to v2 to force re-clean for users who might have stuck SWs
-  if (cookie.includes("sw-cleaned-v2=1") || isLocal) {
+  if (cookie.includes("sw-cleaned-v2=1") || isLocal || isBot) {
     return;
   }
 
