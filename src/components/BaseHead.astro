@@ -145,23 +145,26 @@ const {
 
 <script is:inline>
 	// Kill any old service worker (e.g. Gatsby) and clear all caches.
+	// This runs on every page load to ensure we never get stuck in a stale state.
 	if ("serviceWorker" in navigator) {
-		// 1. Unregister all service workers directly
 		navigator.serviceWorker.getRegistrations().then(function (regs) {
-			regs.forEach(function (reg) {
+			for (const reg of regs) {
 				reg.unregister();
-			});
+				console.log("Unregistered service worker:", reg);
+			}
 		});
-		// 2. Also register our kill-switch SW to replace any SW the browser
-		//    re-activates from its own cache before our unregister takes effect
+		// Force-register the "killer" SW just in case unregistration above races or fails.
+		// The killer SW at /sw.js is designed to install -> skipWaiting -> unregister self -> reload.
 		navigator.serviceWorker.register("/sw.js");
 	}
-	// 3. Nuke CacheStorage (Gatsby's workbox caches)
+
+	// Nuke CacheStorage (Gatsby's workbox caches) directly
 	if ("caches" in window) {
 		caches.keys().then(function (names) {
-			names.forEach(function (name) {
+			for (const name of names) {
 				caches.delete(name);
-			});
+				console.log("Deleted cache:", name);
+			}
 		});
 	}
 </script>

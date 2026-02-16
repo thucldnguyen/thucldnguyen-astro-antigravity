@@ -271,12 +271,31 @@ test.describe('personal site e2e', () => {
     const firstThoughtHref = await firstThought.getAttribute('href');
     expect(firstThoughtHref, 'expected thought detail link for edge case test').toBeTruthy();
     await page.goto(firstThoughtHref!);
+    await page.waitForLoadState('networkidle');
+    await expect
+      .poll(async () => await page.locator('astro-island[ssr]').count(), { timeout: 15_000 })
+      .toBe(0);
 
     await page.getByLabel('Your Name').fill('Edge Case Visitor');
     await page.getByLabel('Your Comment').fill('This should be rejected by the API mock');
+    const rejectionResponsePromise = page
+      .waitForResponse(
+        (response) => response.url().includes('/api/comments') && response.request().method() === 'POST',
+        { timeout: 15_000 },
+      )
+      .catch(() => null);
     await page.getByRole('button', { name: 'Post Comment' }).click();
 
-    await expect(page.getByText('Comment contains inappropriate content')).toBeVisible();
+    const rejectionResponse = await rejectionResponsePromise;
+    expect(rejectionResponse, 'expected comment submission request to be sent').toBeTruthy();
+    expect(rejectionResponse!.status()).toBe(400);
+    const rejectionPayload = await rejectionResponse!.json();
+    expect(String(rejectionPayload.error ?? '')).toContain('inappropriate content');
+
+    await expect(
+      page.getByText(/Comment contains inappropriate content|Failed to post comment/i),
+    ).toBeVisible({ timeout: 10_000 });
+    await expect(page.getByText('Comment posted successfully!')).not.toBeVisible();
     await checkpoint('comment-api-rejection');
   });
 

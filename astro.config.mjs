@@ -32,5 +32,11 @@ export default defineConfig({
 
   adapter: netlify({
     imageCDN: false, // Disable Netlify Image CDN, let Astro handle image optimization
+    // Keep local dev stable for E2E and regular development by avoiding
+    // Netlify dev feature emulation that can cause runtime/image middleware errors.
+    devFeatures: {
+      images: false,
+      environmentVariables: false,
+    },
   }),
 });

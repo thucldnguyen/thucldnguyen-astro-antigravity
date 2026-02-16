@@ -13,7 +13,8 @@ export default async function handler(request: Request) {
     url.hostname === "localhost" || url.hostname === "127.0.0.1";
 
   // Already cleaned — pass through without modification
-  if (cookie.includes("sw-cleaned=1") || isLocal) {
+  // bump to v2 to force re-clean for users who might have stuck SWs
+  if (cookie.includes("sw-cleaned-v2=1") || isLocal) {
     return;
   }
 
@@ -29,12 +30,12 @@ export default async function handler(request: Request) {
   const newResponse = new Response(response.body, response);
 
   // Nuke old service workers and caches
-  newResponse.headers.set("Clear-Site-Data", '"cache", "storage"');
+  newResponse.headers.set("Clear-Site-Data", '"cache", "storage", "executionContexts"');
 
   // Set cookie so we only do this once (expires in 1 year)
   newResponse.headers.append(
     "Set-Cookie",
-    "sw-cleaned=1; Path=/; Max-Age=31536000; SameSite=Lax; Secure"
+    "sw-cleaned-v2=1; Path=/; Max-Age=31536000; SameSite=Lax; Secure"
   );
 
   return newResponse;

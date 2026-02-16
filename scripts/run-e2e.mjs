@@ -100,6 +100,9 @@ const sharedEnv = {
   SCREENSHOT_MODE: normalizedScreenshots,
   BASE_URL: baseURL,
   RUN_ID: runId,
+  // Disable Netlify Vite middleware for local E2E runs to avoid flaky
+  // internal blobs server startup that can crash Playwright webServer boot.
+  ...(isLocalTarget ? { NETLIFY_DEV: '1' } : {}),
 };
 
 function spawnRunner(extraArgs, envOverrides = {}) {
@@ -227,7 +230,8 @@ if (instanceCount === 1) {
         {
           stdio: 'inherit',
           env: {
-            ...process.env,
+            ...sharedEnv,
+            BASE_URL: distributedBaseURL,
           },
         },
       );
