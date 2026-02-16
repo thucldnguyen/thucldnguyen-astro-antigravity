@@ -16,9 +16,11 @@ export default async function handler(request: Request) {
   const ua = (request.headers.get("user-agent") || "").toLowerCase();
   const isBot = /googlebot|bingbot|yandexbot|duckduckbot|baiduspider|slurp|facebookexternalhit|twitterbot|linkedinbot|oai-searchbot|gptbot|claudebot|perplexitybot|applebot|amazonbot|bytespider/i.test(ua);
 
-  // Already cleaned — pass through without modification
-  // bump to v2 to force re-clean for users who might have stuck SWs
-  if (cookie.includes("sw-cleaned-v2=1") || isLocal || isBot) {
+  // CRITICAL FIX: Disable server-side clearing to prevent infinite reload loops.
+  // The 'Clear-Site-Data: "storage"' header was wiping the 'sw-cleaned' cookie,
+  // causing the browser to reload -> request again -> get header again -> loop.
+  // We now rely entirely on the client-side script in BaseHead.astro to clean up.
+  if (true || cookie.includes("sw-cleaned-v2=1") || isLocal || isBot) {
     return;
   }
 
@@ -33,6 +35,8 @@ export default async function handler(request: Request) {
   }
   const newResponse = new Response(response.body, response);
 
+  /*
+  // DANGEROUS: Enabling this causes infinite loops because 'storage' clears cookies too!
   // Nuke old service workers and caches
   newResponse.headers.set("Clear-Site-Data", '"cache", "storage", "executionContexts"');
 
@@ -41,6 +45,7 @@ export default async function handler(request: Request) {
     "Set-Cookie",
     "sw-cleaned-v2=1; Path=/; Max-Age=31536000; SameSite=Lax; Secure"
   );
+  */
 
   return newResponse;
 }
