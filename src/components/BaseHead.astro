@@ -144,28 +144,25 @@ const {
 </script>
 
 <script is:inline>
-	// Kill any old service worker (e.g. Gatsby) and clear all caches.
-	// This runs on every page load to ensure we never get stuck in a stale state.
-	if ("serviceWorker" in navigator) {
-		navigator.serviceWorker.getRegistrations().then(function (regs) {
-			for (const reg of regs) {
-				reg.unregister();
-				console.log("Unregistered service worker:", reg);
-			}
-		});
-		// Force-register the "killer" SW just in case unregistration above races or fails.
-		// The killer SW at /sw.js is designed to install -> skipWaiting -> unregister self -> reload.
-		navigator.serviceWorker.register("/sw.js");
-	}
-
-	// Nuke CacheStorage (Gatsby's workbox caches) directly
-	if ("caches" in window) {
-		caches.keys().then(function (names) {
-			for (const name of names) {
-				caches.delete(name);
-				console.log("Deleted cache:", name);
-			}
-		});
+	// One-time cleanup of old Gatsby service worker and caches.
+	// Runs once per browser, then sets a localStorage flag to skip future visits.
+	// TEMPORARY: remove after 2026-04-01.
+	if (!localStorage.getItem("sw-cleaned")) {
+		if ("serviceWorker" in navigator) {
+			navigator.serviceWorker.getRegistrations().then(function (regs) {
+				for (var i = 0; i < regs.length; i++) {
+					regs[i].unregister();
+				}
+			});
+		}
+		if ("caches" in window) {
+			caches.keys().then(function (names) {
+				for (var i = 0; i < names.length; i++) {
+					caches.delete(names[i]);
+				}
+			});
+		}
+		localStorage.setItem("sw-cleaned", "1");
 	}
 </script>
 

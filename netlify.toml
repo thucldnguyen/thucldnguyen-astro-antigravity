@@ -25,19 +25,17 @@
   [headers.values]
     Cache-Control = "public, max-age=86400, immutable"
 
-# Kill-switch service worker files: never cache, and nuke old SW + caches on fetch.
-# TEMPORARY Clear-Site-Data: remove after 2026-04-01.
+# Service worker files: never cache so browser always gets latest version.
+# TEMPORARY: remove after 2026-04-01.
 [[headers]]
   for = "/sw.js"
   [headers.values]
     Cache-Control = "no-cache, no-store, must-revalidate"
-    Clear-Site-Data = "\"cache\", \"storage\""
 
 [[headers]]
   for = "/service-worker.js"
   [headers.values]
     Cache-Control = "no-cache, no-store, must-revalidate"
-    Clear-Site-Data = "\"cache\", \"storage\""
 
 # Cache llms.txt files for 1 day
 [[headers]]
@@ -52,8 +50,3 @@
   to = "/sitemap-index.xml"
   status = 301
 
-# TEMPORARY: Kill old Gatsby service worker for returning visitors.
-# Remove after 2026-04-01.
-[[edge_functions]]
-  function = "clear-sw"
-  path = "/*"

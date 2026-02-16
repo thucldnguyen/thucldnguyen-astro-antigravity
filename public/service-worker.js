@@ -1,23 +1,17 @@
-self.addEventListener('install', function (e) {
+// No-op service worker that replaces Gatsby's old SW.
+// TEMPORARY: remove after 2026-04-01.
+self.addEventListener('install', function () {
     self.skipWaiting();
 });
 
 self.addEventListener('activate', function (e) {
     e.waitUntil(
-        caches.keys().then(function (cacheNames) {
+        caches.keys().then(function (names) {
             return Promise.all(
-                cacheNames.map(function (cacheName) {
-                    return caches.delete(cacheName);
-                })
+                names.map(function (name) { return caches.delete(name); })
             );
         }).then(function () {
             return self.registration.unregister();
-        }).then(function () {
-            return self.clients.matchAll();
-        }).then(function (clients) {
-            clients.forEach(function (client) {
-                client.navigate(client.url);
-            });
         })
     );
 });
