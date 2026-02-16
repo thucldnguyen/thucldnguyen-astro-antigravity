@@ -1,5 +1,6 @@
 import type { Context } from '@netlify/functions';
 import { getStore } from '@netlify/blobs';
+import { jsonResponse, optionsResponse } from './http';
 
 interface Comment {
     id: string;
@@ -32,14 +33,7 @@ export default async (req: Request, context: Context) => {
 
     // Handle CORS
     if (req.method === 'OPTIONS') {
-        return new Response(null, {
-            status: 204,
-            headers: {
-                'Access-Control-Allow-Origin': '*',
-                'Access-Control-Allow-Methods': 'GET, POST',
-                'Access-Control-Allow-Headers': 'Content-Type',
-            },
-        });
+        return optionsResponse('GET, POST');
     }
 
     try {
@@ -49,27 +43,13 @@ export default async (req: Request, context: Context) => {
             const thoughtId = url.searchParams.get('thoughtId');
 
             if (!thoughtId) {
-                return new Response(JSON.stringify({ error: 'thoughtId required' }), {
-                    status: 400,
-                    headers: { 'Content-Type': 'application/json' },
-                });
+                return jsonResponse({ error: 'thoughtId required' }, 400);
             }
 
             const commentsKey = `comments:${thoughtId}`;
             const comments = await store.get(commentsKey, { type: 'json' }) as Comment[] | null;
 
-            return new Response(
-                JSON.stringify({
-                    comments: comments || [],
-                }),
-                {
-                    status: 200,
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'Access-Control-Allow-Origin': '*',
-                    },
-                }
-            );
+            return jsonResponse({ comments: comments || [] }, 200);
         }
 
         if (req.method === 'POST') {
@@ -80,45 +60,21 @@ export default async (req: Request, context: Context) => {
             // Honeypot check
             if (website) {
                 console.log('Honeypot triggered:', clientIP);
-                return new Response(
-                    JSON.stringify({ error: 'Invalid submission' }),
-                    {
-                        status: 400,
-                        headers: {
-                            'Content-Type': 'application/json',
-                            'Access-Control-Allow-Origin': '*',
-                        },
-                    }
-                );
+                return jsonResponse({ error: 'Invalid submission' }, 400);
             }
 
             // Validation
             if (!thoughtId || !name || !text) {
-                return new Response(JSON.stringify({ error: 'Missing required fields' }), {
-                    status: 400,
-                    headers: { 'Content-Type': 'application/json' },
-                });
+                return jsonResponse({ error: 'Missing required fields' }, 400);
             }
 
             if (name.length > 50 || text.length > 500) {
-                return new Response(JSON.stringify({ error: 'Content too long' }), {
-                    status: 400,
-                    headers: { 'Content-Type': 'application/json' },
-                });
+                return jsonResponse({ error: 'Content too long' }, 400);
             }
 
             // Profanity filter
             if (containsProfanity(text) || containsProfanity(name)) {
-                return new Response(
-                    JSON.stringify({ error: 'Comment contains inappropriate content' }),
-                    {
-                        status: 400,
-                        headers: {
-                            'Content-Type': 'application/json',
-                            'Access-Control-Allow-Origin': '*',
-                        },
-                    }
-                );
+                return jsonResponse({ error: 'Comment contains inappropriate content' }, 400);
             }
 
             // Rate limiting check
@@ -129,16 +85,7 @@ export default async (req: Request, context: Context) => {
             if (rateLimitData) {
                 if (now < rateLimitData.resetTime) {
                     if (rateLimitData.count >= MAX_COMMENTS_PER_HOUR) {
-                        return new Response(
-                            JSON.stringify({ error: 'Rate limit exceeded. Try again later.' }),
-                            {
-                                status: 429,
-                                headers: {
-                                    'Content-Type': 'application/json',
-                                    'Access-Control-Allow-Origin': '*',
-                                },
-                            }
-                        );
+                        return jsonResponse({ error: 'Rate limit exceeded. Try again later.' }, 429);
                     }
                 }
             }
@@ -169,8 +116,8 @@ export default async (req: Request, context: Context) => {
             };
             await store.setJSON(rateLimitKey, newRateLimitData);
 
-            return new Response(
-                JSON.stringify({
+            return jsonResponse(
+                {
                     comment: {
                         id: comment.id,
                         name: comment.name,
@@ -178,30 +125,15 @@ export default async (req: Request, context: Context) => {
                         timestamp: comment.timestamp,
                     },
                     message: 'Comment added',
-                }),
-                {
-                    status: 201,
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'Access-Control-Allow-Origin': '*',
-                    },
-                }
+                },
+                201
             );
         }
 
-        return new Response(JSON.stringify({ error: 'Method not allowed' }), {
-            status: 405,
-            headers: { 'Content-Type': 'application/json' },
-        });
+        return jsonResponse({ error: 'Method not allowed' }, 405);
     } catch (error) {
         console.error('Comments error:', error);
-        return new Response(JSON.stringify({ error: 'Internal server error' }), {
-            status: 500,
-            headers: {
-                'Content-Type': 'application/json',
-                'Access-Control-Allow-Origin': '*',
-            },
-        });
+        return jsonResponse({ error: 'Internal server error' }, 500);
     }
 };
 

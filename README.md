@@ -166,7 +166,7 @@ TURNSTILE_SECRET_KEY=your_turnstile_secret_key
 
 ### Interactive Features
 - **Reactions**: Like posts without authentication
-- **Comments**: Spam-protected with honeypot, profanity filter, and CAPTCHA
+- **Comments**: Spam-protected with honeypot and profanity filter
 - **Rate Limiting**: IP-based to prevent abuse
 - **Optimistic UI**: Instant feedback on interactions
 
