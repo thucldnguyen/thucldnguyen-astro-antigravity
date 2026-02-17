@@ -2,6 +2,7 @@
 import BaseHead from "../../components/BaseHead.astro";
 import Header from "../../components/Header.astro";
 import Footer from "../../components/Footer.astro";
+import AnalyticsScripts from "../../components/AnalyticsScripts.astro";
 import { SITE_TITLE, SITE_DESCRIPTION } from "../../consts";
 import GameComponent from "../../components/GeoGuru/Game.astro";
 ---
@@ -23,5 +24,6 @@ import GameComponent from "../../components/GeoGuru/Game.astro";
             <GameComponent />
         </main>
         <Footer />
+        <AnalyticsScripts />
     </body>
 </html>

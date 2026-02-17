@@ -1,0 +1,63 @@
+---
+// Analytics scripts loaded at the bottom of <body> for better performance
+// Moved from BaseHead.astro to unblock critical rendering path
+---
+
+<!-- Google Tag Manager -->
+<script is:inline>
+	(function (w, d, s, l, i) {
+		w[l] = w[l] || [];
+		w[l].push({ "gtm.start": new Date().getTime(), event: "gtm.js" });
+		var f = d.getElementsByTagName(s)[0],
+			j = d.createElement(s),
+			dl = l != "dataLayer" ? "&l=" + l : "";
+		j.async = true;
+		j.src = "https://www.googletagmanager.com/gtm.js?id=" + i + dl;
+		f.parentNode.insertBefore(j, f);
+	})(window, document, "script", "dataLayer", "GTM-TCPCLWKL");
+</script>
+
+<!-- Ahrefs Web Analytics -->
+<script
+	src="https://analytics.ahrefs.com/analytics.js"
+	data-key="HmvZGorC9yvQSMOnmhYSWA"
+	defer></script>
+
+<!-- Google Analytics (optimized for view transitions) -->
+<script is:inline>
+	// Only initialize GA once, even across view transitions
+	if (!window.gaInitialized) {
+		window.dataLayer = window.dataLayer || [];
+		function gtag() {
+			dataLayer.push(arguments);
+		}
+
+		function loadGA() {
+			if (window.gaInitialized) return; // Prevent double-loading
+			var s = document.createElement("script");
+			s.async = true;
+			s.src =
+				"https://www.googletagmanager.com/gtag/js?id=G-WBEHL329W9";
+			document.head.appendChild(s);
+			gtag("js", new Date());
+			gtag("config", "G-WBEHL329W9");
+			window.gaInitialized = true;
+		}
+
+		// Load after page is fully ready
+		if (document.readyState === "complete") {
+			loadGA();
+		} else {
+			window.addEventListener("load", loadGA);
+		}
+
+		// Track page views on view transitions
+		document.addEventListener("astro:page-load", () => {
+			if (window.gaInitialized && typeof gtag === "function") {
+				gtag("event", "page_view", {
+					page_path: window.location.pathname,
+				});
+			}
+		});
+	}
+</script>

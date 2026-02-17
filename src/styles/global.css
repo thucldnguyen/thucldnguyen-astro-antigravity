@@ -182,7 +182,7 @@ html[data-is-navigating="true"] body {
 /* Speed up page transitions and prevent blocking on resource loads */
 ::view-transition-old(root),
 ::view-transition-new(root) {
-  animation-duration: 0.3s;
+  animation-duration: 0.15s; /* Reduced from 0.3s for snappier transitions */
   animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
 }
 
@@ -213,7 +213,7 @@ html[data-is-navigating="true"] body {
 
 /* Prevent layout shift during transitions */
 ::view-transition-group(root) {
-  animation-duration: 0.3s;
+  animation-duration: 0.15s; /* Reduced from 0.3s for snappier transitions */
 }
 
 /* Ensure dark mode persists during transitions */

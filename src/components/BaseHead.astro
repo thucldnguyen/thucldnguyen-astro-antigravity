@@ -28,24 +28,7 @@ const {
 } = Astro.props;
 ---
 
-<!-- Google Tag Manager -->
-<script is:inline>
-	(function (w, d, s, l, i) {
-		w[l] = w[l] || [];
-		w[l].push({ "gtm.start": new Date().getTime(), event: "gtm.js" });
-		var f = d.getElementsByTagName(s)[0],
-			j = d.createElement(s),
-			dl = l != "dataLayer" ? "&l=" + l : "";
-		j.async = true;
-		j.src = "https://www.googletagmanager.com/gtm.js?id=" + i + dl;
-		f.parentNode.insertBefore(j, f);
-	})(window, document, "script", "dataLayer", "GTM-TCPCLWKL");
-</script>
-<!-- End Google Tag Manager --><!-- Ahrefs Web Analytics -->
-<script
-	src="https://analytics.ahrefs.com/analytics.js"
-	data-key="HmvZGorC9yvQSMOnmhYSWA"
-	async></script>
+<!-- Analytics scripts moved to AnalyticsScripts.astro (bottom of body) for better performance -->
 
 <!-- Global Metadata -->
 <meta charset="utf-8" />
@@ -193,23 +176,4 @@ const {
 	)}
 />
 
-<!-- Google Analytics: load after page load to avoid blocking LCP (3G / low-end) -->
-<script is:inline>
-	window.dataLayer = window.dataLayer || [];
-	function gtag() {
-		dataLayer.push(arguments);
-	}
-	function loadGA() {
-		var s = document.createElement("script");
-		s.async = true;
-		s.src = "https://www.googletagmanager.com/gtag/js?id=G-WBEHL329W9";
-		document.head.appendChild(s);
-		gtag("js", new Date());
-		gtag("config", "G-WBEHL329W9");
-	}
-	if (document.readyState === "complete") {
-		loadGA();
-	} else {
-		window.addEventListener("load", loadGA);
-	}
-</script>
+<!-- Google Analytics moved to AnalyticsScripts.astro for better performance and view transitions support -->

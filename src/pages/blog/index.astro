@@ -6,6 +6,7 @@ import Footer from "../../components/Footer.astro";
 import FormattedDate from "../../components/FormattedDate.astro";
 import Header from "../../components/Header.astro";
 import PostCard from "../../components/PostCard.astro";
+import AnalyticsScripts from "../../components/AnalyticsScripts.astro";
 import { SITE_DESCRIPTION, SITE_TITLE } from "../../consts";
 
 const posts = (await getCollection("blog")).sort(
@@ -48,5 +49,6 @@ const posts = (await getCollection("blog")).sort(
 			</section>
 		</main>
 		<Footer />
+		<AnalyticsScripts />
 	</body>
 </html>

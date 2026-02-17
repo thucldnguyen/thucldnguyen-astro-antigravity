@@ -4,6 +4,7 @@ import BaseHead from "../../components/BaseHead.astro";
 import Header from "../../components/Header.astro";
 import Footer from "../../components/Footer.astro";
 import ThoughtCard from "../../components/ThoughtCard.astro";
+import AnalyticsScripts from "../../components/AnalyticsScripts.astro";
 import { SITE_TITLE, SITE_DESCRIPTION } from "../../consts";
 
 const thoughts = (await getCollection("thoughts")).sort(
@@ -55,6 +56,7 @@ const pageDescription = "Random thoughts, quick updates, and micro-posts";
             }
         </main>
         <Footer />
+        <AnalyticsScripts />
     </body>
 </html>
 

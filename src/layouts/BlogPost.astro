@@ -14,6 +14,7 @@ import RelatedPosts from "../components/RelatedPosts.astro";
 import Comments from "../components/Comments.astro";
 import AnimateOnScroll from "../components/AnimateOnScroll.astro";
 import JsonLd from "../components/JsonLd.astro";
+import AnalyticsScripts from "../components/AnalyticsScripts.astro";
 import bannerImage from "../assets/banner.jpg";
 
 type Props = CollectionEntry<"blog">["data"] & { body?: string };
@@ -184,5 +185,6 @@ const resolvedImage = heroImage || featuredImage || image || bannerImage;
 		<Footer />
 		<Lightbox />
 		<AnimateOnScroll />
+		<AnalyticsScripts />
 	</body>
 </html>
