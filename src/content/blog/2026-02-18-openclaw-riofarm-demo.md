@@ -3,7 +3,7 @@ template: blog-post
 title: "OpenClaw rebuilding my family's farm website - Here's what surprised me"
 slug: /blog/openclaw-riofarm-demo
 date: 2026-02-18 23:00
-description: "How OpenClaw's AI agent rebuilt riofarm.vn from scratch, proposed features I hadn't thought of, and managed it all via Telegram while I put my baby to sleep."
+description: "How OpenClaw's AI agent diagnosed a build failure, recommended scrapping Gatsby, rebuilt riofarm.vn with TDD and parallel sub-agents — all managed from Telegram on my phone while putting my baby to sleep."
 heroImage: ../../assets/openclaw-riofarm-hero.jpg
 tags: ["OpenClaw", "AI", "Product Management", "Side Projects"]
 ---
@@ -18,19 +18,35 @@ That's the part I couldn't have predicted going in. But it's not even the main s
 
 ---
 
+## It Started With a Build Failure
+
+I didn't plan to rebuild the site. I asked the agent to fix a Netlify build error.
+
+The Gatsby site had broken — a native binary dependency (`sharp`) was failing on Netlify's build environment. I asked for a fix. What I got back was a diagnosis and two options:
+
+- **Option A**: Pin Node 20 LTS and force the sharp resolution — the quick fix
+- **Option B**: Migrate to Astro — *"a farm landing page doesn't need a full React SPA framework. Gatsby is massively over-engineered for this."*
+
+The agent's recommendation was explicit: *Option B is honestly the right call.* Not "here are your choices" — an actual recommendation with reasoning. I agreed. That one exchange changed the scope of the whole project.
+
+---
+
 ## The Ask I Thought Would Break It
 
-My sister-in-law's site had been running on a Gatsby template for years. Slow, bloated, hard to maintain. I wanted to move it to Astro 5 — faster builds, better static output, cleaner codebase.
+Once I chose Option B, I added constraints I expected would cause problems:
 
-But I didn't want a sloppy port. I wanted 100% feature parity: every product, every blog post, cart + checkout flow, mobile behavior, everything.
+<figure class="chat-screenshot">
+  <img src="/blog/chat-tdd-brief.jpg" alt="Telegram screenshot: Thuc's TDD brief — write tests before code, 100% coverage, no downtime, glassmorphism styling" />
+  <figcaption>The actual brief, sent from Telegram at 20:52. "Write the tests before you code. Tests must cover 100% of code paths."</figcaption>
+</figure>
 
-And I added one constraint I expected to cause problems:
+Zero downtime. Tests before code, 100% coverage. Keep the old Gatsby code intact as a backup. Perfect SEO with sitemap. Style parity with the existing yellow/glassmorphism theme.
 
-> **Full test coverage. Playwright E2E tests and unit tests for all critical code paths, written alongside the implementation — and nothing ships without them passing.**
+This is a demanding brief even for a senior engineer. For an AI agent running in the background while I'm patting a baby, I expected it to cut corners somewhere.
 
-I wasn't asking for textbook TDD where tests precede every line of code. I was setting a bar: if you can't test it, you don't ship it. I expected the agent to either skip this entirely, or produce shallow tests that passed trivially.
+The agent's immediate response: *"This is a substantial project — TDD migration with full test coverage, SEO, zero downtime, and style parity. Let me read the coding agent skill first before diving in."* Then: *"This is a big, precise job — perfect for a coding agent. I'll spawn Claude Code in the background with a comprehensive brief, then check back on progress."*
 
-I was wrong on both counts.
+It didn't start building. It paused, read its own documentation on how to delegate, then spawned a sub-agent. That discipline — knowing when to hand off rather than just charge ahead — was the first sign this would go differently than expected.
 
 ---
 
@@ -50,9 +66,9 @@ More importantly: the tests caught actual bugs. Cart scripts weren't executing p
 
 That's tests doing their job, not just being decorative.
 
-I reviewed the results like an orchestrator. I sent corrections. Agents updated and re-ran. Back to sleep-patting.
+I reviewed the results like an orchestrator. I sent corrections. Agents updated and re-ran.
 
-The final result: 95% satisfactory on first review. The mental model shift: **I stopped writing code. I started writing briefs.**
+Final result: 95% satisfactory on first review. **I stopped writing code. I started writing briefs.**
 
 ---
 
@@ -60,15 +76,36 @@ The final result: 95% satisfactory on first review. The mental model shift: **I 
 
 This is the part I want to highlight, because it's what I mean by "exceeded expectations."
 
-The original Gatsby site was a template — products, blog, contact form, a YouTube video. Standard e-commerce structure. What the agent did during the migration wasn't just port the existing features. It asked questions, understood context, and proposed additions I hadn't thought of.
+After the core migration, I asked a simple question: *"Help me enrich the content of the astro site. What more info should be displayed there? Be mindful that it's a Vietnamese site tailor fit to Vietnamese consumers."*
 
-**Zalo floating button.** I'd mentioned that riofarm.vn is built specifically for Vietnamese consumers, that the customer relationship is personal and direct. The agent connected those dots and suggested a floating Zalo chat button — the Vietnamese equivalent of "chat with us on WhatsApp." It didn't exist anywhere in the Gatsby codebase. The agent proposed it, built it, styled it with the brand colors, and made it hide correctly when the cart drawer is open. One contextual insight → one shipped feature.
+I expected suggestions. I got an unsolicited gap analysis:
 
-**Customer testimonials section.** Same pattern. The agent suggested that for a local Vietnamese farm selling by word-of-mouth, social proof in the voice of actual customers would matter. I had screenshots of customer chats — real messages from buyers, the kind of casual Vietnamese you can't fabricate ("Mít ngon lắm em. Bọn nhà chị ăn hết 2 cân rồi kk 😂"). I sent the screenshots. The agent read them, extracted the quotes, styled a testimonials grid with the farm's warm yellow palette, and published it to the homepage.
+<div class="chat-screenshot-pair">
+  <figure>
+    <img src="/blog/chat-gap-analysis-1.jpg" alt="Telegram screenshot: Thuc asks about enriching the site for Vietnamese consumers" />
+    <figcaption>The trigger: "Be mindful that it's a Vietnamese site tailor fit to Vietnamese consumers."</figcaption>
+  </figure>
+  <figure>
+    <img src="/blog/chat-gap-analysis-2.jpg" alt="Telegram screenshot: Clawy's gap analysis — Zalo CTA, testimonials, combo sets as high-priority items" />
+    <figcaption>The response: an unprompted priority-ranked gap analysis before touching a single file.</figcaption>
+  </figure>
+</div>
 
-No brief for that one. Just: *here are screenshots, you figure out what to do with them.* It did.
+The agent couldn't even load the Facebook page I'd shared (login wall). It worked from the site alone, the brief, and the context of what "Vietnamese e-commerce" means. Then it ranked what was missing by business impact:
 
-That's the gap between "tool that executes" and "collaborator that thinks." The Zalo button and testimonials were both the agent's ideas. I just said yes.
+**High priority:**
+1. Missing product pages (dried mango, dried jackfruit weren't on the site)
+2. **Zalo CTA** — *"Vietnamese consumers use Zalo more than any other channel. The site only shows a phone number buried in the footer. A sticky Zalo button would meaningfully increase conversions."*
+3. **Customer testimonials** — *"Social proof is critical for Vietnamese e-commerce. 'Khách hàng nói gì' section with 4–6 authentic quotes + location (Hà Nội, TPHCM...)."*
+4. Combo/gift sets for Tết
+
+None of this was in my brief.
+
+**On the Zalo button:** The original Gatsby site had zero Zalo integration. The agent proposed it, built it with brand colors and a pulse animation, and made it correctly hide behind the cart drawer. One contextual insight → one shipped feature.
+
+**On the testimonials:** The initial proposal was for placeholder quotes. I pushed back and sent real screenshots of actual customer chats instead. The agent read them, extracted the genuine quotes, styled a testimonials grid with the farm's warm yellow palette, and published it to the homepage. The quotes stayed authentic — casual Vietnamese, emojis and all (*"Mít ngon lắm em. Bọn nhà chị ăn hết 2 cân rồi kk 😂"*).
+
+That two-step — proposal → push back → better execution — is how good collaboration actually works.
 
 ---
 
@@ -89,11 +126,11 @@ That's the real unlock: **persistent, parallelizable work that I review, don't e
 
 ## The Documentary Transcript
 
-One more moment worth noting for how it illustrates the agent's approach to sourcing.
+One more moment worth noting for how the agent handles sourcing.
 
-The farm's homepage had an embedded YouTube documentary — a local news segment about Rio Macca. I asked the agent to extract facts from it for blog post content.
+The farm's homepage had an embedded YouTube documentary — a local news segment about Rio Macca. I asked the agent to extract facts for blog post content.
 
-I thought it'd spin up a browser instance and "watch" every minute of the video from start to end. To my surprise, it radically simplified by running a Python script to get the full transcript:
+I thought it'd spin up a browser instance and watch the video from start to end. Instead, it radically simplified by running a Python script:
 
 ```python
 from youtube_transcript_api import YouTubeTranscriptApi
@@ -102,13 +139,11 @@ transcript = api.fetch('BUKddHPS3pk', languages=['vi'])
 
 YouTube auto-generates Vietnamese captions. Full transcript in under 3 seconds. Direct quotes, production details, the founder's story — all cited.
 
-Later, cross-referencing a Báo Lâm Đồng article, it found facts the documentary was missing: **20 tons/year** (the documentary said 10 — the farm had grown since filming) and **OCOP 3-star certification**, a Vietnamese government quality mark I hadn't known to add to the site.
+Later, cross-referencing a Báo Lâm Đồng article, it found facts the documentary was missing: **20 tons/year** (the documentary said 10 — the farm had grown since filming) and **OCOP 3-star certification**, a Vietnamese government quality mark that wasn't on the site anywhere.
 
 Those corrections propagated across three blog posts and the homepage trust badge. One cross-reference. Zero manual diffs.
 
-The constraint I gave: *don't fabricate anything. If you don't have the data, flag it.* When I asked about harvest season (not mentioned in either source), it flagged the gap instead of guessing.
-
-That's the part that mattered: it knew what it didn't know.
+The constraint I gave: *don't fabricate anything. If you don't have the data, flag it.* When I asked about harvest season (not mentioned in either source), it flagged the gap instead of guessing. It knew what it didn't know.
 
 ---
 
@@ -128,9 +163,9 @@ It still makes mistakes.
 
 Early sub-agents reused the same image across multiple blog posts. One didn't verify mobile viewport on the cart. The Zalo icon initially rendered as a plain "Z" on some devices before being corrected to a proper SVG badge.
 
-The pattern I found: the agent follows the brief it's given. Vague brief, vague output. Specific constraints, specific results. That's how I'd describe working with any good junior engineer — the discipline is in the framing.
+The pattern: the agent follows the brief it's given. Vague brief, vague output. Specific constraints, specific results. That's how I'd describe working with any good engineer — the discipline is in the framing.
 
-The difference is that when the agent misses something, I say so in chat and it fixes it immediately. No ticket, no sprint, no context-setting from scratch. It already has the full codebase in context.
+The difference is that when the agent misses something, I say so in chat and it fixes it immediately. No ticket, no sprint. It already has the full codebase in context.
 
 ---
 
@@ -142,7 +177,7 @@ The AI had to read existing code before changing it, cite sources for factual cl
 
 That's closer to how real product work goes than most AI demos.
 
-If you haven't thought about what it means to have a persistent, context-aware agent working in the background — not just answering questions but *proposing, building, and shipping* — I'd suggest starting somewhere low-stakes but real. A side project. Something you care about but doesn't have a production SLA.
+If you haven't thought about what it means to have a persistent, context-aware agent working in the background — not just answering questions but *diagnosing, proposing, building, and shipping* — I'd suggest starting somewhere low-stakes but real. A side project. Something you care about but doesn't have a production SLA.
 
 See how far you get before you have to take back the wheel.
 
