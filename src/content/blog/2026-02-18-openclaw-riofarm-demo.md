@@ -22,7 +22,7 @@ That's the part I couldn't have predicted going in. But it's not even the main s
 
 My sister-in-law's site had been running on a Gatsby template for years. Slow, bloated, hard to maintain. I wanted to move it to Astro 5 — faster builds, better static output, cleaner codebase.
 
-But I didn't want a rough port. I wanted zero feature parity losses: every product, every blog post, cart + checkout flow, mobile behavior, everything.
+But I didn't want a sloppy port. I wanted 100% feature parity: every product, every blog post, cart + checkout flow, mobile behavior, everything.
 
 And I added one constraint I expected to cause problems:
 
@@ -50,7 +50,7 @@ More importantly: the tests caught actual bugs. Cart scripts weren't executing p
 
 That's tests doing their job, not just being decorative.
 
-I reviewed the results like a PM reviewing pull requests. I sent corrections. Agents updated and re-ran. Back to sleep-patting.
+I reviewed the results like an orchestrator. I sent corrections. Agents updated and re-ran. Back to sleep-patting.
 
 The final result: 95% satisfactory on first review. The mental model shift: **I stopped writing code. I started writing briefs.**
 
@@ -62,7 +62,7 @@ This is the part I want to highlight, because it's what I mean by "exceeded expe
 
 The original Gatsby site was a template — products, blog, contact form, a YouTube video. Standard e-commerce structure. What the agent did during the migration wasn't just port the existing features. It asked questions, understood context, and proposed additions I hadn't thought of.
 
-**Zalo floating button.** I'd mentioned that riofarm.vn is built specifically for Vietnamese consumers, that the farm sells through Facebook and Zalo, that the customer relationship is personal and direct. The agent connected those dots and suggested a floating Zalo chat button — the Vietnamese equivalent of "chat with us on WhatsApp." It didn't exist anywhere in the Gatsby codebase. The agent proposed it, built it, styled it with the brand colors, and made it hide correctly when the cart drawer is open. One contextual insight → one shipped feature.
+**Zalo floating button.** I'd mentioned that riofarm.vn is built specifically for Vietnamese consumers, that the customer relationship is personal and direct. The agent connected those dots and suggested a floating Zalo chat button — the Vietnamese equivalent of "chat with us on WhatsApp." It didn't exist anywhere in the Gatsby codebase. The agent proposed it, built it, styled it with the brand colors, and made it hide correctly when the cart drawer is open. One contextual insight → one shipped feature.
 
 **Customer testimonials section.** Same pattern. The agent suggested that for a local Vietnamese farm selling by word-of-mouth, social proof in the voice of actual customers would matter. I had screenshots of customer chats — real messages from buyers, the kind of casual Vietnamese you can't fabricate ("Mít ngon lắm em. Bọn nhà chị ăn hết 2 cân rồi kk 😂"). I sent the screenshots. The agent read them, extracted the quotes, styled a testimonials grid with the farm's warm yellow palette, and published it to the homepage.
 
@@ -93,7 +93,7 @@ One more moment worth noting for how it illustrates the agent's approach to sour
 
 The farm's homepage had an embedded YouTube documentary — a local news segment about Rio Macca. I asked the agent to extract facts from it for blog post content.
 
-Instead of opening a browser, it ran a Python script:
+I thought it'd spin up a browser instance and "watch" every minute of the video from start to end. To my surprise, it radically simplified by running a Python script to get the full transcript:
 
 ```python
 from youtube_transcript_api import YouTubeTranscriptApi
