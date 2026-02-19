@@ -3,16 +3,83 @@ template: blog-post
 title: "OpenClaw rebuilding my family's farm website - Here's what surprised me"
 slug: /blog/openclaw-riofarm-demo
 date: 2026-02-18 23:00
-description: "How OpenClaw's AI agent helped me rebuild riofarm.vn from Gatsby to Astro, extract facts from a documentary, source images from the web, and deploy a full content strategy — all from Telegram on my phone."
+description: "How OpenClaw's AI agent rebuilt riofarm.vn from scratch using TDD and parallel sub-agents — all managed from Telegram on my phone while putting my baby to sleep."
 heroImage: ../../assets/openclaw-riofarm-hero.jpg
 tags: ["OpenClaw", "AI", "Product Management", "Side Projects"]
 ---
 
-**The moment that stopped me was when it transcribed a documentary it had never seen.**
+I did most of this project one-handed.
 
-I asked my AI assistant (running on [OpenClaw](https://openclaw.ai)) to analyze a YouTube video on the homepage of my sister-in-law's macadamia farm website. It was a local news documentary about Rio Macca — a small farm business in Lâm Hà, Lâm Đồng. I expected it to open a browser, scrape a transcript, maybe get something partial.
+My son Mino is five months old. He needs soothing to sleep — rocking, patting, slow pacing through a dim room. My other hand had my phone open to Telegram. That's where I was running the whole rebuild of [riofarm.vn](https://riofarm.vn), my sister-in-law's macadamia farm website.
 
-Instead, it ran a Python script in seconds:
+The stack migration (Gatsby → Astro), the content strategy, the blog posts, the product pages, the bug fixes — all managed via chat. No laptop. No IDE. No "let me sit down and focus." Just short bursts of direction while doing something else entirely.
+
+That's the part I couldn't have predicted going in.
+
+---
+
+## The Ask I Thought Would Break It
+
+My sister-in-law's site had been running on a Gatsby template for years. Slow, bloated, hard to maintain. I wanted to move it to Astro 5 — faster builds, better static output, cleaner codebase.
+
+But I didn't want a rough port. I wanted zero feature parity losses: every product, every blog post, cart + checkout flow, mobile behavior, the Zalo floating button, everything.
+
+So I gave the agent a constraint I expected would cause problems:
+
+> **Write the tests first. Unit tests and Playwright E2E tests covering 100% of the critical code paths. Don't write a single line of Astro code until the test suite exists.**
+
+Test-Driven Development on an AI-directed rewrite felt like a stretch. TDD requires upfront discipline — you're writing tests for code that doesn't exist yet, based on specs you have to reason out in advance. I'd seen AI tools fumble at much simpler things.
+
+I half expected it to skip the tests, or write them after the fact, or produce a test file so shallow it was effectively useless.
+
+---
+
+## What Actually Happened
+
+It didn't fumble. It forked.
+
+The agent spawned multiple sub-agents and ran them in parallel:
+
+- **Sub-agent A**: analyzed the Gatsby codebase, extracted every route, every component interface, every cart behavior — and wrote the Playwright E2E specs (`homepage.spec.ts`, `products.spec.ts`, `cart-checkout.spec.ts`, `pages.spec.ts`)
+- **Sub-agent B**: started scaffolding the Astro project structure while A was still running
+- **Sub-agent C**: inventoried all the content — products, blog posts, images, metadata
+
+I got a ping when the tests were done. I reviewed them like PR comments. They were real tests — cart add/remove flows, checkout visibility on mobile, breadcrumb rendering, Zalo button behavior, 404 handling. Not mocks.
+
+Then the implementation agents started running against those specs. Build → test → fix → push. I'd get a summary. I'd reply with a correction or a new constraint. Back to sleep-patting.
+
+The result: 95% satisfactory on first review. A few edge cases (duplicate images across blog posts, mobile checkout clipping) caught by the tests themselves, not by me.
+
+The mental model shift was immediate: **I stopped writing code. I started writing briefs.**
+
+---
+
+## The Parallel Agents Are the Point
+
+This is what I think people miss when they talk about "AI coding tools." The unlock isn't speed — it's parallelism.
+
+When I gave a large task (write 6 blog posts, enrich 8 product pages, build the Korean market post), I didn't wait. The agent spawned sub-agents. I went and did something else. The pings came back as the tasks resolved.
+
+In one session I had three things running simultaneously:
+- Three educational blog posts being written from documentary source material
+- Product pages getting nutrition tables and benefit sections
+- A Korean market post being built with a photo sourced from a newspaper article
+
+All building, testing, pushing independently. I reviewed the outputs like a PM reviewing pull requests — not like a developer waiting on a compile.
+
+That's the real capability: **persistent, parallelizable work that I review, don't execute.**
+
+---
+
+## The Documentary Transcript
+
+One moment worth noting, because it illustrates how the agent handles sourcing.
+
+The farm's homepage had an embedded YouTube documentary — a local news segment about Rio Macca. I asked the agent to extract facts from it for blog post content.
+
+I expected it to open a browser and scrape what it could.
+
+Instead, it ran a Python script:
 
 ```python
 from youtube_transcript_api import YouTubeTranscriptApi
@@ -20,142 +87,54 @@ api = YouTubeTranscriptApi()
 transcript = api.fetch('BUKddHPS3pk', languages=['vi'])
 ```
 
-YouTube auto-generates Vietnamese captions for the video. The library pulls them directly. No browser. No scraping. Full transcript in under 3 seconds.
+YouTube auto-generates Vietnamese captions. Full transcript in under 3 seconds. Then it pulled direct quotes, production details, and the founder's background — all cited to the source.
 
-What came out of that transcript was the real surprise.
+Later, cross-referencing a Báo Lâm Đồng newspaper article, it found a newer figure the documentary didn't have: **20 tons/year** (the documentary said 10 — the farm had grown). And **OCOP 3-star certification**, a Vietnamese government quality mark I hadn't known to add.
 
----
+Those facts propagated across three blog posts and the homepage badge. One conversation. Zero manual diffs.
 
-## The Backstory
+The constraint I gave: *don't fabricate anything. If you don't have the data, flag it.*
 
-I'd been migrating [riofarm.vn](https://riofarm.vn) from a Gatsby template to Astro — cleaner stack, faster builds, better SEO. A side project to help out family. The site sells macadamia nuts, macca oil, and dried fruits, all produced at a small facility in the highlands of Lâm Đồng.
-
-I was running the whole project through OpenClaw — a self-hosted AI gateway that gives you a persistent Claude agent accessible via Telegram. Think of it as Claude with memory, tool access, and the ability to work in the background while you're doing something else.
-
-The migration was mostly code. But at some point the project became something larger: rebuilding the content strategy, writing blog posts, enriching product pages, fixing UI bugs — all driven by a conversation on my phone.
+When I asked about harvest season (not mentioned in either source), it flagged the gap instead of guessing. That's the part that actually mattered — knowing what it didn't know.
 
 ---
 
-## What the Documentary Unlocked
+## Vibe Coding Is a Real Thing
 
-The transcript gave us facts we didn't have.
+I've been a PM long enough to know that "AI will replace engineers" is mostly hype. What I didn't expect was something more specific: AI makes asynchronous, mobile-native development genuinely practical for people who can already reason about systems.
 
-Before the video, the website said Rio Macca produced "over 10 tons/year." The documentary said the same. But I'd shared a link to a Báo Lâm Đồng newspaper article later in the session — and the agent, fetching the page, found a newer figure: **over 20 tons/year**, and something I didn't know existed: **OCOP 3-star certification**.
+I don't mean "write bad code on your phone." I mean: if you can write a clear brief, specify what done looks like, and review output with some judgment — you can ship real features from Telegram while your baby sleeps on your shoulder.
 
-OCOP (One Commune One Product) is a Vietnamese government quality certification. It's a meaningful trust signal for local consumers. We didn't have it anywhere on the site.
+That's new. That's different from "here's a code autocomplete."
 
-Within a few minutes:
-- The `10 tấn` references across 3 blog posts were corrected to `20 tấn`
-- OCOP 3 sao was added to the production process post, the founder story post, and the homepage attribute grid
-- The "Đạt chuẩn VSATP" badge became "🏅 OCOP 3 Sao"
-
-One conversation. Zero manual diffs.
-
----
-
-## Three Blog Posts From a Documentary
-
-The transcript also became the source material for three new blog posts — written entirely from verified facts, no fabrication.
-
-I'd asked the agent to write posts about Rio Macca's founder (Nguyễn Thị Ánh, a 9x-generation entrepreneur from a farming family), the farm-to-hand production process, and why Lâm Hà macadamia is called "nữ hoàng quả khô" (queen of dried fruits).
-
-The constraint I gave: *don't fabricate anything. If you don't have the data, ask me.*
-
-The agent pulled all three posts directly from the documentary transcript — Ánh's direct quotes, the production steps, the partnership model with local farms, the certifications. It then cited the source. When I asked about harvest season (not mentioned in the video), it flagged it instead of guessing.
-
-That's the part that mattered: it knew what it didn't know.
-
----
-
-## The Image I Didn't Have to Find
-
-For the Korean market blog post, I wanted the photo of Ánh from the Báo Lâm Đồng article — her standing at the Rio Macca trade booth at an event in Đà Lạt connecting Lâm Đồng producers with Korean supermarket chains.
-
-I didn't have the file. I didn't have the URL.
-
-The agent ran `curl` on the article HTML, grepped for image URLs, found the CDN path, downloaded the 1920×975 JPEG directly into the repo's `public/blogs/` folder, committed it, and used it as the hero image for the new post.
-
-```bash
-curl -s "https://baolamdong.vn/..." | grep -oE 'https?://[^"]+\.(jpg|jpeg)[^"]*'
-# → https://daknong.1cdn.vn/2025/11/26/thuong-hieu-mac-ca-rio...jpg
-```
-
-I mentioned the article. It found the image. That was the whole interaction.
-
----
-
-## Bugs Fixed From a Phone Screenshot
-
-Midway through the project, I opened riofarm.vn on Chrome Android and sent a screenshot to Telegram. The breadcrumb on a blog post was broken — "Trang chủ" was wrapping onto its own line, and the post title was spilling off screen.
-
-The agent:
-1. Located the `.breadcrumbs` CSS class in `global.css`
-2. Diagnosed the issue: `flex-wrap` not set, no truncation on the last segment
-3. Fixed it with `flex-wrap: nowrap`, `text-overflow: ellipsis` on the last `span`, and `flex-shrink: 0` on the static crumbs
-4. Applied the fix across all 10 blog posts simultaneously (the separator `<span>` needed a class to avoid being caught by the truncation rule)
-5. Built, passed tests, pushed
-
-The fix was global. I sent one screenshot. The whole thing took about 90 seconds.
-
----
-
-## The Sub-Agent Pattern
-
-The biggest productivity unlock wasn't any single feature — it was background agents.
-
-When tasks were long (write 6 blog posts, enrich 8 product pages, build a Tết booth post), I'd say "go" and the agent would spawn a sub-agent. I'd get a ping when it was done. Meanwhile I was doing something else.
-
-In one session I had:
-- Sub-agent A: writing 3 educational blog posts (comparison article, recipes, storage tips)
-- Sub-agent B: adding nutrition tables + key benefits to 8 product pages
-- Sub-agent C: creating the Korean market post with the sourced image
-
-All running in parallel. All building, testing, pushing independently. I reviewed the results like a PM reviewing pull requests.
-
-The mental model shift: I stopped writing code and started writing briefs.
+The riofarm.vn rebuild took about two weeks of sessions. Live site, real products, real users. It's not a toy project. And most of it happened in 10-minute bursts, one-handed, in a dark room.
 
 ---
 
 ## What It's Not
 
-It's not magic. The agent still makes mistakes.
+It still makes mistakes.
 
-Early in the project, sub-agents reused images across blog posts — the same `coso2.jpeg` appeared on three different pages. The Zalo button icon rendered as a plain "Z" letter on mobile. The cart checkout button was off-screen on small phones. These weren't caught before pushing.
+Early sub-agents reused the same image across multiple blog posts. One didn't check mobile viewport for the cart. The Zalo icon rendered as a plain "Z" on some devices. These weren't caught before pushing.
 
-The fix was adding explicit constraints in task briefs: *each post must have a unique image*, *test on mobile*, *confirm checkout is visible without scrolling*. The agent follows the brief it's given. A vague brief produces vague output.
-
-The discipline is the same as managing any engineer: specificity matters.
+The pattern I found: the agent follows the brief it's given. A vague brief produces vague output. Specific constraints get specific results. That's exactly how I'd describe working with a junior engineer — the discipline is in the framing, not the execution.
 
 ---
 
-## The Part That's Hard to Explain
+## If You're a PM Reading This
 
-Somewhere between "translate the documentary into blog posts" and "find the newspaper image and download it into the repo," the project stopped feeling like a tool-assisted task and started feeling like working with someone who was actually invested in the outcome.
+The riofarm project is useful as a test case because it wasn't a greenfield demo. It was a live site with real constraints: accurate content, a working cart, a domain cutover that needed visual parity before going live.
 
-That could be a projection. It probably is.
+The AI had to read existing code before changing it, cite sources, propagate changes consistently, work within explicit constraints, and recover from its own errors.
 
-But when I asked it not to fabricate facts — and it replied by listing exactly which questions it needed answered before writing — that was genuinely useful. Not just as a guardrail, but as a collaborator who understood the stakes. A small family farm's credibility is fragile. Getting facts wrong would be worse than having fewer posts.
+That's closer to how real product work goes.
 
-It understood that. Or at least, it behaved as if it did.
-
----
-
-## If You're a PM Thinking About This
-
-The riofarm project is a useful test case because it wasn't a greenfield toy. It was a live site, real users, real products, real content that needed to be accurate. The AI had to:
-
-- Read existing code before changing it
-- Cite sources for factual claims
-- Propagate changes consistently across multiple files
-- Work within a constraint (don't cut over the domain until visual parity is confirmed)
-- Recover from its own mistakes without losing the thread
-
-That's closer to how real product work goes than most AI demos.
-
-If you're a PM and you haven't thought about what it would mean to have a persistent, context-aware agent working in the background — not just answering questions but *doing things* — I'd suggest starting with something low-stakes but real. A side project. Something you care about but doesn't have a production SLA.
+If you haven't thought about what it means to have a persistent, context-aware agent doing actual work in the background — not just answering questions — I'd suggest starting somewhere low-stakes but real. A side project. Something you care about but doesn't have a production SLA.
 
 See how far you get before you have to take back the wheel.
 
+For me, the answer was: further than I expected, faster than I expected, and almost entirely from my phone.
+
 ---
 
-*OpenClaw is an open-source AI gateway. The riofarm.vn rebuild is ongoing — domain is live, all code is on GitHub.*
+*[OpenClaw](https://openclaw.ai) is an open-source self-hosted AI gateway. [riofarm.vn](https://riofarm.vn) is live — code on GitHub.*
