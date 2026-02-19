@@ -8,6 +8,10 @@ heroImage: ../../assets/openclaw-riofarm-hero.jpg
 tags: ["OpenClaw", "AI", "Product Management", "Side Projects"]
 ---
 
+import BlogImage from '../../components/BlogImage.astro';
+import chatGapAnalysis1 from '../../assets/chat-gap-analysis-1.jpg';
+import chatGapAnalysis2 from '../../assets/chat-gap-analysis-2.jpg';
+
 I did most of this project one-handed.
 
 My son Mino is five months old. He needs soothing to sleep — rocking, patting, slow pacing through a dim room. My other hand had my phone open to Telegram. That's how [riofarm.vn](https://riofarm.vn) got rebuilt over four days: my sister-in-law's macadamia farm website, migrated from a slow Gatsby template to Astro 5, with a full content strategy, nine products, twelve blog posts, and a working cart.
@@ -38,15 +42,9 @@ After the core migration, I asked a simple question: *"Help me enrich the conten
 
 I expected content suggestions. What I got was an unsolicited gap analysis, prioritized by business impact:
 
-<div class="chat-screenshot-pair">
-  <figure>
-    <img src="/blog/chat-gap-analysis-1.jpg" alt="Telegram screenshot: Thuc asks what info to add, noting the site is built for Vietnamese consumers" />
-    <figcaption>The prompt. No specific asks — just audience context.</figcaption>
-  </figure>
-  <figure>
-    <img src="/blog/chat-gap-analysis-2.jpg" alt="Telegram screenshot: agent's response — gap analysis with Zalo CTA and customer testimonials as high-priority items" />
-    <figcaption>The response: a ranked gap analysis before touching a single file.</figcaption>
-  </figure>
+<div class="flex flex-wrap justify-center gap-6 my-8">
+  <BlogImage src={chatGapAnalysis1} alt="The prompt: Thuc asks what info to add, noting the site is built for Vietnamese consumers" />
+  <BlogImage src={chatGapAnalysis2} alt="The response: a ranked gap analysis with Zalo CTA and customer testimonials as high-priority items" />
 </div>
 
 Note that the agent couldn't even load the Facebook page I'd linked (login wall). It worked from the site alone and the words "Vietnamese consumers." The response ranked what was missing by what would actually drive sales:
