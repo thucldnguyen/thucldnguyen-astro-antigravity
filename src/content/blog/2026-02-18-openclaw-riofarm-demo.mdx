@@ -84,20 +84,6 @@ That disposition — *knowing when to ask instead of guess* — matters more tha
 
 ---
 
-### The image I didn't have to find
-
-Later in the project, I asked for a blog post about Rio Macca's appearance at a trade event linking Lâm Đồng producers with Korean supermarket chains. I had the Báo Lâm Đồng article URL. I didn't have the photo of the founder at the booth — I didn't even know what CDN it was on.
-
-The agent fetched the article HTML, parsed it for image URLs, found the CDN path, downloaded the JPEG directly into the repo's `public/blogs/` folder, committed it, and used it as the hero image for the post.
-
-```bash
-curl -s "https://baolamdong.vn/co-hoi-quang-ba..." \
-  | grep -oE 'https?://[^"]+\.(jpg|jpeg)[^"]*'
-# → https://daknong.1cdn.vn/2025/11/26/thuong-hieu-mac-ca-rio...jpg
-```
-
-I mentioned the article. It found the image. That was the whole interaction.
-
 ---
 
 ## What the Tests Don't Catch
