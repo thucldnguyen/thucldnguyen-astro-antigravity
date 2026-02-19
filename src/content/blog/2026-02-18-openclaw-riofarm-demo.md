@@ -143,7 +143,9 @@ Later, cross-referencing a Báo Lâm Đồng article, it found facts the documen
 
 Those corrections propagated across three blog posts and the homepage trust badge. One cross-reference. Zero manual diffs.
 
-The constraint I gave: *don't fabricate anything. If you don't have the data, flag it.* When I asked about harvest season (not mentioned in either source), it flagged the gap instead of guessing. It knew what it didn't know.
+The constraint I gave: *don't fabricate anything. If you don't have the data, flag it.* When the agent hit gaps — harvest season months, macca oil specs — it stopped and asked me directly rather than guessing. When I said I didn't have the facts handy, I told it to skip those topics and just work from what the documentary had. It pivoted without pushback: *"Smart pivot — that's exactly the right use of this content. The documentary already did the hard work; we're just making it accessible for people who won't sit through 8 minutes of video."*
+
+That's the right disposition: flag the gap, accept the redirect, execute cleanly.
 
 ---
 
@@ -159,13 +161,18 @@ The riofarm.vn rebuild took about two weeks of sessions. Live site, real product
 
 ## What It's Not
 
-It still makes mistakes.
+It still makes mistakes — and the tests don't catch everything.
 
-Early sub-agents reused the same image across multiple blog posts. One didn't verify mobile viewport on the cart. The Zalo icon initially rendered as a plain "Z" on some devices before being corrected to a proper SVG badge.
+Early sub-agents reused the same image across multiple blog posts. The Zalo button I'd asked for shipped with a plain letter "Z" as the icon. The floating button covered the cart checkout button when the drawer was open. The checkout button itself was off-screen on mobile. None of these were caught by the test suite — I found them by opening the site on my phone.
 
-The pattern: the agent follows the brief it's given. Vague brief, vague output. Specific constraints, specific results. That's how I'd describe working with any good engineer — the discipline is in the framing.
+<figure class="chat-screenshot">
+  <img src="/blog/chat-bug-report.jpg" alt="Telegram screenshot: Thuc reports 4 bugs including Zalo Z icon, all fixed in one commit d4a8cb1" />
+  <figcaption>Four bugs caught by eye, not by tests. Fixed in a single commit 4 minutes after the report.</figcaption>
+</figure>
 
-The difference is that when the agent misses something, I say so in chat and it fixes it immediately. No ticket, no sprint. It already has the full codebase in context.
+The feedback loop looked like this: I open the site, spot something broken, describe it in chat, get a fix commit in minutes. That's genuinely fast — but the catching was mine, not the agent's.
+
+The pattern: the agent follows the brief it's given. Vague brief, vague output. Specific constraints, specific results. Tests cover the logic you spec out in advance; they don't replace a human actually using the thing.
 
 ---
 
