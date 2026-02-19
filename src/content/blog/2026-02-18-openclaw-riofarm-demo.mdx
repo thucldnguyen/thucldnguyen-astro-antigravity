@@ -76,11 +76,27 @@ transcript = api.fetch('BUKddHPS3pk', languages=['vi'])
 
 YouTube auto-generates Vietnamese captions. Full transcript extracted in seconds — direct quotes, production details, the founder's story, all pulled programmatically and cited. Three blog posts written from source material, no browser, no manual reading.
 
-Then, cross-referencing a Báo Lâm Đồng newspaper article I'd shared, it found facts the documentary didn't have: the farm's output had grown to **20 tons/year** (the documentary said 10), and there was an **OCOP 3-star certification** — a Vietnamese government quality mark — that wasn't anywhere on the site. Those two facts propagated automatically across three blog posts and the homepage trust badge.
+Then, cross-referencing a Báo Lâm Đồng newspaper article I'd shared, it found facts the documentary didn't have: the farm's output had grown to **20 tons/year** (the documentary said 10 — the farm had grown since filming), and an **OCOP 3-star certification** — a Vietnamese government quality mark — that wasn't anywhere on the site. Within a few minutes, the `10 tấn` references across three blog posts were corrected to `20 tấn`, the OCOP certification was added to the founder story, production process post, and homepage, and the generic "VSATP certified" trust badge became "🏅 OCOP 3 Sao." One cross-reference. Zero manual diffs.
 
 When I asked about harvest season months — not in either source — it asked me directly rather than filling in a plausible answer. I didn't have the data either, so I said to skip it and work from what existed. It did.
 
-That last part is the one I keep coming back to: *knowing when to ask instead of guess*. For a small family business where credibility is everything, a confident wrong answer would have been worse than no answer.
+That disposition — *knowing when to ask instead of guess* — matters more than it sounds. For a small family business where credibility is everything, a confident wrong answer is worse than no answer.
+
+---
+
+### The image I didn't have to find
+
+Later in the project, I asked for a blog post about Rio Macca's appearance at a trade event linking Lâm Đồng producers with Korean supermarket chains. I had the Báo Lâm Đồng article URL. I didn't have the photo of the founder at the booth — I didn't even know what CDN it was on.
+
+The agent fetched the article HTML, parsed it for image URLs, found the CDN path, downloaded the JPEG directly into the repo's `public/blogs/` folder, committed it, and used it as the hero image for the post.
+
+```bash
+curl -s "https://baolamdong.vn/co-hoi-quang-ba..." \
+  | grep -oE 'https?://[^"]+\.(jpg|jpeg)[^"]*'
+# → https://daknong.1cdn.vn/2025/11/26/thuong-hieu-mac-ca-rio...jpg
+```
+
+I mentioned the article. It found the image. That was the whole interaction.
 
 ---
 
