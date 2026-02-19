@@ -1,10 +1,10 @@
 ---
 template: blog-post
-title: "I Let an AI Agent Rebuild My Family's Farm Website — Here's What Surprised Me"
+title: "OpenClaw rebuilding my family's farm website - Here's what surprised me"
 slug: /blog/openclaw-riofarm-demo
 date: 2026-02-18 23:00
 description: "How OpenClaw's AI agent helped me rebuild riofarm.vn from Gatsby to Astro, extract facts from a documentary, source images from the web, and deploy a full content strategy — all from Telegram on my phone."
-heroImage: ../../assets/orchestrate-ai-2.png
+heroImage: ../../assets/openclaw-riofarm-hero.jpg
 tags: ["OpenClaw", "AI", "Product Management", "Side Projects"]
 ---
 
