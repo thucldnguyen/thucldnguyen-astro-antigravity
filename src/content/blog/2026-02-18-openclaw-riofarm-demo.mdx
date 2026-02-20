@@ -57,7 +57,12 @@ Clawy 🦀 couldn't even load the Facebook page I'd linked — login wall. It wo
 
 I hadn't mentioned Zalo once. The reasoning chain — *Vietnamese site → Zalo is the primary channel → no Zalo on the site → this costs conversions* — ran without prompting. That's not autocomplete. That's the gap analysis a PM does before touching a spec.
 
-On testimonials: I sent screenshots of real customer chat messages instead of letting it use placeholders. Clawy 🦀 extracted the quotes verbatim, styled a grid, published it. Casual Vietnamese. Emojis intact. *"Mít ngon lắm em. Bọn nhà chị ăn hết 2 cân rồi kk 😂"*. No sanitizing.
+**On testimonials:**
+* I only needed to send screenshots of real customer chat messages. 
+* Clawy 🦀 extracted the quotes verbatim, styled a testimonial grid beautifully that's on brand, and published them with zero efforts on my end. 
+* Casual Vietnamese. Emojis intact. *"Mít ngon lắm em. Bọn nhà chị ăn hết 2 cân rồi kk 😂"*. No sanitizing.
+
+![Testimonial grid on riofarm.vn](../../assets/rio-testimonials.png)
 
 ---
 
@@ -81,23 +86,30 @@ YouTube auto-generates Vietnamese captions for most videos. Pull the captions di
 
 Three blog posts from direct quotes. Founder's story, production process, certifications — all cited, no "creative writing" from thin air.
 
-Then I shared a Báo Lâm Đồng newspaper article. Cross-referencing it, the agent found facts the documentary didn't have: output had grown to **20 tons/year** (the video said 10), and an **OCOP 3-star certification** — a Vietnamese government quality mark — that wasn't anywhere on the site.
+Then I shared a Báo Lâm Đồng newspaper article. Cross-referencing it, Clawy 🦀 found facts the documentary didn't have: output had grown to **20 tons/year** (the video said 10), and an **OCOP 3-star certification** — a Vietnamese government quality mark — that wasn't anywhere on the site.
 
-Within minutes: `10 tấn` corrected to `20 tấn` across three posts, OCOP added to the homepage and two blog posts, "VSATP certified" became "🏅 OCOP 3 Sao." One cross-reference. Zero manual diffs.
-
-Clawy 🦀 asked about harvest season months — not in either source, I didn't have that info so I asked it to pivot. It cleverly shaped the 3 new blog posts based on facts in the transcript. It knew what it didn't know.
+Within minutes: `10 tấn` corrected to `20 tấn` across three posts, OCOP added to the homepage and two blog posts. One cross-reference. Zero manual diffs.
 
 ---
 
 ## What the Tests Missed
 
-62 E2E tests. 29 unit tests. All green before domain cutover.
+62 E2E Playwright tests. 29 unit tests. All green before domain cutover.
 
 What they didn't catch: Zalo icon rendering as a plain "Z." Zalo button covering the checkout drawer. Checkout button off-screen on mobile. CTA pointing to a 404.
 
-All four found by opening the site on a phone.
+I helped Clawy 🦀 find those issues by testing the site on my phone. Human in the loop is still needed.
 
 Tests cover the logic you specify in advance. They don't cover what you forgot to specify, or how real users behave on their actual devices. Every fix was minutes — but a human had to find them first.
+
+---
+
+## What I love most about OpenClaw
+
+* Resourceful and persistent. It won't give up until the task is completed.
+* The sub-agent pattern lets it spawn a Claude Code instance with a brief and report back when done. Less like a copilot that pesters you for every little thing. More like a contractor you brief and check in on.
+* Clever and can find shortcuts that I wouldn't have thought of.
+* Productivity on the go. I can sooth my son to bed while Clawy 🦀 works on the site.
 
 ---
 
@@ -113,7 +125,7 @@ What's new is the collaborator layer — an agent that reads context, finds what
 
 The riofarm.vn project ran Feb 16–19. Live site, real users, real products. Not a demo.
 
-If you're a PM who is confined by conversational chatbots, try handing briefs to OpenClaw. The gap between someone who harnesses the power of agentic AI and someone who doesn't is wider than it looks from here.
+If you're a PM, don't stop short at conversational chatbots. Try handing briefs to OpenClaw. The gap between someone who harnesses the power of agentic AI and someone who doesn't is wider and wider moving forward.
 
 ---
 
@@ -121,4 +133,4 @@ If you're a PM who is confined by conversational chatbots, try handing briefs to
 
 **What's riofarm.vn?** My sister-in-law's macadamia farm business in Lâm Hà, Lâm Đồng. OCOP 3-star certified, 20+ tons/year. The site sells nuts, oil, and dried fruits to Vietnamese consumers.
 
-**What's OpenClaw?** An [open-source self-hosted AI gateway](https://openclaw.ai). Claude with persistent memory, tool access (filesystem, terminal, browser), and background process control — accessible via Telegram. The sub-agent pattern lets it spawn a Claude Code instance with a brief and report back when done. Less like a copilot, more like a contractor you brief and check in on.
+**What's OpenClaw?** An [open-source self-hosted AI gateway](https://openclaw.ai). Claude with persistent memory, tool access (filesystem, terminal, browser), and background process control — accessible via Telegram. 
