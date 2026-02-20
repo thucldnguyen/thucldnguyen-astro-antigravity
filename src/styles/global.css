@@ -76,6 +76,23 @@
   }
 }
 
+@layer components {
+
+  /* Polished Blockquote Styles */
+  .prose blockquote {
+    @apply not-italic font-normal text-slate-700 dark:text-slate-300 border-l-4 border-violet-600 dark:border-violet-400 bg-violet-50/50 dark:bg-slate-800/50 rounded-r-xl py-4 px-6 my-8 relative shadow-sm;
+  }
+
+  /* Remove default quotes added by Typography plugin */
+  .prose blockquote p:before {
+    content: none;
+  }
+
+  .prose blockquote p:after {
+    content: none;
+  }
+}
+
 @layer utilities {
   .glass-panel {
     @apply bg-white/60 dark:bg-slate-900/60 backdrop-blur-2xl border border-white/20 dark:border-white/10 shadow-xl ring-1 ring-black/5;
@@ -182,7 +199,8 @@ html[data-is-navigating="true"] body {
 /* Speed up page transitions and prevent blocking on resource loads */
 ::view-transition-old(root),
 ::view-transition-new(root) {
-  animation-duration: 0.15s; /* Reduced from 0.3s for snappier transitions */
+  animation-duration: 0.15s;
+  /* Reduced from 0.3s for snappier transitions */
   animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
 }
 
@@ -213,7 +231,8 @@ html[data-is-navigating="true"] body {
 
 /* Prevent layout shift during transitions */
 ::view-transition-group(root) {
-  animation-duration: 0.15s; /* Reduced from 0.3s for snappier transitions */
+  animation-duration: 0.15s;
+  /* Reduced from 0.3s for snappier transitions */
 }
 
 /* Ensure dark mode persists during transitions */

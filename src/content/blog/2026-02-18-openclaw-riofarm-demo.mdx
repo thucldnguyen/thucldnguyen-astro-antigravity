@@ -11,6 +11,8 @@ tags: ["OpenClaw", "AI", "Product Management", "Side Projects"]
 import BlogImage from '../../components/BlogImage.astro';
 import chatGapAnalysis1 from '../../assets/chat-gap-analysis-1.jpg';
 import chatGapAnalysis2 from '../../assets/chat-gap-analysis-2.jpg';
+import documentary1 from '../../assets/documentary-1.jpg';
+import documentary2 from '../../assets/documentary-2.jpg';
 
 I did most of this project one-handed.
 
@@ -18,13 +20,13 @@ My son Mino is five months old. Soothing him to sleep means slow circuits throug
 
 No laptop. No IDE. No "let me sit down and focus."
 
-I'm a PM, not a developer. This is what an AI agent actually does when you give it a real brief.
+All thanks to **Clawy 🦀** (my [OpenClaw](https://openclaw.ai) agent).
 
 ---
 
 ## The Brief
 
-Gatsby to Astro 5. Zero feature losses. Full test coverage before shipping. Zero downtime.
+Gatsby to Astro for faster build time, performance and better SEO. Zero feature losses. Full test coverage before shipping. Zero downtime.
 
 I sent the brief over Telegram and went back to pacing around the room:
 
@@ -36,7 +38,7 @@ You write the brief. You review the output. OpenClaw handles everything in betwe
 
 ---
 
-## It Found the Gap I Didn't Ask About
+## OpenClaw as Collaborator, not just Executor
 
 After the migration, I sent one message: *"Help me enrich the content of the astro site. Be mindful that it's a Vietnamese site tailor fit to Vietnamese consumers."*
 
@@ -47,7 +49,7 @@ I expected a content list. What I got was a gap analysis, ranked by business imp
   <BlogImage src={chatGapAnalysis2} alt="The response: a ranked gap analysis with Zalo CTA and customer testimonials as high-priority items" />
 </div>
 
-The agent couldn't even load the Facebook page I'd linked — login wall. It worked from the live site and four words: "tailor fit to Vietnamese consumers." What it flagged:
+Clawy 🦀 couldn't even load the Facebook page I'd linked — login wall. It worked from the live site and four words: "tailor fit to Vietnamese consumers." What it flagged:
 
 1. Missing product pages (dried mango, dried jackfruit weren't on the site)
 2. **Zalo CTA** — *"Vietnamese consumers use Zalo more than any other channel. The site only shows a phone number buried in the footer. A sticky Zalo button would meaningfully increase conversions."*
@@ -55,30 +57,35 @@ The agent couldn't even load the Facebook page I'd linked — login wall. It wor
 
 I hadn't mentioned Zalo once. The reasoning chain — *Vietnamese site → Zalo is the primary channel → no Zalo on the site → this costs conversions* — ran without prompting. That's not autocomplete. That's the gap analysis a PM does before touching a spec.
 
-On testimonials: I sent screenshots of real customer chat messages instead of letting it use placeholders. It extracted the quotes verbatim, styled a grid, published it. Casual Vietnamese. Emojis intact. *"Mít ngon lắm em. Bọn nhà chị ăn hết 2 cân rồi kk 😂"*. No sanitizing.
+On testimonials: I sent screenshots of real customer chat messages instead of letting it use placeholders. Clawy 🦀 extracted the quotes verbatim, styled a grid, published it. Casual Vietnamese. Emojis intact. *"Mít ngon lắm em. Bọn nhà chị ăn hết 2 cân rồi kk 😂"*. No sanitizing.
 
 ---
 
-## It Transcribed a Video It Had Never Seen
+## Clever Autonomous Execution
 
 The farm homepage had an embedded YouTube documentary. I asked for blog posts from it, one constraint: *don't fabricate. If you don't have the data, flag it.*
 
-I expected it to scrape a transcript somehow. What it did was smarter.
+I thought Clawy 🦀 would spin up a browser instance and somehow "watch" the video second by second (silly right?). What it did was smarter.
 
 ```python
 from youtube_transcript_api import YouTubeTranscriptApi
 transcript = api.fetch('BUKddHPS3pk', languages=['vi'])
 ```
 
-YouTube auto-generates Vietnamese captions for most videos. Pull the captions directly — no browser, no video playback. Full transcript in under three seconds. It found the shortcut I wouldn't have thought of.
+YouTube auto-generates Vietnamese captions for most videos. Pull the captions directly — no browser, no video playback. Full transcript in under three seconds. It found the shortcut I wouldn't have thought of. Zero handholding.
 
-Three blog posts from direct quotes. Founder's story, production process, certifications — all cited, nothing invented.
+<div class="flex flex-wrap justify-center gap-6 my-8">
+  <BlogImage src={documentary1} alt="The prompt: Thuc asks OpenClaw to analyze the documentary" />
+  <BlogImage src={documentary2} alt="The response: 'Got the full transcript' after 3 seconds" />
+</div>
+
+Three blog posts from direct quotes. Founder's story, production process, certifications — all cited, no "creative writing" from thin air.
 
 Then I shared a Báo Lâm Đồng newspaper article. Cross-referencing it, the agent found facts the documentary didn't have: output had grown to **20 tons/year** (the video said 10), and an **OCOP 3-star certification** — a Vietnamese government quality mark — that wasn't anywhere on the site.
 
 Within minutes: `10 tấn` corrected to `20 tấn` across three posts, OCOP added to the homepage and two blog posts, "VSATP certified" became "🏅 OCOP 3 Sao." One cross-reference. Zero manual diffs.
 
-When I asked about harvest season months — not in either source — it flagged the gap instead of guessing. For a small business where credibility is everything, a confident wrong answer is worse than no answer. It knew the difference.
+Clawy 🦀 asked about harvest season months — not in either source, I didn't have that info so I asked it to pivot. It cleverly shaped the 3 new blog posts based on facts in the transcript. It knew what it didn't know.
 
 ---
 
