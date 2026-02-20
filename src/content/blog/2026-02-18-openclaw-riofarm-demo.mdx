@@ -14,102 +14,104 @@ import chatGapAnalysis2 from '../../assets/chat-gap-analysis-2.jpg';
 
 I did most of this project one-handed.
 
-My son Mino is five months old. He needs soothing to sleep — rocking, patting, slow pacing through a dim room. My other hand had my phone open to Telegram. That's how [riofarm.vn](https://riofarm.vn) got rebuilt over four days: my sister-in-law's macadamia farm website, migrated from a slow Gatsby template to Astro 5, with a full content strategy, nine products, twelve blog posts, and a working cart.
+My son Mino is five months old. Soothing him to sleep means slow circuits through a dim room, one arm occupied. My other hand had my phone. That's how [riofarm.vn](https://riofarm.vn) got rebuilt: Gatsby → Astro 5, full content strategy, nine products, twelve blog posts, working cart. Four days. All from Telegram.
 
-All managed via chat. No laptop. No IDE. No "let me sit down and focus."
+No laptop. No IDE. No "let me sit down and focus."
 
-I'm a product manager, not a developer. I've used AI coding tools. This felt different — and I want to be specific about why.
-
----
-
-## The Ask
-
-I wanted a complete rewrite: Gatsby to Astro 5, zero feature losses, full test coverage before shipping, zero downtime on the live domain. I gave the brief over Telegram:
-
-> *"Write the tests before you code. Tests must cover 100% of code paths. Leverage unit tests to maximize test coverage but don't forget e2e UI tests (playwright). Old gatsby code must be kept intact locally as a backup. I don't want any downtime."*
-
-The agent responded that it would spawn a Claude Code sub-agent with a comprehensive brief, then check back on progress. Twenty-one minutes later it pinged back: 62 Playwright E2E tests passing, 29 unit tests passing, Astro site built and deployed to Netlify preview.
-
-The sub-agent model is the right mental frame for this kind of work: you write a brief, a coding agent takes it, runs independently for 20–60 minutes, and delivers a reviewable output. Not instant — closer to handing off to a contractor. But you can go put your baby to sleep in the meantime.
+I'm a PM, not a developer. This is what an AI agent actually does when you give it a real brief.
 
 ---
 
-## What Surprised Me: The Agent as Collaborator
+## The Brief
 
-Here's where expectations broke down — in a good way.
+Gatsby to Astro 5. Zero feature losses. Full test coverage before shipping. Zero downtime.
 
-After the core migration, I asked a simple question: *"Help me enrich the content of the astro site. What more info should be displayed there? Be mindful that it's a Vietnamese site tailor fit to Vietnamese consumers."*
+I sent the brief over Telegram and went back to pacing around the room:
 
-I expected content suggestions. What I got was an unsolicited gap analysis, prioritized by business impact:
+> Write the tests before you code. Tests must cover 100% of code paths. Leverage unit tests to maximize test coverage but don't forget e2e UI tests (playwright). Old gatsby code must be kept intact locally as a backup. I don't want any downtime.
+
+Twenty-one minutes later: 62 Playwright E2E tests passing, 29 unit tests passing, Astro site deployed to Netlify preview.
+
+You write the brief. You review the output. OpenClaw handles everything in between.
+
+---
+
+## It Found the Gap I Didn't Ask About
+
+After the migration, I sent one message: *"Help me enrich the content of the astro site. Be mindful that it's a Vietnamese site tailor fit to Vietnamese consumers."*
+
+I expected a content list. What I got was a gap analysis, ranked by business impact:
 
 <div class="flex flex-wrap justify-center gap-6 my-8">
   <BlogImage src={chatGapAnalysis1} alt="The prompt: Thuc asks what info to add, noting the site is built for Vietnamese consumers" />
   <BlogImage src={chatGapAnalysis2} alt="The response: a ranked gap analysis with Zalo CTA and customer testimonials as high-priority items" />
 </div>
 
-Note that the agent couldn't even load the Facebook page I'd linked (login wall). It worked from the site alone and the words "Vietnamese consumers." The response ranked what was missing by what would actually drive sales:
+The agent couldn't even load the Facebook page I'd linked — login wall. It worked from the live site and four words: "tailor fit to Vietnamese consumers." What it flagged:
 
 1. Missing product pages (dried mango, dried jackfruit weren't on the site)
 2. **Zalo CTA** — *"Vietnamese consumers use Zalo more than any other channel. The site only shows a phone number buried in the footer. A sticky Zalo button would meaningfully increase conversions."*
 3. **Customer testimonials** — *"Social proof is critical for Vietnamese e-commerce. 'Khách hàng nói gì' section with authentic quotes from customers."*
 
-The original Gatsby site had no Zalo integration anywhere. I hadn't mentioned Zalo once. It connected those dots from four words: *"tailor fit to Vietnamese consumers."*
+I hadn't mentioned Zalo once. The reasoning chain — *Vietnamese site → Zalo is the primary channel → no Zalo on the site → this costs conversions* — ran without prompting. That's not autocomplete. That's the gap analysis a PM does before touching a spec.
 
-That was the moment I stopped thinking of this as a coding tool. The reasoning chain — *Vietnamese site → Zalo is the primary channel → phone number buried in footer → sticky button would increase conversions* — is product thinking. It's the kind of gap analysis a good PM does before touching a spec. It happened before I asked for it, while I was in another room putting my son to sleep.
-
-**On testimonials:** the initial proposal was for placeholder quotes. I had screenshots of actual customer chat messages and sent them instead. The agent read them, extracted the quotes verbatim, styled a testimonials grid with the farm's warm yellow palette, and published it. The quotes stayed as they were — casual Vietnamese, emojis intact (*"Mít ngon lắm em. Bọn nhà chị ăn hết 2 cân rồi kk 😂"*). No sanitizing, no corporate polish.
+On testimonials: I sent screenshots of real customer chat messages instead of letting it use placeholders. It extracted the quotes verbatim, styled a grid, published it. Casual Vietnamese. Emojis intact. *"Mít ngon lắm em. Bọn nhà chị ăn hết 2 cân rồi kk 😂"*. No sanitizing.
 
 ---
 
-## What Surprised Me: Autonomous Execution
+## It Transcribed a Video It Had Never Seen
 
-The other surprise was what happened when I handed off research tasks.
+The farm homepage had an embedded YouTube documentary. I asked for blog posts from it, one constraint: *don't fabricate. If you don't have the data, flag it.*
 
-The farm's homepage had an embedded YouTube documentary — a local news segment about Rio Macca. I asked for blog posts using facts from it. The constraint: *don't fabricate anything — if the data isn't in the source, flag it.*
-
-Instead of watching the video, the agent ran a script:
+I expected it to scrape a transcript somehow. What it did was smarter.
 
 ```python
 from youtube_transcript_api import YouTubeTranscriptApi
 transcript = api.fetch('BUKddHPS3pk', languages=['vi'])
 ```
 
-YouTube auto-generates Vietnamese captions. Full transcript extracted in seconds — direct quotes, production details, the founder's story, all pulled programmatically and cited. Three blog posts written from source material, no browser, no manual reading.
+YouTube auto-generates Vietnamese captions for most videos. Pull the captions directly — no browser, no video playback. Full transcript in under three seconds. It found the shortcut I wouldn't have thought of.
 
-Then, cross-referencing a Báo Lâm Đồng newspaper article I'd shared, it found facts the documentary didn't have: the farm's output had grown to **20 tons/year** (the documentary said 10 — the farm had grown since filming), and an **OCOP 3-star certification** — a Vietnamese government quality mark — that wasn't anywhere on the site. Within a few minutes, the `10 tấn` references across three blog posts were corrected to `20 tấn`, the OCOP certification was added to the founder story, production process post, and homepage, and the generic "VSATP certified" trust badge became "🏅 OCOP 3 Sao." One cross-reference. Zero manual diffs.
+Three blog posts from direct quotes. Founder's story, production process, certifications — all cited, nothing invented.
 
-When I asked about harvest season months — not in either source — it asked me directly rather than filling in a plausible answer. I didn't have the data either, so I said to skip it and work from what existed. It did.
+Then I shared a Báo Lâm Đồng newspaper article. Cross-referencing it, the agent found facts the documentary didn't have: output had grown to **20 tons/year** (the video said 10), and an **OCOP 3-star certification** — a Vietnamese government quality mark — that wasn't anywhere on the site.
 
-That disposition — *knowing when to ask instead of guess* — matters more than it sounds. For a small family business where credibility is everything, a confident wrong answer is worse than no answer.
+Within minutes: `10 tấn` corrected to `20 tấn` across three posts, OCOP added to the homepage and two blog posts, "VSATP certified" became "🏅 OCOP 3 Sao." One cross-reference. Zero manual diffs.
 
----
-
----
-
-## What the Tests Don't Catch
-
-The test suite passed before domain cutover — 62 E2E, 29 unit, all green. They covered cart flows, routing, form validation, mobile nav.
-
-What they didn't catch: the Zalo icon rendering as a plain letter "Z." The Zalo button covering the cart checkout when the drawer was open. The checkout button scrolling off-screen on mobile. A CTA pointing to a 404. All four found by opening the site on a phone.
-
-Tests cover the logic you specify in advance. They don't replace someone actually using the product on the device your users have. The fix for each was minutes once reported — but the finding required a human.
+When I asked about harvest season months — not in either source — it flagged the gap instead of guessing. For a small business where credibility is everything, a confident wrong answer is worse than no answer. It knew the difference.
 
 ---
 
-## What This Means for PMs
+## What the Tests Missed
 
-The honest capability is more specific than "AI builds your product while you sleep."
+62 E2E tests. 29 unit tests. All green before domain cutover.
 
-It's this: if you can write a clear brief and define what done looks like, you can delegate substantial technical work to a background process and return to something reviewable — from your phone, between other things. The shift is from writing code to writing briefs. The constraint that doesn't change is judgment: someone still has to look at the result, use the product, and catch what the tests miss.
+What they didn't catch: Zalo icon rendering as a plain "Z." Zalo button covering the checkout drawer. Checkout button off-screen on mobile. CTA pointing to a 404.
 
-What's new is the collaborator dimension — an agent that reads context, identifies what's missing, and proposes it before being asked. That's not autocomplete. It's closer to a junior hire who actually thinks about the problem.
+All four found by opening the site on a phone.
+
+Tests cover the logic you specify in advance. They don't cover what you forgot to specify, or how real users behave on their actual devices. Every fix was minutes — but a human had to find them first.
+
+---
+
+## What Changes and What Doesn't
+
+The honest capability isn't "AI builds your product while you sleep."
+
+It's this: write a clear brief, define what done looks like, delegate the work, return to something reviewable — from your phone, between other things. The shift is brief-writing over code-writing.
+
+What doesn't change: judgment. Someone still has to use the product, catch what the tests miss, and push back when the output is wrong.
+
+What's new is the collaborator layer — an agent that reads context, finds what's missing, and flags it before being asked. That's the part you don't expect until it happens.
 
 The riofarm.vn project ran Feb 16–19. Live site, real users, real products. Not a demo.
 
-If you're a PM who hasn't yet built something real with an AI agent — not asked it questions, but handed it a brief and reviewed the output — the gap between you and someone who has is wider than it looks from the outside.
-
-The shift is hard to describe until you feel it. Pick something small and real, and find out.
+If you're a PM who hasn't handed a real brief to an AI agent and reviewed the output, the gap between you and someone who has is wider than it looks from here.
 
 ---
 
-*[OpenClaw](https://openclaw.ai) is an open-source self-hosted AI gateway. [riofarm.vn](https://riofarm.vn) is live.*
+## Appendix
+
+**What's riofarm.vn?** My sister-in-law's macadamia farm business in Lâm Hà, Lâm Đồng. OCOP 3-star certified, 20+ tons/year. The site sells nuts, oil, and dried fruits to Vietnamese consumers.
+
+**What's OpenClaw?** An [open-source self-hosted AI gateway](https://openclaw.ai). Claude with persistent memory, tool access (filesystem, terminal, browser), and background process control — accessible via Telegram. The sub-agent pattern lets it spawn a Claude Code instance with a brief and report back when done. Less like a copilot, more like a contractor you brief and check in on.
