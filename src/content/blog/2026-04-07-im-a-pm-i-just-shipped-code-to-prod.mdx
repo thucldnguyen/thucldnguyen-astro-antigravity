@@ -14,7 +14,7 @@ tags: ["Product Management", "AI", "Software Engineering", "Execution"]
 
 Leadership announced on **March 26** that every PM should ship **2 PRs by June 30**. I merged both of mine on **March 29**.
 
-The point of this post: code generation is the easy part now. Judgment, testing rigor, and choosing the right problem are the hard parts.
+This post is the takeaway: code generation is the easy part now. Judgment, testing rigor, and choosing the right problem are the hard parts.
 
 ---
 
@@ -33,23 +33,21 @@ Both PRs fixed annoying UI issues in our media player.
 - One fixed a bug that had been overlooked by a sister team.
 - The other removed persistent tooltips that kept getting in the way when users tried to edit clips or markers in evidence videos.
 
-These were not glamorous problems. But they were real. And users feel that kind of friction immediately.
+Users feel that kind of friction immediately.
 
 ---
 
 ## AI Made Coding Easy. It Didn’t Make Shipping Easy.
 
-I used Claude Opus 4.6 with 1M context, which was fantastic. The long context window made it easy to stay in flow, understand the codebase, and get to a working fix quickly.
+I used Claude Opus 4.6 with 1M context. The long context window made it easy to stay in flow, understand the codebase, and get to a working fix quickly.
 
-But writing the code was the easy part. The hard part was testing.
+But writing the code was the easy part. Testing was the hard part.
 
-At Axon, the PR review bots are strict. And for good reason. We ship to production environments across the US, UK, Canada, Latin America, Australia, and more.
+At Axon, PR review bots are strict for a reason. We ship to production environments across the US, UK, Canada, Latin America, Australia, and more. When the stakes are that high, “it works on my machine” means nothing.
 
-When the stakes are high, “it works on my machine” means nothing.
+Shipping is not just generating code. Shipping is surviving rigor.
 
-Getting code to prod is not just about generating code. It’s about surviving the rigor around it.
-
-One more practical point on being AI-first as a PM: use the budget with intent.
+After this sprint, I checked my Claude usage to make sure I was using AI aggressively *and* responsibly.
 
 Most PMs won’t spend as much as engineers, and that’s fine. But if you’re spending $2 out of a $1,000 monthly cap, you probably don’t have a cost problem — you have an adoption problem.
 
@@ -57,58 +55,27 @@ At Axon, my April Claude usage is about $696 out of $1,000, still within budget:
 
 ![Anthropic usage dashboard showing 70% of monthly budget used](../../assets/anthropic-usage-70-percent.jpg)
 
-Don’t overspend. But don’t underuse the leverage either. The bar is an AI-first mindset applied everywhere it meaningfully improves speed, quality, or learning.
+Don’t overspend. But don’t underuse the leverage either.
 
 ---
 
-## PMs Should Pass the Fitness Test
+## PMs Should Pass the Fitness Test (Without Becoming Discount Engineers)
 
-I think PMs should be able to ship a real change to production when needed.
+PMs should be able to ship a real production change when needed.
 
-That skill is increasingly valuable, especially in startups or on teams where engineering capacity is the bottleneck. If you can fix a paper cut yourself, unblock a small issue, or validate an idea without waiting in line, that’s real leverage.
+That skill is increasingly valuable in startups and on capacity-constrained teams. If you can fix a paper cut yourself, unblock a small issue, or validate an idea without waiting in line, that’s real leverage.
 
-PMs should pass that fitness test.
-
----
-
-## But Don’t Become a Discount Engineer
-
-Here’s the boundary: if a PM is shipping code all day, every day, they should probably be replaced by an actual engineer.
-
-PMs should be comfortable coding. They should not spend their highest-value hours pretending to be full-time engineers.
-
-That is not where the leverage is.
+But there’s a boundary: if a PM is shipping code all day, every day, that role should probably be an engineer. PMs should be comfortable coding, not pretending to be full-time engineers.
 
 ---
 
 ## The Human Edge Still Wins
 
-The real edge of a PM is still human:
+I still jump on late-night customer calls 3–4 times a week.
 
-- talking to customers,
-- understanding pain deeply,
-- noticing patterns,
-- choosing the right problems.
+Those conversations are where the real product signal comes from: where users hesitate, what they ignore, and what slows them down under pressure. That context is what tells you *which* bug matters now versus later.
 
-That’s why I still jump on late-night calls with customers 3 to 4 times a week.
-
-AI can write code. It cannot build trust with users or understand messy human problems the way direct contact can.
-
----
-
-## The Ratio Is Breaking
-
-This shift is bigger than my 2 PRs.
-
-Lenny summarized a recent conversation with Anthropic’s Head of Growth, Amol Avasare, in a way that really clicked for me: engineering is getting the most AI leverage, and it’s squeezing PMs and designers ([post](https://www.linkedin.com/posts/lennyrachitsky_my-biggest-takeaways-from-anthropics-head-activity-7446932397385818112-QFR8)).
-
-A 5-engineer team can now produce something closer to the output of 15 to 20 engineers, while PM and design productivity haven’t scaled proportionally. The result is a much more compressed PM-to-engineering ratio.
-
-Anthropic’s response is not fewer PMs, but more PMs, plus product-minded engineers acting as mini-PMs on smaller projects.
-
-That matches what I’m seeing.
-
-PMs are not becoming less important. If anything, we’re becoming more of the bottleneck.
+AI can write code. It still can’t build trust with users or extract messy human context the way direct contact can.
 
 ---
 
@@ -116,8 +83,10 @@ PMs are not becoming less important. If anything, we’re becoming more of the b
 
 AI makes it easier to build fast. That makes problem selection more important, not less.
 
-It is useless to solve the wrong problem quickly.
+Solving the wrong problem quickly is still failure.
 
-That’s the new bar for PMs: be technical enough to earn leverage, but stay focused on the work that matters most.
+This is also why PM-to-engineering ratios are getting compressed: engineering output is being amplified faster than PM/design output. Lenny captured this well in his summary of Anthropic’s Head of Growth, Amol Avasare ([post](https://www.linkedin.com/posts/lennyrachitsky_my-biggest-takeaways-from-anthropics-head-activity-7446932397385818112-QFR8)).
 
-Choosing the right problem, fast, has never been more important.
+My take: PMs are not becoming less important. We’re becoming more of the bottleneck.
+
+The new bar is clear: be technical enough to earn leverage, and disciplined enough to choose the right problem.
