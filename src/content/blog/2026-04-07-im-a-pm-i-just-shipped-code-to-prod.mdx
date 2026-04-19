@@ -10,11 +10,11 @@ tags: ["Product Management", "AI", "Software Engineering", "Execution"]
 
 ## Synopsis
 
-Leadership announced on **March 26** that every PM should ship **2 PRs by June 30**. I merged both of mine to production on **March 29** — just 3 days later, and roughly 3 months early.
+**Three days. Two PRs. Production.**
 
-The lesson wasn’t “PMs should become engineers.” It was this: AI makes code generation faster, but the hard part is still judgment, rigor, and choosing the right problems.
+Leadership announced on **March 26** that every PM should ship **2 PRs by June 30**. I merged both of mine on **March 29**.
 
-For broader context on how AI is changing PM-to-engineering dynamics, see [Lenny’s summary of his conversation with Amol Avasare](https://www.linkedin.com/posts/lennyrachitsky_my-biggest-takeaways-from-anthropics-head-activity-7446932397385818112-QFR8).
+The point of this post: code generation is the easy part now. Judgment, testing rigor, and choosing the right problem are the hard parts.
 
 ---
 
@@ -41,14 +41,6 @@ These were not glamorous problems. But they were real. And users feel that kind 
 
 I used Claude Opus 4.6 with 1M context, which was fantastic. The long context window made it easy to stay in flow, understand the codebase, and get to a working fix quickly.
 
-![Anthropic usage dashboard showing 70% of monthly budget used](../../assets/anthropic-usage-70-percent.jpg)
-
-For context: Axon gives us a $1,000 monthly Claude cap. I’m at about $696 in April, which is still within budget.
-
-Most PMs won’t spend as much as engineers, and that’s fine. But if you’re spending $2 out of $1,000 every month, you probably don’t have a cost problem — you have an adoption problem.
-
-As a PM, don’t overspend. But don’t underuse the leverage either. The bar is an AI-first mindset applied everywhere it meaningfully improves speed, quality, or learning.
-
 But writing the code was the easy part. The hard part was testing.
 
 At Axon, the PR review bots are strict. And for good reason. We ship to production environments across the US, UK, Canada, Latin America, Australia, and more.
@@ -56,6 +48,16 @@ At Axon, the PR review bots are strict. And for good reason. We ship to producti
 When the stakes are high, “it works on my machine” means nothing.
 
 Getting code to prod is not just about generating code. It’s about surviving the rigor around it.
+
+One more practical point on being AI-first as a PM: use the budget with intent.
+
+Most PMs won’t spend as much as engineers, and that’s fine. But if you’re spending $2 out of a $1,000 monthly cap, you probably don’t have a cost problem — you have an adoption problem.
+
+At Axon, my April Claude usage is about $696 out of $1,000, still within budget:
+
+![Anthropic usage dashboard showing 70% of monthly budget used](../../assets/anthropic-usage-70-percent.jpg)
+
+Don’t overspend. But don’t underuse the leverage either. The bar is an AI-first mindset applied everywhere it meaningfully improves speed, quality, or learning.
 
 ---
 
@@ -98,7 +100,7 @@ AI can write code. It cannot build trust with users or understand messy human pr
 
 This shift is bigger than my 2 PRs.
 
-Lenny summarized a recent conversation with Anthropic’s Head of Growth, Amol Avasare, in a way that really clicked for me: engineering is getting the most AI leverage, and it’s squeezing PMs and designers.
+Lenny summarized a recent conversation with Anthropic’s Head of Growth, Amol Avasare, in a way that really clicked for me: engineering is getting the most AI leverage, and it’s squeezing PMs and designers ([post](https://www.linkedin.com/posts/lennyrachitsky_my-biggest-takeaways-from-anthropics-head-activity-7446932397385818112-QFR8)).
 
 A 5-engineer team can now produce something closer to the output of 15 to 20 engineers, while PM and design productivity haven’t scaled proportionally. The result is a much more compressed PM-to-engineering ratio.
 
