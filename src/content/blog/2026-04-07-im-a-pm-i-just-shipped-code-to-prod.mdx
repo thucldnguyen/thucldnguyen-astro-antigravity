@@ -1,37 +1,33 @@
 ---
 template: blog-post
-title: "I’m a PM. I Just Shipped Code to Prod."
+title: "I’m a PM and I Ship Code to Prod"
 slug: /blog/pm-shipped-code-to-prod
 date: 2026-04-07 08:30
-description: "I shipped 2 production PRs in 3 days after a new PM coding goal was announced. The code was the easy part. Surviving testing, review rigor, and global production standards was the real work."
+description: "I merged 2 PRs in 3 days after a new PM coding goal was announced. The code was the easy part. Surviving testing, review rigor, and global production standards was the real work."
 heroImage: ../../assets/pm-shipped-code-to-prod-hero.jpg
 tags: ["Product Management", "AI", "Software Engineering", "Execution"]
 ---
 
-## Synopsis
+## TL;DR
 
-**Three days. Two PRs. Production.**
+**Three days. Two PRs merged.**
 
-Leadership announced on **March 26** that every PM should ship **2 PRs by June 30**. I merged both of mine on **March 29**.
+Leadership announced on Mar 26 that every Product Manager in my department should ship 2 PRs by Jun 30. I merged both of mine on Mar 29, **3 days** after the announcement and **3 months** ahead of the deadline.
 
-This post is the takeaway: code generation is the easy part now. Judgment, testing rigor, and choosing the right problem are the hard parts.
-
----
-
-Merging those 2 PRs felt great.
-
-Not because the code was especially hard. It wasn’t.
+As a PM, merging those 2 PRs felt amazing. Not because the code was especially hard. It wasn’t.
 
 What mattered was getting real fixes through a real production process, at a company where the bar is high and the blast radius is global.
+
+Takeaway: code generation is the easy part now. Judgment, testing rigor, and choosing the right problem are the hard parts.
 
 ---
 
 ## The Bugs Were Small. The Friction Wasn’t.
 
-Both PRs fixed annoying UI issues in our media player.
+Both PRs fixed annoying UI issues in our Axon Evidence media player.
 
-- One fixed a bug that had been overlooked by a sister team.
-- The other removed persistent tooltips that kept getting in the way when users tried to edit clips or markers in evidence videos.
+- One suppressed persistent tooltips that kept getting in the way when users tried to edit clips or markers in evidence videos.
+- The other fixed a bug in the media player's Full Screen mode that had been overlooked by a sister team.
 
 Users feel that kind of friction immediately.
 
@@ -39,54 +35,70 @@ Users feel that kind of friction immediately.
 
 ## AI Made Coding Easy. It Didn’t Make Shipping Easy.
 
-I used Claude Opus 4.6 with 1M context. The long context window made it easy to stay in flow, understand the codebase, and get to a working fix quickly.
+I used Claude Opus 4.6 with 1M context which was fantastic. The long context window made it easy to stay in flow, understand the codebase, and get to a working fix quickly.
 
 But writing the code was the easy part. Testing was the hard part.
 
-At Axon, PR review bots are strict for a reason. We ship to production environments across the US, UK, Canada, Latin America, Australia, and more. When the stakes are that high, “it works on my machine” means nothing.
+At Axon, PR review bots are strict. And for good reason. We ship to production environments across the US, UK, Canada, Latin America, Australia, and more. When the stakes are that high, “it works on my machine” means nothing.
 
 Shipping is not just generating code. Shipping is surviving rigor.
 
-After this sprint, I checked my Claude usage to make sure I was using AI aggressively *and* responsibly.
-
-Most PMs won’t spend as much as engineers, and that’s fine. But if you’re spending $2 out of a $1,000 monthly cap, you probably don’t have a cost problem — you have an adoption problem.
-
-At Axon, my April Claude usage is about $696 out of $1,000, still within budget:
-
-![Anthropic usage dashboard showing 70% of monthly budget used](../../assets/anthropic-usage-70-percent.jpg)
-
-Don’t overspend. But don’t underuse the leverage either.
-
 ---
 
-## PMs Should Pass the Fitness Test (Without Becoming Discount Engineers)
+## PMs Should Pass the Fitness Test
 
-PMs should be able to ship a real production change when needed.
+I honestly believe that PMs should be able to ship a real change to production whenever needed.
 
-That skill is increasingly valuable in startups and on capacity-constrained teams. If you can fix a paper cut yourself, unblock a small issue, or validate an idea without waiting in line, that’s real leverage.
+That skill is increasingly valuable, especially in startups or on teams where engineering capacity is the bottleneck. If you can fix a paper cut yourself, unblock a small issue, or validate an idea without waiting in line, that’s real leverage.
 
-But there’s a boundary: if a PM is shipping code all day, every day, that role should probably be an engineer. PMs should be comfortable coding, not pretending to be full-time engineers.
+PMs should pass that fintness test.
+
+## But Don't Become a Discount Engineer
+
+Here’s the boundary: if a PM is shipping code all day, every day, they should probably be replaced by an actual engineer.
+
+PMs should be comfortable coding. But they should not spend their highest-value hours pretending to be full-time engineers. That is not where the leverage is.
 
 ---
 
 ## The Human Edge Still Wins
 
-I still jump on late-night customer calls 3–4 times a week.
+That's why I still jump on late-night customer calls 3–4 times a week.
 
-Those conversations are where the real product signal comes from: where users hesitate, what they ignore, and what slows them down under pressure. That context is what tells you *which* bug matters now versus later.
+Those customer calls are where the real product signal comes from: where users hesitate, what they ignore, and what slows them down under pressure. That context is what tells you *which* problems worth solving now versus later.
 
-AI can write code. It still can’t build trust with users or extract messy human context the way direct contact can.
+AI can write code. It still can’t build trust with users or extract messy human context the way direct human contact can.
 
 ---
 
-## Speed Is Cheap. Judgment Is Not.
+## The Ratio is Breaking.
 
 AI makes it easier to build fast. That makes problem selection more important, not less.
 
 Solving the wrong problem quickly is still failure.
 
-This is also why PM-to-engineering ratios are getting compressed: engineering output is being amplified faster than PM/design output. Lenny captured this well in his summary of Anthropic’s Head of Growth, Amol Avasare ([post](https://www.linkedin.com/posts/lennyrachitsky_my-biggest-takeaways-from-anthropics-head-activity-7446932397385818112-QFR8)).
+This is why the PM-to-engineering ratio of 1:5 is officially broken. Engineering output is being amplified faster than PM/design output. 
+
+Lenny captured this well in his recent conversation with Anthropic’s Head of Growth, Amol Avasare: [LINK](https://www.linkedin.com/posts/lennyrachitsky_my-biggest-takeaways-from-anthropics-head-activity-7446932397385818112-QFR8)
+
+![Lenny Rachitsky on Anthropic’s Amol Avasare: AI leverage squeezing PMs and designers](../../assets/lenny-rachitsky-linkedin-post.png)
+
+That matches what I'm seeing.
+
+**Speed Is Cheap. Judgment Is Not.**
 
 My take: PMs are not becoming less important. We’re becoming more of the bottleneck.
 
 The new bar is clear: be technical enough to earn leverage, and disciplined enough to choose the right problem.
+
+## Embrace AI Aggressively
+
+I've recently checked my Claude usage to make sure I was using AI aggressively *and* responsibly.
+
+My April Claude usage month to date is about $696, which is still within Axon's $1,000/mo budget.
+
+![Anthropic usage dashboard showing 70% of monthly budget used](../../assets/anthropic-usage-70-percent.jpg)
+
+Most PMs are not expected to spend hundreds of millions of tokens every month like engineers. But if you're a PM and you're spending $5 out of a $1,000 monthly cap, you have a serious adoption problem.
+
+Don’t overspend. But don’t underuse the leverage either.
