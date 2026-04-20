@@ -50,9 +50,12 @@ A smarter system would let the investigator ask:
 
 The first query is buildable today with timestamp correlation and transcript search. The last one requires visual understanding that is getting close but is not production-ready yet. The point is that the direction is clear even if the full capability arrives in stages.
 
-This is not a chatbot gimmick. It is a triage layer over a pile of evidence.
+This is not a chatbot gimmick. It is an investigative triage layer for high-volume incidents — multicam use-of-force reviews, officer-involved shootings, prosecutor prep for a known incident window.
 
-The goal is not to chat with your evidence for fun.
+The natural starting point is not "AI understands all your evidence." That would mean running expensive vision models across every frame of every upload, most of which is routine patrol, transport, static scenes, or dead air. Bad unit economics, weak ROI.
+
+The smarter version indexes cheaply everywhere — metadata, timestamps, transcripts, camera-officer linkage, overlap detection — and reasons deeply only when the case earns it. A serious incident, an explicit investigator query, a prosecutor preparing for trial. That is when the system spends the compute.
+
 The goal is to **cut time-to-first-relevant-clip from hours to minutes**.
 
 That sounds simple, but it is a big change in product philosophy. Most evidence systems still assume the user already knows where the answer lives. In real investigations, they often do not.
@@ -83,7 +86,9 @@ And that matters because investigations are not about discovering isolated facts
 
 The hard part is accuracy. Entity resolution across messy police data — misspellings, aliases, partial DOBs — is genuinely difficult. In public safety, a false link is not a bad search result. It is a civil rights problem. So the system has to be honest about confidence levels and keep a human in the loop on every connection it surfaces.
 
-But a platform that already holds the evidence, the metadata, and the chain of custody is in the best position to build this. The graph is not a separate product. It is the next layer on top of an evidence platform that agencies already trust.
+Here is the thing that makes the evidence graph more than a research project: a surprising amount of investigative triage does not require deep visual understanding of video at all. Metadata, transcripts, timestamps, entity linkage, and CAD/RMS joins already capture most of the signal an investigator needs to orient on a case. Vision models matter for the hard queries — "show me the clearest angle of the suspect's hand" — but graph plus transcript plus synchronization does the heavy lifting long before expensive frame-level inference is required.
+
+A platform that already holds the evidence, the metadata, and the chain of custody is in the best position to build this. The graph is not a separate product. It is the next layer on top of an evidence platform that agencies already trust.
 
 ## 3. The quiet agent in the background
 
