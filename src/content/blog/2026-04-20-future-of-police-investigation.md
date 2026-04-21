@@ -8,9 +8,9 @@ heroImage: ../../assets/police-investigator.png
 tags: ["Public Safety", "AI", "Product Management", "Evidence"]
 ---
 
-We already won the evidence collection battle.
+Policing has come a long way on evidence capture and storage.
 
-Now we are losing the comprehension battle.
+Now a different challenge emerges: help humans find what matters inside an ever-growing flood of evidence.
 
 Digital evidence now shows up in roughly [90% of criminal cases](https://pmc.ncbi.nlm.nih.gov/articles/PMC10311201/). In one Colorado DA office, annual video volume jumped from [24,000 hours in 2022 to 41,000 hours in 2025](https://www.cpr.org/2026/01/02/overwhelming-digital-evidence-body-cam-footage/). A routine vehicular homicide there can now generate [up to 90 hours of body-worn and dashcam footage](https://www.cpr.org/2026/01/02/overwhelming-digital-evidence-body-cam-footage/).
 
@@ -18,15 +18,13 @@ That is the backdrop for the next era of policing.
 
 Not a shortage of evidence.
 
-A surplus of it.
+A crazy amount of it.
 
 And once you see that clearly, the future becomes obvious:
 
 **Investigations are shifting from humans manually analyzing evidence to humans verifying AI findings.**
 
-The investigator of the future will not start by watching everything.
-
-They will start by asking:
+The investigator of the future will not start by watching everything. They will start by asking:
 
 **What should I look at first?**
 **What is most likely connected?**
@@ -40,7 +38,7 @@ Today, multi-cam incidents are still brutally manual.
 
 Five officers respond to one scene. All five record overlapping slices of the same event. The investigator scrubs through each one, guesses which angle matters most, and mentally stitches together a timeline.
 
-An investigator on a serious case can easily spend 8-12 hours just finding the right 20 minutes of footage. That ratio is the problem.
+Consider the math: 90 hours of footage from a single vehicular homicide. Even at 2x playback speed, that is 45 hours of scrubbing — to find the 2-3 minutes that actually matter in court. Investigators I talk to describe spending entire shifts just orienting on where to look. That ratio is the problem.
 
 A smarter system would let the investigator ask:
 
@@ -82,6 +80,8 @@ Now the search experience changes completely:
 
 That is a shift from **finding files** to **understanding relationships**.
 
+Some of these connections already exist in isolation — case linkage, officer assignments, CAD dispatch records, RMS entries. The gap is that they live in separate systems and nobody has unified them into a queryable graph. The evidence graph is not inventing new data. It is making existing data talk to each other.
+
 And that matters because investigations are not about discovering isolated facts. They are about connecting facts into something coherent enough to act on and rigorous enough to defend.
 
 The hard part is accuracy. Entity resolution across messy police data — misspellings, aliases, partial DOBs — is genuinely difficult. In public safety, a false link is not a bad search result. It is a civil rights problem. So the system has to be honest about confidence levels and keep a human in the loop on every connection it surfaces.
@@ -94,13 +94,13 @@ A platform that already holds the evidence, the metadata, and the chain of custo
 
 The most interesting AI in public safety may end up being the least flashy.
 
-Not the chatbot. Not the dashboard. Not the one-click summary.
+Chatbots that answer policy questions are useful. One-click video summaries save real time. But the next breakthrough may be something quieter — an agent that keeps working in the background, connecting dots across newly arriving evidence and notifying investigators when something worth reviewing emerges.
 
-The real breakthrough may be a quiet agent that keeps working in the background — connecting dots across newly arriving evidence and notifying investigators when something worth reviewing emerges.
+Here is what that looks like concretely: A new video gets uploaded to Case #4471. The transcript mentions "Marcus." The system already knows Marcus Williams is a person of interest in Case #3892 from last month. The investigator on #3892 gets a notification: "A new video in an unrelated case mentions a name matching your POI. Review?"
 
-A video gets uploaded. A name is mentioned. A face reappears. A vehicle shows up near a location that previously looked unrelated. A victim who seemed peripheral suddenly becomes central once a second evidence source lands.
+That is not science fiction. It is transcript search plus entity matching plus a notification layer. The ingredients already exist. What does not exist yet is a system that runs that check continuously, across cases, without being asked.
 
-Humans are bad at continuously re-scanning the whole graph every time new material arrives. Machines are good at exactly that.
+Humans are bad at re-scanning the whole graph every time new material arrives. Machines are good at exactly that.
 
 The risk here is obvious: alert fatigue. If the system notifies too often, investigators will ignore it entirely. So the bar for interruption has to be high, tunable, and transparent about why it fired. The worst version of this is a notification feed nobody reads. The best version is the investigator who gets a tap on the shoulder at exactly the right moment.
 
@@ -118,9 +118,11 @@ Too many systems still assume the report is the start of the real investigative 
 
 What if the system did not wait?
 
-If uploaded bodycam video mentions a missing child, identifies a known victim, references prior abuse, or places a minor with an adult already tied to prior concern — the system should be able to say:
+The most feasible version starts with transcripts. If the transcript of a newly uploaded video contains keywords matching an active missing persons case — a name, a case number, a location — the system flags it before a report is written.
 
 **This video likely contains information tied to an at-risk person. Review now.**
+
+That is buildable today with transcript search and entity matching against existing case data. Harder capabilities — face matching against victim databases, cross-referencing prior abuse records — arrive later and require deeper integrations. But the transcript-based trigger alone could have changed the outcome in stories like the one above.
 
 This is the most legally sensitive idea in this entire post. If the system flags something and nobody acts, the platform owner may share liability. If it fails to flag something, same problem. Any product team building this has to design the escalation model alongside legal and compliance from day one, not bolt it on after.
 
@@ -139,6 +141,8 @@ Transcribe the audio. Summarize the clip. Generate the report. Add a chat box. A
 Some of that is useful. None of it is the main event.
 
 Even newer public safety AI rollouts from large vendors tend to emphasize [analytics, voice controls, AI chat for chart generation, and automated reporting](https://www.oracle.com/news/announcement/oracle-enhances-public-safety-suite-for-real-time-data-intelligence-2025-10-20/). That may improve workflow around the edges. It does not solve the harder problem of evidentiary reasoning across a messy case.
+
+Here is the difference: today, a detective reviewing a gang-related shooting gets a transcript and a summary. That helps. But it does not tell her that the same vehicle in this footage appeared in a drive-by three weeks ago, that a witness in this video gave a contradictory statement in that earlier case, or that the firearm matches a description from an unsolved robbery. That is the difference between summarizing evidence and reasoning about it.
 
 The future will not belong to the product with the prettiest summary.
 
@@ -173,3 +177,5 @@ More time answering the only question that really matters:
 The last decade in public safety was about capturing everything.
 
 The next decade will be about knowing what deserves attention first.
+
+The starting point is narrow: AI-assisted triage for multicam critical incidents. The destination is an evidence platform that reasons. The gap between those two is where the most important product work in public safety will happen over the next five years.
